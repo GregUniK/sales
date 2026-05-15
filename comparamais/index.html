@@ -236,11 +236,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
 /* ============================================================
    ComparaMais AI Visibility Report — DATA SCAFFOLD
    ------------------------------------------------------------
-   Source: peekaboo API, brand id 2aaf2007-3801-4501-902f-7ba7eb9cd837
+   Source: AI Visibility API, brand id 2aaf2007-3801-4501-902f-7ba7eb9cd837
    Status @ 2026-05-15: 0 runs, 0 competitors per /visibility +
      /competitors endpoints. MCP exposes no list_prompts tool,
-     so prompts configured in peekaboo UI are not retrievable
-     via API. Drop real run data into D_ORIG below when available.
+     so prompts configured in the AI Visibility dashboard are not
+     retrievable via API. Drop real run data into D_ORIG when available.
    Data shape mirrors the GSB report.
    ============================================================ */
 const D_ORIG = {
@@ -253,7 +253,7 @@ const D_ORIG = {
     totalRuns: 0,
     period: "All data"
   },
-  // Fill from peekaboo run data. One object per prompt.
+  // Fill from AI Visibility run data. One object per prompt.
   // Schema per prompt:
   //   { id, text, avgScore, bestScore, mentions, totalRuns,
   //     models: { "google-aio"|"google-ai-mode"|"gemini-2.5-flash"|"sonar"|"gpt-4o-mini":
@@ -289,7 +289,7 @@ function showApiBanner(){
   if (hasData()) return;
   const b = $("apiBanner");
   b.style.display = "block";
-  b.innerHTML = `<b>No run data yet.</b> The peekaboo brand exists (id <code>${D_ORIG.meta.brandId}</code>) but the /visibility and /competitors endpoints currently return 0 runs and 0 competitors. Once prompts run, paste the data into <code>D_ORIG</code> in this file and the report will populate automatically.`;
+  b.innerHTML = `<b>No run data yet.</b> The AI Visibility brand exists (id <code>${D_ORIG.meta.brandId}</code>) but the /visibility and /competitors endpoints currently return 0 runs and 0 competitors. Once prompts run, paste the data into <code>D_ORIG</code> in this file and the report will populate automatically.`;
 }
 
 function renderStatRow(){
@@ -315,7 +315,7 @@ function renderStatRow(){
 
 function renderOverview(){
   if (!hasData()){
-    $("ovContent").innerHTML = noData("Overview will populate once peekaboo runs the first prompts for ComparaMais.");
+    $("ovContent").innerHTML = noData("Overview will populate once the first AI Visibility run completes for ComparaMais.");
     return;
   }
   // Per-model visibility bars
@@ -352,7 +352,7 @@ function renderPrompts(){
   if (STATE.search) rows = rows.filter(p => (p.text||"").toLowerCase().includes(STATE.search.toLowerCase()));
   $("promptsSub").textContent = `${rows.length} of ${D_ORIG.prompts.length} prompts`;
   if (!rows.length){
-    tbody.innerHTML = `<tr><td colspan="6">${noData("No prompts to show. Add prompts in peekaboo, run them, then drop the data into D_ORIG.")}</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="6">${noData("No prompts to show. Add prompts in the AI Visibility dashboard, run them, then drop the data into D_ORIG.")}</td></tr>`;
     return;
   }
   tbody.innerHTML = rows.map(p => {
@@ -395,7 +395,7 @@ function renderCompetitors(){
   const cs = D_ORIG.competitors;
   $("compSub").textContent = `${cs.length} tracked`;
   if (!cs.length){
-    $("compList").innerHTML = noData("No competitors configured for ComparaMais in peekaboo. Add competitors via the dashboard or the add_competitor API call.");
+    $("compList").innerHTML = noData("No competitors configured for ComparaMais. Add competitors via the AI Visibility dashboard or the add_competitor API call.");
     $("compInsight").innerHTML = noDataSmall("Competitive positioning will appear once competitors are tracked and prompts have run.");
     return;
   }
