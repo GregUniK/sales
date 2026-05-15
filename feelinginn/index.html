@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Feeling Inn AI Visibility Report</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;font-size:14px;line-height:1.5;background:#f8f9fb;color:#111827}
+:root{
+  --paper:#fff;--surface:#f9fafb;--surface2:#f3f4f6;
+  --border:#e5e7eb;--border2:#d1d5db;
+  --ink:#111827;--ink2:#374151;--ink3:#6b7280;--ink4:#9ca3af;
+  --v:#4f46e5;--v-bg:#eef2ff;--v-bd:#c7d2fe;--v-text:#3730a3;
+  --radius:10px;
+  --good:#15803d;--good-bg:#f0fdf4;--good-bd:#bbf7d0;
+  --warn:#b45309;--warn-bg:#fffbeb;
+  --bad:#b91c1c;--bad-bg:#fef2f2;
+}
+.header{position:sticky;top:0;z-index:200;background:var(--paper);border-bottom:1px solid var(--border);padding:0 28px;height:54px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.h-left{display:flex;align-items:center;gap:14px}
+.h-title{font-size:13px;font-weight:700;color:var(--ink);letter-spacing:-.01em}
+.h-sep{color:var(--border2)}
+.brand-toggle{display:flex;background:var(--surface);border:1px solid var(--border);border-radius:7px;overflow:hidden}
+.bt-btn{padding:5px 14px;font-size:13px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--ink3);transition:all .15s;display:flex;align-items:center;gap:5px}
+.bt-btn img{width:14px;height:14px;border-radius:3px}
+.bt-btn.active{background:var(--ink);color:#fff;font-weight:600}
+.h-meta{font-size:12px;color:var(--ink4)}
+.model-bar{position:sticky;top:54px;z-index:190;background:var(--paper);border-bottom:1px solid var(--border);padding:8px 28px;display:flex;align-items:center;gap:6px;overflow-x:auto;scrollbar-width:none}
+.model-bar::-webkit-scrollbar{display:none}
+.mb-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--ink4);margin-right:4px;white-space:nowrap}
+.mb-btn{display:flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;border:1px solid var(--border);background:var(--surface);color:var(--ink3);font-size:12px;font-weight:500;cursor:pointer;white-space:nowrap;transition:all .15s}
+.mb-btn img{width:14px;height:14px;border-radius:3px;flex-shrink:0}
+.mb-btn.active{background:var(--ink);border-color:var(--ink);color:#fff}
+.mb-btn.active img{filter:brightness(10)}
+.subnav{position:sticky;top:102px;z-index:180;background:var(--paper);border-bottom:1px solid var(--border);padding:0 28px}
+.sn-inner{display:flex;overflow-x:auto;scrollbar-width:none}
+.sn-inner::-webkit-scrollbar{display:none}
+.stab{padding:11px 16px;font-size:13px;font-weight:500;color:var(--ink3);cursor:pointer;border:none;background:transparent;border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s}
+.stab:hover{color:var(--ink)}
+.stab.active{color:var(--v-text);border-bottom-color:var(--v);font-weight:600}
+.wrap{max-width:1260px;margin:0 auto;padding:0 28px}
+.stat-strip{padding:18px 0 4px}
+.stat-row{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:18px}
+.stat-card{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px}
+.sc-label{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink4);margin-bottom:6px}
+.sc-val{font-size:26px;font-weight:700;line-height:1;color:var(--ink)}
+.sc-val.good{color:var(--good)}.sc-val.warn{color:var(--warn)}.sc-val.bad{color:var(--bad)}
+.sc-sub{font-size:12px;color:var(--ink3);margin-top:4px}
+.panel{display:none;padding:4px 0 48px}.panel.active{display:block}
+.cc{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:14px}
+.cc-head{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.cc-title{font-size:13px;font-weight:600;color:var(--ink)}
+.cc-sub{font-size:12px;color:var(--ink4)}
+.cc-body{padding:14px 18px}.cc-body.np{padding:0}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.filter-bar{display:flex;gap:6px;padding:10px 18px;border-bottom:1px solid var(--border);background:var(--surface);flex-wrap:wrap;align-items:center}
+.fb-btn{padding:3px 10px;border-radius:20px;border:1px solid var(--border);background:var(--paper);color:var(--ink3);font-size:12px;cursor:pointer;transition:all .15s}
+.fb-btn.active{background:var(--ink);border-color:var(--ink);color:#fff}
+.search-inp{padding:5px 12px;border:1px solid var(--border);border-radius:7px;font-size:12px;background:var(--paper);color:var(--ink);outline:none;width:200px}
+.search-inp:focus{border-color:var(--v-bd)}
+.ptable{width:100%;border-collapse:collapse}
+.ptable th{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--ink4);padding:8px 12px;text-align:left;border-bottom:1px solid var(--border);background:var(--surface);white-space:nowrap}
+.ptable td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:middle}
+.ptable tr:last-child td{border-bottom:none}
+.ptable tr:hover td{background:var(--surface)}
+.pt-text{font-size:13px;color:var(--ink);max-width:320px;line-height:1.4}
+.pt-sort{cursor:pointer;user-select:none}
+.pt-sort:hover{color:var(--ink2)}
+.sort-arr{font-size:9px;margin-left:3px;opacity:.5;display:inline-block;width:8px;text-align:center}
+.pt-sort.sorted .sort-arr{opacity:1;color:var(--v)}
+.score-pill{display:inline-flex;align-items:center;justify-content:center;min-width:38px;padding:2px 7px;border-radius:20px;font-size:12px;font-weight:600}
+.sp-good{background:var(--good-bg);color:var(--good)}.sp-med{background:var(--warn-bg);color:var(--warn)}.sp-zero{background:var(--surface2);color:var(--ink4)}
+.model-dots{display:flex;gap:5px;align-items:center}
+.mdot-wrap{position:relative;display:inline-flex;cursor:default}
+.mdot-wrap::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 5px);left:50%;transform:translateX(-50%);background:#111827;color:#fff;font-size:10px;white-space:nowrap;padding:3px 7px;border-radius:5px;opacity:0;pointer-events:none;transition:opacity .12s;z-index:300}
+.mdot-wrap:hover::after{opacity:1}
+.mdot-img{width:20px;height:20px;border-radius:4px;border:1.5px solid var(--border);object-fit:contain;display:block;background:#fff}
+.mdot-miss{opacity:.2;filter:grayscale(1)}
+.comp-iw{position:relative;display:inline-flex;cursor:default}
+.comp-iw img{width:22px;height:22px;border-radius:4px;border:1.5px solid var(--border);background:var(--surface2)}
+.vis-badge{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600}
+.vis-full{background:var(--v-bg);color:var(--v-text)}
+.vis-part{background:var(--warn-bg);color:var(--warn)}
+.vis-none{background:var(--surface2);color:var(--ink4)}
+.pos-badge{font-size:12px;font-weight:600;color:var(--ink2)}
+.sent-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px;margin-top:20px}
+.sent-tile{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px 18px;text-align:center}
+.st-num{font-size:30px;font-weight:700;line-height:1}
+.st-lbl{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-top:4px}
+.spos .st-num,.spos .st-lbl{color:#15803d}.sneu .st-num,.sneu .st-lbl{color:#64748b}
+.sneg .st-num,.sneg .st-lbl{color:#dc2626}.sunc .st-num,.sunc .st-lbl{color:#d97706}
+.sm-card{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;margin-bottom:10px}
+.smc-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px}
+.smc-prompt{font-size:13px;font-weight:600;color:var(--ink)}
+.model-chip{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;white-space:nowrap;border:1px solid var(--border);background:var(--surface)}
+.model-chip img{width:13px;height:13px;border-radius:2px}
+.sent-chip{display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:20px;font-size:12px;font-weight:600}
+.chip-positive{background:var(--good-bg);color:var(--good)}.chip-neutral{background:var(--surface2);color:var(--ink3)}
+.chip-negative{background:var(--bad-bg);color:var(--bad)}.chip-uncertain{background:var(--warn-bg);color:var(--warn)}
+.smc-context{font-size:12px;color:var(--ink3);background:var(--surface2);padding:8px 12px;border-radius:6px;margin:8px 0;font-style:italic}
+.no-data{text-align:center;padding:48px 20px;color:var(--ink4)}
+.no-data-icon{font-size:42px;margin-bottom:10px}
+.no-data h3{font-size:15px;color:var(--ink2);margin-bottom:6px}
+.no-data p{font-size:13px;max-width:380px;margin:0 auto;line-height:1.6}
+.comp-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)}
+.comp-row:last-child{border-bottom:none}
+.comp-rank{font-size:12px;font-weight:700;color:var(--ink4);width:20px;text-align:right;flex-shrink:0}
+.comp-fav{width:18px;height:18px;border-radius:4px;border:1px solid var(--border);flex-shrink:0}
+.comp-name{font-size:13px;font-weight:600;color:var(--ink);flex:1}
+.comp-bar-wrap{flex:0 0 140px;height:6px;background:var(--surface2);border-radius:3px;overflow:hidden}
+.comp-bar{height:100%;background:var(--v);border-radius:3px}
+.comp-count{font-size:12px;color:var(--ink3);width:74px;text-align:right;flex-shrink:0}
+.comp-score{font-size:12px;font-weight:600;color:var(--ink2);width:48px;text-align:right;flex-shrink:0}
+.bar-row{display:flex;align-items:center;gap:10px;padding:4px 0}
+.bar-label{font-size:12px;color:var(--ink2);width:155px;flex-shrink:0}
+.bar-track{flex:1;height:7px;background:var(--surface2);border-radius:3px;overflow:hidden}
+.bar-fill{height:100%;background:var(--v);border-radius:3px}
+.bar-pct{font-size:11px;color:var(--ink4);width:34px;text-align:right;flex-shrink:0}
+.ov-bar-row{display:flex;align-items:center;gap:10px;padding:5px 0;border-bottom:1px solid var(--border)}
+.ov-bar-row:last-child{border-bottom:none}
+.ov-bar-lbl{display:flex;align-items:center;gap:7px;width:148px;flex-shrink:0;font-size:12px;color:var(--ink2)}
+.ov-bar-lbl img{width:16px;height:16px;border-radius:4px;border:1px solid var(--border);flex-shrink:0;object-fit:contain;background:#fff}
+.ov-bar-track{flex:1;height:8px;background:var(--surface2);border-radius:4px;overflow:hidden}
+.ov-bar-fill{height:100%;border-radius:4px;transition:width .35s ease;background:var(--v)}
+.ov-bar-val{font-size:12px;font-weight:600;color:var(--ink3);min-width:42px;text-align:right;white-space:nowrap}
+.time-filter{display:flex;background:var(--surface);border:1px solid var(--border);border-radius:7px;overflow:hidden}
+.tf-btn{padding:5px 11px;font-size:12px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--ink3);transition:all .15s;white-space:nowrap}
+.tf-btn.active{background:var(--ink);color:#fff;font-weight:600}
+.tf-btn:hover:not(.active){background:var(--surface2);color:var(--ink2)}
+.banner{background:var(--warn-bg);border:1px solid #fde68a;color:var(--warn);padding:10px 14px;border-radius:8px;font-size:12.5px;margin:18px 0 0;line-height:1.5}
+.banner b{font-weight:700}
+@media(max-width:1100px){.stat-row{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:780px){
+  .stat-row,.two-col,.sent-tiles{grid-template-columns:1fr 1fr}
+  .comp-bar-wrap{display:none}
+  .wrap,.header,.model-bar,.subnav{padding-left:14px;padding-right:14px}
+}
+@media(max-width:480px){.stat-row,.sent-tiles{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="h-left">
+    <span class="h-title">AI Visibility Report</span>
+    <span class="h-sep">|</span>
+    <div class="brand-toggle">
+      <button class="bt-btn active"><img src="https://www.google.com/s2/favicons?domain=feelinginn.pt&sz=32" onerror="this.style.display='none'">Feeling Inn</button>
+    </div>
+  </div>
+  <div class="time-filter">
+    <button class="tf-btn active" onclick="setTimeRange('all',this)">All data</button>
+    <button class="tf-btn" onclick="setTimeRange('last-20',this)">Last 20 days</button>
+    <button class="tf-btn" onclick="setTimeRange('last-14',this)">Last 14 days</button>
+    <button class="tf-btn" onclick="setTimeRange('last-7',this)">Last 7 days</button>
+    <button class="tf-btn" onclick="setTimeRange('last-run',this)">Last run</button>
+  </div>
+  <div class="h-meta" id="hMeta">May 2026 · 5 AI models</div>
+</header>
+<div class="model-bar">
+  <span class="mb-label">Filter by model</span>
+  <button class="mb-btn active" onclick="setModel('all',this)">All models</button>
+  <button class="mb-btn" onclick="setModel('google-aio',this)">
+    <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32">Google AIO
+  </button>
+  <button class="mb-btn" onclick="setModel('google-ai-mode',this)">
+    <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32">Google AI Mode
+  </button>
+  <button class="mb-btn" onclick="setModel('gemini-2.5-flash',this)">
+    <img src="https://www.google.com/s2/favicons?domain=gemini.google.com&sz=32">Gemini
+  </button>
+  <button class="mb-btn" onclick="setModel('sonar',this)">
+    <img src="https://www.google.com/s2/favicons?domain=perplexity.ai&sz=32">Perplexity
+  </button>
+  <button class="mb-btn" onclick="setModel('gpt-4o-mini',this)">
+    <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32">ChatGPT
+  </button>
+</div>
+<nav class="subnav">
+  <div class="sn-inner">
+    <button class="stab active" onclick="switchTab('overview',this)">Overview</button>
+    <button class="stab" onclick="switchTab('prompts',this)">Prompts</button>
+    <button class="stab" onclick="switchTab('sentiment',this)">Sentiment</button>
+    <button class="stab" onclick="switchTab('competitors',this)">Competitors</button>
+    <button class="stab" onclick="switchTab('citations',this)">Citations</button>
+  </div>
+</nav>
+<div class="wrap">
+  <div id="apiBanner" class="banner" style="display:none"></div>
+  <div class="stat-strip"><div class="stat-row" id="statRow"></div></div>
+</div>
+<div class="wrap">
+<div id="panel-overview" class="panel active"><div id="ovContent"></div></div>
+<div id="panel-prompts" class="panel">
+  <div class="cc">
+    <div class="cc-head">
+      <div><div class="cc-title">All Prompts</div><div class="cc-sub" id="promptsSub"></div></div>
+      <input class="search-inp" id="promptSearch" placeholder="Search prompts..." oninput="onPromptSearch(this.value)">
+    </div>
+    <div class="filter-bar">
+      <button class="fb-btn active" onclick="setPromptFilter('all',this)">All</button>
+      <button class="fb-btn" onclick="setPromptFilter('mentioned',this)">Mentioned</button>
+      <button class="fb-btn" onclick="setPromptFilter('not',this)">Not mentioned</button>
+    </div>
+    <div class="cc-body np">
+      <table class="ptable"><thead><tr>
+        <th>Prompt</th>
+        <th>Visibility</th>
+        <th>Avg Position</th>
+        <th>Sentiment</th>
+        <th>Models</th>
+        <th>Top Competitors</th>
+      </tr></thead><tbody id="promptsTbody"></tbody></table>
+    </div>
+  </div>
+</div>
+<div id="panel-sentiment" class="panel">
+  <div id="sentContent"></div>
+</div>
+<div id="panel-competitors" class="panel">
+  <div class="two-col">
+    <div class="cc">
+      <div class="cc-head"><div><div class="cc-title">Top Competitors</div><div class="cc-sub" id="compSub"></div></div></div>
+      <div class="cc-body" id="compList"></div>
+    </div>
+    <div class="cc">
+      <div class="cc-head"><div class="cc-title">Competitive Overview</div><div class="cc-sub">relative positioning</div></div>
+      <div class="cc-body" id="compInsight"></div>
+    </div>
+  </div>
+</div>
+<div id="panel-citations" class="panel"><div id="citContent"></div></div>
+</div>
+
+<script>
+/* ============================================================
+   Feeling Inn AI Visibility Report — DATA SCAFFOLD
+   ------------------------------------------------------------
+   Source: AI Visibility API, brand id 4389bcc8-0f8c-46e2-b16c-0dbe0f4a37ec
+   Status @ 2026-05-15: 0 runs, 0 competitors per /visibility +
+     /competitors endpoints. MCP exposes no list_prompts tool,
+     so prompts configured in the AI Visibility dashboard are not
+     retrievable via API. Drop real run data into D_ORIG when available.
+   Data shape mirrors the GSB report.
+   ============================================================ */
+const D_ORIG = {
+  meta: {
+    brand: "Feeling Inn",
+    brandId: "4389bcc8-0f8c-46e2-b16c-0dbe0f4a37ec",
+    domain: "feelinginn.pt",
+    generatedAt: "2026-05-15",
+    visibilityScore: 0,
+    totalRuns: 0,
+    period: "All data"
+  },
+  // Fill from AI Visibility run data. One object per prompt.
+  // Schema per prompt:
+  //   { id, text, avgScore, bestScore, mentions, totalRuns,
+  //     models: { "google-aio"|"google-ai-mode"|"gemini-2.5-flash"|"sonar"|"gpt-4o-mini":
+  //       { mentioned, score, rank, sentiment, snippet } } }
+  prompts: [],
+  // Fill from /competitors when populated.
+  // Schema: { name, domain, mentions, visibilityScore, sentiment: {pos,neu,neg} }
+  competitors: [],
+  // Optional — fill from citation aggregation.
+  // Schema per row: { domain, type, count, urls: [{url, title, count, models: []}] }
+  citations: [],
+  // Optional — sentiment summary.
+  // Schema: { positive, neutral, negative, uncertain }
+  sentiment: { positive: 0, neutral: 0, negative: 0, uncertain: 0 }
+};
+
+const MODELS = [
+  { id: "google-aio",       label: "Google AIO",      domain: "google.com" },
+  { id: "google-ai-mode",   label: "Google AI Mode",  domain: "google.com" },
+  { id: "gemini-2.5-flash", label: "Gemini",          domain: "gemini.google.com" },
+  { id: "sonar",            label: "Perplexity",      domain: "perplexity.ai" },
+  { id: "gpt-4o-mini",      label: "ChatGPT",         domain: "openai.com" }
+];
+const favicon = d => `https://www.google.com/s2/favicons?domain=${d}&sz=32`;
+
+const STATE = { tab: "overview", model: "all", time: "all", promptFilter: "all", search: "" };
+
+function $(id){ return document.getElementById(id); }
+
+function hasData(){ return (D_ORIG.prompts && D_ORIG.prompts.length > 0) || D_ORIG.meta.totalRuns > 0; }
+
+function showApiBanner(){
+  if (hasData()) return;
+  const b = $("apiBanner");
+  b.style.display = "block";
+  b.innerHTML = `<b>No run data yet.</b> The AI Visibility brand exists (id <code>${D_ORIG.meta.brandId}</code>) but the /visibility and /competitors endpoints currently return 0 runs and 0 competitors. Once prompts run, paste the data into <code>D_ORIG</code> in this file and the report will populate automatically.`;
+}
+
+function renderStatRow(){
+  const ps = D_ORIG.prompts;
+  const totalPrompts = ps.length;
+  const mentioned = ps.filter(p => (p.mentions||0) > 0).length;
+  const avgScore = totalPrompts ? Math.round(ps.reduce((a,p)=>a+(p.avgScore||0),0)/totalPrompts) : 0;
+  const totalMentions = ps.reduce((a,p)=>a+(p.mentions||0),0);
+  const totalRuns = D_ORIG.meta.totalRuns || ps.reduce((a,p)=>a+(p.totalRuns||0),0);
+  const compCount = D_ORIG.competitors.length;
+  const cards = [
+    { label: "Visibility Score", val: avgScore, sub: "0-100 weighted average", cls: avgScore>=60?"good":avgScore>=30?"warn":"" },
+    { label: "Total Prompts",    val: totalPrompts, sub: totalPrompts ? `${mentioned} mentioned` : "none configured" },
+    { label: "Total Runs",       val: totalRuns,    sub: "across all models" },
+    { label: "Total Mentions",   val: totalMentions, sub: totalRuns ? `${totalRuns?Math.round(totalMentions/totalRuns*100):0}% mention rate` : "no runs yet" },
+    { label: "AI Models",        val: MODELS.length, sub: "tracked" },
+    { label: "Competitors",      val: compCount,    sub: compCount ? "tracked" : "none configured" }
+  ];
+  $("statRow").innerHTML = cards.map(c =>
+    `<div class="stat-card"><div class="sc-label">${c.label}</div><div class="sc-val ${c.cls||""}">${c.val}</div><div class="sc-sub">${c.sub}</div></div>`
+  ).join("");
+}
+
+function renderOverview(){
+  if (!hasData()){
+    $("ovContent").innerHTML = noData("Overview will populate once the first AI Visibility run completes for Feeling Inn.");
+    return;
+  }
+  // Per-model visibility bars
+  const modelStats = MODELS.map(m => {
+    let mentions = 0, runs = 0;
+    D_ORIG.prompts.forEach(p => {
+      const mr = p.models && p.models[m.id];
+      if (mr){
+        runs += 1;
+        if (mr.mentioned) mentions += 1;
+      }
+    });
+    const pct = runs ? Math.round(mentions/runs*100) : 0;
+    return { ...m, mentions, runs, pct };
+  });
+  const bars = modelStats.map(m => `
+    <div class="ov-bar-row">
+      <div class="ov-bar-lbl"><img src="${favicon(m.domain)}"><span>${m.label}</span></div>
+      <div class="ov-bar-track"><div class="ov-bar-fill" style="width:${m.pct}%"></div></div>
+      <div class="ov-bar-val">${m.pct}% <span style="color:var(--ink4)">(${m.mentions}/${m.runs})</span></div>
+    </div>`).join("");
+  $("ovContent").innerHTML = `
+    <div class="cc">
+      <div class="cc-head"><div class="cc-title">Visibility by Model</div><div class="cc-sub">mention rate per AI platform</div></div>
+      <div class="cc-body">${bars || noDataSmall("No model coverage yet.")}</div>
+    </div>`;
+}
+
+function renderPrompts(){
+  const tbody = $("promptsTbody");
+  let rows = D_ORIG.prompts.slice();
+  if (STATE.promptFilter === "mentioned") rows = rows.filter(p => (p.mentions||0) > 0);
+  if (STATE.promptFilter === "not")       rows = rows.filter(p => (p.mentions||0) === 0);
+  if (STATE.search) rows = rows.filter(p => (p.text||"").toLowerCase().includes(STATE.search.toLowerCase()));
+  $("promptsSub").textContent = `${rows.length} of ${D_ORIG.prompts.length} prompts`;
+  if (!rows.length){
+    tbody.innerHTML = `<tr><td colspan="6">${noData("No prompts to show. Add prompts in the AI Visibility dashboard, run them, then drop the data into D_ORIG.")}</td></tr>`;
+    return;
+  }
+  tbody.innerHTML = rows.map(p => {
+    const vis = (p.avgScore||0) >= 50 ? "vis-full" : (p.avgScore||0) > 0 ? "vis-part" : "vis-none";
+    const dots = MODELS.map(m => {
+      const mr = p.models && p.models[m.id];
+      const missed = !mr || !mr.mentioned;
+      return `<span class="mdot-wrap" data-tip="${m.label}: ${mr ? (mr.mentioned ? "mentioned" : "not mentioned") : "no run"}"><img class="mdot-img ${missed?"mdot-miss":""}" src="${favicon(m.domain)}"></span>`;
+    }).join("");
+    const sentiments = MODELS.map(m => p.models && p.models[m.id] && p.models[m.id].sentiment).filter(Boolean);
+    const sent = sentiments[0] || "—";
+    const sentClass = sent === "positive" ? "chip-positive" : sent === "negative" ? "chip-negative" : sent === "uncertain" ? "chip-uncertain" : "chip-neutral";
+    return `<tr>
+      <td><div class="pt-text">${escapeHtml(p.text||"")}</div></td>
+      <td><span class="vis-badge ${vis}">${Math.round(p.avgScore||0)}%</span></td>
+      <td><span class="pos-badge">${(p.avgPosition||"—")}</span></td>
+      <td>${sent==="—"?'<span style="color:var(--ink4)">—</span>':`<span class="sent-chip ${sentClass}">${sent}</span>`}</td>
+      <td><div class="model-dots">${dots}</div></td>
+      <td><span style="color:var(--ink4)">—</span></td>
+    </tr>`;
+  }).join("");
+}
+
+function renderSentiment(){
+  if (!hasData()){
+    $("sentContent").innerHTML = noData("Sentiment breakdown will populate once prompts return mentions.");
+    return;
+  }
+  const s = D_ORIG.sentiment;
+  $("sentContent").innerHTML = `
+    <div class="sent-tiles">
+      <div class="sent-tile spos"><div class="st-num">${s.positive||0}</div><div class="st-lbl">Positive</div></div>
+      <div class="sent-tile sneu"><div class="st-num">${s.neutral||0}</div><div class="st-lbl">Neutral</div></div>
+      <div class="sent-tile sneg"><div class="st-num">${s.negative||0}</div><div class="st-lbl">Negative</div></div>
+      <div class="sent-tile sunc"><div class="st-num">${s.uncertain||0}</div><div class="st-lbl">Uncertain</div></div>
+    </div>`;
+}
+
+function renderCompetitors(){
+  const cs = D_ORIG.competitors;
+  $("compSub").textContent = `${cs.length} tracked`;
+  if (!cs.length){
+    $("compList").innerHTML = noData("No competitors configured for Feeling Inn. Add competitors via the AI Visibility dashboard or the add_competitor API call.");
+    $("compInsight").innerHTML = noDataSmall("Competitive positioning will appear once competitors are tracked and prompts have run.");
+    return;
+  }
+  const max = Math.max(...cs.map(c => c.mentions||0), 1);
+  $("compList").innerHTML = cs.map((c,i) => `
+    <div class="comp-row">
+      <div class="comp-rank">${i+1}</div>
+      <img class="comp-fav" src="${favicon(c.domain||c.name)}">
+      <div class="comp-name">${escapeHtml(c.name||"")}</div>
+      <div class="comp-bar-wrap"><div class="comp-bar" style="width:${(c.mentions||0)/max*100}%"></div></div>
+      <div class="comp-count">${c.mentions||0} mentions</div>
+      <div class="comp-score">${Math.round(c.visibilityScore||0)}%</div>
+    </div>`).join("");
+  $("compInsight").innerHTML = `<div style="font-size:12.5px;color:var(--ink2);line-height:1.6">${cs.length} competitor${cs.length===1?"":"s"} tracked. Leader: <b>${escapeHtml(cs[0].name||"—")}</b> with ${cs[0].mentions||0} mentions.</div>`;
+}
+
+function renderCitations(){
+  const c = D_ORIG.citations;
+  if (!c.length){
+    $("citContent").innerHTML = noData("Citation domains will appear once AI models cite sources for Feeling Inn prompts.");
+    return;
+  }
+  const max = Math.max(...c.map(x => x.count||0), 1);
+  $("citContent").innerHTML = `
+    <div class="cc">
+      <div class="cc-head"><div class="cc-title">Top Cited Domains</div><div class="cc-sub">${c.length} domains</div></div>
+      <div class="cc-body">
+        ${c.map(d => `<div class="bar-row">
+          <div class="bar-label">${escapeHtml(d.domain||"")}</div>
+          <div class="bar-track"><div class="bar-fill" style="width:${(d.count||0)/max*100}%"></div></div>
+          <div class="bar-pct">${Math.round((d.count||0)/max*100)}%</div>
+        </div>`).join("")}
+      </div>
+    </div>`;
+}
+
+function noData(msg){
+  return `<div class="no-data"><div class="no-data-icon">·</div><h3>No data yet</h3><p>${msg}</p></div>`;
+}
+function noDataSmall(msg){
+  return `<div style="padding:14px;color:var(--ink4);font-size:12.5px;text-align:center">${msg}</div>`;
+}
+function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c])); }
+
+function switchTab(tab, btn){
+  STATE.tab = tab;
+  document.querySelectorAll(".stab").forEach(b => b.classList.toggle("active", b === btn));
+  document.querySelectorAll(".panel").forEach(p => p.classList.toggle("active", p.id === "panel-"+tab));
+}
+function setModel(m, btn){
+  STATE.model = m;
+  document.querySelectorAll(".mb-btn").forEach(b => b.classList.toggle("active", b === btn));
+  renderAll();
+}
+function setTimeRange(t, btn){
+  STATE.time = t;
+  document.querySelectorAll(".tf-btn").forEach(b => b.classList.toggle("active", b === btn));
+  renderAll();
+}
+function setPromptFilter(f, btn){
+  STATE.promptFilter = f;
+  document.querySelectorAll("#panel-prompts .fb-btn").forEach(b => b.classList.toggle("active", b === btn));
+  renderPrompts();
+}
+function onPromptSearch(v){ STATE.search = v; renderPrompts(); }
+
+function renderAll(){
+  showApiBanner();
+  renderStatRow();
+  renderOverview();
+  renderPrompts();
+  renderSentiment();
+  renderCompetitors();
+  renderCitations();
+}
+
+renderAll();
+</script>
+</body>
+</html>
