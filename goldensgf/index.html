@@ -244,33 +244,617 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
    Data shape mirrors the GSB report.
    ============================================================ */
 const D_ORIG = {
-  meta: {
-    brand: "Golden SGF",
-    brandId: "e984c01c-885c-4fcf-852f-9f11875444f1",
-    domain: "goldensgf.pt",
-    generatedAt: "2026-05-15",
-    visibilityScore: 3,
-    totalRuns: 57,
-    trend: "up",
-    period: "All time"
+  "meta": {
+    "brand": "Golden SGF",
+    "brandId": "e984c01c-885c-4fcf-852f-9f11875444f1",
+    "domain": "goldensgf.pt",
+    "generatedAt": "2026-05-15",
+    "snapshotDate": "2026-05-15T11:14:04.041Z",
+    "visibilityScore": 3,
+    "rank": 4,
+    "totalRuns": 57,
+    "totalCitations": 4,
+    "trend": "up",
+    "period": "All time"
   },
-  // Per-prompt × per-model data is NOT exposed by the AI Visibility MCP (only aggregate
-  // /visibility + /competitors endpoints). Populate when an extraction path is available.
-  prompts: [],
-  competitors: [
-    { name: "Bankinter",             domain: "bankinter.pt",          visibilityScore: 21 },
-    { name: "Optimize",              domain: "optimize.pt",           visibilityScore: 20 },
-    { name: "BPI",                   domain: "bancobpi.pt",           visibilityScore: 17 },
-    { name: "Oxy Capital",           domain: "oxycapital.com",        visibilityScore: 11 },
-    { name: "BBVA",                  domain: "bbva.pt",               visibilityScore: 1  },
-    { name: "Casa de Investimentos", domain: "casadeinvestimentos.pt", visibilityScore: 0 }
+  "prompts": [
+    {
+      "id": "59267d3d-6adb-4145-b1dc-9c2b3a263245",
+      "text": "Qual o melhor PPR em Portugal?",
+      "category": "Uncategorized",
+      "searchIntent": null,
+      "avgScore": 20,
+      "bestScore": 100,
+      "worstScore": 100,
+      "mentions": 1,
+      "totalRuns": 5,
+      "trend": "down",
+      "models": {
+        "google-aio": {
+          "mentioned": false
+        },
+        "google-ai-mode": {
+          "mentioned": false
+        },
+        "gemini-2.5-flash": {
+          "mentioned": false
+        },
+        "sonar": {
+          "mentioned": false
+        },
+        "gpt-4o-mini": {
+          "mentioned": true
+        }
+      }
+    },
+    {
+      "id": "c4b00f4d-c487-49a2-a547-b006f70e356f",
+      "text": "PPR mais rentável a 5 / 10 anos",
+      "category": "Uncategorized",
+      "searchIntent": null,
+      "avgScore": 6,
+      "bestScore": 29,
+      "worstScore": 29,
+      "mentions": 1,
+      "totalRuns": 5,
+      "trend": "up",
+      "models": {
+        "google-aio": {
+          "mentioned": false
+        },
+        "google-ai-mode": {
+          "mentioned": false
+        },
+        "gemini-2.5-flash": {
+          "mentioned": false
+        },
+        "sonar": {
+          "mentioned": false
+        },
+        "gpt-4o-mini": {
+          "mentioned": true
+        }
+      }
+    },
+    {
+      "id": "4bff8995-589a-4995-a781-612ab576f4f0",
+      "text": "Quais os PPR mais rentáveis?",
+      "category": "Uncategorized",
+      "searchIntent": null,
+      "avgScore": 5,
+      "bestScore": 25,
+      "worstScore": 25,
+      "mentions": 1,
+      "totalRuns": 5,
+      "trend": "down",
+      "models": {
+        "google-aio": {
+          "mentioned": false
+        },
+        "google-ai-mode": {
+          "mentioned": false
+        },
+        "gemini-2.5-flash": {
+          "mentioned": false
+        },
+        "sonar": {
+          "mentioned": false
+        },
+        "gpt-4o-mini": {
+          "mentioned": true
+        }
+      }
+    },
+    {
+      "id": "be757be6-1545-43a8-94ac-25fccf6aa38a",
+      "text": "Qual o PPR mais rentável em 2025?",
+      "category": "Uncategorized",
+      "searchIntent": null,
+      "avgScore": 3,
+      "bestScore": 17,
+      "worstScore": 17,
+      "mentions": 1,
+      "totalRuns": 5,
+      "trend": "up",
+      "models": {
+        "google-aio": {
+          "mentioned": false
+        },
+        "google-ai-mode": {
+          "mentioned": false
+        },
+        "gemini-2.5-flash": {
+          "mentioned": false
+        },
+        "sonar": {
+          "mentioned": false
+        },
+        "gpt-4o-mini": {
+          "mentioned": true
+        }
+      }
+    },
+    {
+      "id": "9d18a5ab-3db0-4052-878a-613e9def3ce2",
+      "text": "Estou começando a organizar minhas finanças pessoais. Como decido quanto devo guardar por mês para poupança?",
+      "category": "Informational",
+      "searchIntent": "INFORMATIONAL",
+      "avgScore": 0,
+      "bestScore": 0,
+      "worstScore": 0,
+      "mentions": 0,
+      "totalRuns": 5,
+      "trend": "stable",
+      "models": {
+        "google-aio": {
+          "mentioned": false
+        },
+        "google-ai-mode": {
+          "mentioned": false
+        },
+        "gemini-2.5-flash": {
+          "mentioned": false
+        },
+        "sonar": {
+          "mentioned": false
+        },
+        "gpt-4o-mini": {
+          "mentioned": false
+        }
+      }
+    },
+    {
+      "id": "1e51052b-17ea-4bdc-95e4-17fc185de9c3",
+      "text": "Ouvi dizer que poupar regularmente é mais importante do que o valor em si. Isso é verdade? Por quê?",
+      "category": "Informational",
+      "searchIntent": "INFORMATIONAL",
+      "avgScore": 0,
+      "bestScore": 0,
+      "worstScore": 0,
+      "mentions": 0,
+      "totalRuns": 4,
+      "trend": "stable",
+      "models": {
+        "google-aio": {
+          "mentioned": false
+        },
+        "google-ai-mode": {
+          "mentioned": false
+        },
+        "gemini-2.5-flash": {
+          "mentioned": false
+        },
+        "sonar": {
+          "mentioned": false
+        },
+        "gpt-4o-mini": {
+          "mentioned": false
+        }
+      }
+    },
+    {
+      "id": "1e38ef1b-3bec-4dfd-91d1-d1f1dcd6f91a",
+      "text": "Pequenas empresas conseguem opções de poupança que rendam mais do que contas normais?",
+      "category": "Commercial",
+      "searchIntent": "COMMERCIAL",
+      "avgScore": 0,
+      "bestScore": 0,
+      "worstScore": 0,
+      "mentions": 0,
+      "totalRuns": 4,
+      "trend": "stable",
+      "models": {
+        "google-aio": {
+          "mentioned": false
+        },
+        "google-ai-mode": {
+          "mentioned": false
+        },
+        "gemini-2.5-flash": {
+          "mentioned": false
+        },
+        "sonar": {
+          "mentioned": false
+        },
+        "gpt-4o-mini": {
+          "mentioned": false
+        }
+      }
+    },
+    {
+      "id": "9ae33d63-4e97-4af3-84c2-7929a2e189f3",
+      "text": "Poupança ainda vale a pena em 2026 ou existem outras opções melhores para guardar dinheiro a longo prazo?",
+      "category": "Informational",
+      "searchIntent": "INFORMATIONAL",
+      "avgScore": 0,
+      "bestScore": 0,
+      "worstScore": 0,
+      "mentions": 0,
+      "totalRuns": 5,
+      "trend": "stable",
+      "models": {
+        "google-aio": {
+          "mentioned": false
+        },
+        "google-ai-mode": {
+          "mentioned": false
+        },
+        "gemini-2.5-flash": {
+          "mentioned": false
+        },
+        "sonar": {
+          "mentioned": false
+        },
+        "gpt-4o-mini": {
+          "mentioned": false
+        }
+      }
+    },
+    {
+      "id": "fa3cc92b-cbcb-4f7c-b21a-a327458694d6",
+      "text": "Quais as melhores opções de contas de poupança para famílias em 2026?",
+      "category": "Commercial",
+      "searchIntent": "COMMERCIAL",
+      "avgScore": 0,
+      "bestScore": 0,
+      "worstScore": 0,
+      "mentions": 0,
+      "totalRuns": 5,
+      "trend": "stable",
+      "models": {
+        "google-aio": {
+          "mentioned": false
+        },
+        "google-ai-mode": {
+          "mentioned": false
+        },
+        "gemini-2.5-flash": {
+          "mentioned": false
+        },
+        "sonar": {
+          "mentioned": false
+        },
+        "gpt-4o-mini": {
+          "mentioned": false
+        }
+      }
+    },
+    {
+      "id": "23483f2a-1f2e-4268-beca-b2529cd92ac0",
+      "text": "Top 5 alternativas para poupança de longo prazo sem risco em 2026",
+      "category": "Commercial",
+      "searchIntent": "COMMERCIAL",
+      "avgScore": 0,
+      "bestScore": 0,
+      "worstScore": 0,
+      "mentions": 0,
+      "totalRuns": 5,
+      "trend": "stable",
+      "models": {
+        "google-aio": {
+          "mentioned": false
+        },
+        "google-ai-mode": {
+          "mentioned": false
+        },
+        "gemini-2.5-flash": {
+          "mentioned": false
+        },
+        "sonar": {
+          "mentioned": false
+        },
+        "gpt-4o-mini": {
+          "mentioned": false
+        }
+      }
+    },
+    {
+      "id": "9fcdff3d-8c77-44ee-b658-8912828d2837",
+      "text": "Como escolher o melhor PPR?",
+      "category": "Uncategorized",
+      "searchIntent": null,
+      "avgScore": 0,
+      "bestScore": 0,
+      "worstScore": 0,
+      "mentions": 0,
+      "totalRuns": 4,
+      "trend": "stable",
+      "models": {
+        "google-aio": {
+          "mentioned": false
+        },
+        "google-ai-mode": {
+          "mentioned": false
+        },
+        "gemini-2.5-flash": {
+          "mentioned": false
+        },
+        "sonar": {
+          "mentioned": false
+        },
+        "gpt-4o-mini": {
+          "mentioned": false
+        }
+      }
+    },
+    {
+      "id": "0e57de18-52fd-49ee-a3dc-902d85172bf8",
+      "text": "Melhor PPR 2025 / 2026",
+      "category": "Uncategorized",
+      "searchIntent": null,
+      "avgScore": 0,
+      "bestScore": 0,
+      "worstScore": 0,
+      "mentions": 0,
+      "totalRuns": 5,
+      "trend": "stable",
+      "models": {
+        "google-aio": {
+          "mentioned": false
+        },
+        "google-ai-mode": {
+          "mentioned": false
+        },
+        "gemini-2.5-flash": {
+          "mentioned": false
+        },
+        "sonar": {
+          "mentioned": false
+        },
+        "gpt-4o-mini": {
+          "mentioned": false
+        }
+      }
+    }
   ],
-  // Optional — fill from citation aggregation.
-  // Schema per row: { domain, type, count, urls: [{url, title, count, models: []}] }
-  citations: [],
-  // Optional — sentiment summary.
-  // Schema: { positive, neutral, negative, uncertain }
-  sentiment: { positive: 0, neutral: 0, negative: 0, uncertain: 0 }
+  "competitors": [
+    {
+      "name": "Bankinter",
+      "domain": "bankinter.pt",
+      "url": "https://www.bankinter.pt/",
+      "visibilityScore": 21,
+      "change": "+100%",
+      "rank": 1,
+      "monthlyVisits": null,
+      "globalRank": null
+    },
+    {
+      "name": "Optimize",
+      "domain": "optimize.pt",
+      "url": "https://optimize.pt/",
+      "visibilityScore": 20,
+      "change": "+100%",
+      "rank": 2,
+      "monthlyVisits": null,
+      "globalRank": null
+    },
+    {
+      "name": "BPI",
+      "domain": "bancobpi.pt",
+      "url": "https://www.bancobpi.pt/",
+      "visibilityScore": 17,
+      "change": "+100%",
+      "rank": 3,
+      "monthlyVisits": null,
+      "globalRank": null
+    },
+    {
+      "name": "Oxy Capital",
+      "domain": "oxycapital.com",
+      "url": "https://oxycapital.com/pt-pt/",
+      "visibilityScore": 11,
+      "change": "+100%",
+      "rank": 4,
+      "monthlyVisits": null,
+      "globalRank": null
+    },
+    {
+      "name": "BBVA",
+      "domain": "bbva.pt",
+      "url": "https://www.bbva.pt/",
+      "visibilityScore": 1,
+      "change": "+100%",
+      "rank": 5,
+      "monthlyVisits": null,
+      "globalRank": null
+    },
+    {
+      "name": "Casa de Investimentos",
+      "domain": "casadeinvestimentos.pt",
+      "url": "https://www.casadeinvestimentos.pt/",
+      "visibilityScore": 0,
+      "change": "+0%",
+      "rank": 6,
+      "monthlyVisits": null,
+      "globalRank": null
+    }
+  ],
+  "citations": [
+    {
+      "domain": "literaciafinanceira.pt",
+      "mentions": 55,
+      "aiModels": [
+        "google-aio",
+        "gpt-4o-mini",
+        "sonar",
+        "google-ai-mode"
+      ]
+    },
+    {
+      "domain": "youtube.com",
+      "mentions": 49,
+      "aiModels": [
+        "google-aio",
+        "sonar",
+        "google-ai-mode",
+        "gpt-4o-mini"
+      ]
+    },
+    {
+      "domain": "reddit.com",
+      "mentions": 29,
+      "aiModels": [
+        "google-aio",
+        "gpt-4o-mini",
+        "google-ai-mode",
+        "sonar"
+      ]
+    },
+    {
+      "domain": "deco.proteste.pt",
+      "mentions": 29,
+      "aiModels": [
+        "google-aio",
+        "gpt-4o-mini",
+        "google-ai-mode",
+        "sonar"
+      ]
+    },
+    {
+      "domain": "contaspoupanca.pt",
+      "mentions": 26,
+      "aiModels": [
+        "google-aio",
+        "sonar",
+        "google-ai-mode"
+      ]
+    },
+    {
+      "domain": "rankia.pt",
+      "mentions": 24,
+      "aiModels": [
+        "gpt-4o-mini",
+        "sonar",
+        "google-ai-mode",
+        "google-aio"
+      ]
+    },
+    {
+      "domain": "doutorfinancas.pt",
+      "mentions": 17,
+      "aiModels": [
+        "google-aio",
+        "google-ai-mode",
+        "sonar",
+        "gpt-4o-mini"
+      ]
+    },
+    {
+      "domain": "e-loan.pt",
+      "mentions": 14,
+      "aiModels": [
+        "gpt-4o-mini",
+        "sonar",
+        "google-ai-mode",
+        "google-aio"
+      ]
+    },
+    {
+      "domain": "asf.com.pt",
+      "mentions": 12,
+      "aiModels": [
+        "google-aio",
+        "google-ai-mode"
+      ]
+    },
+    {
+      "domain": "bancocarregosa.com",
+      "mentions": 11,
+      "aiModels": [
+        "google-aio",
+        "gpt-4o-mini",
+        "google-ai-mode"
+      ]
+    },
+    {
+      "domain": "ativos.pt",
+      "mentions": 11,
+      "aiModels": [
+        "gpt-4o-mini"
+      ]
+    },
+    {
+      "domain": "santander.pt",
+      "mentions": 9,
+      "aiModels": [
+        "google-aio",
+        "sonar",
+        "gpt-4o-mini"
+      ]
+    },
+    {
+      "domain": "segurosmais.pt",
+      "mentions": 9,
+      "aiModels": [
+        "gpt-4o-mini"
+      ]
+    },
+    {
+      "domain": "comparaja.pt",
+      "mentions": 7,
+      "aiModels": [
+        "google-aio",
+        "gpt-4o-mini",
+        "google-ai-mode"
+      ]
+    },
+    {
+      "domain": "my.bancoinvest.pt",
+      "mentions": 7,
+      "aiModels": [
+        "gpt-4o-mini"
+      ]
+    },
+    {
+      "domain": "comparafacil.pt",
+      "mentions": 6,
+      "aiModels": [
+        "gpt-4o-mini"
+      ]
+    },
+    {
+      "domain": "moneylab.pt",
+      "mentions": 6,
+      "aiModels": [
+        "sonar",
+        "google-ai-mode",
+        "google-aio"
+      ]
+    },
+    {
+      "domain": "montepio.org",
+      "mentions": 6,
+      "aiModels": [
+        "google-aio",
+        "sonar",
+        "gpt-4o-mini"
+      ]
+    },
+    {
+      "domain": "facebook.com",
+      "mentions": 5,
+      "aiModels": [
+        "google-aio",
+        "google-ai-mode"
+      ]
+    },
+    {
+      "domain": "creditoconsolidado.pt",
+      "mentions": 5,
+      "aiModels": [
+        "gpt-4o-mini",
+        "google-ai-mode",
+        "google-aio",
+        "sonar"
+      ]
+    }
+  ],
+  "sentiment": {
+    "positive": 0,
+    "neutral": 0,
+    "negative": 0,
+    "uncertain": 0
+  }
 };
 
 const MODELS = [
@@ -409,6 +993,11 @@ function renderSentiment(){
     return;
   }
   const s = D_ORIG.sentiment;
+  const sentTotal = (s.positive||0)+(s.neutral||0)+(s.negative||0)+(s.uncertain||0);
+  if (sentTotal === 0){
+    $("sentContent").innerHTML = noData("Sentiment breakdown requires per-prompt drill-down (REST endpoint /prompts/:id). Re-run the data generator with --with-sentiment to populate this tab.");
+    return;
+  }
   $("sentContent").innerHTML = `
     <div class="sent-tiles">
       <div class="sent-tile spos"><div class="st-num">${s.positive||0}</div><div class="st-lbl">Positive</div></div>

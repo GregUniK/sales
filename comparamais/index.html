@@ -244,30 +244,984 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
    Data shape mirrors the GSB report.
    ============================================================ */
 const D_ORIG = {
-  meta: {
-    brand: "ComparaMais",
-    brandId: "2aaf2007-3801-4501-902f-7ba7eb9cd837",
-    domain: "comparamais.pt",
-    generatedAt: "2026-05-15",
-    visibilityScore: 23,
-    totalRuns: 119,
-    trend: "up",
-    period: "All time"
+  "meta": {
+    "brand": "ComparaMais",
+    "brandId": "2aaf2007-3801-4501-902f-7ba7eb9cd837",
+    "domain": "comparamais.pt",
+    "generatedAt": "2026-05-15",
+    "snapshotDate": "2026-05-15T10:38:25.005Z",
+    "visibilityScore": 23,
+    "rank": 1,
+    "totalRuns": 119,
+    "totalCitations": 31,
+    "trend": "up",
+    "period": "All time"
   },
-  // Per-prompt × per-model data is NOT exposed by the AI Visibility MCP (only aggregate
-  // /visibility + /competitors endpoints). Populate when an extraction path is available.
-  prompts: [],
-  competitors: [
-    { name: "Cetelem",   domain: "cetelem.pt",   visibilityScore: 5 },
-    { name: "Cofidis",   domain: "cofidis.pt",   visibilityScore: 4 },
-    { name: "ComparaJá", domain: "comparaja.pt", visibilityScore: 0 }
+  "prompts": [
+    {
+      "id": "01505fb1-0f66-4018-9d06-843a58a69cc7",
+      "text": "Os preços de energia aumentaram muito em 2026. Há formas de encontrar tarifas mais baratas?",
+      "category": "Discovery Prompts",
+      "searchIntent": null,
+      "avgScore": 80,
+      "bestScore": 100,
+      "worstScore": 100,
+      "mentions": 4,
+      "totalRuns": 5,
+      "trend": "up",
+      "models": {
+        "google-aio": {
+          "mentioned": true
+        },
+        "google-ai-mode": {
+          "mentioned": true
+        },
+        "gemini-2.5-flash": {
+          "mentioned": true
+        },
+        "sonar": {
+          "mentioned": false
+        },
+        "gpt-4o-mini": {
+          "mentioned": true
+        }
+      }
+    },
+    {
+      "id": "51d23c35-3956-4a01-b2e0-2c62cc274ed2",
+      "text": "Estou a pagar muito pela internet e televisão. Onde comparar os preços?",
+      "category": "Discovery Prompts",
+      "searchIntent": null,
+      "avgScore": 75,
+      "bestScore": 100,
+      "worstScore": 100,
+      "mentions": 3,
+      "totalRuns": 4,
+      "trend": "down",
+      "models": {
+        "google-aio": {
+          "mentioned": false
+        },
+        "google-ai-mode": {
+          "mentioned": true
+        },
+        "gemini-2.5-flash": {
+          "mentioned": true
+        },
+        "sonar": {
+          "mentioned": false
+        },
+        "gpt-4o-mini": {
+          "mentioned": true
+        }
+      }
+    },
+    {
+      "id": "84db3ed2-271d-4081-8eb4-a6fd786c193d",
+      "text": "Como descobrir os melhores simuladores de crédito pessoal em Portugal?",
+      "category": "Discovery Prompts",
+      "searchIntent": null,
+      "avgScore": 73,
+      "bestScore": 100,
+      "worstScore": 67,
+      "mentions": 4,
+      "totalRuns": 5,
+      "trend": "down",
+      "models": {
+        "google-aio": {
+          "mentioned": true
+        },
+        "google-ai-mode": {
+          "mentioned": true
+        },
+        "gemini-2.5-flash": {
+          "mentioned": true
+        },
+        "sonar": {
+          "mentioned": false
+        },
+        "gpt-4o-mini": {
+          "mentioned": true
+        }
+      }
+    },
+    {
+      "id": "a684f44c-c7d0-4005-b701-810f9c440121",
+      "text": "Quais são os simuladores de crédito mais confiáveis este ano?",
+      "category": "Purchase Intent",
+      "searchIntent": null,
+      "avgScore": 47,
+      "bestScore": 100,
+      "worstScore": 33,
+      "mentions": 3,
+      "totalRuns": 5,
+      "trend": "up",
+      "models": {
+        "google-aio": {
+          "mentioned": true
+        },
+        "google-ai-mode": {
+          "mentioned": true
+        },
+        "gemini-2.5-flash": {
+          "mentioned": false
+        },
+        "sonar": {
+          "mentioned": false
+        },
+        "gpt-4o-mini": {
+          "mentioned": true
+        }
+      }
+    },
+    {
+      "id": "57f367a6-87a1-4f6e-b74c-9229a24620c3",
+      "text": "Alguém sabe onde posso poupar mais: mudar de tarifa de luz ou gás?",
+      "category": "Purchase Intent",
+      "searchIntent": null,
+      "avgScore": 44,
+      "bestScore": 100,
+      "worstScore": 20,
+      "mentions": 3,
+      "totalRuns": 5,
+      "trend": "up",
+      "models": {
+        "google-aio": {
+          "mentioned": true
+        },
+        "google-ai-mode": {
+          "mentioned": true
+        },
+        "gemini-2.5-flash": {
+          "mentioned": false
+        },
+        "sonar": {
+          "mentioned": false
+        },
+        "gpt-4o-mini": {
+          "mentioned": true
+        }
+      }
+    },
+    {
+      "id": "bea72e69-2daa-44a9-830c-1b679b4b4602",
+      "text": "Preciso de um crédito rápido, mas com juros baixos. Alguma dica para escolher?",
+      "category": "Purchase Intent",
+      "searchIntent": null,
+      "avgScore": 40,
+      "bestScore": 100,
+      "worstScore": 100,
+      "mentions": 2,
+      "totalRuns": 5,
+      "trend": "down",
+      "models": {
+        "google-aio": {
+          "mentioned": true
+        },
+        "google-ai-mode": {
+          "mentioned": false
+        },
+        "gemini-2.5-flash": {
+          "mentioned": false
+        },
+        "sonar": {
+          "mentioned": false
+        },
+        "gpt-4o-mini": {
+          "mentioned": true
+        }
+      }
+    },
+    {
+      "id": "9d42c09b-99fb-4bb2-bba5-472193ea7a43",
+      "text": "Famílias pequenas conseguem poupar no pacote TV Net Voz? Alguma dica?",
+      "category": "Discovery Prompts",
+      "searchIntent": null,
+      "avgScore": 37,
+      "bestScore": 100,
+      "worstScore": 83,
+      "mentions": 2,
+      "totalRuns": 5,
+      "trend": "down",
+      "models": {
+        "google-aio": {
+          "mentioned": false
+        },
+        "google-ai-mode": {
+          "mentioned": true
+        },
+        "gemini-2.5-flash": {
+          "mentioned": false
+        },
+        "sonar": {
+          "mentioned": false
+        },
+        "gpt-4o-mini": {
+          "mentioned": true
+        }
+      }
+    },
+    {
+      "id": "8cdc852d-2b47-47db-b6c4-2472ebb2dd76",
+      "text": "Qual é o melhor simulador para comparar crédito pessoal em 2026?",
+      "category": "Purchase Intent",
+      "searchIntent": null,
+      "avgScore": 30,
+      "bestScore": 100,
+      "worstScore": 50,
+      "mentions": 2,
+      "totalRuns": 5,
+      "trend": "up",
+      "models": {
+        "google-aio": {
+          "mentioned": true
+        },
+        "google-ai-mode": {
+          "mentioned": false
+        },
+        "gemini-2.5-flash": {
+          "mentioned": true
+        },
+        "sonar": {
+          "mentioned": false
+        },
+        "gpt-4o-mini": {
+          "mentioned": false
+        }
+      }
+    },
+    {
+      "id": "707d4472-f1d5-42ff-b75f-42f074eeae3f",
+      "text": "Melhores formas de poupar mudando de fornecedor de energia em Portugal?",
+      "category": "Purchase Intent",
+      "searchIntent": null,
+      "avgScore": 25,
+      "bestScore": 100,
+      "worstScore": 100,
+      "mentions": 1,
+      "totalRuns": 4,
+      "trend": "up",
+      "models": {
+        "google-aio": {
+          "mentioned": false
+        },
+        "google-ai-mode": {
+          "mentioned": true
+        },
+        "gemini-2.5-flash": {
+          "mentioned": false
+        },
+        "sonar": {
+          "mentioned": false
+        },
+        "gpt-4o-mini": {
+          "mentioned": false
+        }
+      }
+    },
+    {
+      "id": "75d47d37-a72c-4c66-9c8f-6bfefc3d8ae1",
+      "text": "Os pacotes de TV NET VOZ em 2026 estão melhores ou mais caros do que no ano passado?",
+      "category": "Purchase Intent",
+      "searchIntent": null,
+      "avgScore": 24,
+      "bestScore": 100,
+      "worstScore": 20,
+      "mentions": 2,
+      "totalRuns": 5,
+      "trend": "up",
+      "models": {
+        "google-aio": {
+          "mentioned": false
+        },
+        "google-ai-mode": {
+          "mentioned": true
+        },
+        "gemini-2.5-flash": {
+          "mentioned": false
+        },
+        "sonar": {
+          "mentioned": false
+        },
+        "gpt-4o-mini": {
+          "mentioned": true
+        }
+      }
+    },
+    {
+      "id": "b6379ed0-4ccd-4c47-b0da-7ac52206b507",
+      "text": "Vale a pena mudar de fornecedor de Luz e Gás? Como saber se estou a escolher bem?",
+      "category": "Discovery Prompts",
+      "searchIntent": null,
+      "avgScore": 20,
+      "bestScore": 100,
+      "worstScore": 100,
+      "mentions": 1,
+      "totalRuns": 5,
+      "trend": "up",
+      "models": {
+        "google-aio": {
+          "mentioned": false
+        },
+        "google-ai-mode": {
+          "mentioned": false
+        },
+        "gemini-2.5-flash": {
+          "mentioned": false
+        },
+        "sonar": {
+          "mentioned": false
+        },
+        "gpt-4o-mini": {
+          "mentioned": true
+        }
+      }
+    },
+    {
+      "id": "7f3ca811-c881-4c8f-8979-1f16d6bb956e",
+      "text": "Melhores pacotes TV NET VOZ para uma família de 4 pessoas este ano?",
+      "category": "Purchase Intent",
+      "searchIntent": null,
+      "avgScore": 20,
+      "bestScore": 100,
+      "worstScore": 100,
+      "mentions": 1,
+      "totalRuns": 5,
+      "trend": "up",
+      "models": {
+        "google-aio": {
+          "mentioned": false
+        },
+        "google-ai-mode": {
+          "mentioned": true
+        },
+        "gemini-2.5-flash": {
+          "mentioned": false
+        },
+        "sonar": {
+          "mentioned": false
+        },
+        "gpt-4o-mini": {
+          "mentioned": false
+        }
+      }
+    },
+    {
+      "id": "4870a8f9-194e-473e-ac3a-9021c1f3371e",
+      "text": "Estou a mudar de casa. Como encontro o crédito habitação com as melhores taxas agora?",
+      "category": "Purchase Intent",
+      "searchIntent": null,
+      "avgScore": 20,
+      "bestScore": 100,
+      "worstScore": 100,
+      "mentions": 1,
+      "totalRuns": 5,
+      "trend": "up",
+      "models": {
+        "google-aio": {
+          "mentioned": false
+        },
+        "google-ai-mode": {
+          "mentioned": false
+        },
+        "gemini-2.5-flash": {
+          "mentioned": false
+        },
+        "sonar": {
+          "mentioned": false
+        },
+        "gpt-4o-mini": {
+          "mentioned": true
+        }
+      }
+    },
+    {
+      "id": "6d4310ec-e453-4992-9c9e-0337052355bb",
+      "text": "Alguém mudou recentemente de fornecedor de gás? Como fizeram para comparar preços?",
+      "category": "Purchase Intent",
+      "searchIntent": null,
+      "avgScore": 20,
+      "bestScore": 100,
+      "worstScore": 100,
+      "mentions": 1,
+      "totalRuns": 5,
+      "trend": "up",
+      "models": {
+        "google-aio": {
+          "mentioned": false
+        },
+        "google-ai-mode": {
+          "mentioned": true
+        },
+        "gemini-2.5-flash": {
+          "mentioned": false
+        },
+        "sonar": {
+          "mentioned": false
+        },
+        "gpt-4o-mini": {
+          "mentioned": false
+        }
+      }
+    },
+    {
+      "id": "34fb8431-1513-4d61-ad0b-8408b355aa23",
+      "text": "Como saber se estou a pagar demais pela eletricidade? Há comparadores confiáveis?",
+      "category": "Purchase Intent",
+      "searchIntent": null,
+      "avgScore": 13,
+      "bestScore": 67,
+      "worstScore": 67,
+      "mentions": 1,
+      "totalRuns": 5,
+      "trend": "up",
+      "models": {
+        "google-aio": {
+          "mentioned": false
+        },
+        "google-ai-mode": {
+          "mentioned": false
+        },
+        "gemini-2.5-flash": {
+          "mentioned": false
+        },
+        "sonar": {
+          "mentioned": false
+        },
+        "gpt-4o-mini": {
+          "mentioned": true
+        }
+      }
+    },
+    {
+      "id": "20d68dc6-67f0-48ce-8c0e-4f55ece1b111",
+      "text": "Será que devo consolidar os meus créditos? Por onde começar?",
+      "category": "Discovery Prompts",
+      "searchIntent": null,
+      "avgScore": 0,
+      "bestScore": 0,
+      "worstScore": 0,
+      "mentions": 0,
+      "totalRuns": 4,
+      "trend": "stable",
+      "models": {
+        "google-aio": {
+          "mentioned": false
+        },
+        "google-ai-mode": {
+          "mentioned": false
+        },
+        "gemini-2.5-flash": {
+          "mentioned": false
+        },
+        "sonar": {
+          "mentioned": false
+        },
+        "gpt-4o-mini": {
+          "mentioned": false
+        }
+      }
+    },
+    {
+      "id": "19409586-f099-481d-b159-3f9030d4bae8",
+      "text": "Qual é o passo a passo para pedir um crédito habitação pela primeira vez?",
+      "category": "Purchase Intent",
+      "searchIntent": null,
+      "avgScore": 0,
+      "bestScore": 0,
+      "worstScore": 0,
+      "mentions": 0,
+      "totalRuns": 5,
+      "trend": "stable",
+      "models": {
+        "google-aio": {
+          "mentioned": false
+        },
+        "google-ai-mode": {
+          "mentioned": false
+        },
+        "gemini-2.5-flash": {
+          "mentioned": false
+        },
+        "sonar": {
+          "mentioned": false
+        },
+        "gpt-4o-mini": {
+          "mentioned": false
+        }
+      }
+    },
+    {
+      "id": "823a4a13-fa45-4fae-b376-851c7f4b28a4",
+      "text": "Quais são as melhores estratégias para reduzir as despesas mensais em 2026?",
+      "category": "Discovery Prompts",
+      "searchIntent": null,
+      "avgScore": 0,
+      "bestScore": 0,
+      "worstScore": 0,
+      "mentions": 0,
+      "totalRuns": 5,
+      "trend": "stable",
+      "models": {
+        "google-aio": {
+          "mentioned": false
+        },
+        "google-ai-mode": {
+          "mentioned": false
+        },
+        "gemini-2.5-flash": {
+          "mentioned": false
+        },
+        "sonar": {
+          "mentioned": false
+        },
+        "gpt-4o-mini": {
+          "mentioned": false
+        }
+      }
+    },
+    {
+      "id": "81a3b791-5b8d-4b09-b407-b45c083ce9c2",
+      "text": "Não percebo muito de créditos. Como posso começar a comparar sem me enganar?",
+      "category": "Discovery Prompts",
+      "searchIntent": null,
+      "avgScore": 0,
+      "bestScore": 0,
+      "worstScore": 0,
+      "mentions": 0,
+      "totalRuns": 4,
+      "trend": "stable",
+      "models": {
+        "google-aio": {
+          "mentioned": false
+        },
+        "google-ai-mode": {
+          "mentioned": false
+        },
+        "gemini-2.5-flash": {
+          "mentioned": false
+        },
+        "sonar": {
+          "mentioned": false
+        },
+        "gpt-4o-mini": {
+          "mentioned": false
+        }
+      }
+    },
+    {
+      "id": "b2d18fe3-126b-4578-b801-9834cb5928f6",
+      "text": "2026: Qual a diferença entre taxas fixas e variáveis no crédito habitação? Como escolher?",
+      "category": "Purchase Intent",
+      "searchIntent": null,
+      "avgScore": 0,
+      "bestScore": 0,
+      "worstScore": 0,
+      "mentions": 0,
+      "totalRuns": 5,
+      "trend": "stable",
+      "models": {
+        "google-aio": {
+          "mentioned": false
+        },
+        "google-ai-mode": {
+          "mentioned": false
+        },
+        "gemini-2.5-flash": {
+          "mentioned": false
+        },
+        "sonar": {
+          "mentioned": false
+        },
+        "gpt-4o-mini": {
+          "mentioned": false
+        }
+      }
+    },
+    {
+      "id": "6a8639e7-23a6-4252-9d3d-75daf46c1cd1",
+      "text": "Estou a gastar muito no tarifário de telemóvel. Qual é o mais barato para 2026?",
+      "category": "Purchase Intent",
+      "searchIntent": null,
+      "avgScore": 0,
+      "bestScore": 0,
+      "worstScore": 0,
+      "mentions": 0,
+      "totalRuns": 4,
+      "trend": "stable",
+      "models": {
+        "google-aio": {
+          "mentioned": false
+        },
+        "google-ai-mode": {
+          "mentioned": false
+        },
+        "gemini-2.5-flash": {
+          "mentioned": false
+        },
+        "sonar": {
+          "mentioned": false
+        },
+        "gpt-4o-mini": {
+          "mentioned": false
+        }
+      }
+    },
+    {
+      "id": "e49628a0-8b7b-409f-b942-614e83032c0b",
+      "text": "Crédito pessoal ou cartão de crédito? Quando é que um compensa mais que o outro?",
+      "category": "Purchase Intent",
+      "searchIntent": null,
+      "avgScore": 0,
+      "bestScore": 0,
+      "worstScore": 0,
+      "mentions": 0,
+      "totalRuns": 5,
+      "trend": "stable",
+      "models": {
+        "google-aio": {
+          "mentioned": false
+        },
+        "google-ai-mode": {
+          "mentioned": false
+        },
+        "gemini-2.5-flash": {
+          "mentioned": false
+        },
+        "sonar": {
+          "mentioned": false
+        },
+        "gpt-4o-mini": {
+          "mentioned": false
+        }
+      }
+    },
+    {
+      "id": "e311d9ff-102b-4532-877d-7ddb8957244d",
+      "text": "Crédito consolidado vale mesmo a pena? Como comparar opções?",
+      "category": "Purchase Intent",
+      "searchIntent": null,
+      "avgScore": 0,
+      "bestScore": 0,
+      "worstScore": 0,
+      "mentions": 0,
+      "totalRuns": 5,
+      "trend": "stable",
+      "models": {
+        "google-aio": {
+          "mentioned": false
+        },
+        "google-ai-mode": {
+          "mentioned": false
+        },
+        "gemini-2.5-flash": {
+          "mentioned": false
+        },
+        "sonar": {
+          "mentioned": false
+        },
+        "gpt-4o-mini": {
+          "mentioned": false
+        }
+      }
+    },
+    {
+      "id": "9af0cb0c-f070-40fa-b6f6-9f61d3eab98f",
+      "text": "Como posso saber se estou a pagar demais pelo crédito habitação?",
+      "category": "Discovery Prompts",
+      "searchIntent": null,
+      "avgScore": 0,
+      "bestScore": 0,
+      "worstScore": 0,
+      "mentions": 0,
+      "totalRuns": 4,
+      "trend": "stable",
+      "models": {
+        "google-aio": {
+          "mentioned": false
+        },
+        "google-ai-mode": {
+          "mentioned": false
+        },
+        "gemini-2.5-flash": {
+          "mentioned": false
+        },
+        "sonar": {
+          "mentioned": false
+        },
+        "gpt-4o-mini": {
+          "mentioned": false
+        }
+      }
+    },
+    {
+      "id": "f858b353-600b-4a85-a60f-3fb5210fbc28",
+      "text": "Como as pessoas estão a poupar mais dinheiro em 2026 com as suas contas fixas?",
+      "category": "Discovery Prompts",
+      "searchIntent": null,
+      "avgScore": 0,
+      "bestScore": 0,
+      "worstScore": 0,
+      "mentions": 0,
+      "totalRuns": 5,
+      "trend": "stable",
+      "models": {
+        "google-aio": {
+          "mentioned": false
+        },
+        "google-ai-mode": {
+          "mentioned": false
+        },
+        "gemini-2.5-flash": {
+          "mentioned": false
+        },
+        "sonar": {
+          "mentioned": false
+        },
+        "gpt-4o-mini": {
+          "mentioned": false
+        }
+      }
+    }
   ],
-  // Optional — fill from citation aggregation.
-  // Schema per row: { domain, type, count, urls: [{url, title, count, models: []}] }
-  citations: [],
-  // Optional — sentiment summary.
-  // Schema: { positive, neutral, negative, uncertain }
-  sentiment: { positive: 0, neutral: 0, negative: 0, uncertain: 0 }
+  "competitors": [
+    {
+      "name": "Cetelem",
+      "domain": "cetelem.pt",
+      "url": "https://www.cetelem.pt/",
+      "visibilityScore": 5,
+      "change": "+100%",
+      "rank": 1,
+      "monthlyVisits": null,
+      "globalRank": null
+    },
+    {
+      "name": "Cofidis",
+      "domain": "cofidis.pt",
+      "url": "https://www.cofidis.pt/",
+      "visibilityScore": 4,
+      "change": "+100%",
+      "rank": 2,
+      "monthlyVisits": null,
+      "globalRank": null
+    },
+    {
+      "name": "ComparaJá",
+      "domain": "comparaja.pt",
+      "url": "https://www.comparaja.pt/",
+      "visibilityScore": 0,
+      "change": "+0%",
+      "rank": 3,
+      "monthlyVisits": null,
+      "globalRank": null
+    }
+  ],
+  "citations": [
+    {
+      "domain": "comparamais.pt",
+      "mentions": 102,
+      "aiModels": [
+        "gpt-4o-mini",
+        "google-ai-mode",
+        "google-aio",
+        "sonar",
+        "gemini-2.5-flash"
+      ]
+    },
+    {
+      "domain": "youtube.com",
+      "mentions": 87,
+      "aiModels": [
+        "google-ai-mode",
+        "google-aio",
+        "sonar",
+        "gpt-4o-mini"
+      ]
+    },
+    {
+      "domain": "reddit.com",
+      "mentions": 76,
+      "aiModels": [
+        "gpt-4o-mini",
+        "google-ai-mode",
+        "google-aio",
+        "sonar"
+      ]
+    },
+    {
+      "domain": "comparaja.pt",
+      "mentions": 53,
+      "aiModels": [
+        "google-aio",
+        "sonar",
+        "google-ai-mode",
+        "gemini-2.5-flash",
+        "gpt-4o-mini"
+      ]
+    },
+    {
+      "domain": "doutorfinancas.pt",
+      "mentions": 50,
+      "aiModels": [
+        "google-ai-mode",
+        "google-aio",
+        "sonar",
+        "gemini-2.5-flash",
+        "gpt-4o-mini"
+      ]
+    },
+    {
+      "domain": "erse.pt",
+      "mentions": 40,
+      "aiModels": [
+        "google-aio",
+        "google-ai-mode",
+        "gemini-2.5-flash",
+        "gpt-4o-mini"
+      ]
+    },
+    {
+      "domain": "deco.proteste.pt",
+      "mentions": 38,
+      "aiModels": [
+        "google-ai-mode",
+        "google-aio",
+        "sonar",
+        "gpt-4o-mini"
+      ]
+    },
+    {
+      "domain": "contaspoupanca.pt",
+      "mentions": 33,
+      "aiModels": [
+        "google-ai-mode",
+        "sonar",
+        "google-aio"
+      ]
+    },
+    {
+      "domain": "cgd.pt",
+      "mentions": 28,
+      "aiModels": [
+        "google-ai-mode",
+        "google-aio",
+        "sonar",
+        "gemini-2.5-flash",
+        "gpt-4o-mini"
+      ]
+    },
+    {
+      "domain": "selectra.pt",
+      "mentions": 18,
+      "aiModels": [
+        "gpt-4o-mini",
+        "sonar",
+        "google-ai-mode",
+        "google-aio",
+        "gemini-2.5-flash"
+      ]
+    },
+    {
+      "domain": "facebook.com",
+      "mentions": 18,
+      "aiModels": [
+        "google-ai-mode",
+        "google-aio"
+      ]
+    },
+    {
+      "domain": "nos.pt",
+      "mentions": 17,
+      "aiModels": [
+        "google-ai-mode",
+        "sonar",
+        "google-aio",
+        "gemini-2.5-flash"
+      ]
+    },
+    {
+      "domain": "idealista.pt",
+      "mentions": 16,
+      "aiModels": [
+        "google-aio",
+        "google-ai-mode",
+        "gemini-2.5-flash",
+        "gpt-4o-mini",
+        "sonar"
+      ]
+    },
+    {
+      "domain": "emconta.pt",
+      "mentions": 15,
+      "aiModels": [
+        "gpt-4o-mini"
+      ]
+    },
+    {
+      "domain": "vodafone.pt",
+      "mentions": 14,
+      "aiModels": [
+        "gpt-4o-mini",
+        "google-ai-mode",
+        "sonar",
+        "google-aio",
+        "gemini-2.5-flash"
+      ]
+    },
+    {
+      "domain": "gov.pt",
+      "mentions": 14,
+      "aiModels": [
+        "google-ai-mode",
+        "gemini-2.5-flash",
+        "google-aio",
+        "gpt-4o-mini"
+      ]
+    },
+    {
+      "domain": "clientebancario.bportugal.pt",
+      "mentions": 14,
+      "aiModels": [
+        "google-aio",
+        "google-ai-mode"
+      ]
+    },
+    {
+      "domain": "santander.pt",
+      "mentions": 13,
+      "aiModels": [
+        "google-aio",
+        "sonar",
+        "gpt-4o-mini",
+        "google-ai-mode"
+      ]
+    },
+    {
+      "domain": "millenniumbcp.pt",
+      "mentions": 11,
+      "aiModels": [
+        "google-aio",
+        "gpt-4o-mini"
+      ]
+    },
+    {
+      "domain": "repsol.pt",
+      "mentions": 11,
+      "aiModels": [
+        "google-aio",
+        "gemini-2.5-flash",
+        "gpt-4o-mini",
+        "google-ai-mode",
+        "sonar"
+      ]
+    }
+  ],
+  "sentiment": {
+    "positive": 0,
+    "neutral": 0,
+    "negative": 0,
+    "uncertain": 0
+  }
 };
 
 const MODELS = [
@@ -407,6 +1361,11 @@ function renderSentiment(){
     return;
   }
   const s = D_ORIG.sentiment;
+  const sentTotal = (s.positive||0)+(s.neutral||0)+(s.negative||0)+(s.uncertain||0);
+  if (sentTotal === 0){
+    $("sentContent").innerHTML = noData("Sentiment breakdown requires per-prompt drill-down (REST endpoint /prompts/:id). Re-run the data generator with --with-sentiment to populate this tab.");
+    return;
+  }
   $("sentContent").innerHTML = `
     <div class="sent-tiles">
       <div class="sent-tile spos"><div class="st-num">${s.positive||0}</div><div class="st-lbl">Positive</div></div>

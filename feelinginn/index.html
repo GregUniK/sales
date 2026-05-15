@@ -244,26 +244,28 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
    Data shape mirrors the GSB report.
    ============================================================ */
 const D_ORIG = {
-  meta: {
-    brand: "Feeling Inn",
-    brandId: "4389bcc8-0f8c-46e2-b16c-0dbe0f4a37ec",
-    domain: "feelinginn.pt",
-    generatedAt: "2026-05-15",
-    visibilityScore: 0,
-    totalRuns: 0,
-    trend: "stable",
-    period: "All time"
+  "meta": {
+    "brand": "Feeling Inn",
+    "brandId": "4389bcc8-0f8c-46e2-b16c-0dbe0f4a37ec",
+    "domain": "feelinginn.pt",
+    "generatedAt": "2026-05-15",
+    "snapshotDate": null,
+    "visibilityScore": 0,
+    "rank": null,
+    "totalRuns": 0,
+    "totalCitations": 0,
+    "trend": "stable",
+    "period": "All time"
   },
-  // Per-prompt × per-model data is NOT exposed by the AI Visibility MCP (only aggregate
-  // /visibility + /competitors endpoints). Populate when an extraction path is available.
-  prompts: [],
-  competitors: [],
-  // Optional — fill from citation aggregation.
-  // Schema per row: { domain, type, count, urls: [{url, title, count, models: []}] }
-  citations: [],
-  // Optional — sentiment summary.
-  // Schema: { positive, neutral, negative, uncertain }
-  sentiment: { positive: 0, neutral: 0, negative: 0, uncertain: 0 }
+  "prompts": [],
+  "competitors": [],
+  "citations": [],
+  "sentiment": {
+    "positive": 0,
+    "neutral": 0,
+    "negative": 0,
+    "uncertain": 0
+  }
 };
 
 const MODELS = [
@@ -402,6 +404,11 @@ function renderSentiment(){
     return;
   }
   const s = D_ORIG.sentiment;
+  const sentTotal = (s.positive||0)+(s.neutral||0)+(s.negative||0)+(s.uncertain||0);
+  if (sentTotal === 0){
+    $("sentContent").innerHTML = noData("Sentiment breakdown requires per-prompt drill-down (REST endpoint /prompts/:id). Re-run the data generator with --with-sentiment to populate this tab.");
+    return;
+  }
   $("sentContent").innerHTML = `
     <div class="sent-tiles">
       <div class="sent-tile spos"><div class="st-num">${s.positive||0}</div><div class="st-lbl">Positive</div></div>
