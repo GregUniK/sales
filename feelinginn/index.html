@@ -251,16 +251,12 @@ const D_ORIG = {
     generatedAt: "2026-05-15",
     visibilityScore: 0,
     totalRuns: 0,
-    period: "All data"
+    trend: "stable",
+    period: "All time"
   },
-  // Fill from AI Visibility run data. One object per prompt.
-  // Schema per prompt:
-  //   { id, text, avgScore, bestScore, mentions, totalRuns,
-  //     models: { "google-aio"|"google-ai-mode"|"gemini-2.5-flash"|"sonar"|"gpt-4o-mini":
-  //       { mentioned, score, rank, sentiment, snippet } } }
+  // Per-prompt × per-model data is NOT exposed by the AI Visibility MCP (only aggregate
+  // /visibility + /competitors endpoints). Populate when an extraction path is available.
   prompts: [],
-  // Fill from /competitors when populated.
-  // Schema: { name, domain, mentions, visibilityScore, sentiment: {pos,neu,neg} }
   competitors: [],
   // Optional — fill from citation aggregation.
   // Schema per row: { domain, type, count, urls: [{url, title, count, models: []}] }
@@ -296,15 +292,17 @@ function renderStatRow(){
   const ps = D_ORIG.prompts;
   const totalPrompts = ps.length;
   const mentioned = ps.filter(p => (p.mentions||0) > 0).length;
-  const avgScore = totalPrompts ? Math.round(ps.reduce((a,p)=>a+(p.avgScore||0),0)/totalPrompts) : 0;
-  const totalMentions = ps.reduce((a,p)=>a+(p.mentions||0),0);
+  const promptAvg = totalPrompts ? Math.round(ps.reduce((a,p)=>a+(p.avgScore||0),0)/totalPrompts) : 0;
+  const avgScore = (D_ORIG.meta.visibilityScore != null && D_ORIG.meta.totalRuns > 0) ? D_ORIG.meta.visibilityScore : promptAvg;
   const totalRuns = D_ORIG.meta.totalRuns || ps.reduce((a,p)=>a+(p.totalRuns||0),0);
+  const totalMentions = ps.reduce((a,p)=>a+(p.mentions||0),0);
   const compCount = D_ORIG.competitors.length;
+  const trendStr = D_ORIG.meta.trend === "up" ? "▲ trending up" : D_ORIG.meta.trend === "down" ? "▼ trending down" : "stable";
   const cards = [
-    { label: "Visibility Score", val: avgScore, sub: "0-100 weighted average", cls: avgScore>=60?"good":avgScore>=30?"warn":"" },
-    { label: "Total Prompts",    val: totalPrompts, sub: totalPrompts ? `${mentioned} mentioned` : "none configured" },
+    { label: "Visibility Score", val: avgScore, sub: `0-100 · ${trendStr}`, cls: avgScore>=60?"good":avgScore>=30?"warn":"" },
+    { label: "Total Prompts",    val: totalPrompts || "—", sub: totalPrompts ? `${mentioned} mentioned` : "per-prompt data unavailable" },
     { label: "Total Runs",       val: totalRuns,    sub: "across all models" },
-    { label: "Total Mentions",   val: totalMentions, sub: totalRuns ? `${totalRuns?Math.round(totalMentions/totalRuns*100):0}% mention rate` : "no runs yet" },
+    { label: "Total Mentions",   val: totalPrompts ? totalMentions : "—", sub: totalPrompts ? `${totalRuns?Math.round(totalMentions/totalRuns*100):0}% mention rate` : "per-prompt data unavailable" },
     { label: "AI Models",        val: MODELS.length, sub: "tracked" },
     { label: "Competitors",      val: compCount,    sub: compCount ? "tracked" : "none configured" }
   ];
@@ -316,6 +314,21 @@ function renderStatRow(){
 function renderOverview(){
   if (!hasData()){
     $("ovContent").innerHTML = noData("Overview will populate once the first AI Visibility run completes for Feeling Inn.");
+    return;
+  }
+  if (!D_ORIG.prompts || D_ORIG.prompts.length === 0){
+    const s = D_ORIG.meta.visibilityScore || 0;
+    const trendStr = D_ORIG.meta.trend === "up" ? "▲ trending up" : D_ORIG.meta.trend === "down" ? "▼ trending down" : "— stable";
+    const scoreColor = s>=60?"var(--good)":s>=30?"var(--warn)":"var(--ink)";
+    $("ovContent").innerHTML = `
+      <div class="cc">
+        <div class="cc-head"><div class="cc-title">Aggregate Visibility</div><div class="cc-sub">overall score across all prompts × models</div></div>
+        <div class="cc-body" style="text-align:center;padding:36px 20px">
+          <div style="font-size:56px;font-weight:700;line-height:1;color:${scoreColor}">${s}<span style="font-size:24px;color:var(--ink4);font-weight:500"> / 100</span></div>
+          <div style="font-size:13px;color:var(--ink3);margin-top:10px">${D_ORIG.meta.totalRuns} runs · ${trendStr}</div>
+          <div style="font-size:12px;color:var(--ink4);margin-top:18px;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.55">Per-prompt and per-model breakdown is not exposed by the AI Visibility MCP API. The Prompts, Sentiment, and Citations tabs remain empty until prompt-level data can be extracted.</div>
+        </div>
+      </div>`;
     return;
   }
   // Per-model visibility bars
@@ -352,7 +365,10 @@ function renderPrompts(){
   if (STATE.search) rows = rows.filter(p => (p.text||"").toLowerCase().includes(STATE.search.toLowerCase()));
   $("promptsSub").textContent = `${rows.length} of ${D_ORIG.prompts.length} prompts`;
   if (!rows.length){
-    tbody.innerHTML = `<tr><td colspan="6">${noData("No prompts to show. Add prompts in the AI Visibility dashboard, run them, then drop the data into D_ORIG.")}</td></tr>`;
+    const msg = (D_ORIG.meta.totalRuns > 0)
+      ? `Per-prompt detail is not exposed by the AI Visibility MCP API. Aggregate: <b>${D_ORIG.meta.visibilityScore}/100</b> across ${D_ORIG.meta.totalRuns} runs.`
+      : "No prompts to show. Add prompts in the AI Visibility dashboard, run them, then drop the data into D_ORIG.";
+    tbody.innerHTML = `<tr><td colspan="6">${noData(msg)}</td></tr>`;
     return;
   }
   tbody.innerHTML = rows.map(p => {
@@ -381,6 +397,10 @@ function renderSentiment(){
     $("sentContent").innerHTML = noData("Sentiment breakdown will populate once prompts return mentions.");
     return;
   }
+  if (!D_ORIG.prompts || D_ORIG.prompts.length === 0){
+    $("sentContent").innerHTML = noData("Sentiment classifications are part of per-prompt detail and are not exposed by the AI Visibility MCP API.");
+    return;
+  }
   const s = D_ORIG.sentiment;
   $("sentContent").innerHTML = `
     <div class="sent-tiles">
@@ -399,14 +419,15 @@ function renderCompetitors(){
     $("compInsight").innerHTML = noDataSmall("Competitive positioning will appear once competitors are tracked and prompts have run.");
     return;
   }
-  const max = Math.max(...cs.map(c => c.mentions||0), 1);
+  const metric = c => (c.mentions != null ? c.mentions : (c.visibilityScore||0));
+  const max = Math.max(...cs.map(metric), 1);
   $("compList").innerHTML = cs.map((c,i) => `
     <div class="comp-row">
       <div class="comp-rank">${i+1}</div>
       <img class="comp-fav" src="${favicon(c.domain||c.name)}">
       <div class="comp-name">${escapeHtml(c.name||"")}</div>
-      <div class="comp-bar-wrap"><div class="comp-bar" style="width:${(c.mentions||0)/max*100}%"></div></div>
-      <div class="comp-count">${c.mentions||0} mentions</div>
+      <div class="comp-bar-wrap"><div class="comp-bar" style="width:${metric(c)/max*100}%"></div></div>
+      <div class="comp-count">${c.mentions != null ? (c.mentions + " mentions") : "—"}</div>
       <div class="comp-score">${Math.round(c.visibilityScore||0)}%</div>
     </div>`).join("");
   $("compInsight").innerHTML = `<div style="font-size:12.5px;color:var(--ink2);line-height:1.6">${cs.length} competitor${cs.length===1?"":"s"} tracked. Leader: <b>${escapeHtml(cs[0].name||"—")}</b> with ${cs[0].mentions||0} mentions.</div>`;
@@ -415,7 +436,7 @@ function renderCompetitors(){
 function renderCitations(){
   const c = D_ORIG.citations;
   if (!c.length){
-    $("citContent").innerHTML = noData("Citation domains will appear once AI models cite sources for Feeling Inn prompts.");
+    $("citContent").innerHTML = noData("Citation data is part of per-prompt detail and is not exposed by the AI Visibility MCP API.");
     return;
   }
   const max = Math.max(...c.map(x => x.count||0), 1);
