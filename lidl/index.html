@@ -236,6 +236,22 @@ tr.dom-row-open .dom-chev{transform:rotate(180deg)}
 .cit-comp-opt:hover{background:var(--surface2)}
 .cit-comp-opt.active{background:var(--surface2);font-weight:600;color:var(--v)}
 .cit-comp-opt img{width:14px;height:14px;border-radius:3px;flex-shrink:0}
+/* filter dropdowns (model + intent) */
+.flt-dd{position:relative;display:inline-block}
+.flt-trigger{display:flex;align-items:center;gap:6px;padding:5px 11px;border-radius:8px;border:1.5px solid var(--border);color:var(--ink2);font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;background:var(--paper);white-space:nowrap;min-width:145px}
+.flt-trigger:hover{border-color:var(--v-bd)}
+.flt-trigger.open{border-color:var(--v);box-shadow:0 0 0 2px var(--v-bg)}
+.flt-trigger img{width:14px;height:14px;border-radius:3px;flex-shrink:0}
+.flt-trigger-label{flex:1;text-align:left}
+.flt-chev{font-size:9px;color:var(--ink4);transition:transform .15s;display:inline-block}
+.flt-trigger.open .flt-chev{transform:rotate(180deg)}
+.flt-menu{position:fixed;min-width:185px;background:var(--paper);border:1.5px solid var(--border);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.13);z-index:9999;overflow:hidden;display:none}
+.flt-menu.open{display:block}
+.flt-opt{display:flex;align-items:center;gap:8px;padding:7px 12px;font-size:12px;color:var(--ink2);cursor:pointer;transition:background .1s;white-space:nowrap}
+.flt-opt:hover{background:var(--surface2)}
+.flt-opt.selected{background:var(--v-bg);font-weight:600;color:var(--v-text)}
+.flt-opt img{width:14px;height:14px;border-radius:3px;flex-shrink:0}
+.flt-opt-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
 /* time range filter */
 .time-filter{display:flex;background:var(--surface);border:1px solid var(--border);border-radius:7px;overflow:hidden}
 .tf-btn{padding:5px 11px;font-size:12px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--ink3);transition:all .15s;white-space:nowrap}
@@ -271,22 +287,47 @@ tr.dom-row-open .dom-chev{transform:rotate(180deg)}
 </header>
 <div class="model-bar">
   <span class="mb-label">Filter by model</span>
-  <button class="mb-btn active" onclick="setModel('all',this)">All models</button>
-  <button class="mb-btn" onclick="setModel('google-aio',this)">
-    <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32">Google AIO
-  </button>
-  <button class="mb-btn" onclick="setModel('google-ai-mode',this)">
-    <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32">Google AI Mode
-  </button>
-  <button class="mb-btn" onclick="setModel('gemini-2.5-flash',this)">
-    <img src="https://www.google.com/s2/favicons?domain=gemini.google.com&sz=32">Gemini
-  </button>
-  <button class="mb-btn" onclick="setModel('sonar',this)">
-    <img src="https://www.google.com/s2/favicons?domain=perplexity.ai&sz=32">Perplexity
-  </button>
-  <button class="mb-btn" onclick="setModel('gpt-4o-mini',this)">
-    <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32">ChatGPT
-  </button>
+  <div class="flt-dd" id="modelDd">
+    <button class="flt-trigger" id="modelTrigger" onclick="toggleFltDd('modelDd','modelMenu','modelTrigger')">
+      <span class="flt-trigger-label" id="modelTriggerLabel">All models</span>
+      <span class="flt-chev">&#9660;</span>
+    </button>
+    <div class="flt-menu" id="modelMenu">
+      <div class="flt-opt selected" onclick="pickModel('all',this)">All models</div>
+      <div class="flt-opt" onclick="pickModel('google-aio',this)">
+        <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32">Google AIO
+      </div>
+      <div class="flt-opt" onclick="pickModel('google-ai-mode',this)">
+        <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32">Google AI Mode
+      </div>
+      <div class="flt-opt" onclick="pickModel('gemini-2.5-flash',this)">
+        <img src="https://www.google.com/s2/favicons?domain=gemini.google.com&sz=32">Gemini
+      </div>
+      <div class="flt-opt" onclick="pickModel('sonar',this)">
+        <img src="https://www.google.com/s2/favicons?domain=perplexity.ai&sz=32">Perplexity
+      </div>
+      <div class="flt-opt" onclick="pickModel('gpt-4o-mini',this)">
+        <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32">ChatGPT
+      </div>
+    </div>
+  </div>
+  <span class="mb-label" style="margin-left:10px">Filter by intent</span>
+  <div class="flt-dd" id="intentDd">
+    <button class="flt-trigger" id="intentTrigger" onclick="toggleFltDd('intentDd','intentMenu','intentTrigger')">
+      <span class="flt-trigger-label" id="intentTriggerLabel">All intents</span>
+      <span class="flt-chev">&#9660;</span>
+    </button>
+    <div class="flt-menu" id="intentMenu">
+      <div class="flt-opt selected" onclick="pickIntent('all',this)">All intents</div>
+      <div class="flt-opt" onclick="pickIntent('COMMERCIAL',this)"><span class="flt-opt-dot" style="background:#7c3aed1a;border:1.5px solid #7c3aed"></span>Commercial</div>
+      <div class="flt-opt" onclick="pickIntent('TRANSACTIONAL',this)"><span class="flt-opt-dot" style="background:#16a34a1a;border:1.5px solid #16a34a"></span>Transactional</div>
+      <div class="flt-opt" onclick="pickIntent('INVESTIGATIONAL',this)"><span class="flt-opt-dot" style="background:#2563eb1a;border:1.5px solid #2563eb"></span>Investigational</div>
+      <div class="flt-opt" onclick="pickIntent('INFORMATIONAL',this)"><span class="flt-opt-dot" style="background:#0891b21a;border:1.5px solid #0891b2"></span>Informational</div>
+      <div class="flt-opt" onclick="pickIntent('NAVIGATIONAL',this)"><span class="flt-opt-dot" style="background:#64748b1a;border:1.5px solid #64748b"></span>Navigational</div>
+      <div class="flt-opt" onclick="pickIntent('BRANDED',this)"><span class="flt-opt-dot" style="background:#d974061a;border:1.5px solid #d97406"></span>Branded</div>
+      <div class="flt-opt" onclick="pickIntent('SENTIMENT',this)"><span class="flt-opt-dot" style="background:#db27771a;border:1.5px solid #db2777"></span>Sentiment</div>
+    </div>
+  </div>
 </div>
 <nav class="subnav">
   <div class="sn-inner">
@@ -371,7 +412,7 @@ const ICONS={
   target:'<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="3"/><path d="M8 5V2M8 14v-3M5 8H2M14 8h-3"/></svg>'
 };
 const ACTIONS={"lidl": [{"priority": "high", "effort": "High effort", "cat": "Citation Strategy", "icon": "list", "title": "Get Lidl Portugal listed in the top supermarket roundup articles cited by AI", "signals": ["Listicles drive only 1% of citations but are the highest-converting format for AI inclusion", "zome.pt has 17 listicle citations and idealista.pt has 8 in this space", "Lidl appears in just 41% of prompts vs Pingo Doce and Continente at 546 mentions each"], "favDomains": ["zome.pt", "idealista.pt", "montepio.org", "deco.proteste.pt"], "why": "Lidl Portugal is mentioned in only 15 of 37 tracked prompts while Pingo Doce and Continente lead with 546 AI mentions each. The listicle category sits at just 1% of total citations, meaning the few roundup pages that exist (zome.pt at 17 cites, idealista.pt at 8 cites, montepio.org at 7 cites) carry disproportionate weight. Securing inclusion in these specific roundups is the fastest path to closing the visibility gap with the two market leaders.", "steps": ["This week, audit the top 5 supermarket roundups on zome.pt, idealista.pt, montepio.org, and deco.proteste.pt and document where Lidl is missing or underrepresented", "Reach out to each publisher with a press kit covering Lidl Portugal store count, private-label range, and price-comparison data", "Pitch a quarterly Lidl-vs-competitor savings update to deco.proteste.pt, which already drives 215 citations in this space", "Track inclusion in each target listicle weekly and request updates when new product ranges launch"], "outcome": "Inclusion in 3 to 5 high-authority listicles within 60 to 90 days, lifting prompt visibility from 41% toward 55% as those pages get re-crawled by AI engines", "platDomains": ["zome.pt", "idealista.pt", "montepio.org", "deco.proteste.pt", "lidl.pt"]}, {"priority": "high", "effort": "Med effort", "cat": "Citation Strategy", "icon": "chat", "title": "Build a Reddit and forum presence to own the 675 reddit.com citations dominating this space", "signals": ["reddit.com is the #1 cited domain at 675 citations, far ahead of any owned property", "Forum threads make up 7% of citations, the second-largest content type", "lidl.pt only contributes 329 citations, less than half of Reddit's volume"], "favDomains": ["reddit.com", "facebook.com", "instagram.com"], "why": "Reddit is the single most cited domain in this space at 675 citations, ahead of YouTube at 597 and well ahead of lidl.pt at 329. Forum threads represent 7% of all AI citations, the largest non-blog format. Pingo Doce and Continente both pull 546 mentions in part because user discussion threads about them get pulled into LLM answers. Lidl needs an authentic presence in the Portuguese subreddits where supermarket comparisons happen.", "steps": ["Today, map every active thread on r/portugal, r/devagar, and r/financasportugal that mentions Lidl, Pingo Doce, Continente, or Mercadona", "Set up a verified brand account and contribute genuinely useful answers about pricing, weekly offers, and private-label sourcing", "Seed 4 to 6 helpful threads per month covering recurring questions like Lidl Bonus Card, weekly leaflet, and store locator", "Cross-reference Reddit activity with facebook.com and instagram.com posts so the same topics get reinforced across the 298 facebook and 228 instagram citations"], "outcome": "Lidl appearing in 30 to 50 additional Reddit threads within 90 days, feeding directly into AI answers within one to two crawl cycles", "platDomains": ["reddit.com", "facebook.com", "instagram.com", "lidl.pt"]}, {"priority": "high", "effort": "Med effort", "cat": "Content", "icon": "play", "title": "Launch a YouTube channel push to capture the 597 youtube.com AI citations", "signals": ["youtube.com is the #2 cited domain with 597 citations across this prompt set", "Video content drives 5% of citations but lidl.pt has minimal native video presence in AI answers", "youtube.com appears in the listicle data with 11 citations, doubling its strategic value"], "favDomains": ["youtube.com", "lidl.pt", "institucional.lidl.pt"], "why": "YouTube is the second-most cited source in this space at 597 citations and also appears as a top listicle target with 11 citations. Video accounts for 5% of all AI citations and is a format competitors like Continente and Pingo Doce lean into heavily. Lidl Portugal's institutional channel currently underweights the topics AI engines pull from: weekly offers, recipe content using Lidl ingredients, and Bonus Card explainers.", "steps": ["This week, ship 3 short-form videos covering the highest-volume Portuguese supermarket questions: weekly leaflet, Lidl Bonus Card, and store opening hours", "Add full transcripts and timestamped chapters so AI engines can cite specific moments", "Publish a recurring monthly comparison video on Lidl private-label vs Pingo Doce, Continente, Auchan, and Mercadona equivalents", "Cross-link every video back to the matching lidl.pt and institucional.lidl.pt page to consolidate entity signals"], "outcome": "First YouTube citations appearing in AI answers within 2 to 4 weeks, with 5 to 10 new video citations contributing to overall visibility within 60 days", "platDomains": ["youtube.com", "lidl.pt", "institucional.lidl.pt", "facebook.com", "instagram.com"]}, {"priority": "high", "effort": "High effort", "cat": "Competitive", "icon": "target", "title": "Close the 155-mention gap behind Pingo Doce and Continente by owning price-comparison topics", "signals": ["Pingo Doce and Continente both lead with 546 AI mentions vs Lidl at 391", "Auchan at 366 and Mercadona at 349 are within striking distance below", "deco.proteste.pt drives 215 citations and is the de-facto neutral arbiter of supermarket pricing in Portugal"], "favDomains": ["deco.proteste.pt", "donapoupanca.pt", "pingodoce.pt", "continente.pt"], "why": "Lidl trails the two market leaders by 155 mentions each (391 vs 546) but only leads Auchan by 25 and Mercadona by 42. The two domains most likely to swing AI answers on supermarket comparisons are deco.proteste.pt (215 cites) and donapoupanca.pt (186 cites). These are the editorial properties LLMs lean on when answering 'which Portuguese supermarket is cheapest' style queries. Owning the data narrative on these two properties is the highest-leverage way to overtake Pingo Doce and Continente.", "steps": ["Build a quarterly Lidl Portugal price-basket study and pitch it to deco.proteste.pt and donapoupanca.pt as exclusive data", "Publish the same study on lidl.pt with a clear FAQ schema block so AI engines can pull structured comparisons", "Create dedicated Lidl-vs-Pingo Doce and Lidl-vs-Continente comparison pages on lidl.pt with side-by-side product, price, and store-network data", "Monitor which prompts currently surface pingodoce.pt (230 cites) and continente.pt (173 cites) and ensure Lidl has matching equivalent content"], "outcome": "Closing the gap from 391 to 480 to 500 mentions within 90 days, putting Lidl within 5% of Pingo Doce and Continente", "platDomains": ["deco.proteste.pt", "donapoupanca.pt", "pingodoce.pt", "continente.pt", "lidl.pt"]}, {"priority": "medium", "effort": "Med effort", "cat": "Content", "icon": "search", "title": "Add structured data and entity markup to lidl.pt and institucional.lidl.pt to lift owned-domain citations", "signals": ["lidl.pt only generates 329 citations and institucional.lidl.pt 182, well below Reddit at 675", "Blog articles drive 85% of all citations, meaning content format is heavily favored", "Visibility is weakest on sonar (3%) and gemini-2.5-flash (5%), models that lean heavily on schema and entity signals"], "favDomains": ["lidl.pt", "institucional.lidl.pt"], "why": "Owned domains contribute only 511 combined citations (329 + 182) vs Reddit at 675 and YouTube at 597. Blog articles drive 85% of citations in this space, so the structural problem is not format but discoverability. Sonar (Perplexity) sits at 3% visibility and Gemini at 5%, both models that weight FAQ schema, Organization schema, and clean entity definitions. Adding the right structured data is one of the highest-ROI fixes available.", "signals_check": "n/a", "steps": ["Audit lidl.pt for FAQPage, Organization, LocalBusiness, and Product schema coverage and document gaps", "Add FAQPage schema to the 20 highest-trafficked help and store pages, prioritizing Bonus Card, weekly leaflet, and store locator", "Add LocalBusiness schema to every store page on institucional.lidl.pt, including hours and address", "Submit updated XML sitemap and request reindexing in Search Console once schema is live"], "outcome": "Schema-driven visibility gains in Gemini and Perplexity within 45 to 90 days, lifting sonar from 3% and gemini-2.5-flash from 5% toward 10%", "platDomains": ["lidl.pt", "institucional.lidl.pt", "deco.proteste.pt"]}, {"priority": "medium", "effort": "Med effort", "cat": "Visibility", "icon": "zap", "title": "Lift Google AI Mode and AIO coverage from 11% by reinforcing the prompts where Lidl is absent", "signals": ["Google AI Mode and Google AIO both sit at 11% visibility, mentioned in only 4 of 37 prompts", "22 of 37 prompts (59%) trigger no Lidl mention at all", "Top blog domains driving competitor visibility include donapoupanca.pt (186 cites) and deco.proteste.pt (215 cites)"], "favDomains": ["donapoupanca.pt", "deco.proteste.pt", "institucional.lidl.pt"], "why": "Google AI Mode and AIO both surface Lidl in only 4 of 37 prompts (11% visibility) despite being the highest-volume AI surfaces in Portugal. 59% of prompts in this space return no Lidl mention. The blog domains pulling competitor visibility (donapoupanca.pt at 186 and deco.proteste.pt at 215) are well-known editorial outlets, so Lidl needs editorial coverage on the specific topics where it is currently absent.", "steps": ["This week, list the 22 prompts where Lidl gets no mention and group them by underlying topic (price, range, store network, private label)", "For each topic group, identify the editorial property already cited (donapoupanca.pt, deco.proteste.pt, idealista.pt) and pitch a Lidl angle", "Publish 4 deep-dive articles on institucional.lidl.pt that match those underserved topics, with clear factual data AI engines can cite", "Re-test visibility against the same prompt set after 60 days and document which prompts shifted from absent to mentioned"], "outcome": "Google AI Mode and AIO visibility climbing from 11% toward 20% within 60 to 90 days as new editorial coverage and owned content gets indexed", "platDomains": ["donapoupanca.pt", "deco.proteste.pt", "institucional.lidl.pt", "idealista.pt", "lidl.pt"]}]};
-let currentBrand='lidl',activeModel='all',promptFilter='all',actFilter='all',searchQuery='';
+let currentBrand='lidl',activeModel='all',promptFilter='all',intentFilter='all',actFilter='all',searchQuery='';
 let sortCol='visibility',sortDir='desc';
 let currentTimeRange='all';
 let sentimentFilter='all';
@@ -547,7 +588,58 @@ function setTimeRange(range,btn){
 }
 
 function setBrand(b,btn){currentBrand=b;sortCol='visibility';sortDir='desc';['prompt','visibility','position','sentiment','competitors'].forEach(function(c){var arr=document.getElementById('sa-'+c);var th=document.getElementById('th-'+c);if(!arr||!th)return;if(c==='visibility'){th.classList.add('sorted');arr.classList.add('sorted');arr.innerHTML='&#8595;';}else{th.classList.remove('sorted');arr.classList.remove('sorted');arr.innerHTML='&#8597;';}});document.querySelectorAll('.bt-btn').forEach(x=>x.classList.remove('active'));btn.classList.add('active');_applyTimeRange();renderAll();}
-function setModel(m,btn){activeModel=m;document.querySelectorAll('.mb-btn').forEach(x=>x.classList.remove('active'));btn.classList.add('active');renderAll();}
+var _fltDdOpen=null;
+function toggleFltDd(ddId,menuId,triggerId){
+  var menu=document.getElementById(menuId);
+  var trigger=document.getElementById(triggerId);
+  var isOpen=menu.classList.contains('open');
+  if(_fltDdOpen&&_fltDdOpen!==menuId){
+    var prev=document.getElementById(_fltDdOpen);
+    if(prev){prev.classList.remove('open');}
+    document.querySelectorAll('.flt-trigger.open').forEach(function(t){t.classList.remove('open');});
+  }
+  if(isOpen){
+    menu.classList.remove('open');trigger.classList.remove('open');_fltDdOpen=null;
+  } else {
+    var rect=trigger.getBoundingClientRect();
+    menu.style.top=(rect.bottom+5)+'px';
+    menu.style.left=rect.left+'px';
+    menu.classList.add('open');trigger.classList.add('open');_fltDdOpen=menuId;
+  }
+}
+document.addEventListener('click',function(e){
+  if(!e.target.closest('.flt-dd')){
+    document.querySelectorAll('.flt-menu.open').forEach(function(m){m.classList.remove('open');});
+    document.querySelectorAll('.flt-trigger.open').forEach(function(t){t.classList.remove('open');});
+    _fltDdOpen=null;
+  }
+});
+function pickModel(m,opt){
+  activeModel=m;
+  document.querySelectorAll('#modelMenu .flt-opt').forEach(function(x){x.classList.remove('selected');});
+  opt.classList.add('selected');
+  var labelEl=document.getElementById('modelTriggerLabel');
+  if(labelEl)labelEl.textContent=opt.textContent.trim();
+  var trigger=document.getElementById('modelTrigger');
+  if(trigger){trigger.classList.remove('open');}
+  var menu=document.getElementById('modelMenu');
+  if(menu){menu.classList.remove('open');}
+  _fltDdOpen=null;
+  renderAll();
+}
+function pickIntent(it,opt){
+  intentFilter=it;
+  document.querySelectorAll('#intentMenu .flt-opt').forEach(function(x){x.classList.remove('selected');});
+  opt.classList.add('selected');
+  var labelEl=document.getElementById('intentTriggerLabel');
+  if(labelEl)labelEl.textContent=opt.textContent.trim();
+  var trigger=document.getElementById('intentTrigger');
+  if(trigger){trigger.classList.remove('open');}
+  var menu=document.getElementById('intentMenu');
+  if(menu){menu.classList.remove('open');}
+  _fltDdOpen=null;
+  applyPromptFilter();
+}
 function switchTab(t,btn){document.querySelectorAll('.stab').forEach(x=>x.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));document.getElementById('panel-'+t).classList.add('active');}
 function renderAll(){renderStats();renderOverview();renderPrompts();renderSentiment();renderCompetitors();renderCitations();renderActionsGrid();}
 function fav(d,sz){return 'https://www.google.com/s2/favicons?domain='+d+'&sz='+(sz||32);}
@@ -893,6 +985,7 @@ function applyPromptFilter(){
     if(activeModel==='all')return !Object.values(p.models).some(function(m){return m&&m.mentioned;});
     return !(p.models[activeModel]&&p.models[activeModel].mentioned);
   });
+  if(intentFilter!=='all')data=data.filter(function(p){return String(p.intent||'').toUpperCase()===intentFilter;});
   data=sortPrompts(data);
   var tbody=document.getElementById('promptsTbody');
   if(!data.length){tbody.innerHTML='<tr><td colspan="6" style="text-align:center;padding:32px;color:var(--ink4)">No prompts match filter</td></tr>';return;}

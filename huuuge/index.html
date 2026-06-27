@@ -236,6 +236,22 @@ tr.dom-row-open .dom-chev{transform:rotate(180deg)}
 .cit-comp-opt:hover{background:var(--surface2)}
 .cit-comp-opt.active{background:var(--surface2);font-weight:600;color:var(--v)}
 .cit-comp-opt img{width:14px;height:14px;border-radius:3px;flex-shrink:0}
+/* filter dropdowns (model + intent) */
+.flt-dd{position:relative;display:inline-block}
+.flt-trigger{display:flex;align-items:center;gap:6px;padding:5px 11px;border-radius:8px;border:1.5px solid var(--border);color:var(--ink2);font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;background:var(--paper);white-space:nowrap;min-width:145px}
+.flt-trigger:hover{border-color:var(--v-bd)}
+.flt-trigger.open{border-color:var(--v);box-shadow:0 0 0 2px var(--v-bg)}
+.flt-trigger img{width:14px;height:14px;border-radius:3px;flex-shrink:0}
+.flt-trigger-label{flex:1;text-align:left}
+.flt-chev{font-size:9px;color:var(--ink4);transition:transform .15s;display:inline-block}
+.flt-trigger.open .flt-chev{transform:rotate(180deg)}
+.flt-menu{position:fixed;min-width:185px;background:var(--paper);border:1.5px solid var(--border);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.13);z-index:9999;overflow:hidden;display:none}
+.flt-menu.open{display:block}
+.flt-opt{display:flex;align-items:center;gap:8px;padding:7px 12px;font-size:12px;color:var(--ink2);cursor:pointer;transition:background .1s;white-space:nowrap}
+.flt-opt:hover{background:var(--surface2)}
+.flt-opt.selected{background:var(--v-bg);font-weight:600;color:var(--v-text)}
+.flt-opt img{width:14px;height:14px;border-radius:3px;flex-shrink:0}
+.flt-opt-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
 /* time range filter */
 .time-filter{display:flex;background:var(--surface);border:1px solid var(--border);border-radius:7px;overflow:hidden}
 .tf-btn{padding:5px 11px;font-size:12px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--ink3);transition:all .15s;white-space:nowrap}
@@ -271,22 +287,47 @@ tr.dom-row-open .dom-chev{transform:rotate(180deg)}
 </header>
 <div class="model-bar">
   <span class="mb-label">Filter by model</span>
-  <button class="mb-btn active" onclick="setModel('all',this)">All models</button>
-  <button class="mb-btn" onclick="setModel('google-aio',this)">
-    <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32">Google AIO
-  </button>
-  <button class="mb-btn" onclick="setModel('google-ai-mode',this)">
-    <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32">Google AI Mode
-  </button>
-  <button class="mb-btn" onclick="setModel('gemini-2.5-flash',this)">
-    <img src="https://www.google.com/s2/favicons?domain=gemini.google.com&sz=32">Gemini
-  </button>
-  <button class="mb-btn" onclick="setModel('sonar',this)">
-    <img src="https://www.google.com/s2/favicons?domain=perplexity.ai&sz=32">Perplexity
-  </button>
-  <button class="mb-btn" onclick="setModel('gpt-4o-mini',this)">
-    <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32">ChatGPT
-  </button>
+  <div class="flt-dd" id="modelDd">
+    <button class="flt-trigger" id="modelTrigger" onclick="toggleFltDd('modelDd','modelMenu','modelTrigger')">
+      <span class="flt-trigger-label" id="modelTriggerLabel">All models</span>
+      <span class="flt-chev">&#9660;</span>
+    </button>
+    <div class="flt-menu" id="modelMenu">
+      <div class="flt-opt selected" onclick="pickModel('all',this)">All models</div>
+      <div class="flt-opt" onclick="pickModel('google-aio',this)">
+        <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32">Google AIO
+      </div>
+      <div class="flt-opt" onclick="pickModel('google-ai-mode',this)">
+        <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32">Google AI Mode
+      </div>
+      <div class="flt-opt" onclick="pickModel('gemini-2.5-flash',this)">
+        <img src="https://www.google.com/s2/favicons?domain=gemini.google.com&sz=32">Gemini
+      </div>
+      <div class="flt-opt" onclick="pickModel('sonar',this)">
+        <img src="https://www.google.com/s2/favicons?domain=perplexity.ai&sz=32">Perplexity
+      </div>
+      <div class="flt-opt" onclick="pickModel('gpt-4o-mini',this)">
+        <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32">ChatGPT
+      </div>
+    </div>
+  </div>
+  <span class="mb-label" style="margin-left:10px">Filter by intent</span>
+  <div class="flt-dd" id="intentDd">
+    <button class="flt-trigger" id="intentTrigger" onclick="toggleFltDd('intentDd','intentMenu','intentTrigger')">
+      <span class="flt-trigger-label" id="intentTriggerLabel">All intents</span>
+      <span class="flt-chev">&#9660;</span>
+    </button>
+    <div class="flt-menu" id="intentMenu">
+      <div class="flt-opt selected" onclick="pickIntent('all',this)">All intents</div>
+      <div class="flt-opt" onclick="pickIntent('COMMERCIAL',this)"><span class="flt-opt-dot" style="background:#7c3aed1a;border:1.5px solid #7c3aed"></span>Commercial</div>
+      <div class="flt-opt" onclick="pickIntent('TRANSACTIONAL',this)"><span class="flt-opt-dot" style="background:#16a34a1a;border:1.5px solid #16a34a"></span>Transactional</div>
+      <div class="flt-opt" onclick="pickIntent('INVESTIGATIONAL',this)"><span class="flt-opt-dot" style="background:#2563eb1a;border:1.5px solid #2563eb"></span>Investigational</div>
+      <div class="flt-opt" onclick="pickIntent('INFORMATIONAL',this)"><span class="flt-opt-dot" style="background:#0891b21a;border:1.5px solid #0891b2"></span>Informational</div>
+      <div class="flt-opt" onclick="pickIntent('NAVIGATIONAL',this)"><span class="flt-opt-dot" style="background:#64748b1a;border:1.5px solid #64748b"></span>Navigational</div>
+      <div class="flt-opt" onclick="pickIntent('BRANDED',this)"><span class="flt-opt-dot" style="background:#d974061a;border:1.5px solid #d97406"></span>Branded</div>
+      <div class="flt-opt" onclick="pickIntent('SENTIMENT',this)"><span class="flt-opt-dot" style="background:#db27771a;border:1.5px solid #db2777"></span>Sentiment</div>
+    </div>
+  </div>
 </div>
 <nav class="subnav">
   <div class="sn-inner">
@@ -371,7 +412,7 @@ const ICONS={
   target:'<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="3"/><path d="M8 5V2M8 14v-3M5 8H2M14 8h-3"/></svg>'
 };
 const ACTIONS={"huuuge": [{"priority": "high", "effort": "High priority", "cat": "Visibility", "icon": "zap", "title": "Get Huuuge Casino listed on apps.apple.com and play.google.com pages that AI models are already citing 275 times", "signals": ["apps.apple.com generates 143 citations and play.google.com generates 132 citations across the 40 tracked prompts — combined, store listings are the single largest citation source at 275 hits", "AI models answering 'best free slots app for Android' and 'best casino app on iPhone' pull directly from app store listing pages and charts — Huuuge Casino is not appearing in any of these 40 responses", "Jackpot Party has App Store and Google Play listings that AI models cite by name across 10 competitor mentions — Huuuge Casino has zero mentions across all 195 analyzed AI chats"], "favDomains": ["apps.apple.com", "play.google.com", "huuuge.com", "casino.org"], "why": "The AI models answering all 40 tracked prompts are pulling from app store pages as their primary source — 275 combined citations from apps.apple.com (143) and play.google.com (132). Huuuge Casino has listings on both stores but is not appearing in any AI response across 195 analyzed chats. The issue is that the listing copy does not match the language used in the tracked prompts. Prompts ask for 'progressive jackpot', 'free chips', 'Vegas-style slots', 'offline play', 'no deposit required', 'daily bonuses' — if these exact phrases do not appear in the store listing descriptions, AI models skip the listing when answering those prompts. Each phrase added to the store description is a direct match to an active tracked prompt.", "steps": ["Audit the Huuuge Casino App Store listing today: check that the description includes 'free slots', 'progressive jackpot', 'daily bonuses', 'Vegas-style', 'offline play', 'no wi-fi needed', 'no deposit required', 'free chips', and 'social casino' — all phrases directly used in the 40 tracked prompts", "Rewrite both the App Store and Google Play short and long descriptions to front-load these exact phrases in the first 160 characters, where AI models weight the copy most heavily", "Add a structured feature list to the Google Play description (supported by rich text formatting): slot variety, daily free coins, offline mode, tournament access, and social club features", "Update screenshots and preview text with feature callouts matching tracked prompt language — AI models that process images and rich snippets pick up screenshot captions as citation signals"], "outcome": "App store listing updates are typically re-indexed by AI models within 30-45 days. Aligning store copy with the exact tracked prompt language can move Huuuge from 0% to visible on the 8 'best free slots app' and 'best casino app' prompts that currently drive the most citation volume from apps.apple.com and play.google.com.", "platDomains": ["apps.apple.com", "play.google.com", "casino.org", "reddit.com", "pokernews.com"]}, {"priority": "high", "effort": "High priority", "cat": "Citation Strategy", "icon": "shield", "title": "Get Huuuge Casino into casino.org and pokernews.com roundups — these two domains alone generate 140 citations across the tracked prompts", "signals": ["casino.org generates 76 citations and pokernews.com generates 64 citations — combined 140 hits, the third and fourth largest citation sources after the app stores", "These are editorial review sites that publish 'best free casino apps' and 'top slots games' roundups — the exact content format AI models cite when answering 18 of the 40 tracked prompts", "Huuuge Casino has 0 mentions across all 195 analyzed AI chats while competitors like Jackpot Party (10 mentions) and Lotsa Slots (5 mentions) appear regularly in the same roundups on these sites"], "favDomains": ["casino.org", "pokernews.com", "huuuge.com", "play.google.com"], "why": "casino.org and pokernews.com are the two highest-citation editorial domains in Huuuge's tracked prompt space, generating 140 citations combined. These sites publish and maintain roundup articles covering the best free casino apps, top social slots games, and free chip guides — exactly the content AI models quote when answering tracked prompts like 'which free casino app has the most slot machines', 'which casino apps have tournaments', and 'what free apps have progressive jackpot slots'. Getting Huuuge Casino added to or featured in these roundups is the fastest route to editorial citations since the sites are already indexed and trusted by all 5 AI models. A single well-placed review on casino.org generates citations across multiple prompts simultaneously.", "steps": ["This week: find the existing Huuuge Casino page or review on casino.org and pokernews.com — if pages exist, check when they were last updated and whether they include current features like progressive jackpots, club tournaments, and daily bonus structure", "If no page exists on either site, contact their editorial teams with a press kit: current app version, slot count, daily bonus details, jackpot amounts, App Store rating, and 3 differentiating features vs Jackpot Party and Slotomania", "Request an update or new review specifically mentioning the features that appear in the tracked prompts: free chips on signup, offline mode, Vegas-style slots, no deposit needed, and tournament play", "Provide casino.org with structured data: number of slot titles, daily bonus chip amount, jackpot size, and a direct App Store download link — these are the data points editorial reviewers copy into roundup tables"], "outcome": "Inclusion in casino.org and pokernews.com roundup articles generates citations within 30-60 days of publication. Based on the 140 existing citations from these domains, getting Huuuge Casino into 2-3 articles on each site can realistically add 40-60 new citations and move visibility from 0% to 15-25% on the editorial roundup prompts in the first analysis cycle.", "platDomains": ["casino.org", "pokernews.com", "huuuge.com", "slotomania.com", "appshunter.io"]}, {"priority": "high", "effort": "High priority", "cat": "Content", "icon": "list", "title": "Publish a 'social casino explained' hub page on huuuge.com to capture the 6 educational prompts where no competitor has a citation advantage", "signals": ["6 tracked prompts are purely educational: 'what is a social casino', 'difference from real casino', 'can you win real money', 'are free casino apps safe', 'how do slot machines work in mobile games', 'how do casino club features work' — all at 0% visibility with no strong first-party answers from any competitor", "611 listicle/roundup citations and 196 how-to guide citations are flowing in this space — but none of them point to Huuuge Casino's own site, which means huuuge.com is not being treated as an authority source", "AI models consistently prefer first-party 'what is X' content from the brand itself for educational queries — a well-structured hub page on huuuge.com would be the only brand-owned educational resource in this space"], "favDomains": ["huuuge.com", "casino.org", "reddit.com", "youtube.com"], "why": "Six of the 40 tracked prompts ask educational questions that players research before downloading any app: what is a social casino, how it differs from real gambling, whether you can win real money, whether these apps are safe, how slot mechanics work, and how club features function. These prompts have zero Huuuge visibility and no strong first-party competitor page either. The 611 listicle citations and 196 how-to guide citations currently flowing in this space all go to third-party sites. A dedicated /social-casino-explained hub on huuuge.com with H2 headers matching the exact tracked prompt questions gives AI models a single authoritative Huuuge URL to cite across the entire educational cluster — and creates an internal linking anchor for all feature pages and the app download page.", "steps": ["Publish /social-casino-explained on huuuge.com covering: definition of social casino, legal distinction from real-money gambling, how free chips work, data safety practices, what players can win, how slot mechanics work in mobile apps, and how casino club features function", "Structure the page with H2 headers matching the exact tracked prompt questions word-for-word — AI models extract answers passage-by-passage from well-structured pages and match them to the query that triggered the response", "Add FAQPage schema markup covering all 6 educational prompts — Google AI Overview surfaces FAQ schema directly in responses, and it is one of the fastest ways to get cited by the Google-family models", "Link to this hub from the app download page, the homepage footer, and any blog or news section — crawl depth directly affects how quickly AI training and retrieval systems pick up the page"], "outcome": "A well-structured educational hub typically generates AI citations within 45-60 days of indexing. For the 6 educational prompts, Huuuge moving from 0% to top-cited source is realistic within 90 days given the absence of strong incumbent first-party content in this cluster. FAQPage schema accelerates Google AIO visibility specifically.", "platDomains": ["huuuge.com", "casino.org", "reddit.com", "youtube.com", "pokernews.com"]}, {"priority": "medium", "effort": "Med effort", "cat": "Citation Strategy", "icon": "map", "title": "Build YouTube tutorials for the 8 how-to prompts — video generates 53 citations and is the most underutilized Huuuge citation channel", "signals": ["youtube.com generates 53 citations across the tracked prompts — but none of them reference Huuuge Casino content, meaning competitors are capturing all 53 video citations", "8 of the 40 tracked prompts are how-to queries: 'how do I get free chips every day', 'how do I get more free chips without paying', 'how do slot machines work in mobile games', 'best tips to last longer in free casino games', 'is there a strategy to win more often on slot apps', 'how do casino club features work', 'how do I get free coins without spending money', 'what are the best tips to last longer' — all answered via video", "Video content generates 28 citations in the 'video' content type category plus additional citations from blog articles that embed YouTube videos — tutorials indexed within 2-4 weeks appear in Perplexity and ChatGPT responses"], "favDomains": ["youtube.com", "huuuge.com", "reddit.com", "casino.org"], "why": "YouTube generates 53 citations across the Huuuge tracked prompts, but none reference Huuuge Casino's own channel. Eight of the 40 tracked prompts are how-to and tips queries — the format YouTube is most effective at answering. AI models cite YouTube tutorials heavily for mobile gaming how-to content because video demonstrations match the visual nature of the query. Each tutorial title should match a tracked prompt exactly: 'How to Get Free Chips Every Day on Huuuge Casino', 'How Do Slot Machines Work in Mobile Casino Games', 'Best Tips to Last Longer in Free Casino Games'. These are ready-made titles from the tracked set. Screen-recorded gameplay tutorials are fast to produce, and Huuuge Casino's visual interface makes them natural to film.", "steps": ["Record 6-8 short screen-recorded tutorials (2-4 minutes each) covering the highest-frequency how-to prompts: free chips daily, slot machine mechanics, casino club features, tips for lasting longer, promo codes, and progressive jackpot explanation", "Title each video using the exact phrasing of the tracked prompts — do not paraphrase, use the query language verbatim as the video title and in the first 125 characters of the description", "Add huuuge.com download links and the specific feature referenced in each video to the YouTube description — this creates a citation chain from YouTube back to huuuge.com and improves the authority signal for both pages", "Publish on a consistent weekly schedule for 6-8 weeks — recency signals matter for AI models that use real-time web retrieval (Perplexity sonar, Google AI Mode) which currently generates 0 Huuuge citations"], "outcome": "YouTube tutorials for mobile gaming apps typically appear in AI responses within 2-4 weeks of indexing. 6-8 videos aligned to tracked prompts can generate 20-35 new YouTube citations across the first analysis cycle, capturing a portion of the 53 video citations currently going to competitors. Perplexity sonar and Google AI Mode are the two models most likely to show early improvement from YouTube content.", "platDomains": ["youtube.com", "huuuge.com", "casino.org", "reddit.com", "apps.apple.com"]}, {"priority": "medium", "effort": "Med effort", "cat": "Competitive", "icon": "search", "title": "Target reddit.com and quora.com — 83 combined citations where Huuuge Casino is currently unmentioned", "signals": ["reddit.com generates 70 citations and quora.com generates 13 citations — combined 83 hits from community discussion platforms where Huuuge Casino has 0 mentions across all 195 analyzed AI chats", "Community prompts in the tracked set include 'do casino apps give promo codes', 'do casino apps reward loyal players', 'how do I get free coins without spending money', 'are there casino apps with free chips when you sign up' — these are answered via Reddit threads and Quora Q&As by definition", "Jackpot Party appears in sonar (Perplexity) responses via Reddit threads — Perplexity weights community content most heavily among all 5 AI models, and Huuuge has 0% visibility on sonar"], "favDomains": ["reddit.com", "quora.com", "huuuge.com", "youtube.com"], "why": "Reddit generates 70 citations and Quora 13 citations in the Huuuge tracked prompt space — 83 combined community citations where Huuuge Casino has zero presence. Perplexity (sonar), the model that weights Reddit and Quora most heavily, currently shows 0% Huuuge visibility. Community prompts about promo codes, free chips without spending, loyalty rewards, and daily bonuses are answered almost exclusively via community threads — not official brand pages. r/huuugecasino likely already has threads about these topics, but they may be outdated or missing key current details. A Huuuge community manager participating in these threads with accurate, helpful answers (with disclosed affiliation) creates the citable community content that Perplexity will surface when these prompts are asked.", "steps": ["Audit r/huuugecasino and r/casinogames for existing threads about promo codes, daily bonuses, club features, and free chip strategies — identify which threads are outdated or have incorrect information about the current version of the app", "Have a Huuuge community manager post updated threads in r/huuugecasino: current promo codes, daily bonus claim process, club tier benefits, and free chip sources — always disclose the affiliation and link to huuuge.com for the current version details", "Answer the 5 most viewed Quora questions about social casino apps and free slots with Huuuge-specific answers — Quora answers that get upvotes are cited by Google AI Overview and Perplexity within 30-45 days", "Pin a weekly free chips megathread in r/huuugecasino — recurring pinned threads with engagement are weighted heavily by Perplexity sonar for community-sourced queries and generate consistent citation opportunities"], "outcome": "Active Reddit and Quora participation typically generates 15-25 additional Perplexity and ChatGPT citations within 60 days. Perplexity sonar visibility moving from 0% toward 20-30% is realistic within one analysis cycle given the direct weight sonar places on community content. This is the fastest path to improving Huuuge's worst-performing model score.", "platDomains": ["reddit.com", "quora.com", "huuuge.com", "casino.org", "youtube.com"]}, {"priority": "medium", "effort": "Med effort", "cat": "Content", "icon": "chat", "title": "Publish 5 niche feature pages on huuuge.com targeting the offline, fish table, video poker, fruit slots, and multiplayer prompts — all uncontested", "signals": ["5 tracked prompts target niche features with very low incumbent content: offline play ('is there a casino slot game I can play offline'), fish table games ('what are fish table casino games and where can I play them for free'), video poker ('where can I find a good free video poker app'), classic fruit slots ('what are the most popular fruit slot machine games on Android'), and multiplayer ('are there any multiplayer casino games I can play with friends') — all at 0%", "The 494 unique domains generating 1,689 citations include no strong first-party Huuuge pages for any of these 5 feature categories — meaning the field is open for a well-indexed brand page to win by default", "These are low-competition queries: the brand with a specific indexed page wins the AI citation because there are few incumbent articles covering these features in the context of social casino apps"], "favDomains": ["huuuge.com", "apps.apple.com", "play.google.com", "casino.org"], "why": "Five tracked prompts target specific Huuuge Casino features that either exist in the app or are adjacent enough to warrant a dedicated page: offline play, fish table games, video poker, classic fruit 777 slots, and multiplayer social features. These are low-competition queries — the brand with a specific page wins by default because there are few incumbent articles covering these features specifically in the social casino context. Feature pages can be short (300-500 words) but must match the exact tracked prompt language, be included in the huuuge.com sitemap, and be linked from the main download page and the social casino hub. Each page gives AI models a direct URL to cite for a specific prompt cluster, and all 5 prompts are currently generating zero citations to any Huuuge content.", "steps": ["Publish 5 short feature pages on huuuge.com: /offline-slots (answering 'casino slot game I can play offline without internet'), /fish-table-games (answering 'what are fish table casino games and where can I play them for free'), /video-poker (answering 'free video poker app for mobile'), /fruit-slots (answering 'popular fruit slot machine games on Android'), and /multiplayer-casino (answering 'multiplayer casino games I can play with friends on mobile')", "Each page must answer the exact tracked prompt question in the first paragraph, then describe how Huuuge Casino delivers that feature with specific details — which slot titles work offline, which video poker variants are available, how the multiplayer club system works", "Add all 5 pages to the huuuge.com sitemap.xml and submit via Google Search Console to accelerate indexation — unsubmitted pages can take 6-8 weeks to appear in AI model indexes, submitted pages typically appear in 2-3 weeks", "Link to each feature page from the social casino explained hub, the main app download page, and from each other where features overlap — internal link depth is a direct signal for crawl priority"], "outcome": "Niche feature pages indexed within 30 days can generate AI citations within 45-60 days. For these 5 uncontested prompts, achieving 60-80% visibility is realistic given the low incumbent competition. Google AI Overview and Google AI Mode are the most likely models to cite new huuuge.com pages quickly since both actively crawl and index site pages in near real time.", "platDomains": ["huuuge.com", "apps.apple.com", "play.google.com", "casino.org", "reddit.com"]}]};
-let currentBrand='huuuge',activeModel='all',promptFilter='all',actFilter='all',searchQuery='';
+let currentBrand='huuuge',activeModel='all',promptFilter='all',intentFilter='all',actFilter='all',searchQuery='';
 let sortCol='visibility',sortDir='desc';
 let currentTimeRange='all';
 let sentimentFilter='all';
@@ -547,7 +588,58 @@ function setTimeRange(range,btn){
 }
 
 function setBrand(b,btn){currentBrand=b;sortCol='visibility';sortDir='desc';['prompt','visibility','position','sentiment','competitors'].forEach(function(c){var arr=document.getElementById('sa-'+c);var th=document.getElementById('th-'+c);if(!arr||!th)return;if(c==='visibility'){th.classList.add('sorted');arr.classList.add('sorted');arr.innerHTML='&#8595;';}else{th.classList.remove('sorted');arr.classList.remove('sorted');arr.innerHTML='&#8597;';}});document.querySelectorAll('.bt-btn').forEach(x=>x.classList.remove('active'));btn.classList.add('active');_applyTimeRange();renderAll();}
-function setModel(m,btn){activeModel=m;document.querySelectorAll('.mb-btn').forEach(x=>x.classList.remove('active'));btn.classList.add('active');renderAll();}
+var _fltDdOpen=null;
+function toggleFltDd(ddId,menuId,triggerId){
+  var menu=document.getElementById(menuId);
+  var trigger=document.getElementById(triggerId);
+  var isOpen=menu.classList.contains('open');
+  if(_fltDdOpen&&_fltDdOpen!==menuId){
+    var prev=document.getElementById(_fltDdOpen);
+    if(prev){prev.classList.remove('open');}
+    document.querySelectorAll('.flt-trigger.open').forEach(function(t){t.classList.remove('open');});
+  }
+  if(isOpen){
+    menu.classList.remove('open');trigger.classList.remove('open');_fltDdOpen=null;
+  } else {
+    var rect=trigger.getBoundingClientRect();
+    menu.style.top=(rect.bottom+5)+'px';
+    menu.style.left=rect.left+'px';
+    menu.classList.add('open');trigger.classList.add('open');_fltDdOpen=menuId;
+  }
+}
+document.addEventListener('click',function(e){
+  if(!e.target.closest('.flt-dd')){
+    document.querySelectorAll('.flt-menu.open').forEach(function(m){m.classList.remove('open');});
+    document.querySelectorAll('.flt-trigger.open').forEach(function(t){t.classList.remove('open');});
+    _fltDdOpen=null;
+  }
+});
+function pickModel(m,opt){
+  activeModel=m;
+  document.querySelectorAll('#modelMenu .flt-opt').forEach(function(x){x.classList.remove('selected');});
+  opt.classList.add('selected');
+  var labelEl=document.getElementById('modelTriggerLabel');
+  if(labelEl)labelEl.textContent=opt.textContent.trim();
+  var trigger=document.getElementById('modelTrigger');
+  if(trigger){trigger.classList.remove('open');}
+  var menu=document.getElementById('modelMenu');
+  if(menu){menu.classList.remove('open');}
+  _fltDdOpen=null;
+  renderAll();
+}
+function pickIntent(it,opt){
+  intentFilter=it;
+  document.querySelectorAll('#intentMenu .flt-opt').forEach(function(x){x.classList.remove('selected');});
+  opt.classList.add('selected');
+  var labelEl=document.getElementById('intentTriggerLabel');
+  if(labelEl)labelEl.textContent=opt.textContent.trim();
+  var trigger=document.getElementById('intentTrigger');
+  if(trigger){trigger.classList.remove('open');}
+  var menu=document.getElementById('intentMenu');
+  if(menu){menu.classList.remove('open');}
+  _fltDdOpen=null;
+  applyPromptFilter();
+}
 function switchTab(t,btn){document.querySelectorAll('.stab').forEach(x=>x.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));document.getElementById('panel-'+t).classList.add('active');}
 function renderAll(){renderStats();renderOverview();renderPrompts();renderSentiment();renderCompetitors();renderCitations();renderActionsGrid();}
 function fav(d,sz){return 'https://www.google.com/s2/favicons?domain='+d+'&sz='+(sz||32);}
@@ -893,6 +985,7 @@ function applyPromptFilter(){
     if(activeModel==='all')return !Object.values(p.models).some(function(m){return m&&m.mentioned;});
     return !(p.models[activeModel]&&p.models[activeModel].mentioned);
   });
+  if(intentFilter!=='all')data=data.filter(function(p){return String(p.intent||'').toUpperCase()===intentFilter;});
   data=sortPrompts(data);
   var tbody=document.getElementById('promptsTbody');
   if(!data.length){tbody.innerHTML='<tr><td colspan="6" style="text-align:center;padding:32px;color:var(--ink4)">No prompts match filter</td></tr>';return;}

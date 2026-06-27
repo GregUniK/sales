@@ -236,6 +236,22 @@ tr.dom-row-open .dom-chev{transform:rotate(180deg)}
 .cit-comp-opt:hover{background:var(--surface2)}
 .cit-comp-opt.active{background:var(--surface2);font-weight:600;color:var(--v)}
 .cit-comp-opt img{width:14px;height:14px;border-radius:3px;flex-shrink:0}
+/* filter dropdowns (model + intent) */
+.flt-dd{position:relative;display:inline-block}
+.flt-trigger{display:flex;align-items:center;gap:6px;padding:5px 11px;border-radius:8px;border:1.5px solid var(--border);color:var(--ink2);font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;background:var(--paper);white-space:nowrap;min-width:145px}
+.flt-trigger:hover{border-color:var(--v-bd)}
+.flt-trigger.open{border-color:var(--v);box-shadow:0 0 0 2px var(--v-bg)}
+.flt-trigger img{width:14px;height:14px;border-radius:3px;flex-shrink:0}
+.flt-trigger-label{flex:1;text-align:left}
+.flt-chev{font-size:9px;color:var(--ink4);transition:transform .15s;display:inline-block}
+.flt-trigger.open .flt-chev{transform:rotate(180deg)}
+.flt-menu{position:fixed;min-width:185px;background:var(--paper);border:1.5px solid var(--border);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.13);z-index:9999;overflow:hidden;display:none}
+.flt-menu.open{display:block}
+.flt-opt{display:flex;align-items:center;gap:8px;padding:7px 12px;font-size:12px;color:var(--ink2);cursor:pointer;transition:background .1s;white-space:nowrap}
+.flt-opt:hover{background:var(--surface2)}
+.flt-opt.selected{background:var(--v-bg);font-weight:600;color:var(--v-text)}
+.flt-opt img{width:14px;height:14px;border-radius:3px;flex-shrink:0}
+.flt-opt-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
 /* time range filter */
 .time-filter{display:flex;background:var(--surface);border:1px solid var(--border);border-radius:7px;overflow:hidden}
 .tf-btn{padding:5px 11px;font-size:12px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--ink3);transition:all .15s;white-space:nowrap}
@@ -271,22 +287,47 @@ tr.dom-row-open .dom-chev{transform:rotate(180deg)}
 </header>
 <div class="model-bar">
   <span class="mb-label">Filter by model</span>
-  <button class="mb-btn active" onclick="setModel('all',this)">All models</button>
-  <button class="mb-btn" onclick="setModel('google-aio',this)">
-    <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32">Google AIO
-  </button>
-  <button class="mb-btn" onclick="setModel('google-ai-mode',this)">
-    <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32">Google AI Mode
-  </button>
-  <button class="mb-btn" onclick="setModel('gemini-2.5-flash',this)">
-    <img src="https://www.google.com/s2/favicons?domain=gemini.google.com&sz=32">Gemini
-  </button>
-  <button class="mb-btn" onclick="setModel('sonar',this)">
-    <img src="https://www.google.com/s2/favicons?domain=perplexity.ai&sz=32">Perplexity
-  </button>
-  <button class="mb-btn" onclick="setModel('gpt-4o-mini',this)">
-    <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32">ChatGPT
-  </button>
+  <div class="flt-dd" id="modelDd">
+    <button class="flt-trigger" id="modelTrigger" onclick="toggleFltDd('modelDd','modelMenu','modelTrigger')">
+      <span class="flt-trigger-label" id="modelTriggerLabel">All models</span>
+      <span class="flt-chev">&#9660;</span>
+    </button>
+    <div class="flt-menu" id="modelMenu">
+      <div class="flt-opt selected" onclick="pickModel('all',this)">All models</div>
+      <div class="flt-opt" onclick="pickModel('google-aio',this)">
+        <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32">Google AIO
+      </div>
+      <div class="flt-opt" onclick="pickModel('google-ai-mode',this)">
+        <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32">Google AI Mode
+      </div>
+      <div class="flt-opt" onclick="pickModel('gemini-2.5-flash',this)">
+        <img src="https://www.google.com/s2/favicons?domain=gemini.google.com&sz=32">Gemini
+      </div>
+      <div class="flt-opt" onclick="pickModel('sonar',this)">
+        <img src="https://www.google.com/s2/favicons?domain=perplexity.ai&sz=32">Perplexity
+      </div>
+      <div class="flt-opt" onclick="pickModel('gpt-4o-mini',this)">
+        <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32">ChatGPT
+      </div>
+    </div>
+  </div>
+  <span class="mb-label" style="margin-left:10px">Filter by intent</span>
+  <div class="flt-dd" id="intentDd">
+    <button class="flt-trigger" id="intentTrigger" onclick="toggleFltDd('intentDd','intentMenu','intentTrigger')">
+      <span class="flt-trigger-label" id="intentTriggerLabel">All intents</span>
+      <span class="flt-chev">&#9660;</span>
+    </button>
+    <div class="flt-menu" id="intentMenu">
+      <div class="flt-opt selected" onclick="pickIntent('all',this)">All intents</div>
+      <div class="flt-opt" onclick="pickIntent('COMMERCIAL',this)"><span class="flt-opt-dot" style="background:#7c3aed1a;border:1.5px solid #7c3aed"></span>Commercial</div>
+      <div class="flt-opt" onclick="pickIntent('TRANSACTIONAL',this)"><span class="flt-opt-dot" style="background:#16a34a1a;border:1.5px solid #16a34a"></span>Transactional</div>
+      <div class="flt-opt" onclick="pickIntent('INVESTIGATIONAL',this)"><span class="flt-opt-dot" style="background:#2563eb1a;border:1.5px solid #2563eb"></span>Investigational</div>
+      <div class="flt-opt" onclick="pickIntent('INFORMATIONAL',this)"><span class="flt-opt-dot" style="background:#0891b21a;border:1.5px solid #0891b2"></span>Informational</div>
+      <div class="flt-opt" onclick="pickIntent('NAVIGATIONAL',this)"><span class="flt-opt-dot" style="background:#64748b1a;border:1.5px solid #64748b"></span>Navigational</div>
+      <div class="flt-opt" onclick="pickIntent('BRANDED',this)"><span class="flt-opt-dot" style="background:#d974061a;border:1.5px solid #d97406"></span>Branded</div>
+      <div class="flt-opt" onclick="pickIntent('SENTIMENT',this)"><span class="flt-opt-dot" style="background:#db27771a;border:1.5px solid #db2777"></span>Sentiment</div>
+    </div>
+  </div>
 </div>
 <nav class="subnav">
   <div class="sn-inner">
@@ -371,7 +412,7 @@ const ICONS={
   target:'<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="3"/><path d="M8 5V2M8 14v-3M5 8H2M14 8h-3"/></svg>'
 };
 const ACTIONS={"betway": [{"priority": "high", "effort": "High effort", "cat": "Citation Strategy", "icon": "list", "title": "Get Betway listed in the top sportsbook listicles cited across all 5 AI models", "signals": ["0% visibility across 40 prompts and 5 models", "Bet365 leads with 585 mentions while Betway sits at 369", "Top listicle hubs tipsanalistas.com (89 cites), bolavip.com (69 cites), lat.motorsport.com (63 cites) drive citation volume"], "favDomains": ["tipsanalistas.com", "bolavip.com", "lat.motorsport.com", "deadspin.com"], "why": "Listicle and roundup pages account for 9% of cited content but punch far above their weight: a single inclusion on tipsanalistas.com is worth 89 AI citations, and bolavip.com adds another 69. Betway is absent from every one of the 40 tracked prompts while Bet365 (585), Codere (466), and Caliente.mx (353) dominate. Securing placements on the listicles AI models already trust is the fastest route from 0% to measurable visibility.", "steps": ["this week, audit the top 20 listicle URLs on tipsanalistas.com, bolavip.com, lat.motorsport.com, deadspin.com, and estafa.info to identify which 'best sportsbook' or 'best betting site' roundups exclude Betway", "build a one-page Betway media kit covering license details, market coverage, bonus structure, and 3 unique selling points editors can quote verbatim", "outreach to each editor or contributor with a tailored inclusion pitch, offering exclusive promo codes or odds data as the editorial hook", "track new mentions weekly and re-pitch outdated 2024 and 2025 roundups for 2026 refreshes"], "outcome": "60-90 days to first listicle inclusions translating into AI citations across Perplexity, ChatGPT, Gemini, and Google AI surfaces", "platDomains": ["tipsanalistas.com", "bolavip.com", "lat.motorsport.com", "deadspin.com", "estafa.info"]}, {"priority": "high", "effort": "Med effort", "cat": "Competitive", "icon": "target", "title": "Close the citation gap with Bet365, Codere, and Caliente.mx by reverse-engineering their cited URLs", "signals": ["Bet365 has 585 AI mentions vs Betway's 369", "Codere (466) and Caliente.mx (353) are both ahead of Betway in this space", "1xBet trails at 261 mentions and is catchable"], "favDomains": ["codere.mx", "oddschecker.com", "oddspedia.com", "legalbet.mx"], "why": "Three direct competitors are already cited more than Betway, and two of them (Codere with codere.mx at 356 cites and the cluster around legalbet.mx at 365 cites) own owned-property entries in the AI graph. Mapping the exact pages models pull from for Bet365 and Codere reveals which entity types, schema, and topical clusters are missing from Betway's site.", "steps": ["today, pull the top 50 cited URLs for Bet365, Codere, and Caliente.mx from the citation data and classify by topic (odds, bonuses, how-to, sport-specific guides)", "identify the 10 highest-citation topic clusters Betway has no equivalent page for and brief them as priority content", "publish parity content on betway.com under clean, descriptive URLs that mirror the entity structure of cited competitor pages", "internally link the new pages from Betway's existing high-authority hubs to accelerate indexation"], "outcome": "First competitive citations within 45-60 days; visibility parity with 1xBet (261 mentions) achievable within one quarter", "platDomains": ["codere.mx", "legalbet.mx", "oddschecker.com", "oddspedia.com", "transfermarkt.mx"]}, {"priority": "high", "effort": "High effort", "cat": "Content", "icon": "zap", "title": "Build a Spanish-language sports betting hub aligned to the Mexico-heavy citation graph", "signals": ["mundodeportivo.com (750), bolavip.com (670), lat.motorsport.com (481) lead all citations and skew Spanish/LatAm", "transfermarkt.mx (408), legalbet.mx (365), codere.mx (356) reinforce Mexico market dominance", "84% of cited content is blog_article format"], "favDomains": ["mundodeportivo.com", "transfermarkt.mx", "legalbet.mx", "lat.motorsport.com"], "why": "The top 10 cited domains are overwhelmingly Spanish-language and Mexico-focused: mundodeportivo.com alone drives 750 citations, with bolavip.com (670), lat.motorsport.com (481), transfermarkt.mx (408), and legalbet.mx (365) reinforcing the pattern. Betway's English-first content is invisible to AI models answering Spanish-language sports betting queries, which is where 0 of 40 mentions are happening.", "steps": ["this week, commission a content audit of Betway's Spanish/MX subfolder against the topic clusters in mundodeportivo.com, transfermarkt.mx, and legalbet.mx", "produce 20 Spanish-language blog_articles covering Liga MX, Champions League, NFL, and NBA betting since blog_article is 84% of cited content", "implement hreflang and a clean es-MX folder structure to signal regional relevance", "syndicate or guest-post select pieces on mundodeportivo.com and lat.motorsport.com to seed citation pathways"], "outcome": "First Spanish-query AI mentions within 60-90 days; sustained visibility lift in gpt-4o-mini and gemini-2.5-flash where Mexico content dominates", "platDomains": ["mundodeportivo.com", "transfermarkt.mx", "legalbet.mx", "lat.motorsport.com", "bolavip.com"]}, {"priority": "medium", "effort": "Med effort", "cat": "Visibility", "icon": "play", "title": "Launch a YouTube channel covering odds analysis, since YouTube drives 406 AI citations in this space", "signals": ["youtube.com is a top-10 cited domain with 406 mentions", "video is 2% of cited content but every cited video gets surfaced widely", "Competitors like Bet365 already use video for AI exposure"], "favDomains": ["youtube.com", "oddschecker.com", "oddspedia.com"], "why": "YouTube sits at 406 citations in the top-10 cited domains, meaning AI models routinely pull video transcripts into responses. Betway has no video presence in the cited set despite competitors using YouTube as an entity-building moat. Video is a faster citation channel than written content because Google AI Mode and Gemini index transcripts within days.", "steps": ["today, claim or audit the existing Betway YouTube channel and confirm transcripts are enabled on every video", "publish 8 videos in 4 weeks covering weekly odds breakdowns, Liga MX previews, and NFL predictions", "structure each video description with timestamps, schema-friendly summaries, and links to the matching betway.com guide", "submit the channel sitemap to Google and ensure videos use full closed captions for transcript indexing"], "outcome": "First YouTube-sourced AI citations within 2-4 weeks once transcripts are crawled", "platDomains": ["youtube.com", "oddschecker.com", "oddspedia.com", "lat.motorsport.com"]}, {"priority": "medium", "effort": "Med effort", "cat": "Content", "icon": "search", "title": "Add SportsEvent, FAQPage, and Organization schema to every betway.com guide page", "signals": ["0% visibility across all 5 AI models indicates entity recognition failure", "blog_article is 84% of cited content, making structured data the differentiator", "889 unique domains in the citation pool means competition for entity authority is fragmented"], "favDomains": ["betway.com", "oddschecker.com", "oddspedia.com"], "why": "Across 14894 total citations spread over 889 domains, the citation graph rewards pages with unambiguous entity signals. Betway sits at 0% across gemini-2.5-flash, sonar, google-ai-mode, gpt-4o-mini, and google-aio, which is consistent with weak structured data rather than weak content. Schema is the cheapest lever to make Betway answerable when the model is choosing between near-identical sportsbook descriptions.", "steps": ["this week, run a schema audit of the top 50 betway.com pages and identify which lack JSON-LD", "deploy SportsEvent schema on event-specific betting guides, FAQPage on every how-to, and a single canonical Organization graph site-wide", "include sameAs links to Betway's verified Wikidata, Crunchbase, and LinkedIn entries to strengthen entity disambiguation", "validate with Rich Results Test and resubmit affected URLs in Search Console"], "outcome": "Schema reindexed in 45-90 days; first measurable lift in google-aio and google-ai-mode visibility as entity confidence improves", "platDomains": ["betway.com", "oddschecker.com", "oddspedia.com", "transfermarkt.mx"]}, {"priority": "medium", "effort": "Med effort", "cat": "Citation Strategy", "icon": "chat", "title": "Earn placements on odds-comparison and forum sources already feeding the AI citation graph", "signals": ["oddschecker.com (453) and oddspedia.com (417) are top-10 cited domains", "forum_thread accounts for 2% of cited content", "Aggregator pages disproportionately influence which sportsbooks get named"], "favDomains": ["oddschecker.com", "oddspedia.com", "legalbet.mx"], "why": "oddschecker.com (453 cites) and oddspedia.com (417 cites) are aggregator hubs whose comparison tables get quoted directly in AI responses. legalbet.mx adds another 365 cites in the Mexico market. These are not standard outreach targets but data integrations: getting Betway's odds and bonus rows into their feeds means automatic inclusion every time an AI model paraphrases their tables.", "steps": ["audit how Betway's existing data feed is reaching oddschecker.com and oddspedia.com, and confirm bonus, market, and license fields are populated and current", "open a partnership conversation with legalbet.mx for Mexico-market inclusion since codere.mx (356 cites) already appears there", "monitor relevant forum_thread sources for unanswered Betway questions and respond with a verified-operator account citing betway.com guides", "set a quarterly review of aggregator pages to catch missing or stale Betway entries"], "outcome": "Aggregator-driven citations within 60-90 days, scaling automatically as feeds refresh", "platDomains": ["oddschecker.com", "oddspedia.com", "legalbet.mx", "codere.mx"]}]};
-let currentBrand='betway',activeModel='all',promptFilter='all',actFilter='all',searchQuery='';
+let currentBrand='betway',activeModel='all',promptFilter='all',intentFilter='all',actFilter='all',searchQuery='';
 let sortCol='visibility',sortDir='desc';
 let currentTimeRange='all';
 let sentimentFilter='all';
@@ -547,7 +588,58 @@ function setTimeRange(range,btn){
 }
 
 function setBrand(b,btn){currentBrand=b;sortCol='visibility';sortDir='desc';['prompt','visibility','position','sentiment','competitors'].forEach(function(c){var arr=document.getElementById('sa-'+c);var th=document.getElementById('th-'+c);if(!arr||!th)return;if(c==='visibility'){th.classList.add('sorted');arr.classList.add('sorted');arr.innerHTML='&#8595;';}else{th.classList.remove('sorted');arr.classList.remove('sorted');arr.innerHTML='&#8597;';}});document.querySelectorAll('.bt-btn').forEach(x=>x.classList.remove('active'));btn.classList.add('active');_applyTimeRange();renderAll();}
-function setModel(m,btn){activeModel=m;document.querySelectorAll('.mb-btn').forEach(x=>x.classList.remove('active'));btn.classList.add('active');renderAll();}
+var _fltDdOpen=null;
+function toggleFltDd(ddId,menuId,triggerId){
+  var menu=document.getElementById(menuId);
+  var trigger=document.getElementById(triggerId);
+  var isOpen=menu.classList.contains('open');
+  if(_fltDdOpen&&_fltDdOpen!==menuId){
+    var prev=document.getElementById(_fltDdOpen);
+    if(prev){prev.classList.remove('open');}
+    document.querySelectorAll('.flt-trigger.open').forEach(function(t){t.classList.remove('open');});
+  }
+  if(isOpen){
+    menu.classList.remove('open');trigger.classList.remove('open');_fltDdOpen=null;
+  } else {
+    var rect=trigger.getBoundingClientRect();
+    menu.style.top=(rect.bottom+5)+'px';
+    menu.style.left=rect.left+'px';
+    menu.classList.add('open');trigger.classList.add('open');_fltDdOpen=menuId;
+  }
+}
+document.addEventListener('click',function(e){
+  if(!e.target.closest('.flt-dd')){
+    document.querySelectorAll('.flt-menu.open').forEach(function(m){m.classList.remove('open');});
+    document.querySelectorAll('.flt-trigger.open').forEach(function(t){t.classList.remove('open');});
+    _fltDdOpen=null;
+  }
+});
+function pickModel(m,opt){
+  activeModel=m;
+  document.querySelectorAll('#modelMenu .flt-opt').forEach(function(x){x.classList.remove('selected');});
+  opt.classList.add('selected');
+  var labelEl=document.getElementById('modelTriggerLabel');
+  if(labelEl)labelEl.textContent=opt.textContent.trim();
+  var trigger=document.getElementById('modelTrigger');
+  if(trigger){trigger.classList.remove('open');}
+  var menu=document.getElementById('modelMenu');
+  if(menu){menu.classList.remove('open');}
+  _fltDdOpen=null;
+  renderAll();
+}
+function pickIntent(it,opt){
+  intentFilter=it;
+  document.querySelectorAll('#intentMenu .flt-opt').forEach(function(x){x.classList.remove('selected');});
+  opt.classList.add('selected');
+  var labelEl=document.getElementById('intentTriggerLabel');
+  if(labelEl)labelEl.textContent=opt.textContent.trim();
+  var trigger=document.getElementById('intentTrigger');
+  if(trigger){trigger.classList.remove('open');}
+  var menu=document.getElementById('intentMenu');
+  if(menu){menu.classList.remove('open');}
+  _fltDdOpen=null;
+  applyPromptFilter();
+}
 function switchTab(t,btn){document.querySelectorAll('.stab').forEach(x=>x.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));document.getElementById('panel-'+t).classList.add('active');}
 function renderAll(){renderStats();renderOverview();renderPrompts();renderSentiment();renderCompetitors();renderCitations();renderActionsGrid();}
 function fav(d,sz){return 'https://www.google.com/s2/favicons?domain='+d+'&sz='+(sz||32);}
@@ -893,6 +985,7 @@ function applyPromptFilter(){
     if(activeModel==='all')return !Object.values(p.models).some(function(m){return m&&m.mentioned;});
     return !(p.models[activeModel]&&p.models[activeModel].mentioned);
   });
+  if(intentFilter!=='all')data=data.filter(function(p){return String(p.intent||'').toUpperCase()===intentFilter;});
   data=sortPrompts(data);
   var tbody=document.getElementById('promptsTbody');
   if(!data.length){tbody.innerHTML='<tr><td colspan="6" style="text-align:center;padding:32px;color:var(--ink4)">No prompts match filter</td></tr>';return;}

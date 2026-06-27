@@ -236,6 +236,22 @@ tr.dom-row-open .dom-chev{transform:rotate(180deg)}
 .cit-comp-opt:hover{background:var(--surface2)}
 .cit-comp-opt.active{background:var(--surface2);font-weight:600;color:var(--v)}
 .cit-comp-opt img{width:14px;height:14px;border-radius:3px;flex-shrink:0}
+/* filter dropdowns (model + intent) */
+.flt-dd{position:relative;display:inline-block}
+.flt-trigger{display:flex;align-items:center;gap:6px;padding:5px 11px;border-radius:8px;border:1.5px solid var(--border);color:var(--ink2);font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;background:var(--paper);white-space:nowrap;min-width:145px}
+.flt-trigger:hover{border-color:var(--v-bd)}
+.flt-trigger.open{border-color:var(--v);box-shadow:0 0 0 2px var(--v-bg)}
+.flt-trigger img{width:14px;height:14px;border-radius:3px;flex-shrink:0}
+.flt-trigger-label{flex:1;text-align:left}
+.flt-chev{font-size:9px;color:var(--ink4);transition:transform .15s;display:inline-block}
+.flt-trigger.open .flt-chev{transform:rotate(180deg)}
+.flt-menu{position:fixed;min-width:185px;background:var(--paper);border:1.5px solid var(--border);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.13);z-index:9999;overflow:hidden;display:none}
+.flt-menu.open{display:block}
+.flt-opt{display:flex;align-items:center;gap:8px;padding:7px 12px;font-size:12px;color:var(--ink2);cursor:pointer;transition:background .1s;white-space:nowrap}
+.flt-opt:hover{background:var(--surface2)}
+.flt-opt.selected{background:var(--v-bg);font-weight:600;color:var(--v-text)}
+.flt-opt img{width:14px;height:14px;border-radius:3px;flex-shrink:0}
+.flt-opt-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
 /* time range filter */
 .time-filter{display:flex;background:var(--surface);border:1px solid var(--border);border-radius:7px;overflow:hidden}
 .tf-btn{padding:5px 11px;font-size:12px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--ink3);transition:all .15s;white-space:nowrap}
@@ -271,22 +287,47 @@ tr.dom-row-open .dom-chev{transform:rotate(180deg)}
 </header>
 <div class="model-bar">
   <span class="mb-label">Filter by model</span>
-  <button class="mb-btn active" onclick="setModel('all',this)">All models</button>
-  <button class="mb-btn" onclick="setModel('google-aio',this)">
-    <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32">Google AIO
-  </button>
-  <button class="mb-btn" onclick="setModel('google-ai-mode',this)">
-    <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32">Google AI Mode
-  </button>
-  <button class="mb-btn" onclick="setModel('gemini-2.5-flash',this)">
-    <img src="https://www.google.com/s2/favicons?domain=gemini.google.com&sz=32">Gemini
-  </button>
-  <button class="mb-btn" onclick="setModel('sonar',this)">
-    <img src="https://www.google.com/s2/favicons?domain=perplexity.ai&sz=32">Perplexity
-  </button>
-  <button class="mb-btn" onclick="setModel('gpt-4o-mini',this)">
-    <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32">ChatGPT
-  </button>
+  <div class="flt-dd" id="modelDd">
+    <button class="flt-trigger" id="modelTrigger" onclick="toggleFltDd('modelDd','modelMenu','modelTrigger')">
+      <span class="flt-trigger-label" id="modelTriggerLabel">All models</span>
+      <span class="flt-chev">&#9660;</span>
+    </button>
+    <div class="flt-menu" id="modelMenu">
+      <div class="flt-opt selected" onclick="pickModel('all',this)">All models</div>
+      <div class="flt-opt" onclick="pickModel('google-aio',this)">
+        <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32">Google AIO
+      </div>
+      <div class="flt-opt" onclick="pickModel('google-ai-mode',this)">
+        <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32">Google AI Mode
+      </div>
+      <div class="flt-opt" onclick="pickModel('gemini-2.5-flash',this)">
+        <img src="https://www.google.com/s2/favicons?domain=gemini.google.com&sz=32">Gemini
+      </div>
+      <div class="flt-opt" onclick="pickModel('sonar',this)">
+        <img src="https://www.google.com/s2/favicons?domain=perplexity.ai&sz=32">Perplexity
+      </div>
+      <div class="flt-opt" onclick="pickModel('gpt-4o-mini',this)">
+        <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32">ChatGPT
+      </div>
+    </div>
+  </div>
+  <span class="mb-label" style="margin-left:10px">Filter by intent</span>
+  <div class="flt-dd" id="intentDd">
+    <button class="flt-trigger" id="intentTrigger" onclick="toggleFltDd('intentDd','intentMenu','intentTrigger')">
+      <span class="flt-trigger-label" id="intentTriggerLabel">All intents</span>
+      <span class="flt-chev">&#9660;</span>
+    </button>
+    <div class="flt-menu" id="intentMenu">
+      <div class="flt-opt selected" onclick="pickIntent('all',this)">All intents</div>
+      <div class="flt-opt" onclick="pickIntent('COMMERCIAL',this)"><span class="flt-opt-dot" style="background:#7c3aed1a;border:1.5px solid #7c3aed"></span>Commercial</div>
+      <div class="flt-opt" onclick="pickIntent('TRANSACTIONAL',this)"><span class="flt-opt-dot" style="background:#16a34a1a;border:1.5px solid #16a34a"></span>Transactional</div>
+      <div class="flt-opt" onclick="pickIntent('INVESTIGATIONAL',this)"><span class="flt-opt-dot" style="background:#2563eb1a;border:1.5px solid #2563eb"></span>Investigational</div>
+      <div class="flt-opt" onclick="pickIntent('INFORMATIONAL',this)"><span class="flt-opt-dot" style="background:#0891b21a;border:1.5px solid #0891b2"></span>Informational</div>
+      <div class="flt-opt" onclick="pickIntent('NAVIGATIONAL',this)"><span class="flt-opt-dot" style="background:#64748b1a;border:1.5px solid #64748b"></span>Navigational</div>
+      <div class="flt-opt" onclick="pickIntent('BRANDED',this)"><span class="flt-opt-dot" style="background:#d974061a;border:1.5px solid #d97406"></span>Branded</div>
+      <div class="flt-opt" onclick="pickIntent('SENTIMENT',this)"><span class="flt-opt-dot" style="background:#db27771a;border:1.5px solid #db2777"></span>Sentiment</div>
+    </div>
+  </div>
 </div>
 <nav class="subnav">
   <div class="sn-inner">
@@ -371,7 +412,7 @@ const ICONS={
   target:'<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="3"/><path d="M8 5V2M8 14v-3M5 8H2M14 8h-3"/></svg>'
 };
 const ACTIONS={"fairfield": [{"priority": "high", "effort": "High effort", "cat": "Citation Strategy", "icon": "list", "title": "Get Fairfield County Bank listed in the top banking listicles cited by AI", "signals": ["bankrate.com drives 216 citations in this space, the single largest source", "smartasset.com has 9 listicle citations and rankings.newsweek.com has 7", "Only 11% of cited content is listicle_roundup, so ranked inclusion compounds fast"], "favDomains": ["bankrate.com", "smartasset.com", "rankings.newsweek.com", "nerdwallet.com"], "why": "Bankrate alone accounts for 216 citations across this prompt set, more than Fairfield County Bank's own domain (152) and almost double Reddit (119). With listicle and roundup content driving 11% of all citations and outsized influence on AI Overviews and AI Mode, getting onto Bankrate, SmartAsset, NerdWallet (67 citations), and Newsweek bank rankings is the highest-leverage move for visibility.", "steps": ["this week, build a media kit with bank assets: total deposits, branch count, CT-specific differentiators, FDIC details, leadership bios, awards", "Pitch Bankrate, SmartAsset, and NerdWallet editors with a CT community bank angle and offer rate sheets, mortgage products, and customer testimonials", "Submit Fairfield County Bank to Newsweek's annual America's Best Banks and Best Regional Banks rankings using their nomination form", "Track inclusion progress monthly and refresh listings every quarter with current rates and product changes"], "outcome": "Inclusion in 2-3 major banking listicles within 60-90 days, lifting AI citation share by 8-12 points", "platDomains": ["bankrate.com", "smartasset.com", "nerdwallet.com", "rankings.newsweek.com", "airwallex.com"]}, {"priority": "high", "effort": "High effort", "cat": "Competitive", "icon": "target", "title": "Close the gap with First County Bank, the dominant local competitor in AI answers", "signals": ["First County Bank earns 63 AI mentions vs Fairfield County Bank's footprint at 26% visibility", "firstcountybank.com is cited 99 times, ccbankonline.com 93 times in the same prompt set", "Connecticut Community Bank also outranks in mentions at 31"], "favDomains": ["firstcountybank.com", "ccbankonline.com", "fairfieldcountybank.com"], "why": "First County Bank, Connecticut Community Bank, and ccbankonline.com are systematically being cited as the CT community banking answers, while Fairfield County Bank is mentioned in only 13 of 50 prompts. Reverse-engineering what they own, location pages, comparison content, and product schema, will let Fairfield County Bank claim the same entity territory.", "steps": ["Audit firstcountybank.com and ccbankonline.com pages cited by AI: identify product pages, comparison pages, and schema patterns", "Build out branch and town landing pages for every CT community Fairfield serves with LocalBusiness and BankOrCreditUnion schema", "Publish comparison content: Fairfield County Bank vs national chains, Fairfield County Bank vs other CT community banks, with clear product matrices", "Add FAQ schema to every product page covering the questions competitors answer in their cited content"], "outcome": "Mention parity with First County Bank in CT-focused prompts within 90-120 days", "platDomains": ["firstcountybank.com", "ccbankonline.com", "fairfieldcountybank.com", "icba.org", "usbank.com"]}, {"priority": "high", "effort": "Med effort", "cat": "Visibility", "icon": "zap", "title": "Fix the Perplexity gap where visibility drops to 11% vs 22% on Google AI", "signals": ["Sonar (Perplexity) shows 11% visibility vs 22% on google-ai-mode, google-aio, and gemini-2.5-flash", "Sonar mentions Fairfield in only 4 prompts vs 11 on Gemini and Google AI", "Reddit drives 119 citations and is heavily weighted by Perplexity"], "favDomains": ["reddit.com", "sonar.perplexity.ai", "icba.org"], "why": "Perplexity's Sonar model weights Reddit, forum threads, and ICBA-style trade citations more heavily than Google AI does. Fairfield's 11% Sonar visibility is half the rate of Gemini and Google AI Mode (22%), and Reddit is already the third-largest cited domain in the space at 119 citations. A Reddit-and-forum signal push closes the gap fastest.", "steps": ["this week, identify 10 active CT banking, mortgage, and personal finance subreddits and audit existing Fairfield mentions", "Engage authentically as a verified bank rep in r/personalfinance, r/Connecticut, r/Mortgages with helpful answers, never promotional", "Get Fairfield County Bank profiled on icba.org member pages and any CT Bankers Association directory pages", "Encourage genuine customer reviews on Reddit threads about CT community banks rather than scripted posts"], "outcome": "Sonar visibility lifts from 11% toward 18-22% within 45-60 days as forum and association signals accumulate", "platDomains": ["reddit.com", "icba.org", "fairfieldcountybank.com", "youtube.com"]}, {"priority": "medium", "effort": "Med effort", "cat": "Content", "icon": "search", "title": "Add BankOrCreditUnion and FAQ schema across product and branch pages", "signals": ["fairfieldcountybank.com gets 152 own-domain citations, indicating AI does crawl the site", "77% of all space citations are blog_article, leaving structured data underused", "Competitors like firstcountybank.com (99 cites) and ccbankonline.com (93 cites) hold structured ground"], "favDomains": ["fairfieldcountybank.com", "schema.org"], "why": "Fairfield County Bank's own domain already earns 152 citations, but with 77% of cited content being unstructured blog_article and only 4% comparison, the site is leaking entity authority. Adding BankOrCreditUnion, LocalBusiness, FAQ, and HowTo schema to product, branch, and rate pages makes Fairfield easier to cite than competitors who lack it.", "steps": ["Audit current schema on fairfieldcountybank.com using a structured data tester and document gaps by template", "Implement BankOrCreditUnion schema sitewide and LocalBusiness on each branch page with NAP, hours, and geo coordinates", "Add FAQPage schema to mortgage, savings, checking, and business banking pages using real customer questions", "Add HowTo schema to any guide-style content covering account opening, loan applications, or wire transfers"], "outcome": "Citation rate from own domain rises 20-30% and own-site appearance in AIO panels improves within 45-90 days", "platDomains": ["fairfieldcountybank.com", "schema.org", "google.com", "bing.com"]}, {"priority": "medium", "effort": "Med effort", "cat": "Content", "icon": "play", "title": "Build a YouTube channel covering CT banking, mortgage, and small business topics", "signals": ["youtube.com drives 75 citations in this prompt set, the seventh-largest cited source", "Only 6% of cited content is how_to_guide, a clear gap", "Video content is increasingly cited by Gemini and Google AI Mode where Fairfield already shows 22% visibility"], "favDomains": ["youtube.com", "fairfieldcountybank.com"], "why": "YouTube earns 75 AI citations in this space and is consistently surfaced by Gemini and Google AI Mode, both already at 22% Fairfield visibility. With only 6% of cited content being how-to guides, video tutorials on first-time homebuyer programs, CT mortgage rates, and small business lending give Fairfield a fast path to cited multimedia.", "steps": ["today, list 15 high-intent banking topics: CT first-time buyer, jumbo mortgages, HELOC, business loans, IRA", "Record 10 short videos with bank loan officers and branch managers, optimize titles for question-style queries", "Add full transcripts and chapter markers to every video and embed each video on the matching service page", "Cross-link videos from blog posts and ensure VideoObject schema is present on every embed page"], "outcome": "First YouTube citations within 2-4 weeks of consistent publishing, compounding into Google AI visibility", "platDomains": ["youtube.com", "fairfieldcountybank.com", "google.com"]}, {"priority": "medium", "effort": "Med effort", "cat": "Citation Strategy", "icon": "shield", "title": "Claim industry association and trade publication citations to lock in entity authority", "signals": ["icba.org is cited 53 times and visbanking.com 79 times in this space", "psbt.com has 7 listicle citations as a regional banking comparison source", "airwallex.com and reliabank.com each drive 8 listicle citations"], "favDomains": ["icba.org", "visbanking.com", "psbt.com", "airwallex.com"], "why": "Industry trade and association sites like icba.org (53 cites), visbanking.com (79 cites), and psbt.com (7 listicle cites) are trusted citation sources for AI models when describing community banks. These pages are easier to earn than Bankrate placement and create durable entity signals that all five AI models pick up.", "steps": ["Verify and enrich Fairfield County Bank's ICBA member profile with full description, products, and links", "Pitch visbanking.com and psbt.com with CT community bank data stories: lending growth, community impact, deposit trends", "Submit Fairfield County Bank to CT Bankers Association directories and any FDIC-linked community bank registries", "Quarterly, refresh association profiles with new branches, leadership changes, and product launches"], "outcome": "5-10 additional trade and association citations within 60-90 days, raising baseline visibility floor", "platDomains": ["icba.org", "visbanking.com", "psbt.com", "airwallex.com", "reliabank.com"]}]};
-let currentBrand='fairfield',activeModel='all',promptFilter='all',actFilter='all',searchQuery='';
+let currentBrand='fairfield',activeModel='all',promptFilter='all',intentFilter='all',actFilter='all',searchQuery='';
 let sortCol='visibility',sortDir='desc';
 let currentTimeRange='all';
 let sentimentFilter='all';
@@ -547,7 +588,58 @@ function setTimeRange(range,btn){
 }
 
 function setBrand(b,btn){currentBrand=b;sortCol='visibility';sortDir='desc';['prompt','visibility','position','sentiment','competitors'].forEach(function(c){var arr=document.getElementById('sa-'+c);var th=document.getElementById('th-'+c);if(!arr||!th)return;if(c==='visibility'){th.classList.add('sorted');arr.classList.add('sorted');arr.innerHTML='&#8595;';}else{th.classList.remove('sorted');arr.classList.remove('sorted');arr.innerHTML='&#8597;';}});document.querySelectorAll('.bt-btn').forEach(x=>x.classList.remove('active'));btn.classList.add('active');_applyTimeRange();renderAll();}
-function setModel(m,btn){activeModel=m;document.querySelectorAll('.mb-btn').forEach(x=>x.classList.remove('active'));btn.classList.add('active');renderAll();}
+var _fltDdOpen=null;
+function toggleFltDd(ddId,menuId,triggerId){
+  var menu=document.getElementById(menuId);
+  var trigger=document.getElementById(triggerId);
+  var isOpen=menu.classList.contains('open');
+  if(_fltDdOpen&&_fltDdOpen!==menuId){
+    var prev=document.getElementById(_fltDdOpen);
+    if(prev){prev.classList.remove('open');}
+    document.querySelectorAll('.flt-trigger.open').forEach(function(t){t.classList.remove('open');});
+  }
+  if(isOpen){
+    menu.classList.remove('open');trigger.classList.remove('open');_fltDdOpen=null;
+  } else {
+    var rect=trigger.getBoundingClientRect();
+    menu.style.top=(rect.bottom+5)+'px';
+    menu.style.left=rect.left+'px';
+    menu.classList.add('open');trigger.classList.add('open');_fltDdOpen=menuId;
+  }
+}
+document.addEventListener('click',function(e){
+  if(!e.target.closest('.flt-dd')){
+    document.querySelectorAll('.flt-menu.open').forEach(function(m){m.classList.remove('open');});
+    document.querySelectorAll('.flt-trigger.open').forEach(function(t){t.classList.remove('open');});
+    _fltDdOpen=null;
+  }
+});
+function pickModel(m,opt){
+  activeModel=m;
+  document.querySelectorAll('#modelMenu .flt-opt').forEach(function(x){x.classList.remove('selected');});
+  opt.classList.add('selected');
+  var labelEl=document.getElementById('modelTriggerLabel');
+  if(labelEl)labelEl.textContent=opt.textContent.trim();
+  var trigger=document.getElementById('modelTrigger');
+  if(trigger){trigger.classList.remove('open');}
+  var menu=document.getElementById('modelMenu');
+  if(menu){menu.classList.remove('open');}
+  _fltDdOpen=null;
+  renderAll();
+}
+function pickIntent(it,opt){
+  intentFilter=it;
+  document.querySelectorAll('#intentMenu .flt-opt').forEach(function(x){x.classList.remove('selected');});
+  opt.classList.add('selected');
+  var labelEl=document.getElementById('intentTriggerLabel');
+  if(labelEl)labelEl.textContent=opt.textContent.trim();
+  var trigger=document.getElementById('intentTrigger');
+  if(trigger){trigger.classList.remove('open');}
+  var menu=document.getElementById('intentMenu');
+  if(menu){menu.classList.remove('open');}
+  _fltDdOpen=null;
+  applyPromptFilter();
+}
 function switchTab(t,btn){document.querySelectorAll('.stab').forEach(x=>x.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));document.getElementById('panel-'+t).classList.add('active');}
 function renderAll(){renderStats();renderOverview();renderPrompts();renderSentiment();renderCompetitors();renderCitations();renderActionsGrid();}
 function fav(d,sz){return 'https://www.google.com/s2/favicons?domain='+d+'&sz='+(sz||32);}
@@ -893,6 +985,7 @@ function applyPromptFilter(){
     if(activeModel==='all')return !Object.values(p.models).some(function(m){return m&&m.mentioned;});
     return !(p.models[activeModel]&&p.models[activeModel].mentioned);
   });
+  if(intentFilter!=='all')data=data.filter(function(p){return String(p.intent||'').toUpperCase()===intentFilter;});
   data=sortPrompts(data);
   var tbody=document.getElementById('promptsTbody');
   if(!data.length){tbody.innerHTML='<tr><td colspan="6" style="text-align:center;padding:32px;color:var(--ink4)">No prompts match filter</td></tr>';return;}

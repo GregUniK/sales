@@ -236,6 +236,22 @@ tr.dom-row-open .dom-chev{transform:rotate(180deg)}
 .cit-comp-opt:hover{background:var(--surface2)}
 .cit-comp-opt.active{background:var(--surface2);font-weight:600;color:var(--v)}
 .cit-comp-opt img{width:14px;height:14px;border-radius:3px;flex-shrink:0}
+/* filter dropdowns (model + intent) */
+.flt-dd{position:relative;display:inline-block}
+.flt-trigger{display:flex;align-items:center;gap:6px;padding:5px 11px;border-radius:8px;border:1.5px solid var(--border);color:var(--ink2);font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;background:var(--paper);white-space:nowrap;min-width:145px}
+.flt-trigger:hover{border-color:var(--v-bd)}
+.flt-trigger.open{border-color:var(--v);box-shadow:0 0 0 2px var(--v-bg)}
+.flt-trigger img{width:14px;height:14px;border-radius:3px;flex-shrink:0}
+.flt-trigger-label{flex:1;text-align:left}
+.flt-chev{font-size:9px;color:var(--ink4);transition:transform .15s;display:inline-block}
+.flt-trigger.open .flt-chev{transform:rotate(180deg)}
+.flt-menu{position:fixed;min-width:185px;background:var(--paper);border:1.5px solid var(--border);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.13);z-index:9999;overflow:hidden;display:none}
+.flt-menu.open{display:block}
+.flt-opt{display:flex;align-items:center;gap:8px;padding:7px 12px;font-size:12px;color:var(--ink2);cursor:pointer;transition:background .1s;white-space:nowrap}
+.flt-opt:hover{background:var(--surface2)}
+.flt-opt.selected{background:var(--v-bg);font-weight:600;color:var(--v-text)}
+.flt-opt img{width:14px;height:14px;border-radius:3px;flex-shrink:0}
+.flt-opt-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
 /* time range filter */
 .time-filter{display:flex;background:var(--surface);border:1px solid var(--border);border-radius:7px;overflow:hidden}
 .tf-btn{padding:5px 11px;font-size:12px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--ink3);transition:all .15s;white-space:nowrap}
@@ -271,22 +287,47 @@ tr.dom-row-open .dom-chev{transform:rotate(180deg)}
 </header>
 <div class="model-bar">
   <span class="mb-label">Filter by model</span>
-  <button class="mb-btn active" onclick="setModel('all',this)">All models</button>
-  <button class="mb-btn" onclick="setModel('google-aio',this)">
-    <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32">Google AIO
-  </button>
-  <button class="mb-btn" onclick="setModel('google-ai-mode',this)">
-    <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32">Google AI Mode
-  </button>
-  <button class="mb-btn" onclick="setModel('gemini-2.5-flash',this)">
-    <img src="https://www.google.com/s2/favicons?domain=gemini.google.com&sz=32">Gemini
-  </button>
-  <button class="mb-btn" onclick="setModel('sonar',this)">
-    <img src="https://www.google.com/s2/favicons?domain=perplexity.ai&sz=32">Perplexity
-  </button>
-  <button class="mb-btn" onclick="setModel('gpt-4o-mini',this)">
-    <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32">ChatGPT
-  </button>
+  <div class="flt-dd" id="modelDd">
+    <button class="flt-trigger" id="modelTrigger" onclick="toggleFltDd('modelDd','modelMenu','modelTrigger')">
+      <span class="flt-trigger-label" id="modelTriggerLabel">All models</span>
+      <span class="flt-chev">&#9660;</span>
+    </button>
+    <div class="flt-menu" id="modelMenu">
+      <div class="flt-opt selected" onclick="pickModel('all',this)">All models</div>
+      <div class="flt-opt" onclick="pickModel('google-aio',this)">
+        <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32">Google AIO
+      </div>
+      <div class="flt-opt" onclick="pickModel('google-ai-mode',this)">
+        <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32">Google AI Mode
+      </div>
+      <div class="flt-opt" onclick="pickModel('gemini-2.5-flash',this)">
+        <img src="https://www.google.com/s2/favicons?domain=gemini.google.com&sz=32">Gemini
+      </div>
+      <div class="flt-opt" onclick="pickModel('sonar',this)">
+        <img src="https://www.google.com/s2/favicons?domain=perplexity.ai&sz=32">Perplexity
+      </div>
+      <div class="flt-opt" onclick="pickModel('gpt-4o-mini',this)">
+        <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32">ChatGPT
+      </div>
+    </div>
+  </div>
+  <span class="mb-label" style="margin-left:10px">Filter by intent</span>
+  <div class="flt-dd" id="intentDd">
+    <button class="flt-trigger" id="intentTrigger" onclick="toggleFltDd('intentDd','intentMenu','intentTrigger')">
+      <span class="flt-trigger-label" id="intentTriggerLabel">All intents</span>
+      <span class="flt-chev">&#9660;</span>
+    </button>
+    <div class="flt-menu" id="intentMenu">
+      <div class="flt-opt selected" onclick="pickIntent('all',this)">All intents</div>
+      <div class="flt-opt" onclick="pickIntent('COMMERCIAL',this)"><span class="flt-opt-dot" style="background:#7c3aed1a;border:1.5px solid #7c3aed"></span>Commercial</div>
+      <div class="flt-opt" onclick="pickIntent('TRANSACTIONAL',this)"><span class="flt-opt-dot" style="background:#16a34a1a;border:1.5px solid #16a34a"></span>Transactional</div>
+      <div class="flt-opt" onclick="pickIntent('INVESTIGATIONAL',this)"><span class="flt-opt-dot" style="background:#2563eb1a;border:1.5px solid #2563eb"></span>Investigational</div>
+      <div class="flt-opt" onclick="pickIntent('INFORMATIONAL',this)"><span class="flt-opt-dot" style="background:#0891b21a;border:1.5px solid #0891b2"></span>Informational</div>
+      <div class="flt-opt" onclick="pickIntent('NAVIGATIONAL',this)"><span class="flt-opt-dot" style="background:#64748b1a;border:1.5px solid #64748b"></span>Navigational</div>
+      <div class="flt-opt" onclick="pickIntent('BRANDED',this)"><span class="flt-opt-dot" style="background:#d974061a;border:1.5px solid #d97406"></span>Branded</div>
+      <div class="flt-opt" onclick="pickIntent('SENTIMENT',this)"><span class="flt-opt-dot" style="background:#db27771a;border:1.5px solid #db2777"></span>Sentiment</div>
+    </div>
+  </div>
 </div>
 <nav class="subnav">
   <div class="sn-inner">
@@ -371,7 +412,7 @@ const ICONS={
   target:'<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="3"/><path d="M8 5V2M8 14v-3M5 8H2M14 8h-3"/></svg>'
 };
 const ACTIONS={"clemens": [{"priority": "high", "effort": "High priority", "cat": "Visibility", "icon": "zap", "title": "Get Clemens Construction listed on angi.com, houzz.com, and constructconnect.com — 130 combined citations where the brand is currently invisible", "signals": ["angi.com (43 citations), houzz.com (46 citations), and constructconnect.com (41 citations) are the three contractor discovery platforms generating 130 combined citations across the 50 tracked prompts — Clemens has 0 presence on any of them", "Prompts like 'need a reliable construction company for a commercial project', 'looking for a construction company that handles custom luxury homes', and 'how to schedule a consultation' are answered directly via contractor listings on these platforms", "Clemens has 0.1% visibility across all 708 model runs — the only mention came from a single 'request a quote' prompt, suggesting the brand is not indexed as a discoverable contractor entity by any AI model"], "favDomains": ["angi.com", "houzz.com", "constructconnect.com", "clemensconstruction.com"], "why": "The three platforms that AI models cite most for contractor discovery — angi.com (43), houzz.com (46), and constructconnect.com (41) — generate 130 combined citations across Clemens's tracked prompts, and Clemens has no verified listing on any of them. These are the platforms AI models check first when answering queries like 'need a reliable construction company' or 'how do I get started on a commercial project'. A complete, verified listing on each platform with service area, project types (commercial, residential, design-build), and client reviews gives AI models a citable local entity signal for Clemens. This is the fastest path to appearing in the 14 'discovery' prompts in the tracked set.", "steps": ["Create or claim and complete the Clemens Construction listing on Angi (formerly Angie's List): add service categories (commercial construction, residential remodeling, custom homes, design-build), service area, license numbers, and request 3-5 verified reviews from recent clients", "Create or update the Houzz professional profile: add project photos for at least 5 completed projects, tag each with categories (custom home, kitchen renovation, office construction), and connect to the clemensconstruction.com website", "Register Clemens Construction on constructconnect.com — this is the primary B2B contractor discovery platform AI models use for commercial project prompts; add company size, bonding capacity, and past commercial project types", "Ensure all three listings use identical NAP (name, address, phone) data matching clemensconstruction.com — consistency across citation sources is how AI models verify entity legitimacy"], "outcome": "Contractor platform listings are typically indexed by AI models within 30-60 days of creation. Getting complete listings on angi.com, houzz.com, and constructconnect.com can move Clemens from 0.1% to 15-25% visibility on the 14 discovery and consultation prompts within 90 days. These platforms collectively feed the Google-family models (Google AIO and Google AI Mode) which currently account for the majority of construction query citations.", "platDomains": ["angi.com", "houzz.com", "constructconnect.com", "clemensconstruction.com", "linkedin.com"]}, {"priority": "high", "effort": "High priority", "cat": "Content", "icon": "list", "title": "Build a project portfolio hub on clemensconstruction.com to capture the 12 prompts asking for proof of work and past experience", "signals": ["12 of 50 tracked prompts ask directly for evidence of past work: 'request a demo or walkthrough of past commercial projects', 'real feedback on custom kitchen renovations', 'honest review of home addition project', 'how happy are homeowners with new builds' — all currently showing 0 Clemens mentions", "AI models answering these prompts pull from portfolio pages, case study articles, and review platforms — clemensconstruction.com currently has no indexable portfolio content that AI models can cite", "DPR Construction leads with 14 AI mentions — its portfolio of project photos, case studies, and client testimonials on its own site are the citation source AI models use to recommend it over Clemens"], "favDomains": ["clemensconstruction.com", "houzz.com", "angi.com", "reddit.com"], "why": "12 of 50 tracked prompts are proof-of-work queries: customers and contractors asking for real project examples, client feedback, honest reviews of construction outcomes, and past commercial project walkthroughs. These prompts are answered via case study pages, portfolio galleries, and testimonial sections on contractor websites. Clemens's website currently does not have indexable project portfolio content that AI models can use to answer these queries. A dedicated /projects section with 5-8 detailed case studies — including project type, location (general region), timeline, scope, and a quoted outcome — gives AI models structured content to cite for every proof-of-work prompt in the tracked set.", "steps": ["Create a /projects or /portfolio section on clemensconstruction.com with individual pages for 5-8 completed projects — each page should include: project type, scale (sq ft or dollar range), timeline, specific challenges solved, and 1-2 client outcome quotes", "Include a dedicated page for each major service category that appears in the tracked prompts: commercial office construction, custom luxury homes, home additions and renovations, design-build projects, and healthcare or industrial facilities", "Add structured data (LocalBusiness schema + Review schema) to the homepage and each project page — Google AI Overview specifically surfaces structured review data in contractor recommendation responses", "Submit the /projects section to Google Search Console and link to it prominently from the homepage — crawl priority determines how quickly AI models index new pages"], "outcome": "Portfolio and case study pages typically appear in AI responses within 45-75 days of indexing. For the 12 proof-of-work prompts, moving from 0 to consistently recommended is realistic within 90 days given the low competitor content quality for local and mid-size construction firms. Google AI Mode is the most likely model to cite new clemensconstruction.com pages first.", "platDomains": ["clemensconstruction.com", "houzz.com", "angi.com", "constructconnect.com", "linkedin.com"]}, {"priority": "high", "effort": "High priority", "cat": "Citation Strategy", "icon": "shield", "title": "Build Reddit presence to capture 294 citations — the largest single citation source in the construction query space", "signals": ["reddit.com generates 294 citations across the 50 tracked prompts — the largest domain by far, ahead of youtube.com (268) and procore.com (143)", "10 tracked prompts are community-driven: 'anyone worked with local construction companies', 'has anyone regretted hiring a family-owned construction company', 'we've had bad experiences with contractors before', 'honest review of home addition project', 'what are people saying about mid-sized construction companies' — all answered via Reddit threads", "Clemens has 0% visibility on every community-driven prompt — DPR Construction and Turner Construction both appear in Reddit threads because their employees and past clients are active participants"], "favDomains": ["reddit.com", "clemensconstruction.com", "houzz.com", "angi.com"], "why": "Reddit generates 294 citations across Clemens's tracked prompts — the single highest citation source, 10% more than YouTube. The community-driven prompts in the tracked set (bad contractor experiences, honest reviews, local company feedback, family-owned construction feedback) are exclusively answered via Reddit threads on r/HomeImprovement, r/DIY, r/Construction, and r/Contractors. These are the prompts that generate the most trust with residential and commercial clients at the top of the funnel. A Clemens team member participating in these subreddits — answering questions about construction timelines, permit processes, contractor red flags, and renovation planning — creates the citable community content that Perplexity and ChatGPT surface when these prompts are asked. Disclosure is required; quality answers with no direct promotion are what generate citations.", "steps": ["Identify the 5 subreddits where construction questions matching the tracked prompts are most active: r/HomeImprovement, r/DIY, r/Construction, r/Contractors, and r/RealEstate — audit the top 10 most-viewed threads on each for the topics in the tracked prompt set", "Have a Clemens team member (owner, project manager, or estimator) create a Reddit account and answer 2-3 existing questions per week about: hiring contractors, avoiding delays, design-build process, renovation budgets, and what to look for in a construction company — always disclosing affiliation when directly relevant", "Post an original thread in r/HomeImprovement answering 'what are the most common reasons construction projects go over budget' — this matches 3 tracked prompts and tends to attract upvotes that generate lasting AI citation value", "Monitor r/Construction and r/Contractors for threads asking about mid-sized companies or local alternatives to large firms — these are the highest-value citation opportunities for Clemens specifically"], "outcome": "Active Reddit participation typically generates 20-40 Perplexity and ChatGPT citations within 60-90 days. For the 10 community-driven prompts, Perplexity (sonar) visibility can move from 0% to 15-25% within one analysis cycle. Reddit citations are particularly durable — highly-upvoted threads remain as citation sources for 2-3 years.", "platDomains": ["reddit.com", "clemensconstruction.com", "houzz.com", "quora.com", "angi.com"]}, {"priority": "medium", "effort": "Med effort", "cat": "Citation Strategy", "icon": "map", "title": "Strengthen the LinkedIn company page — 90 citations make it the primary B2B validation source for construction firms", "signals": ["linkedin.com generates 90 citations — the 6th largest domain, and the primary source AI models use to validate B2B construction firms for prompts like 'need a reliable construction company for a commercial project' and 'enterprise construction solutions for large-scale developments'", "8 of the tracked prompts are B2B commercial queries where decision-makers research firms before contacting them — AI models cite LinkedIn company pages, team size, and past project descriptions as entity verification signals", "DPR Construction and Turner Construction have fully built LinkedIn company pages with case studies, employee count, and project type tags — Clemens's page may be incomplete or lack the service keywords these competitors use"], "favDomains": ["linkedin.com", "clemensconstruction.com", "constructconnect.com", "angi.com"], "why": "LinkedIn generates 90 citations in AI responses about construction firms — the 6th most-cited domain and the primary B2B validation layer. For prompts like 'need a construction company for a commercial project', 'enterprise construction solutions', and 'which design-build firms are excelling right now', AI models use LinkedIn to verify company size, specialization, and credibility before recommending a firm. Clemens's LinkedIn company page is a direct signal that feeds these 8 B2B commercial prompts. Ensuring it includes the correct service categories (commercial construction, design-build, healthcare facilities, industrial), team size range, and 3-5 project highlights creates the entity profile AI models need to recommend Clemens for these queries.", "steps": ["Audit the Clemens Construction LinkedIn company page: verify that service categories include 'Commercial Construction', 'Design-Build', 'General Contracting', 'Residential Construction', and 'Project Management' — all terms that appear in the tracked prompts", "Add 3-5 featured posts or articles highlighting major completed projects with project type, scale, and outcome — use the same language as the tracked prompts: 'commercial project', 'custom luxury home', 'design-build', 'office building'", "Update the company description to include geographic service area, company size, and the specific project types Clemens handles — AI models extract this structured text to match firms against location-specific queries", "Post monthly updates about project milestones, team certifications, or recent wins — LinkedIn freshness signals influence how AI models weight the profile as a current, active entity"], "outcome": "LinkedIn profile improvements typically reflect in AI citations within 30-45 days. For the 8 B2B commercial prompts, moving from 0% to consistently appearing is realistic within 60 days. Google AIO and Google AI Mode cite LinkedIn most heavily for local B2B firm validation.", "platDomains": ["linkedin.com", "clemensconstruction.com", "constructconnect.com", "angi.com", "houzz.com"]}, {"priority": "medium", "effort": "Med effort", "cat": "Content", "icon": "chat", "title": "Publish educational guides on clemensconstruction.com to capture the 15 how-to and process prompts — 1,020 how-to citations are flowing to competitors", "signals": ["how_to_guide content generates 1,020 citations — the 2nd largest content type — and 15 tracked prompts are educational process queries: 'what is BIM', 'how does design-build work', 'what do pre-construction services include', 'how do construction companies estimate costs', 'what permits and inspections do I need'", "These prompts have no Clemens presence — AI models are citing generic construction industry guides on procore.com (143), autodesk.com (98), and coggno.com rather than contractor-specific content", "First-party educational content from a contractor's own site signals domain expertise to AI models — a contractor that explains BIM and design-build credibly is more likely to be recommended when a client asks who to hire for that type of project"], "favDomains": ["clemensconstruction.com", "procore.com", "constructconnect.com", "reddit.com"], "why": "1,020 how-to guide citations are flowing to industry platforms like procore.com and autodesk.com for 15 educational prompts in Clemens's tracked set: how BIM works, what design-build includes, how estimates are made, what permits are needed, and how to plan a new build. These are the prompts clients ask before they hire anyone — if Clemens's website answers them clearly, AI models begin citing clemensconstruction.com as the authoritative source and associate the brand with the construction expertise it demonstrates. A /resources or /guides section with 5-7 plain-language articles covering the exact topics in the tracked prompts creates a first-party citation hub that no current competitor in the local/mid-size contractor space has built.", "steps": ["Publish 5-7 guides on clemensconstruction.com covering the highest-frequency educational prompts: 'What is Design-Build Construction and How Does It Work', 'What Are Pre-Construction Services and Why Do They Matter', 'How Construction Companies Estimate Costs for Commercial Buildings', 'What Permits and Inspections Do I Need for a New Build', 'What Is BIM and How Does It Improve Your Project'", "Write each guide in plain language targeting a client audience (not industry professionals) — use the exact phrasing from the tracked prompts as H1 and H2 headers", "Add HowTo schema markup to each guide — Google AI Overview surfaces how-to structured data directly in responses and is the most efficient way to get first-party content cited by the Google-family models", "Link to each guide from the relevant service pages and from the project portfolio — internal link depth accelerates crawl indexation and improves AI model retrieval confidence"], "outcome": "Educational guide pages indexed within 30 days can generate AI citations within 45-60 days. For the 15 how-to and process prompts, Clemens moving from 0% to appearing in 20-40% of responses is realistic within 90 days. Procore.com and autodesk.com currently dominate this space but neither is a contractor — a contractor-authored guide that answers the same question is preferred by AI models for prompts where the searcher is trying to hire someone.", "platDomains": ["clemensconstruction.com", "procore.com", "autodesk.com", "constructconnect.com", "reddit.com"]}, {"priority": "medium", "effort": "Med effort", "cat": "Competitive", "icon": "search", "title": "Target the 782 listicle citations to get Clemens into construction roundups before DPR and Turner consolidate the recommendation space", "signals": ["listicle_roundup content generates 782 citations — the 3rd largest content type after blog articles (5,622) and how-to guides (1,020)", "DPR Construction leads with 14 AI mentions and Turner Construction with 8 — both appear in contractor comparison roundups on constructiondive.com (9 citations) and constructconnect.com (41 citations) that Clemens is not included in", "Prompts like 'which design-build firms are excelling right now', 'what are people saying about mid-sized construction companies', and 'best prefab building solutions for commercial spaces' are answered almost exclusively via roundup articles"], "favDomains": ["constructiondive.com", "constructconnect.com", "clemensconstruction.com", "angi.com"], "why": "782 listicle citations flow through construction roundup articles on constructiondive.com (9 citations), constructconnect.com (41), and similar industry editorial sites. These roundups answer the 'which firms are excelling', 'best design-build', and 'top construction companies' prompts that represent pure top-of-funnel discovery. DPR Construction and Turner Construction appear in these roundups because they have media and editorial relationships; Clemens does not. Getting Clemens included in 3-4 relevant roundups — particularly for regional coverage, custom homes, and mid-size commercial projects — directly unlocks the discovery prompts where Clemens currently has 0 AI visibility. The outreach is straightforward: constructiondive.com and constructconnect.com editorial teams accept vendor profiles and project submissions.", "steps": ["This week: search 'best design-build firms 2026', 'top commercial construction companies', and 'mid-size construction companies for custom projects' on Google — identify which roundup articles rank on page 1 and are most likely cited by AI models", "Contact constructiondive.com and constructconnect.com editorial contacts with a Clemens profile: founding year, team size, project types (commercial, luxury residential, healthcare, design-build), notable projects (with scope and scale), and certifications", "Prepare a one-page press kit with 3 project photos, a brief company bio, and a quote from the owner or project manager — roundup editors typically require this before adding a new company", "Submit Clemens to any local or regional business roundup publications that cover the construction industry in Clemens's service area — regional citations feed Google AI Mode and Google AIO which are the two models that weight local business authority most heavily"], "outcome": "Inclusion in 3-4 construction roundup articles can add 15-30 listicle citations within 90 days. For the 6 discovery and comparison prompts, moving from 0% to 20-35% visibility is achievable within one analysis cycle. Roundup placements also generate lasting citation value — articles on constructiondive.com and constructconnect.com remain cited by AI models for 12-24 months after publication.", "platDomains": ["constructiondive.com", "constructconnect.com", "clemensconstruction.com", "angi.com", "linkedin.com"]}]};
-let currentBrand='clemens',activeModel='all',promptFilter='all',actFilter='all',searchQuery='';
+let currentBrand='clemens',activeModel='all',promptFilter='all',intentFilter='all',actFilter='all',searchQuery='';
 let sortCol='visibility',sortDir='desc';
 let currentTimeRange='all';
 let sentimentFilter='all';
@@ -547,7 +588,58 @@ function setTimeRange(range,btn){
 }
 
 function setBrand(b,btn){currentBrand=b;sortCol='visibility';sortDir='desc';['prompt','visibility','position','sentiment','competitors'].forEach(function(c){var arr=document.getElementById('sa-'+c);var th=document.getElementById('th-'+c);if(!arr||!th)return;if(c==='visibility'){th.classList.add('sorted');arr.classList.add('sorted');arr.innerHTML='&#8595;';}else{th.classList.remove('sorted');arr.classList.remove('sorted');arr.innerHTML='&#8597;';}});document.querySelectorAll('.bt-btn').forEach(x=>x.classList.remove('active'));btn.classList.add('active');_applyTimeRange();renderAll();}
-function setModel(m,btn){activeModel=m;document.querySelectorAll('.mb-btn').forEach(x=>x.classList.remove('active'));btn.classList.add('active');renderAll();}
+var _fltDdOpen=null;
+function toggleFltDd(ddId,menuId,triggerId){
+  var menu=document.getElementById(menuId);
+  var trigger=document.getElementById(triggerId);
+  var isOpen=menu.classList.contains('open');
+  if(_fltDdOpen&&_fltDdOpen!==menuId){
+    var prev=document.getElementById(_fltDdOpen);
+    if(prev){prev.classList.remove('open');}
+    document.querySelectorAll('.flt-trigger.open').forEach(function(t){t.classList.remove('open');});
+  }
+  if(isOpen){
+    menu.classList.remove('open');trigger.classList.remove('open');_fltDdOpen=null;
+  } else {
+    var rect=trigger.getBoundingClientRect();
+    menu.style.top=(rect.bottom+5)+'px';
+    menu.style.left=rect.left+'px';
+    menu.classList.add('open');trigger.classList.add('open');_fltDdOpen=menuId;
+  }
+}
+document.addEventListener('click',function(e){
+  if(!e.target.closest('.flt-dd')){
+    document.querySelectorAll('.flt-menu.open').forEach(function(m){m.classList.remove('open');});
+    document.querySelectorAll('.flt-trigger.open').forEach(function(t){t.classList.remove('open');});
+    _fltDdOpen=null;
+  }
+});
+function pickModel(m,opt){
+  activeModel=m;
+  document.querySelectorAll('#modelMenu .flt-opt').forEach(function(x){x.classList.remove('selected');});
+  opt.classList.add('selected');
+  var labelEl=document.getElementById('modelTriggerLabel');
+  if(labelEl)labelEl.textContent=opt.textContent.trim();
+  var trigger=document.getElementById('modelTrigger');
+  if(trigger){trigger.classList.remove('open');}
+  var menu=document.getElementById('modelMenu');
+  if(menu){menu.classList.remove('open');}
+  _fltDdOpen=null;
+  renderAll();
+}
+function pickIntent(it,opt){
+  intentFilter=it;
+  document.querySelectorAll('#intentMenu .flt-opt').forEach(function(x){x.classList.remove('selected');});
+  opt.classList.add('selected');
+  var labelEl=document.getElementById('intentTriggerLabel');
+  if(labelEl)labelEl.textContent=opt.textContent.trim();
+  var trigger=document.getElementById('intentTrigger');
+  if(trigger){trigger.classList.remove('open');}
+  var menu=document.getElementById('intentMenu');
+  if(menu){menu.classList.remove('open');}
+  _fltDdOpen=null;
+  applyPromptFilter();
+}
 function switchTab(t,btn){document.querySelectorAll('.stab').forEach(x=>x.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));document.getElementById('panel-'+t).classList.add('active');}
 function renderAll(){renderStats();renderOverview();renderPrompts();renderSentiment();renderCompetitors();renderCitations();renderActionsGrid();}
 function fav(d,sz){return 'https://www.google.com/s2/favicons?domain='+d+'&sz='+(sz||32);}
@@ -893,6 +985,7 @@ function applyPromptFilter(){
     if(activeModel==='all')return !Object.values(p.models).some(function(m){return m&&m.mentioned;});
     return !(p.models[activeModel]&&p.models[activeModel].mentioned);
   });
+  if(intentFilter!=='all')data=data.filter(function(p){return String(p.intent||'').toUpperCase()===intentFilter;});
   data=sortPrompts(data);
   var tbody=document.getElementById('promptsTbody');
   if(!data.length){tbody.innerHTML='<tr><td colspan="6" style="text-align:center;padding:32px;color:var(--ink4)">No prompts match filter</td></tr>';return;}

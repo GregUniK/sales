@@ -232,6 +232,22 @@ tr.dom-row-open .dom-chev{transform:rotate(180deg)}
 .cit-comp-opt:hover{background:var(--surface2)}
 .cit-comp-opt.active{background:var(--surface2);font-weight:600;color:var(--v)}
 .cit-comp-opt img{width:14px;height:14px;border-radius:3px;flex-shrink:0}
+/* filter dropdowns (model + intent) */
+.flt-dd{position:relative;display:inline-block}
+.flt-trigger{display:flex;align-items:center;gap:6px;padding:5px 11px;border-radius:8px;border:1.5px solid var(--border);color:var(--ink2);font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;background:var(--paper);white-space:nowrap;min-width:145px}
+.flt-trigger:hover{border-color:var(--v-bd)}
+.flt-trigger.open{border-color:var(--v);box-shadow:0 0 0 2px var(--v-bg)}
+.flt-trigger img{width:14px;height:14px;border-radius:3px;flex-shrink:0}
+.flt-trigger-label{flex:1;text-align:left}
+.flt-chev{font-size:9px;color:var(--ink4);transition:transform .15s;display:inline-block}
+.flt-trigger.open .flt-chev{transform:rotate(180deg)}
+.flt-menu{position:fixed;min-width:185px;background:var(--paper);border:1.5px solid var(--border);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.13);z-index:9999;overflow:hidden;display:none}
+.flt-menu.open{display:block}
+.flt-opt{display:flex;align-items:center;gap:8px;padding:7px 12px;font-size:12px;color:var(--ink2);cursor:pointer;transition:background .1s;white-space:nowrap}
+.flt-opt:hover{background:var(--surface2)}
+.flt-opt.selected{background:var(--v-bg);font-weight:600;color:var(--v-text)}
+.flt-opt img{width:14px;height:14px;border-radius:3px;flex-shrink:0}
+.flt-opt-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
 /* time range filter */
 .time-filter{display:flex;background:var(--surface);border:1px solid var(--border);border-radius:7px;overflow:hidden}
 .tf-btn{padding:5px 11px;font-size:12px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--ink3);transition:all .15s;white-space:nowrap}
@@ -288,22 +304,47 @@ tr.dom-row-open .dom-chev{transform:rotate(180deg)}
 </header>
 <div class="model-bar">
   <span class="mb-label">Filter by model</span>
-  <button class="mb-btn active" onclick="setModel('all',this)">All models</button>
-  <button class="mb-btn" onclick="setModel('google-aio',this)">
-    <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32">Google AIO
-  </button>
-  <button class="mb-btn" onclick="setModel('google-ai-mode',this)">
-    <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32">Google AI Mode
-  </button>
-  <button class="mb-btn" onclick="setModel('gemini-2.5-flash',this)">
-    <img src="https://www.google.com/s2/favicons?domain=gemini.google.com&sz=32">Gemini
-  </button>
-  <button class="mb-btn" onclick="setModel('sonar',this)">
-    <img src="https://www.google.com/s2/favicons?domain=perplexity.ai&sz=32">Perplexity
-  </button>
-  <button class="mb-btn" onclick="setModel('gpt-4o-mini',this)">
-    <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32">ChatGPT
-  </button>
+  <div class="flt-dd" id="modelDd">
+    <button class="flt-trigger" id="modelTrigger" onclick="toggleFltDd('modelDd','modelMenu','modelTrigger')">
+      <span class="flt-trigger-label" id="modelTriggerLabel">All models</span>
+      <span class="flt-chev">&#9660;</span>
+    </button>
+    <div class="flt-menu" id="modelMenu">
+      <div class="flt-opt selected" onclick="pickModel('all',this)">All models</div>
+      <div class="flt-opt" onclick="pickModel('google-aio',this)">
+        <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32">Google AIO
+      </div>
+      <div class="flt-opt" onclick="pickModel('google-ai-mode',this)">
+        <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32">Google AI Mode
+      </div>
+      <div class="flt-opt" onclick="pickModel('gemini-2.5-flash',this)">
+        <img src="https://www.google.com/s2/favicons?domain=gemini.google.com&sz=32">Gemini
+      </div>
+      <div class="flt-opt" onclick="pickModel('sonar',this)">
+        <img src="https://www.google.com/s2/favicons?domain=perplexity.ai&sz=32">Perplexity
+      </div>
+      <div class="flt-opt" onclick="pickModel('gpt-4o-mini',this)">
+        <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32">ChatGPT
+      </div>
+    </div>
+  </div>
+  <span class="mb-label" style="margin-left:10px">Filter by intent</span>
+  <div class="flt-dd" id="intentDd">
+    <button class="flt-trigger" id="intentTrigger" onclick="toggleFltDd('intentDd','intentMenu','intentTrigger')">
+      <span class="flt-trigger-label" id="intentTriggerLabel">All intents</span>
+      <span class="flt-chev">&#9660;</span>
+    </button>
+    <div class="flt-menu" id="intentMenu">
+      <div class="flt-opt selected" onclick="pickIntent('all',this)">All intents</div>
+      <div class="flt-opt" onclick="pickIntent('COMMERCIAL',this)"><span class="flt-opt-dot" style="background:#7c3aed1a;border:1.5px solid #7c3aed"></span>Commercial</div>
+      <div class="flt-opt" onclick="pickIntent('TRANSACTIONAL',this)"><span class="flt-opt-dot" style="background:#16a34a1a;border:1.5px solid #16a34a"></span>Transactional</div>
+      <div class="flt-opt" onclick="pickIntent('INVESTIGATIONAL',this)"><span class="flt-opt-dot" style="background:#2563eb1a;border:1.5px solid #2563eb"></span>Investigational</div>
+      <div class="flt-opt" onclick="pickIntent('INFORMATIONAL',this)"><span class="flt-opt-dot" style="background:#0891b21a;border:1.5px solid #0891b2"></span>Informational</div>
+      <div class="flt-opt" onclick="pickIntent('NAVIGATIONAL',this)"><span class="flt-opt-dot" style="background:#64748b1a;border:1.5px solid #64748b"></span>Navigational</div>
+      <div class="flt-opt" onclick="pickIntent('BRANDED',this)"><span class="flt-opt-dot" style="background:#d974061a;border:1.5px solid #d97406"></span>Branded</div>
+      <div class="flt-opt" onclick="pickIntent('SENTIMENT',this)"><span class="flt-opt-dot" style="background:#db27771a;border:1.5px solid #db2777"></span>Sentiment</div>
+    </div>
+  </div>
 </div>
 <nav class="subnav">
   <div class="sn-inner">
@@ -391,7 +432,7 @@ const ICONS={
   target:'<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="3"/><path d="M8 5V2M8 14v-3M5 8H2M14 8h-3"/></svg>'
 };
 const ACTIONS={"euroeac": [{"priority": "high", "effort": "High priority", "cat": "Citation Strategy", "icon": "shield", "title": "Get EURO EAC listed on senmit.com and railworks.net — these two domains alone generate 550 citations and euroeac.com appears in neither", "signals": ["senmit.com generates 298 citations and railworks.net generates 252 citations — combined 550, the two most-cited domains in the railing space by a large margin, ahead of youtube.com (227) and every other source", "Both are railing-specific product and supplier directories that AI models cite consistently when answering questions about railing suppliers, bulk orders, and contractor recommendations — the exact query types in EURO EAC's tracked prompts", "EURO EAC has 0% visibility across all 708 model runs — Fortress Building Products leads with 41 mentions and appears on both senmit.com and railworks.net, directly explaining the visibility gap"], "favDomains": ["senmit.com", "railworks.net", "euroeac.com", "decksdirect.com"], "why": "senmit.com and railworks.net are the two highest-citation domains in EURO EAC's tracked prompt space with 550 combined citations — 7% of all 7,560 citations in this space. These are railing-specific product directories and supplier listings that AI models treat as the primary authority layer for railing brand discovery. Fortress Building Products (41 mentions) and Superior Aluminum Products (13 mentions) appear on both platforms and that is the core reason they are cited while EURO EAC is not. Getting a EURO EAC product listing, supplier profile, or brand mention on senmit.com and railworks.net is the single highest-leverage action available — one listing on each can unlock citations across multiple prompt clusters simultaneously because AI models reference these directories for diverse query types: material comparisons, supplier recommendations, bulk pricing, and coastal durability questions.", "steps": ["Visit senmit.com and identify whether they accept supplier listings, product catalog submissions, or editorial pitches — if they have a vendor/brand directory, submit EURO EAC with full product catalog: aluminum railing systems, glass railings, cable railings, powder-coated finishes, and bulk/commercial options", "Contact railworks.net editorial team with a EURO EAC supplier profile: product lines, geographic coverage, bulk order capabilities, lead times, and certifications — railworks.net is referenced in commercial contractor queries specifically, so emphasize commercial and multi-unit project capacity", "Prepare a supplier press kit with product specs, finish options, and a B2B pricing contact — both sites are used by contractors comparing railing suppliers for large projects, which matches 12 tracked prompts directly", "Once listed, ensure the product descriptions on both platforms use the exact language from the tracked prompts: 'aluminum railings', 'glass railings', 'coastal durability', 'powder-coated finish', 'bulk commercial orders', 'quick delivery' — keyword alignment between listings and tracked prompts is how AI models match citations to specific queries"], "outcome": "Listings on senmit.com and railworks.net are typically indexed and cited by AI models within 30-45 days of publication. Based on the 550 existing citations from these two domains, getting EURO EAC listed and described on both can add 40-80 citations and move visibility from 0% to 15-30% on the supplier recommendation and material comparison prompts within the first analysis cycle.", "platDomains": ["senmit.com", "railworks.net", "euroeac.com", "decksdirect.com", "viewrail.com"]}, {"priority": "high", "effort": "High priority", "cat": "Content", "icon": "list", "title": "Publish material comparison pages on euroeac.com — 673 comparison citations are the 3rd largest content category and EURO EAC has no first-party comparison content", "signals": ["comparison content generates 673 citations — the 3rd largest content type, ahead of listicles and video, with domains like decksdirect.com (131), decks.com (117), and viewrail.com (115) all publishing comparison guides that EURO EAC is not included in", "10 tracked prompts are direct material comparisons: 'glass railings vs aluminum', 'aluminum vs stainless steel for balcony railings', 'powder-coated vs anodized aluminum', 'cable railings vs traditional bars', 'glass vs metal for minimalist look' — EURO EAC has 0 mentions on all 10", "AI models answer comparison queries by citing brand-owned comparison pages first, then third-party review sites — a well-structured /aluminum-vs-glass-railings page on euroeac.com would be the only manufacturer-authored comparison in this space"], "favDomains": ["euroeac.com", "decksdirect.com", "viewrail.com", "decks.com"], "why": "673 comparison citations flow to competitor sites in EURO EAC's tracked prompt space — the 3rd largest content category. 10 of the 50 tracked prompts are direct material comparison queries that AI models answer via comparison guides on decksdirect.com, decks.com, and viewrail.com. EURO EAC as a manufacturer has the most authoritative voice to answer these comparisons, yet has no first-party comparison content on euroeac.com for AI models to cite. A set of 5 comparison pages — aluminum vs glass, aluminum vs stainless steel, powder-coated vs anodized, cable vs traditional, indoor vs outdoor — with structured pro/con sections gives AI models a direct manufacturer-authored citation source that outranks retailer comparison guides because it comes from the brand itself. This is the highest-leverage content format in the tracked prompt set.", "steps": ["Publish 5 comparison pages on euroeac.com: /aluminum-vs-glass-railings, /aluminum-vs-stainless-steel-railings, /powder-coated-vs-anodized-aluminum, /cable-vs-traditional-railings, /indoor-vs-outdoor-railing-systems — each page should answer the exact tracked prompt question in the first paragraph", "Structure each page with an H2 comparison table (cost, durability, maintenance, aesthetics, best use case), then a detailed pro/con section for each material — AI models extract structured comparison tables as direct answers to comparison queries", "Add ComparisonTable schema markup to each page — Google AI Overview surfaces comparison schema directly in responses for 'X vs Y' queries, and it is one of the fastest paths to Google-family model citations", "Link all 5 comparison pages from the product pages, the homepage navigation, and from each other where materials overlap — internal linking depth accelerates indexation and improves how AI models associate EURO EAC with material expertise"], "outcome": "Manufacturer-authored comparison pages typically generate AI citations within 30-45 days of indexing and outperform retailer comparison guides because AI models weight domain expertise. For the 10 comparison prompts, achieving 40-60% visibility within 90 days is realistic. Google AIO and Gemini are the two models most likely to cite structured comparison content first.", "platDomains": ["euroeac.com", "decksdirect.com", "viewrail.com", "decks.com", "sandiegocablerailings.com"]}, {"priority": "high", "effort": "High priority", "cat": "Citation Strategy", "icon": "zap", "title": "Get EURO EAC into decksdirect.com, decks.com, and viewrail.com — 363 combined citations from the three largest retail listing platforms in the railing space", "signals": ["decksdirect.com (131 citations), decks.com (117 citations), and viewrail.com (115 citations) generate 363 combined citations — together the 4th through 6th most-cited domains, and all three are railing product retail/listing platforms", "Prompts like 'best railing systems for small-scale residential contractors', 'affordable but high-quality railing options', 'what railing packages include for quick delivery' are answered via product listings on these three platforms", "Fortress Building Products appears on all three platforms and accounts for 41 competitor mentions — its retail presence on decksdirect.com, decks.com, and viewrail.com directly explains its citation lead over EURO EAC"], "favDomains": ["decksdirect.com", "decks.com", "viewrail.com", "euroeac.com"], "why": "decksdirect.com, decks.com, and viewrail.com are the three largest retail/listing platforms in EURO EAC's tracked railing space, generating 363 combined citations. These platforms are where AI models go when answering product discovery queries: 'best railing systems for small contractors', 'affordable high-quality railing options', 'what's included in railing packages for quick delivery'. Fortress Building Products' dominance (41 mentions) is directly tied to its product presence on all three platforms. Getting EURO EAC's aluminum and glass railing systems listed — with product descriptions that match the tracked prompt language — unlocks citations across the 8 product discovery prompts in the tracked set. These platforms accept manufacturer product submissions and typically list new products within 2-4 weeks.", "steps": ["Contact decksdirect.com's vendor/brand team about listing EURO EAC railing products — provide a full product feed with SKUs, specs (material, finish, height options, load ratings), pricing tiers, and a high-quality product image set", "Submit EURO EAC products to decks.com, which is both a product listing and editorial content platform — a product listing plus an editorial mention in one of their railing buyer's guides would generate citations across multiple content types simultaneously", "Submit to viewrail.com or request an editorial comparison — viewrail.com publishes detailed railing comparisons and is cited by AI models for 'which railing styles are trending for luxury homes' and 'modern railing options for high-rise projects', both tracked prompts", "Ensure all product descriptions across the three platforms include the exact terms from the tracked prompts: 'quick delivery', 'bulk commercial orders', 'powder-coated aluminum', 'coastal durability', 'modular installation' — keyword alignment between product listings and tracked prompts determines which listings get cited"], "outcome": "Product listings on railing retail platforms are indexed and cited by AI models within 30-60 days of publication. Getting EURO EAC listed on all three platforms can add 30-60 new citations and move visibility from 0% to 10-20% on product discovery and pricing prompts within one analysis cycle. decksdirect.com in particular is a high-authority domain for ChatGPT and Perplexity railing queries.", "platDomains": ["decksdirect.com", "decks.com", "viewrail.com", "euroeac.com", "senmit.com"]}, {"priority": "medium", "effort": "Med effort", "cat": "Content", "icon": "map", "title": "Publish niche application pages on euroeac.com for the 8 context-specific prompts — coastal, high-rise, historic, outdoor stairs, balcony privacy", "signals": ["8 tracked prompts target specific application contexts where no competitor has a strong first-party page: coastal railings, high-rise modern railings, historic building railings, steep outdoor stair railings in harsh climates, balcony privacy with open feel, multi-unit housing railings, minimal maintenance for office staircases, and safety standards for public spaces", "These are the queries where the brand with a specific page wins by default — competitor pages on sihandrails.com (100 citations) and grecorailings.com (117 citations) cover general railing topics but not these specific application contexts", "Application-specific pages also generate B2B conversion signals — prompts like 'railing solutions for multi-unit housing', 'railing supplier for large commercial project', and 'enterprise pricing for railing orders' indicate commercial clients in procurement mode"], "favDomains": ["euroeac.com", "sihandrails.com", "grecorailings.com", "viewrail.com"], "why": "8 tracked prompts target specific application contexts that are underserved by competitor content: coastal durability, high-rise commercial projects, historic building retrofits, harsh-climate stairs, balcony privacy design, multi-unit housing scale, office staircase aesthetics, and public safety compliance. These are low-competition queries — no competitor has a dedicated, well-indexed page for 'railing systems for coastal homes' or 'railings for historic building renovations'. A EURO EAC application page for each of these 8 contexts, with a clear description of which product lines apply and why, gives AI models a direct citation source for queries that are currently unanswered from EURO EAC's perspective. These pages can be 300-400 words each and are fast to produce.", "steps": ["Publish 8 short application pages on euroeac.com: /coastal-railings, /high-rise-railing-systems, /historic-building-railings, /outdoor-stair-railings-harsh-climate, /balcony-railing-privacy, /multi-unit-housing-railings, /commercial-office-staircase-railings, /public-space-railing-safety", "Each page should answer the exact tracked prompt in the first paragraph, name the specific EURO EAC product lines that apply, and explain why that product fits the context (e.g., marine-grade aluminum for coastal, tempered glass for privacy with open feel)", "Add each page to the euroeac.com sitemap.xml and submit via Google Search Console — unsubmitted pages can take 6-8 weeks to appear in AI model indexes; submitted pages typically appear in 2-3 weeks", "Link all 8 application pages from a central /applications hub page and from the relevant product pages — internal link structure improves crawl priority and helps AI models understand the full scope of EURO EAC's product applicability"], "outcome": "Niche application pages indexed within 30 days can generate AI citations within 45-60 days. For these 8 context-specific prompts, achieving 60-80% visibility is realistic given the low incumbent competition — these are effectively uncontested queries in the railing B2B space. Google AI Mode and Gemini are the most likely models to cite new euroeac.com pages quickly.", "platDomains": ["euroeac.com", "sihandrails.com", "grecorailings.com", "decksdirect.com", "viewrail.com"]}, {"priority": "medium", "effort": "Med effort", "cat": "Citation Strategy", "icon": "play", "title": "Build YouTube product demonstration videos to capture 227 citations — the 3rd largest citation source where EURO EAC has zero presence", "signals": ["youtube.com generates 227 citations across the 50 tracked prompts — the 3rd most-cited domain — but none reference EURO EAC content, meaning all 227 citations go to competitors or generic railing installation videos", "Video content generates 141 citations in the 'video' content type category, and prompts like 'easiest railing system to install for small teams', 'how does installation differ for glass vs metal', 'honest feedback on aluminum railings for outdoor spaces' are answered via YouTube demonstrations", "EURO EAC's products are visual by nature — installation processes, finish comparisons, and application demos are exactly the content format AI models prefer for 'how to' and 'what does it look like' railing queries"], "favDomains": ["youtube.com", "euroeac.com", "decksdirect.com", "viewrail.com"], "why": "YouTube generates 227 citations in EURO EAC's tracked prompt space — the 3rd largest source after senmit.com (298) and railworks.net (252). None of these citations reference EURO EAC video content, meaning competitors are capturing all 227 video citations with installation guides, product comparisons, and finish demonstrations. 6 tracked prompts are best answered via video: installation for small teams, glass vs metal installation differences, aluminum feedback for outdoor spaces, classic vs modern railing durability, satisfaction with cable railings, and deck balcony design. Short product demonstration videos (3-5 minutes) are the standard format AI models cite for these queries. EURO EAC's products offer natural demonstration opportunities: powder-coat finish quality, modular installation steps, and before/after application comparisons.", "steps": ["Record 5-6 short product demonstration videos (3-5 minutes each) covering the highest-frequency video-suited prompts: 'How to Install Aluminum Railings for Small Teams', 'Aluminum vs Glass Railings: A Real Comparison', 'What Does Powder-Coated Aluminum Look Like in Real Life', 'Cable Railing Installation Step by Step', 'Best Railing Options for Coastal Homes', and 'Classic vs Modern Railing Designs: Which Holds Up Better'", "Title each video using the exact phrasing of the tracked prompts — do not paraphrase; the title is the primary text AI models use to match video content to queries", "Add euroeac.com product page links and the specific product SKUs shown in each video to the YouTube description — this creates a citation chain from YouTube back to euroeac.com and strengthens the authority signal for both", "Publish on a consistent weekly schedule for 5-6 weeks — Perplexity (sonar) and Google AI Mode both weight recency signals for product demonstration content, and consistent publishing is more effective than a batch release"], "outcome": "Product demonstration videos for railing brands typically appear in AI responses within 2-4 weeks of indexing. 5-6 videos aligned to tracked prompts can generate 20-40 YouTube citations across the first analysis cycle. Perplexity and Google AI Mode are the two models most likely to surface new EURO EAC video content earliest, given their real-time retrieval capabilities.", "platDomains": ["youtube.com", "euroeac.com", "senmit.com", "decksdirect.com", "viewrail.com"]}, {"priority": "medium", "effort": "Med effort", "cat": "Competitive", "icon": "search", "title": "Close the 41-mention gap with Fortress Building Products by targeting the roundup articles where Fortress is listed and EURO EAC is not", "signals": ["Fortress Building Products leads with 41 AI mentions — the dominant competitor by a factor of 3x over Superior Aluminum Products (13) — and 0 mentions for EURO EAC across all 708 model runs", "listicle_roundup content generates 643 citations — the 4th largest content type — and Fortress Building Products appears in every major railing roundup that answers 'best railing systems for residential contractors', 'most popular railing materials in 2026', and 'which railing styles are trending for luxury homes'", "Competitor roundup presence feeds citation chains: when AI models cite a roundup that includes Fortress but not EURO EAC, they learn to recommend Fortress for the category and exclude EURO EAC — this pattern compounds over time without intervention"], "favDomains": ["decksdirect.com", "decks.com", "viewrail.com", "sandiegocablerailings.com"], "why": "Fortress Building Products has 41 AI mentions while EURO EAC has 0 — a 41-mention gap that is entirely driven by roundup article inclusion. The 643 listicle citations in this space come from railing comparison roundups on decksdirect.com, decks.com, viewrail.com, and sandiegocablerailings.com. These roundups answer the 'best railing' and 'trending railing' prompts that represent top-of-funnel discovery for both residential and commercial clients. Getting EURO EAC added to or featured in 4-5 of the key roundups that currently feature Fortress Building Products would directly close the mention gap. The approach is straightforward: identify which specific articles on these domains rank for the tracked prompt topics and pitch EURO EAC as an alternative with specific differentiators (European design, powder-coat quality, commercial bulk capacity).", "steps": ["Search 'best aluminum railings 2026', 'top railing brands for modern homes', and 'best cable railing systems' on Google — identify which roundup articles from decksdirect.com, decks.com, viewrail.com, and sandiegocablerailings.com rank on page 1 and currently feature Fortress but not EURO EAC", "Contact the editorial teams of the top 5 roundup articles with a EURO EAC product comparison: powder-coat finish durability vs competitors, bulk pricing for commercial contractors, European design aesthetics, and lead time for large orders — these are the differentiators that justify adding a new brand to an existing roundup", "Provide each editorial team with high-quality product images, a one-paragraph brand description, and a direct link to the euroeac.com product catalog — roundup editors require this before adding any brand", "Offer sample product access for decks.com and viewrail.com editors who publish hands-on review content — a direct product review generates 5-10 citations from a single editorial relationship and places EURO EAC in the same tier as Fortress Building Products"], "outcome": "Inclusion in 4-5 railing roundup articles that currently feature Fortress Building Products can add 20-35 listicle citations and move EURO EAC from 0% to 10-20% on the 'best railing' and 'trending railing' discovery prompts within 90 days. Each roundup placement also generates compound citation growth as the article is re-crawled and cited in future AI model training cycles.", "platDomains": ["decksdirect.com", "decks.com", "viewrail.com", "sandiegocablerailings.com", "euroeac.com"]}]};
-let currentBrand='euroeac',activeModel='all',promptFilter='all',actFilter='all',searchQuery='';
+let currentBrand='euroeac',activeModel='all',promptFilter='all',intentFilter='all',actFilter='all',searchQuery='';
 let sortCol='visibility',sortDir='desc';
 let currentTimeRange='all';
 let customStartDate=null,customEndDate=null;
@@ -614,7 +655,58 @@ function setTimeRange(range,btn){
 }
 
 function setBrand(b,btn){currentBrand=b;sortCol='visibility';sortDir='desc';['prompt','visibility','position','sentiment','competitors'].forEach(function(c){var arr=document.getElementById('sa-'+c);var th=document.getElementById('th-'+c);if(!arr||!th)return;if(c==='visibility'){th.classList.add('sorted');arr.classList.add('sorted');arr.innerHTML='&#8595;';}else{th.classList.remove('sorted');arr.classList.remove('sorted');arr.innerHTML='&#8597;';}});document.querySelectorAll('.bt-btn').forEach(x=>x.classList.remove('active'));btn.classList.add('active');_applyTimeRange();renderAll();}
-function setModel(m,btn){activeModel=m;document.querySelectorAll('.mb-btn').forEach(x=>x.classList.remove('active'));btn.classList.add('active');renderAll();}
+var _fltDdOpen=null;
+function toggleFltDd(ddId,menuId,triggerId){
+  var menu=document.getElementById(menuId);
+  var trigger=document.getElementById(triggerId);
+  var isOpen=menu.classList.contains('open');
+  if(_fltDdOpen&&_fltDdOpen!==menuId){
+    var prev=document.getElementById(_fltDdOpen);
+    if(prev){prev.classList.remove('open');}
+    document.querySelectorAll('.flt-trigger.open').forEach(function(t){t.classList.remove('open');});
+  }
+  if(isOpen){
+    menu.classList.remove('open');trigger.classList.remove('open');_fltDdOpen=null;
+  } else {
+    var rect=trigger.getBoundingClientRect();
+    menu.style.top=(rect.bottom+5)+'px';
+    menu.style.left=rect.left+'px';
+    menu.classList.add('open');trigger.classList.add('open');_fltDdOpen=menuId;
+  }
+}
+document.addEventListener('click',function(e){
+  if(!e.target.closest('.flt-dd')){
+    document.querySelectorAll('.flt-menu.open').forEach(function(m){m.classList.remove('open');});
+    document.querySelectorAll('.flt-trigger.open').forEach(function(t){t.classList.remove('open');});
+    _fltDdOpen=null;
+  }
+});
+function pickModel(m,opt){
+  activeModel=m;
+  document.querySelectorAll('#modelMenu .flt-opt').forEach(function(x){x.classList.remove('selected');});
+  opt.classList.add('selected');
+  var labelEl=document.getElementById('modelTriggerLabel');
+  if(labelEl)labelEl.textContent=opt.textContent.trim();
+  var trigger=document.getElementById('modelTrigger');
+  if(trigger){trigger.classList.remove('open');}
+  var menu=document.getElementById('modelMenu');
+  if(menu){menu.classList.remove('open');}
+  _fltDdOpen=null;
+  renderAll();
+}
+function pickIntent(it,opt){
+  intentFilter=it;
+  document.querySelectorAll('#intentMenu .flt-opt').forEach(function(x){x.classList.remove('selected');});
+  opt.classList.add('selected');
+  var labelEl=document.getElementById('intentTriggerLabel');
+  if(labelEl)labelEl.textContent=opt.textContent.trim();
+  var trigger=document.getElementById('intentTrigger');
+  if(trigger){trigger.classList.remove('open');}
+  var menu=document.getElementById('intentMenu');
+  if(menu){menu.classList.remove('open');}
+  _fltDdOpen=null;
+  applyPromptFilter();
+}
 function switchTab(t,btn){document.querySelectorAll('.stab').forEach(x=>x.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));document.getElementById('panel-'+t).classList.add('active');}
 function renderAll(){renderStats();renderOverview();renderPrompts();renderSentiment();renderCompetitors();renderCitations();renderActionsGrid();}
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
@@ -1045,6 +1137,7 @@ function applyPromptFilter(){
     if(activeModel==='all')return !Object.values(p.models).some(function(m){return m&&m.mentioned;});
     return !(p.models[activeModel]&&p.models[activeModel].mentioned);
   });
+  if(intentFilter!=='all')data=data.filter(function(p){return String(p.intent||'').toUpperCase()===intentFilter;});
   data=sortPrompts(data);
   var tbody=document.getElementById('promptsTbody');
   if(!data.length){tbody.innerHTML='<tr><td colspan="9" style="text-align:center;padding:32px;color:var(--ink4)">No prompts match filter</td></tr>';return;}

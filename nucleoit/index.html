@@ -236,6 +236,22 @@ tr.dom-row-open .dom-chev{transform:rotate(180deg)}
 .cit-comp-opt:hover{background:var(--surface2)}
 .cit-comp-opt.active{background:var(--surface2);font-weight:600;color:var(--v)}
 .cit-comp-opt img{width:14px;height:14px;border-radius:3px;flex-shrink:0}
+/* filter dropdowns (model + intent) */
+.flt-dd{position:relative;display:inline-block}
+.flt-trigger{display:flex;align-items:center;gap:6px;padding:5px 11px;border-radius:8px;border:1.5px solid var(--border);color:var(--ink2);font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;background:var(--paper);white-space:nowrap;min-width:145px}
+.flt-trigger:hover{border-color:var(--v-bd)}
+.flt-trigger.open{border-color:var(--v);box-shadow:0 0 0 2px var(--v-bg)}
+.flt-trigger img{width:14px;height:14px;border-radius:3px;flex-shrink:0}
+.flt-trigger-label{flex:1;text-align:left}
+.flt-chev{font-size:9px;color:var(--ink4);transition:transform .15s;display:inline-block}
+.flt-trigger.open .flt-chev{transform:rotate(180deg)}
+.flt-menu{position:fixed;min-width:185px;background:var(--paper);border:1.5px solid var(--border);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.13);z-index:9999;overflow:hidden;display:none}
+.flt-menu.open{display:block}
+.flt-opt{display:flex;align-items:center;gap:8px;padding:7px 12px;font-size:12px;color:var(--ink2);cursor:pointer;transition:background .1s;white-space:nowrap}
+.flt-opt:hover{background:var(--surface2)}
+.flt-opt.selected{background:var(--v-bg);font-weight:600;color:var(--v-text)}
+.flt-opt img{width:14px;height:14px;border-radius:3px;flex-shrink:0}
+.flt-opt-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
 /* time range filter */
 .time-filter{display:flex;background:var(--surface);border:1px solid var(--border);border-radius:7px;overflow:hidden}
 .tf-btn{padding:5px 11px;font-size:12px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--ink3);transition:all .15s;white-space:nowrap}
@@ -271,22 +287,47 @@ tr.dom-row-open .dom-chev{transform:rotate(180deg)}
 </header>
 <div class="model-bar">
   <span class="mb-label">Filter by model</span>
-  <button class="mb-btn active" onclick="setModel('all',this)">All models</button>
-  <button class="mb-btn" onclick="setModel('google-aio',this)">
-    <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32">Google AIO
-  </button>
-  <button class="mb-btn" onclick="setModel('google-ai-mode',this)">
-    <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32">Google AI Mode
-  </button>
-  <button class="mb-btn" onclick="setModel('gemini-2.5-flash',this)">
-    <img src="https://www.google.com/s2/favicons?domain=gemini.google.com&sz=32">Gemini
-  </button>
-  <button class="mb-btn" onclick="setModel('sonar',this)">
-    <img src="https://www.google.com/s2/favicons?domain=perplexity.ai&sz=32">Perplexity
-  </button>
-  <button class="mb-btn" onclick="setModel('gpt-4o-mini',this)">
-    <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32">ChatGPT
-  </button>
+  <div class="flt-dd" id="modelDd">
+    <button class="flt-trigger" id="modelTrigger" onclick="toggleFltDd('modelDd','modelMenu','modelTrigger')">
+      <span class="flt-trigger-label" id="modelTriggerLabel">All models</span>
+      <span class="flt-chev">&#9660;</span>
+    </button>
+    <div class="flt-menu" id="modelMenu">
+      <div class="flt-opt selected" onclick="pickModel('all',this)">All models</div>
+      <div class="flt-opt" onclick="pickModel('google-aio',this)">
+        <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32">Google AIO
+      </div>
+      <div class="flt-opt" onclick="pickModel('google-ai-mode',this)">
+        <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32">Google AI Mode
+      </div>
+      <div class="flt-opt" onclick="pickModel('gemini-2.5-flash',this)">
+        <img src="https://www.google.com/s2/favicons?domain=gemini.google.com&sz=32">Gemini
+      </div>
+      <div class="flt-opt" onclick="pickModel('sonar',this)">
+        <img src="https://www.google.com/s2/favicons?domain=perplexity.ai&sz=32">Perplexity
+      </div>
+      <div class="flt-opt" onclick="pickModel('gpt-4o-mini',this)">
+        <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32">ChatGPT
+      </div>
+    </div>
+  </div>
+  <span class="mb-label" style="margin-left:10px">Filter by intent</span>
+  <div class="flt-dd" id="intentDd">
+    <button class="flt-trigger" id="intentTrigger" onclick="toggleFltDd('intentDd','intentMenu','intentTrigger')">
+      <span class="flt-trigger-label" id="intentTriggerLabel">All intents</span>
+      <span class="flt-chev">&#9660;</span>
+    </button>
+    <div class="flt-menu" id="intentMenu">
+      <div class="flt-opt selected" onclick="pickIntent('all',this)">All intents</div>
+      <div class="flt-opt" onclick="pickIntent('COMMERCIAL',this)"><span class="flt-opt-dot" style="background:#7c3aed1a;border:1.5px solid #7c3aed"></span>Commercial</div>
+      <div class="flt-opt" onclick="pickIntent('TRANSACTIONAL',this)"><span class="flt-opt-dot" style="background:#16a34a1a;border:1.5px solid #16a34a"></span>Transactional</div>
+      <div class="flt-opt" onclick="pickIntent('INVESTIGATIONAL',this)"><span class="flt-opt-dot" style="background:#2563eb1a;border:1.5px solid #2563eb"></span>Investigational</div>
+      <div class="flt-opt" onclick="pickIntent('INFORMATIONAL',this)"><span class="flt-opt-dot" style="background:#0891b21a;border:1.5px solid #0891b2"></span>Informational</div>
+      <div class="flt-opt" onclick="pickIntent('NAVIGATIONAL',this)"><span class="flt-opt-dot" style="background:#64748b1a;border:1.5px solid #64748b"></span>Navigational</div>
+      <div class="flt-opt" onclick="pickIntent('BRANDED',this)"><span class="flt-opt-dot" style="background:#d974061a;border:1.5px solid #d97406"></span>Branded</div>
+      <div class="flt-opt" onclick="pickIntent('SENTIMENT',this)"><span class="flt-opt-dot" style="background:#db27771a;border:1.5px solid #db2777"></span>Sentiment</div>
+    </div>
+  </div>
 </div>
 <nav class="subnav">
   <div class="sn-inner">
@@ -371,7 +412,7 @@ const ICONS={
   target:'<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="3"/><path d="M8 5V2M8 14v-3M5 8H2M14 8h-3"/></svg>'
 };
 const ACTIONS={"nucleoit": [{"priority": "high", "effort": "High effort", "cat": "Citation Strategy", "icon": "list", "title": "Get Nucleo IT listed in the top Spanish-language POS software listicles", "signals": ["comparasoftware.com drives 61 listicle citations and 1273 total citations in this space", "siigo.com listicles drive 39 citations", "Fudo has 1034 AI mentions vs Nucleo IT's 374, largely from listicle inclusion"], "favDomains": ["comparasoftware.com.ar", "siigo.com", "infobae.com", "ingenieriademenu.com"], "why": "Comparasoftware.com.ar is the single most influential third-party source in this category with 1273 citations and 61 listicle appearances. Fudo, Bistrosoft, and Maxirest dominate AI mentions because they are listed in these roundups. Nucleo IT pulls only 374 mentions despite owning nucleoit.com.ar (1553 citations). Getting listed in 4-5 priority roundups closes the gap with Fudo's 1034 mentions.", "steps": ["this week: audit comparasoftware.com.ar, siigo.com, ingenieriademenu.com, and infobae.com listicles to confirm Nucleo IT is missing or buried", "reach out to comparasoftware.com.ar editor with a complete vendor profile, pricing tiers, screenshots, and 3 customer references", "pitch infobae.com and ingenieriademenu.com a guest comparison angle focused on Argentina restaurant POS specifics", "track inclusion monthly and refresh entries with new feature releases every quarter"], "outcome": "Inclusion in 3-4 of the top 5 listicles within 60-90 days should lift AI mention share by 30-50% and close the gap with Bistrosoft (769) and Maxirest (748).", "platDomains": ["comparasoftware.com.ar", "siigo.com", "infobae.com", "ingenieriademenu.com", "capterra.com.ar"]}, {"priority": "high", "effort": "Med effort", "cat": "Content", "icon": "play", "title": "Build a YouTube presence to capture the 4% video citation slice", "signals": ["youtube.com is the 4th most cited domain with 1135 citations", "Video makes up 4% of content type citations, the second largest after blogs", "Fudo and Bistrosoft both have active YouTube channels driving AI citations"], "favDomains": ["youtube.com", "fu.do", "bistrosoft.com", "nucleoit.com.ar"], "why": "YouTube is the second highest cited content type at 4% and youtube.com sits in the top 5 domains with 1135 citations. AI engines pull video transcripts and descriptions when answering POS comparison queries, and competitors Fudo and Bistrosoft both have demo channels. Nucleo IT does not appear in this layer at all, leaving free reach on the table.", "steps": ["today: outline 8 short demo videos covering setup, kitchen integration, payment flows, multi-branch reporting, and Argentina tax compliance", "record and publish 2 videos per week with full Spanish transcripts, timestamped chapters, and clear product feature names in titles", "cross link videos from product pages on nucleoit.com.ar and embed them in long-form blog posts", "target restaurant operator queries directly in titles, e.g. 'mejor software para restaurante en Argentina'"], "outcome": "YouTube citations typically begin appearing in AI answers within 2-4 weeks of publication once transcripts are indexed and the channel reaches 8-10 videos.", "platDomains": ["youtube.com", "fu.do", "bistrosoft.com", "maxirest.com", "nucleoit.com.ar"]}, {"priority": "high", "effort": "Med effort", "cat": "Competitive", "icon": "target", "title": "Publish head to head comparison pages against Fudo, Bistrosoft, and Maxirest", "signals": ["Fudo leads with 1034 AI mentions, Bistrosoft 769, Maxirest 748", "fu.do (799 citations), bistrosoft.com (1576 citations) and maxirest.com (655 citations) dominate branded comparison queries", "Nucleo IT only pulls 374 mentions despite a strong owned domain footprint"], "favDomains": ["nucleoit.com.ar", "fu.do", "bistrosoft.com", "maxirest.com"], "why": "The three competitors above account for over 2500 combined AI mentions while Nucleo IT sits at 374. Comparison content is the most efficient way to enter conversations where users are already evaluating those names. Owning nucleoit.com.ar/comparativas/fudo, /bistrosoft, /maxirest puts Nucleo IT in the consideration set whenever AI answers cite competitor pages.", "steps": ["this week: build a comparison template covering pricing, hardware support, fiscal compliance, integrations, and customer support", "publish 'Nucleo IT vs Fudo', 'Nucleo IT vs Bistrosoft', and 'Nucleo IT vs Maxirest' pages with feature matrices and honest tradeoffs", "add Product schema and FAQPage schema with 6-8 commonly asked comparison questions per page", "interlink each comparison page from the homepage and from category landing pages on nucleoit.com.ar"], "outcome": "Comparison pages with proper schema typically begin appearing in AI Overviews and ChatGPT answers within 45-90 days of indexation and start lifting mention share against the named competitors.", "platDomains": ["nucleoit.com.ar", "fu.do", "bistrosoft.com", "maxirest.com", "comparasoftware.com.ar"]}, {"priority": "high", "effort": "Med effort", "cat": "Citation Strategy", "icon": "shield", "title": "Claim and optimize the Capterra Argentina profile and similar review platforms", "signals": ["capterra.com.ar drives 921 citations in this space", "Comparasoftware is third largest at 1273 citations and feeds the same review surface", "91% of citations are blog articles, leaving review/listing surface underused by Nucleo IT"], "favDomains": ["capterra.com.ar", "comparasoftware.com.ar", "getapp.com", "softwareadvice.com"], "why": "Capterra.com.ar pulls 921 citations and AI engines treat verified review platforms as authoritative when comparing software. Competitors with mature review profiles (Fudo, Bistrosoft, Maxirest) get pulled into AI answers because their Capterra and Comparasoftware listings carry star ratings, screenshots, and recent reviews. A neglected or absent profile is a structural disadvantage.", "steps": ["this week: claim or update the Capterra Argentina, GetApp, Software Advice, and Comparasoftware listings with consistent NAP, screenshots, pricing tiers, and category tags", "launch a review request flow to existing customers with a 30-day target of 25 verified reviews per platform", "keep feature lists, integrations, and category tags identical across platforms so AI answers reconcile to a single entity", "monitor monthly for new reviews, respond to negatives within 48 hours, and refresh screenshots each quarter"], "outcome": "Verified, well-rated profiles on Capterra and Comparasoftware typically start showing up in AI citations within 60-90 days and lift overall mention share by 15-25%.", "platDomains": ["capterra.com.ar", "comparasoftware.com.ar", "getapp.com", "softwareadvice.com", "nucleoit.com.ar"]}, {"priority": "medium", "effort": "Med effort", "cat": "Content", "icon": "search", "title": "Strengthen entity signals on nucleoit.com.ar with Organization and SoftwareApplication schema", "signals": ["nucleoit.com.ar already pulls 1553 citations, the second highest in the space", "91% of citations are blog articles, signaling AI engines parse on-page content heavily", "Two competitor entities ('Nucleo IT Gastronomico' 375 and 'Nucleo IT' 374) suggest entity confusion in the AI knowledge graph"], "favDomains": ["nucleoit.com.ar", "schema.org", "wikidata.org", "linkedin.com"], "why": "Two distinct mention buckets for what should be one brand (375 + 374) means AI engines are treating Nucleo IT and Nucleo IT Gastronomico as separate entities, splitting authority. With 1553 owned citations already in play, consolidating the entity is the single highest leverage on-page fix. Proper Organization, SoftwareApplication, and sameAs schema unifies the entity.", "steps": ["audit nucleoit.com.ar for inconsistent brand naming, then standardize on one canonical name across titles, footers, and meta", "add Organization schema with sameAs links to LinkedIn, Wikidata, Crunchbase, Capterra, and Comparasoftware profiles", "add SoftwareApplication schema to the product page with pricing, operatingSystem, applicationCategory, and aggregateRating", "create or update a Wikidata entity with consistent aliases, founding date, headquarters, and official site"], "outcome": "Entity consolidation through schema and sameAs links typically resolves duplicate mentions within 45-90 days and lifts the combined 749 mentions toward a single, stronger 1000+ entity in AI knowledge graphs.", "platDomains": ["nucleoit.com.ar", "schema.org", "wikidata.org", "linkedin.com", "crunchbase.com"]}, {"priority": "medium", "effort": "High effort", "cat": "Visibility", "icon": "alert", "title": "Close the 78% prompt gap by building topic clusters around uncovered restaurant tech queries", "signals": ["Brand triggers a mention in only 9 of 40 tracked prompts (22% visibility)", "All five model channels currently report 0% visibility in tracked breakdowns", "Top competitor Fudo appears in conversations that Nucleo IT is absent from, accumulating 1034 mentions"], "favDomains": ["nucleoit.com.ar", "comparasoftware.com.ar", "infobae.com", "ingenieriademenu.com"], "why": "31 of 40 tracked prompts return no Nucleo IT mention. Even where the brand is cited 1553 times, the topical coverage is too narrow to win adjacent restaurant operator questions (kitchen display, delivery integration, fiscal compliance, multi-branch reporting). A topic cluster strategy expands the entity's footprint into adjacent queries where Fudo, Bistrosoft, and Maxirest currently win uncontested.", "steps": ["map the 31 prompts where the brand is absent into 4-5 topic clusters, e.g. fiscal compliance, kitchen workflow, delivery, multi-branch, payments", "build a hub page per cluster on nucleoit.com.ar with 6-8 supporting articles linking back to the hub and to the product page", "target each cluster with FAQPage and HowTo schema and answer the exact phrasing used in restaurant operator queries", "pitch one cluster topic per quarter to ingenieriademenu.com and infobae.com as guest contributions to earn external citations"], "outcome": "Topic cluster builds typically lift prompt visibility from 22% toward 40-50% within 90-120 days as the new pages get indexed and start appearing in AI answers.", "platDomains": ["nucleoit.com.ar", "comparasoftware.com.ar", "infobae.com", "ingenieriademenu.com", "capterra.com.ar"]}]};
-let currentBrand='nucleoit',activeModel='all',promptFilter='all',actFilter='all',searchQuery='';
+let currentBrand='nucleoit',activeModel='all',promptFilter='all',intentFilter='all',actFilter='all',searchQuery='';
 let sortCol='visibility',sortDir='desc';
 let currentTimeRange='all';
 let sentimentFilter='all';
@@ -547,7 +588,58 @@ function setTimeRange(range,btn){
 }
 
 function setBrand(b,btn){currentBrand=b;sortCol='visibility';sortDir='desc';['prompt','visibility','position','sentiment','competitors'].forEach(function(c){var arr=document.getElementById('sa-'+c);var th=document.getElementById('th-'+c);if(!arr||!th)return;if(c==='visibility'){th.classList.add('sorted');arr.classList.add('sorted');arr.innerHTML='&#8595;';}else{th.classList.remove('sorted');arr.classList.remove('sorted');arr.innerHTML='&#8597;';}});document.querySelectorAll('.bt-btn').forEach(x=>x.classList.remove('active'));btn.classList.add('active');_applyTimeRange();renderAll();}
-function setModel(m,btn){activeModel=m;document.querySelectorAll('.mb-btn').forEach(x=>x.classList.remove('active'));btn.classList.add('active');renderAll();}
+var _fltDdOpen=null;
+function toggleFltDd(ddId,menuId,triggerId){
+  var menu=document.getElementById(menuId);
+  var trigger=document.getElementById(triggerId);
+  var isOpen=menu.classList.contains('open');
+  if(_fltDdOpen&&_fltDdOpen!==menuId){
+    var prev=document.getElementById(_fltDdOpen);
+    if(prev){prev.classList.remove('open');}
+    document.querySelectorAll('.flt-trigger.open').forEach(function(t){t.classList.remove('open');});
+  }
+  if(isOpen){
+    menu.classList.remove('open');trigger.classList.remove('open');_fltDdOpen=null;
+  } else {
+    var rect=trigger.getBoundingClientRect();
+    menu.style.top=(rect.bottom+5)+'px';
+    menu.style.left=rect.left+'px';
+    menu.classList.add('open');trigger.classList.add('open');_fltDdOpen=menuId;
+  }
+}
+document.addEventListener('click',function(e){
+  if(!e.target.closest('.flt-dd')){
+    document.querySelectorAll('.flt-menu.open').forEach(function(m){m.classList.remove('open');});
+    document.querySelectorAll('.flt-trigger.open').forEach(function(t){t.classList.remove('open');});
+    _fltDdOpen=null;
+  }
+});
+function pickModel(m,opt){
+  activeModel=m;
+  document.querySelectorAll('#modelMenu .flt-opt').forEach(function(x){x.classList.remove('selected');});
+  opt.classList.add('selected');
+  var labelEl=document.getElementById('modelTriggerLabel');
+  if(labelEl)labelEl.textContent=opt.textContent.trim();
+  var trigger=document.getElementById('modelTrigger');
+  if(trigger){trigger.classList.remove('open');}
+  var menu=document.getElementById('modelMenu');
+  if(menu){menu.classList.remove('open');}
+  _fltDdOpen=null;
+  renderAll();
+}
+function pickIntent(it,opt){
+  intentFilter=it;
+  document.querySelectorAll('#intentMenu .flt-opt').forEach(function(x){x.classList.remove('selected');});
+  opt.classList.add('selected');
+  var labelEl=document.getElementById('intentTriggerLabel');
+  if(labelEl)labelEl.textContent=opt.textContent.trim();
+  var trigger=document.getElementById('intentTrigger');
+  if(trigger){trigger.classList.remove('open');}
+  var menu=document.getElementById('intentMenu');
+  if(menu){menu.classList.remove('open');}
+  _fltDdOpen=null;
+  applyPromptFilter();
+}
 function switchTab(t,btn){document.querySelectorAll('.stab').forEach(x=>x.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));document.getElementById('panel-'+t).classList.add('active');}
 function renderAll(){renderStats();renderOverview();renderPrompts();renderSentiment();renderCompetitors();renderCitations();renderActionsGrid();}
 function fav(d,sz){return 'https://www.google.com/s2/favicons?domain='+d+'&sz='+(sz||32);}
@@ -893,6 +985,7 @@ function applyPromptFilter(){
     if(activeModel==='all')return !Object.values(p.models).some(function(m){return m&&m.mentioned;});
     return !(p.models[activeModel]&&p.models[activeModel].mentioned);
   });
+  if(intentFilter!=='all')data=data.filter(function(p){return String(p.intent||'').toUpperCase()===intentFilter;});
   data=sortPrompts(data);
   var tbody=document.getElementById('promptsTbody');
   if(!data.length){tbody.innerHTML='<tr><td colspan="6" style="text-align:center;padding:32px;color:var(--ink4)">No prompts match filter</td></tr>';return;}

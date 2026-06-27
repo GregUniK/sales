@@ -236,6 +236,22 @@ tr.dom-row-open .dom-chev{transform:rotate(180deg)}
 .cit-comp-opt:hover{background:var(--surface2)}
 .cit-comp-opt.active{background:var(--surface2);font-weight:600;color:var(--v)}
 .cit-comp-opt img{width:14px;height:14px;border-radius:3px;flex-shrink:0}
+/* filter dropdowns (model + intent) */
+.flt-dd{position:relative;display:inline-block}
+.flt-trigger{display:flex;align-items:center;gap:6px;padding:5px 11px;border-radius:8px;border:1.5px solid var(--border);color:var(--ink2);font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;background:var(--paper);white-space:nowrap;min-width:145px}
+.flt-trigger:hover{border-color:var(--v-bd)}
+.flt-trigger.open{border-color:var(--v);box-shadow:0 0 0 2px var(--v-bg)}
+.flt-trigger img{width:14px;height:14px;border-radius:3px;flex-shrink:0}
+.flt-trigger-label{flex:1;text-align:left}
+.flt-chev{font-size:9px;color:var(--ink4);transition:transform .15s;display:inline-block}
+.flt-trigger.open .flt-chev{transform:rotate(180deg)}
+.flt-menu{position:fixed;min-width:185px;background:var(--paper);border:1.5px solid var(--border);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.13);z-index:9999;overflow:hidden;display:none}
+.flt-menu.open{display:block}
+.flt-opt{display:flex;align-items:center;gap:8px;padding:7px 12px;font-size:12px;color:var(--ink2);cursor:pointer;transition:background .1s;white-space:nowrap}
+.flt-opt:hover{background:var(--surface2)}
+.flt-opt.selected{background:var(--v-bg);font-weight:600;color:var(--v-text)}
+.flt-opt img{width:14px;height:14px;border-radius:3px;flex-shrink:0}
+.flt-opt-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
 /* time range filter */
 .time-filter{display:flex;background:var(--surface);border:1px solid var(--border);border-radius:7px;overflow:hidden}
 .tf-btn{padding:5px 11px;font-size:12px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--ink3);transition:all .15s;white-space:nowrap}
@@ -271,22 +287,47 @@ tr.dom-row-open .dom-chev{transform:rotate(180deg)}
 </header>
 <div class="model-bar">
   <span class="mb-label">Filter by model</span>
-  <button class="mb-btn active" onclick="setModel('all',this)">All models</button>
-  <button class="mb-btn" onclick="setModel('google-aio',this)">
-    <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32">Google AIO
-  </button>
-  <button class="mb-btn" onclick="setModel('google-ai-mode',this)">
-    <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32">Google AI Mode
-  </button>
-  <button class="mb-btn" onclick="setModel('gemini-2.5-flash',this)">
-    <img src="https://www.google.com/s2/favicons?domain=gemini.google.com&sz=32">Gemini
-  </button>
-  <button class="mb-btn" onclick="setModel('sonar',this)">
-    <img src="https://www.google.com/s2/favicons?domain=perplexity.ai&sz=32">Perplexity
-  </button>
-  <button class="mb-btn" onclick="setModel('gpt-4o-mini',this)">
-    <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32">ChatGPT
-  </button>
+  <div class="flt-dd" id="modelDd">
+    <button class="flt-trigger" id="modelTrigger" onclick="toggleFltDd('modelDd','modelMenu','modelTrigger')">
+      <span class="flt-trigger-label" id="modelTriggerLabel">All models</span>
+      <span class="flt-chev">&#9660;</span>
+    </button>
+    <div class="flt-menu" id="modelMenu">
+      <div class="flt-opt selected" onclick="pickModel('all',this)">All models</div>
+      <div class="flt-opt" onclick="pickModel('google-aio',this)">
+        <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32">Google AIO
+      </div>
+      <div class="flt-opt" onclick="pickModel('google-ai-mode',this)">
+        <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32">Google AI Mode
+      </div>
+      <div class="flt-opt" onclick="pickModel('gemini-2.5-flash',this)">
+        <img src="https://www.google.com/s2/favicons?domain=gemini.google.com&sz=32">Gemini
+      </div>
+      <div class="flt-opt" onclick="pickModel('sonar',this)">
+        <img src="https://www.google.com/s2/favicons?domain=perplexity.ai&sz=32">Perplexity
+      </div>
+      <div class="flt-opt" onclick="pickModel('gpt-4o-mini',this)">
+        <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=32">ChatGPT
+      </div>
+    </div>
+  </div>
+  <span class="mb-label" style="margin-left:10px">Filter by intent</span>
+  <div class="flt-dd" id="intentDd">
+    <button class="flt-trigger" id="intentTrigger" onclick="toggleFltDd('intentDd','intentMenu','intentTrigger')">
+      <span class="flt-trigger-label" id="intentTriggerLabel">All intents</span>
+      <span class="flt-chev">&#9660;</span>
+    </button>
+    <div class="flt-menu" id="intentMenu">
+      <div class="flt-opt selected" onclick="pickIntent('all',this)">All intents</div>
+      <div class="flt-opt" onclick="pickIntent('COMMERCIAL',this)"><span class="flt-opt-dot" style="background:#7c3aed1a;border:1.5px solid #7c3aed"></span>Commercial</div>
+      <div class="flt-opt" onclick="pickIntent('TRANSACTIONAL',this)"><span class="flt-opt-dot" style="background:#16a34a1a;border:1.5px solid #16a34a"></span>Transactional</div>
+      <div class="flt-opt" onclick="pickIntent('INVESTIGATIONAL',this)"><span class="flt-opt-dot" style="background:#2563eb1a;border:1.5px solid #2563eb"></span>Investigational</div>
+      <div class="flt-opt" onclick="pickIntent('INFORMATIONAL',this)"><span class="flt-opt-dot" style="background:#0891b21a;border:1.5px solid #0891b2"></span>Informational</div>
+      <div class="flt-opt" onclick="pickIntent('NAVIGATIONAL',this)"><span class="flt-opt-dot" style="background:#64748b1a;border:1.5px solid #64748b"></span>Navigational</div>
+      <div class="flt-opt" onclick="pickIntent('BRANDED',this)"><span class="flt-opt-dot" style="background:#d974061a;border:1.5px solid #d97406"></span>Branded</div>
+      <div class="flt-opt" onclick="pickIntent('SENTIMENT',this)"><span class="flt-opt-dot" style="background:#db27771a;border:1.5px solid #db2777"></span>Sentiment</div>
+    </div>
+  </div>
 </div>
 <nav class="subnav">
   <div class="sn-inner">
@@ -371,7 +412,7 @@ const ICONS={
   target:'<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="3"/><path d="M8 5V2M8 14v-3M5 8H2M14 8h-3"/></svg>'
 };
 const ACTIONS={"gsb": [{"priority": "high", "effort": "High priority", "cat": "Citation Strategy", "icon": "shield", "title": "Make clutch.co the cornerstone of GSB's AI citation strategy — it generates 167 citations, more than any other domain", "signals": ["clutch.co is the #1 cited domain with 167 citations — 4.2x more than gsbworld.com's own 59 citations", "GSB visibility across all 5 AI models is below 33%, and AI models rely on Clutch as the primary authority signal for IT services firms", "BairesDev (85 competitor mentions) has a significantly stronger Clutch profile with more reviews and category rankings"], "favDomains": ["clutch.co", "gsbworld.com", "linkedin.com", "bairesdev.com"], "why": "In IT services, Clutch is the primary source AI models use to verify and rank vendors. With 167 citations, it is referenced in nearly every AI response about nearshore IT companies, RPA, AI development, and software outsourcing. GSB's own site generates only 59 citations — a 2.8x gap vs Clutch alone. Every new verified client review on Clutch adds a citation opportunity, and Clutch category rankings directly influence which firms AI models recommend in response to unbranded prompts like 'best nearshore software development company in Argentina'. This is the single highest-leverage action available.", "steps": ["Today: audit GSB's Clutch profile — check review count, response rate, project descriptions, and which Clutch categories GSB is listed under (IT Staff Augmentation, Custom Software Development, AI Development, RPA)", "This week: send review requests to the last 5-10 clients GSB has worked with, using Clutch's direct review request tool — each review adds a citable data point for AI models", "Add project case studies to the Clutch profile for the largest clients mentioned in GSB's tracked prompts (Coca-Cola, Honda, L'Oreal) — these names appear in AI responses and validate enterprise credibility", "Ensure GSB is listed in at least 3 Clutch categories relevant to its service lines: AI Development, RPA, and Nearshore Outsourcing — each category ranking generates its own citation pool"], "outcome": "Each Clutch review typically generates 2-4 new AI citations within 60-90 days as Clutch pages are re-crawled. Getting GSB into Clutch's top 15 for Argentina IT Services or Nearshore Software Development moves it from invisible to recommended on unbranded prompts — where GSB currently has 0% visibility.", "platDomains": ["clutch.co", "gsbworld.com", "bairesdev.com", "designrush.com", "ensun.io"]}, {"priority": "high", "effort": "High priority", "cat": "Visibility", "icon": "zap", "title": "Fix the unbranded visibility gap — GSB appears in only 33% of prompts, all of them branded queries", "signals": ["GSB is visible on 10 of 30 tracked prompts — but all 10 are branded or semi-branded queries where GSB's name appears in the prompt itself", "On generic prompts like 'best nearshore software development company' or 'Argentina IT services firms', GSB has 0% visibility across all 5 AI models", "BairesDev appears in 85 AI responses for unbranded prompts — GSB appears in 0 of the same responses"], "favDomains": ["gsbworld.com", "clutch.co", "reddit.com", "linkedin.com"], "why": "GSB's AI presence is entirely dependent on someone already knowing the name and searching for it. This means AI models do not recommend GSB to prospects at the top of the funnel — they only confirm GSB exists when someone asks directly. BairesDev has built entity authority across the unbranded query space, appearing 85 times in responses about nearshore development, AI, and RPA without the prospect needing to type 'BairesDev'. Closing this gap requires GSB to appear in the same listicles, comparison articles, and review roundups that AI models cite when answering category-level queries.", "steps": ["Map the 20 prompts where GSB has 0% visibility and identify the specific competing firms that appear in those AI responses — these are the comparison pages and listicles GSB needs to be added to", "This week: submit GSB to ensun.io (43 citations), hireinsouth.com (37 citations), and beon.tech (36 citations) — these are active directory and comparison sites in the IT outsourcing space that are already influencing AI responses", "Publish a service page on gsbworld.com specifically targeting 'nearshore software development Argentina' and 'IT staff augmentation Buenos Aires' — these are the exact topic clusters generating the unbranded prompt responses", "Request inclusion in the top 5 unbranded listicles from svitla.com (18 listicle citations), dbbsoftware.com (10), and tuxdi.com (10) that cover Argentina or Latin American IT vendors"], "outcome": "Moving from 33% to 55%+ visibility within 90 days is realistic by targeting the citation sources that feed the 20 prompts where GSB is currently absent. Each new listicle inclusion that gets indexed typically generates 3-8 AI citations across the 5 tracked models.", "platDomains": ["ensun.io", "hireinsouth.com", "beon.tech", "svitla.com", "dbbsoftware.com"]}, {"priority": "high", "effort": "High priority", "cat": "Competitive", "icon": "search", "title": "Publish a direct GSB vs BairesDev comparison page to capture the 85-mention gap between them", "signals": ["BairesDev appears 85 times in AI competitor mentions vs GSB's near-zero unbranded mentions", "AI models already surface 'GSB vs BairesDev' as a tracked comparison prompt — but GSB scores only 87.5 on it", "'GSB World vs Globant' is also a tracked prompt where GSB scores 75 — a direct comparison page would own this query"], "favDomains": ["gsbworld.com", "bairesdev.com", "clutch.co", "alcor.com"], "why": "Two tracked prompts ask directly for GSB vs BairesDev and GSB vs Globant comparisons. AI models are already being asked these questions — but without a dedicated, structured comparison page on gsbworld.com, the models fall back to third-party sources that may not present GSB favorably. A well-structured /gsb-vs-bairesdev page with a feature table (team size, response time, technology stack, pricing model, client industries) gives AI models a first-party citation to pull from when answering these queries. This is the highest-ROI content GSB can publish given the tracked prompts.", "steps": ["Publish /gsb-vs-bairesdev on gsbworld.com with a structured comparison table: team size, average project size, tech specializations, pricing model, response time, Clutch rating, and notable clients", "Add FAQPage and ComparisonTable schema markup to the page so Google AI Overview can extract the table as a direct answer to comparison queries", "Publish a second page for /gsb-vs-globant using the same format — Globant is a tracked prompt and a natural comparison for mid-market clients", "Link both comparison pages from the gsbworld.com homepage and services pages to ensure they are crawled and indexed quickly"], "outcome": "Comparison pages typically generate AI citations within 45-90 days of indexing. For the 2 tracked comparison prompts, moving from 75-87 to 100 score is achievable. More importantly, first-party comparison pages begin appearing in unbranded prompts as AI models learn to associate GSB with BairesDev and Globant as peer alternatives.", "platDomains": ["gsbworld.com", "bairesdev.com", "clutch.co", "howdy.com", "tecla.io"]}, {"priority": "medium", "effort": "Med effort", "cat": "Citation Strategy", "icon": "map", "title": "Strengthen the LinkedIn entity — 95 citations make it the #2 source AI models use for IT firm validation", "signals": ["linkedin.com generates 95 citations — the #2 domain after clutch.co (167) and ahead of gsbworld.com (59)", "AI models cite LinkedIn company pages, founder profiles, and employee counts as entity validation signals for B2B services firms", "GSB's tracked prompts include enterprise client names (Coca-Cola, Honda, L'Oreal) — these should appear as featured case studies on the LinkedIn company page"], "favDomains": ["linkedin.com", "gsbworld.com", "clutch.co", "bairesdev.com"], "why": "LinkedIn generates 95 citations in AI responses about IT services — second only to Clutch. For B2B services firms, AI models treat the LinkedIn company page as an entity verification signal: employee count, location, founding date, service categories, and featured case studies all appear in AI training data and real-time retrieval. GSB's LinkedIn page likely has gaps in service categories and featured content that reduce the signal strength. Given that enterprise client names appear in GSB's tracked prompts but likely not on the LinkedIn page, adding these as featured case studies directly improves the data AI models use to verify GSB's enterprise credibility.", "steps": ["Audit the GSB LinkedIn company page: check that service categories include AI Development, RPA, IT Staff Augmentation, and Nearshore Outsourcing — all terms that appear in the tracked prompts", "Add 3-5 featured case studies or posts highlighting work for the enterprise clients referenced in GSB's tracked prompts — use client names where approved and industry/project type where not", "Ensure the company description includes the specific geographies (Argentina, Barcelona, Latin America) and verticals that appear in the highest-performing prompts", "Post monthly updates about technology partnerships, certifications, or client wins — LinkedIn freshness signals influence how AI models weight the profile as a current source"], "outcome": "LinkedIn profile improvements take 30-45 days to reflect in AI citations as profiles are re-crawled. Stronger LinkedIn entity signals particularly improve visibility on Perplexity (sonar) and ChatGPT (gpt-4o-mini), which both rely on LinkedIn for B2B firm validation.", "platDomains": ["linkedin.com", "gsbworld.com", "clutch.co", "n-ix.com", "bairesdev.com"]}, {"priority": "medium", "effort": "Med effort", "cat": "Content", "icon": "list", "title": "Target the 1,292 listicle citations with a structured outreach to the 6 highest-citation roundup domains", "signals": ["Listicle/roundup content generates 1,292 citations — 33% of all citations in the space, the second largest content type", "The top listicle domains are svitla.com (18), dbbsoftware.com (10), tuxdi.com (10), clutch.co (9), wowremoteteams.com (9), designrush.com (7)", "GSB has 0% visibility on the unbranded prompts these listicles feed — inclusion in even 3 of the top 6 would change this"], "favDomains": ["svitla.com", "dbbsoftware.com", "tuxdi.com", "wowremoteteams.com"], "why": "1,292 listicle citations are flowing to IT services vendors that appear in roundup articles on svitla.com, dbbsoftware.com, tuxdi.com, and others. These roundups are the primary source AI models use to answer 'best nearshore software development company' and 'top Argentina IT firms' prompts — exactly the unbranded queries where GSB has 0% visibility. Getting included in 3-4 of these roundups would directly unlock the unbranded prompt category. The outreach is straightforward: these are editorial lists maintained by IT sourcing and comparison platforms, and they accept vendor submissions or editorial pitches.", "steps": ["This week: visit svitla.com, dbbsoftware.com, tuxdi.com, wowremoteteams.com, and designrush.com and identify their vendor submission or editorial contact process", "Prepare a one-page GSB fact sheet: founding year, team size, locations (Argentina, Barcelona), technology specializations (AI, RPA, .NET, Java), Clutch rating, and 3 representative client logos or industries", "Submit GSB to each platform's listing process and follow up once per month for 3 months — editorial decisions at these sites often take multiple touchpoints", "For designrush.com specifically, create a full agency profile including portfolio items — DesignRush feeds AI citation roundups disproportionately in the IT services space"], "outcome": "Inclusion in 4 of the 6 target listicle domains at an average of 8 citations each would add 32 net new listicle citations within 90 days, directly increasing unbranded prompt visibility from 0% toward 20-30% across the 5 AI models.", "platDomains": ["svitla.com", "dbbsoftware.com", "designrush.com", "wowremoteteams.com", "tuxdi.com"]}, {"priority": "medium", "effort": "Med effort", "cat": "Content", "icon": "chat", "title": "Build a Reddit and forum presence to capture the 185 social citations currently going to competitors", "signals": ["reddit.com generates 44 citations and forum threads overall account for 141 citations in the space", "Sonar (Perplexity) visibility is 21% — Perplexity weights Reddit and forum content heavily for B2B vendor queries", "Prompts about Argentina-based IT firms and nearshore development are exactly the type answered via Reddit threads on r/outsourcing, r/digitalnomad, and r/cscareerquestions"], "favDomains": ["reddit.com", "gsbworld.com", "clutch.co", "linkedin.com"], "why": "Reddit generates 44 citations in AI responses about IT services vendors, and forum threads overall represent 141 citations. Perplexity Sonar, the model with the lowest GSB visibility (21%), weights Reddit and forum content heavily when answering vendor recommendation queries. The prompts asking about 'Argentina-based IT firms' and 'nearshore software development' are exactly the types that surface Reddit threads as primary sources. GSB needs a legitimate community presence in subreddits like r/outsourcing, r/webdev, r/machinelearning, and r/argentina where these discussions happen — not promotional posts, but authentic answers to questions where GSB's expertise is directly relevant.", "steps": ["Identify the 5 most active subreddits where IT outsourcing and nearshore development questions are asked: r/outsourcing, r/webdev, r/digitalnomad, r/cscareerquestions, r/argentina", "Have a GSB team member (founder or BD lead) create a Reddit account and participate in 2-3 existing threads per week — answer questions about working with Argentine IT firms, AI development timelines, RPA use cases, without direct promotion", "When relevant, reference gsbworld.com or Clutch profile in responses to questions specifically about vendor selection (always disclose the affiliation)", "Monitor for threads asking about 'Argentina IT companies' or 'BairesDev alternatives' — these are high-value opportunities where a GSB mention with context naturally fits"], "outcome": "Active Reddit participation typically generates 10-20 additional forum citations within 60 days as threads are indexed by Perplexity and other AI models. Perplexity visibility moving from 21% to 35%+ is realistic within 60-90 days with consistent forum presence.", "platDomains": ["reddit.com", "gsbworld.com", "linkedin.com", "clutch.co", "howdy.com"]}]};
-let currentBrand='gsb',activeModel='all',promptFilter='all',actFilter='all',searchQuery='';
+let currentBrand='gsb',activeModel='all',promptFilter='all',intentFilter='all',actFilter='all',searchQuery='';
 let sortCol='visibility',sortDir='desc';
 let currentTimeRange='all';
 let sentimentFilter='all';
@@ -547,7 +588,58 @@ function setTimeRange(range,btn){
 }
 
 function setBrand(b,btn){currentBrand=b;sortCol='visibility';sortDir='desc';['prompt','visibility','position','sentiment','competitors'].forEach(function(c){var arr=document.getElementById('sa-'+c);var th=document.getElementById('th-'+c);if(!arr||!th)return;if(c==='visibility'){th.classList.add('sorted');arr.classList.add('sorted');arr.innerHTML='&#8595;';}else{th.classList.remove('sorted');arr.classList.remove('sorted');arr.innerHTML='&#8597;';}});document.querySelectorAll('.bt-btn').forEach(x=>x.classList.remove('active'));btn.classList.add('active');_applyTimeRange();renderAll();}
-function setModel(m,btn){activeModel=m;document.querySelectorAll('.mb-btn').forEach(x=>x.classList.remove('active'));btn.classList.add('active');renderAll();}
+var _fltDdOpen=null;
+function toggleFltDd(ddId,menuId,triggerId){
+  var menu=document.getElementById(menuId);
+  var trigger=document.getElementById(triggerId);
+  var isOpen=menu.classList.contains('open');
+  if(_fltDdOpen&&_fltDdOpen!==menuId){
+    var prev=document.getElementById(_fltDdOpen);
+    if(prev){prev.classList.remove('open');}
+    document.querySelectorAll('.flt-trigger.open').forEach(function(t){t.classList.remove('open');});
+  }
+  if(isOpen){
+    menu.classList.remove('open');trigger.classList.remove('open');_fltDdOpen=null;
+  } else {
+    var rect=trigger.getBoundingClientRect();
+    menu.style.top=(rect.bottom+5)+'px';
+    menu.style.left=rect.left+'px';
+    menu.classList.add('open');trigger.classList.add('open');_fltDdOpen=menuId;
+  }
+}
+document.addEventListener('click',function(e){
+  if(!e.target.closest('.flt-dd')){
+    document.querySelectorAll('.flt-menu.open').forEach(function(m){m.classList.remove('open');});
+    document.querySelectorAll('.flt-trigger.open').forEach(function(t){t.classList.remove('open');});
+    _fltDdOpen=null;
+  }
+});
+function pickModel(m,opt){
+  activeModel=m;
+  document.querySelectorAll('#modelMenu .flt-opt').forEach(function(x){x.classList.remove('selected');});
+  opt.classList.add('selected');
+  var labelEl=document.getElementById('modelTriggerLabel');
+  if(labelEl)labelEl.textContent=opt.textContent.trim();
+  var trigger=document.getElementById('modelTrigger');
+  if(trigger){trigger.classList.remove('open');}
+  var menu=document.getElementById('modelMenu');
+  if(menu){menu.classList.remove('open');}
+  _fltDdOpen=null;
+  renderAll();
+}
+function pickIntent(it,opt){
+  intentFilter=it;
+  document.querySelectorAll('#intentMenu .flt-opt').forEach(function(x){x.classList.remove('selected');});
+  opt.classList.add('selected');
+  var labelEl=document.getElementById('intentTriggerLabel');
+  if(labelEl)labelEl.textContent=opt.textContent.trim();
+  var trigger=document.getElementById('intentTrigger');
+  if(trigger){trigger.classList.remove('open');}
+  var menu=document.getElementById('intentMenu');
+  if(menu){menu.classList.remove('open');}
+  _fltDdOpen=null;
+  applyPromptFilter();
+}
 function switchTab(t,btn){document.querySelectorAll('.stab').forEach(x=>x.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));document.getElementById('panel-'+t).classList.add('active');}
 function renderAll(){renderStats();renderOverview();renderPrompts();renderSentiment();renderCompetitors();renderCitations();renderActionsGrid();}
 function fav(d,sz){return 'https://www.google.com/s2/favicons?domain='+d+'&sz='+(sz||32);}
@@ -893,6 +985,7 @@ function applyPromptFilter(){
     if(activeModel==='all')return !Object.values(p.models).some(function(m){return m&&m.mentioned;});
     return !(p.models[activeModel]&&p.models[activeModel].mentioned);
   });
+  if(intentFilter!=='all')data=data.filter(function(p){return String(p.intent||'').toUpperCase()===intentFilter;});
   data=sortPrompts(data);
   var tbody=document.getElementById('promptsTbody');
   if(!data.length){tbody.innerHTML='<tr><td colspan="6" style="text-align:center;padding:32px;color:var(--ink4)">No prompts match filter</td></tr>';return;}
