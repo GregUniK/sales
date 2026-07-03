@@ -69,6 +69,24 @@ jobs:
           print('Config created for', slug)
           "
 
+      - name: Patch build_fast.py (skip LLM actions generation)
+        run: |
+          python3 -c "
+          import pathlib
+          p = pathlib.Path('/tmp/report-tool/build_fast.py')
+          content = p.read_text(encoding='utf-8')
+          # Replace the generate_actions call with an empty list — no LLM needed
+          patched = content.replace(
+            'ACTIONS[brand_key] = generate_actions(cfg, brand_name, brand_domain, brand_data)',
+            'ACTIONS[brand_key] = []'
+          )
+          if patched == content:
+            print('WARNING: patch target not found — check upstream build_fast.py')
+          else:
+            p.write_text(patched, encoding='utf-8')
+            print('Patched: LLM actions generation skipped')
+          "
+
       - name: Build report
         run: |
           cd /tmp/report-tool
