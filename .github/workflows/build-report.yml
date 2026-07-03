@@ -1,0 +1,120 @@
+name: Build PeekaBoo Report
+
+on:
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: 'Report slug (lowercase, used as URL path)'
+        required: true
+      brand_id:
+        description: 'PeekaBoo brand UUID'
+        required: true
+      brand_name:
+        description: 'Brand display name'
+        required: true
+      domain:
+        description: 'Brand domain (e.g. pianopiano.com)'
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sales repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Clone report tool
+        run: git clone --depth=1 https://github.com/filipelinsduarte/ai-visibility-report /tmp/report-tool
+
+      - name: Install dependencies
+        run: pip install -r /tmp/report-tool/requirements.txt
+
+      - name: Create config and actions stub
+        env:
+          PEEKABOO_KEY: ${{ secrets.PEEKABOO_SALES_KEY }}
+          BRAND_ID: ${{ inputs.brand_id }}
+          BRAND_NAME: ${{ inputs.brand_name }}
+          BRAND_SLUG: ${{ inputs.slug }}
+          BRAND_DOMAIN: ${{ inputs.domain }}
+        run: |
+          python3 -c "
+          import json, os
+          slug = os.environ['BRAND_SLUG']
+          cfg = {
+            'aipeekaboo_api_key': os.environ['PEEKABOO_KEY'],
+            'skip_nlp': True,
+            'llm_api_key': 'none',
+            'brands': [{
+              'id': os.environ['BRAND_ID'],
+              'name': os.environ['BRAND_NAME'],
+              'key': slug,
+              'domain': os.environ['BRAND_DOMAIN']
+            }],
+            'output_file': 'report.html'
+          }
+          with open('/tmp/report-tool/config.json', 'w') as f:
+            json.dump(cfg, f, indent=2)
+          with open(f'/tmp/report-tool/actions_{slug}.json', 'w') as f:
+            f.write('[]')
+          print('Config created for', slug)
+          "
+
+      - name: Build report
+        run: |
+          cd /tmp/report-tool
+          python3 build_fast.py --config config.json
+
+      - name: Post-process (noindex + strip Actions tab)
+        env:
+          BRAND_SLUG: ${{ inputs.slug }}
+        run: |
+          python3 -c "
+          import pathlib, os
+          slug = os.environ['BRAND_SLUG']
+          src = pathlib.Path('/tmp/report-tool/report.html')
+          dst = pathlib.Path(slug) / 'index.html'
+          dst.parent.mkdir(exist_ok=True)
+          html = src.read_text(encoding='utf-8')
+          noindex = '<meta name=\"robots\" content=\"noindex,nofollow\">'
+          if noindex not in html:
+            html = html.replace('<head>', '<head>\n  ' + noindex, 1)
+          html = html.replace('<button class=\"stab\" onclick=\"switchTab(\'actions\',this)\">Actions</button>', '')
+          tag = '<div id=\"panel-actions\"'
+          start = html.find(tag)
+          if start != -1:
+            depth, i = 0, start
+            while i < len(html):
+              if html[i:i+4] == '<div': depth += 1
+              elif html[i:i+6] == '</div>':
+                depth -= 1
+                if depth == 0:
+                  html = html[:start] + html[i+6:]
+                  break
+              i += 1
+          dst.write_text(html, encoding='utf-8')
+          print(f'Written to {dst} ({len(html)} bytes)')
+          "
+
+      - name: Commit and push
+        env:
+          BRAND_SLUG: ${{ inputs.slug }}
+        run: |
+          git config user.name "PeekaBoo Bot"
+          git config user.email "bot@gregunik.github.io"
+          git add "${BRAND_SLUG}/index.html"
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "report(${BRAND_SLUG}): $(date -u +%Y-%m-%d)"
+            git push
+          fi
