@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="robots" content="noindex,nofollow">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
 <title>AI Visibility Report: DelSuites</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -261,15 +261,75 @@ tr.dom-row-open .dom-chev{transform:rotate(180deg)}
   .wrap,.header,.model-bar,.subnav{padding-left:14px;padding-right:14px}
 }
 @media(max-width:480px){.stat-row,.sent-tiles,.act-grid{grid-template-columns:1fr}}
+/* ── labs additions ─────────────────────────────────────────────────────── */
+.labs-pill{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#92400e;background:#fef3c7;border:1px solid #fcd34d;border-radius:20px;padding:2px 8px}
+.labs-notes{margin:14px 0 0;border:1px solid #fcd34d;background:#fffbeb;border-radius:var(--radius);font-size:12.5px;color:#78350f}
+.labs-notes summary{cursor:pointer;padding:9px 14px;font-weight:600;list-style:none;display:flex;align-items:center;gap:8px}
+.labs-notes summary::-webkit-details-marker{display:none}
+.labs-notes ul{margin:0;padding:0 14px 10px 34px;line-height:1.7}
+.labs-sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:2px 0 8px;flex-wrap:wrap}
+.labs-sec-title{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+.labs-sec-sub{font-size:12px;color:var(--ink4)}
+.labs-row{display:grid;grid-template-columns:repeat(3,1fr) 1.7fr;gap:12px;margin-bottom:14px}
+.labs-card{background:var(--paper);border:1px solid var(--border);border-top:3px solid var(--v);border-radius:var(--radius);padding:14px 18px}
+.lm-row{display:flex;align-items:center;gap:8px;font-size:12px;padding:2px 0}
+.lm-row img{width:14px;height:14px;border-radius:3px;flex-shrink:0}
+.lm-lbl{width:118px;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lm-track{flex:1;height:6px;background:var(--surface2);border-radius:3px;overflow:hidden;min-width:30px}
+.lm-fill{height:100%;background:var(--v);border-radius:3px}
+.lm-val{width:24px;text-align:right;font-weight:700;color:var(--ink)}
+.lm-meta{width:104px;text-align:right;color:var(--ink4);font-size:11px;white-space:nowrap}
+.seg{display:inline-flex;border:1px solid var(--border);border-radius:7px;overflow:hidden;background:var(--surface)}
+.seg button{padding:4px 10px;font-size:12px;border:none;background:transparent;color:var(--ink3);cursor:pointer;white-space:nowrap}
+.seg button.active{background:var(--ink);color:#fff;font-weight:600}
+.tag{display:inline-block;padding:1px 7px;border-radius:20px;font-size:10.5px;font-weight:600;white-space:nowrap;margin-left:6px}
+.tag-you{background:var(--v-bg);color:var(--v-text)}.tag-tracked{background:#ecfdf5;color:#047857}.tag-other{background:var(--surface2);color:var(--ink3)}
+.sb-wrap{overflow-x:auto}
+.sb-table{width:100%;border-collapse:collapse;font-size:13px}
+.sb-table th{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--ink4);padding:8px 12px;text-align:right;border-bottom:1px solid var(--border);background:var(--surface);white-space:nowrap}
+.sb-table th:nth-child(-n+2),.sb-table td:nth-child(-n+2){text-align:left}
+.sb-table td{padding:8px 12px;border-bottom:1px solid var(--border);text-align:right;white-space:nowrap}
+.sb-table tr:last-child td{border-bottom:none}
+.sb-table tr.sb-you td{background:rgba(79,70,229,.06);color:var(--v-text);font-weight:600}
+.sb-name{display:flex;align-items:center;gap:7px}
+.sb-name img{width:16px;height:16px;border-radius:3px;border:1px solid var(--border)}
+.chg-up{color:var(--good)}.chg-down{color:var(--bad)}
+.fo-num{font-size:30px;font-weight:700;line-height:1;color:var(--ink)}
+.fo-cov{display:grid;grid-template-columns:1fr 1.6fr;gap:22px;align-items:start}
+.fo-runs{width:100%;border-collapse:collapse;font-size:12px}
+.fo-runs td,.fo-runs th{padding:5px 8px;border-bottom:1px solid var(--border);text-align:left}
+.fo-runs th{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink4)}
+.fo-runs td.n{text-align:right;font-variant-numeric:tabular-nums}
+.fo-cat{display:inline-block;padding:1px 7px;border-radius:20px;font-size:10.5px;font-weight:600;background:var(--surface2);color:var(--ink3);white-space:nowrap}
+.fo-q{font-size:12.5px;color:var(--ink);line-height:1.45}
+.fo-site{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;background:var(--v-bg);color:var(--v-text);padding:0 4px;border-radius:4px}
+.fo-clickable{cursor:pointer}.fo-clickable:hover td,.fo-clickable:hover{background:var(--surface)}
+.fo-active td,.comp-row.fo-active,.bar-row.fo-active{background:var(--v-bg)!important}
+.fo-hit{color:var(--good);font-weight:700}.fo-miss{color:var(--ink4)}
+.fo-block{padding:10px 0 6px}
+.fo-block-title{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink4);margin-bottom:4px}
+.fo-run{display:flex;gap:12px;padding:7px 0;border-top:1px solid var(--border)}
+.fo-run-meta{width:210px;flex-shrink:0;font-size:11.5px;color:var(--ink3);display:flex;align-items:flex-start;gap:6px;flex-wrap:wrap}
+.fo-run-meta img{width:13px;height:13px;border-radius:2px;margin-top:2px}
+.fo-run ol{margin:0;padding-left:18px;font-size:12.5px;color:var(--ink);line-height:1.6}
+.fo-empty{padding:10px 0;color:var(--ink4);font-size:12px}
+.fo-pill{display:inline-block;min-width:22px;text-align:center;padding:1px 7px;border-radius:20px;font-size:11px;font-weight:700;background:var(--v-bg);color:var(--v-text)}
+.fo-tbl{width:100%;border-collapse:collapse}
+.fo-tbl th{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--ink4);padding:8px 12px;text-align:left;border-bottom:1px solid var(--border);background:var(--surface);white-space:nowrap}
+.fo-tbl td{padding:8px 12px;border-bottom:1px solid var(--border);vertical-align:top;font-size:12.5px}
+.fo-tbl tr:last-child td{border-bottom:none}
+.fo-more{padding:10px 18px;font-size:12px}
+.fo-more button{background:none;border:none;color:var(--v);cursor:pointer;font-size:12px;font-weight:600}
+@media(max-width:1100px){.labs-row{grid-template-columns:repeat(2,1fr)}.fo-cov{grid-template-columns:1fr}}
+@media(max-width:480px){.labs-row{grid-template-columns:1fr}.fo-run{flex-direction:column}.fo-run-meta{width:auto}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-YV8FCLN403"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-YV8FCLN403');</script>
 </head>
 <body>
 <header class="header">
   <div class="h-left">
     <span class="h-title">AI Visibility Report</span>
+    
     <span class="h-sep">|</span>
     <div class="brand-toggle"><button class="bt-btn active" onclick="setBrand('delsuites',this)"><img src="https://www.google.com/s2/favicons?domain=delsuites.com&sz=32" onerror="this.style.display='none'">DelSuites</button></div>
   </div>
@@ -361,13 +421,14 @@ tr.dom-row-open .dom-chev{transform:rotate(180deg)}
   <div class="sn-inner">
     <button class="stab active" onclick="switchTab('overview',this)">Overview</button>
     <button class="stab" onclick="switchTab('prompts',this)">Prompts</button>
+    
     <button class="stab" onclick="switchTab('sentiment',this)">Sentiment</button>
     <button class="stab" onclick="switchTab('competitors',this)">Competitors</button>
     <button class="stab" onclick="switchTab('citations',this)">Citations</button>
-    
   </div>
 </nav>
 <div class="wrap">
+  <div id="labsNotes"></div>
   <div class="stat-strip"><div class="stat-row" id="statRow"></div></div>
 </div>
 <div class="wrap">
@@ -382,6 +443,7 @@ tr.dom-row-open .dom-chev{transform:rotate(180deg)}
       <button class="fb-btn active" onclick="setPromptFilter('all',this)">All</button>
       <button class="fb-btn" onclick="setPromptFilter('mentioned',this)">Mentioned</button>
       <button class="fb-btn" onclick="setPromptFilter('not',this)">Not mentioned</button>
+      <button class="fb-btn" id="promptMissBtn" onclick="setPromptFilter('missing',this)" title="Prompts where tracked competitors were named in the answers and the brand never was">Missing, competitors named</button>
     </div>
     <div class="cc-body np">
       <table class="ptable"><thead><tr>
@@ -395,10 +457,12 @@ tr.dom-row-open .dom-chev{transform:rotate(180deg)}
         <th>Models</th>
         <th class="pt-sort" onclick="setSortCol('competitors')" id="th-competitors">Top Competitors<span class="info-tip" data-tip="Brands mentioned most often alongside this brand in AI responses for this prompt." onclick="event.stopPropagation()" style="margin-left:4px"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="7" cy="7" r="6"/><path d="M7 6v4" stroke-linecap="round"/><circle cx="7" cy="4.5" r=".5" fill="currentColor" stroke="none"/></svg></span><span class="sort-arr" id="sa-competitors">&#8597;</span></th>
         <th>Top Citations<span class="info-tip" data-tip="Domains most frequently cited by AI models when answering this prompt." style="margin-left:4px"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="7" cy="7" r="6"/><path d="M7 6v4" stroke-linecap="round"/><circle cx="7" cy="4.5" r=".5" fill="currentColor" stroke="none"/></svg></span></th>
+        <th>Fan-out<span class="info-tip" data-tip="Web searches ChatGPT and Gemini ran while answering this prompt, in the selected range. Expand the row to read them." style="margin-left:4px"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="7" cy="7" r="6"/><path d="M7 6v4" stroke-linecap="round"/><circle cx="7" cy="4.5" r=".5" fill="currentColor" stroke="none"/></svg></span></th>
       </tr></thead><tbody id="promptsTbody"></tbody></table>
     </div>
   </div>
 </div>
+<div id="panel-fanout" class="panel"><div id="fanoutContent"></div></div>
 <div id="panel-sentiment" class="panel">
   <div class="filter-bar" id="sentFilterBar">
     <button class="fb-btn active" onclick="setSentFilter('all',this)">All</button>
@@ -410,9 +474,10 @@ tr.dom-row-open .dom-chev{transform:rotate(180deg)}
   <div id="sentContent"></div>
 </div>
 <div id="panel-competitors" class="panel">
+  <div id="compBoard"></div>
   <div class="two-col">
     <div class="cc">
-      <div class="cc-head"><div><div class="cc-title">Top Competitors</div><div class="cc-sub" id="compSub"></div></div></div>
+      <div class="cc-head"><div><div class="cc-title">Named in AI answers</div><div class="cc-sub" id="compSub"></div></div><div class="seg" id="compScopeSeg"></div></div>
       <div class="cc-body" id="compList"></div>
     </div>
     <div class="cc">
@@ -422,7 +487,6 @@ tr.dom-row-open .dom-chev{transform:rotate(180deg)}
   </div>
 </div>
 <div id="panel-citations" class="panel"><div id="citContent"></div></div>
-
 </div>
 <script>
 const D_ORIG={"prompts": {"DelSuites": [{"id": "f2f7fa91-29dc-4a6d-8cd9-3ef833a6a278", "text": "We need to secure a furnished apartment in Markham for our insurer to cover a client's temporary displacement.", "intent": "TRANSACTIONAL", "topic": "General", "avgScore": 0.0, "bestScore": 0, "mentions": 0, "totalRuns": 0, "models": {}}, {"id": "cd634707-93e7-4514-8993-3647a3727d0d", "text": "I'm looking for family-friendly furnished rentals in Toronto for an extended vacation. What are my best picks?", "intent": "COMMERCIAL", "topic": "General", "avgScore": 0.0, "bestScore": 0, "mentions": 0, "totalRuns": 0, "models": {}}, {"id": "57640b0f-062c-4ad5-a834-d5024b9af481", "text": "I've heard about extended-stay tax exemptions. How does this affect corporate housing rentals?", "intent": "INFORMATIONAL", "topic": "General", "avgScore": 0.0, "bestScore": 0, "mentions": 0, "totalRuns": 0, "models": {}}, {"id": "e8521ad9-d4e4-438d-80aa-34db59bfd76a", "text": "Anyone had an issue with the cancellation policy for extended-stay condos in Toronto?", "intent": "SENTIMENT", "topic": "General", "avgScore": 0.0, "bestScore": 0, "mentions": 0, "totalRuns": 0, "models": {}}, {"id": "80e32b24-0565-4cb4-9fdd-50cb92861030", "text": "Looking for a luxury condo rental in Toronto for a three-month work assignment. Can you suggest options?", "intent": "TRANSACTIONAL", "topic": "General", "avgScore": 0.0, "bestScore": 0, "mentions": 0, "totalRuns": 0, "models": {}}, {"id": "9546470f-dbe6-4e1d-9d07-4dcb3716fd04", "text": "Looking for experiences: How do extended-stay condos compare to hotels in terms of comfort and value in Toronto?", "intent": "SENTIMENT", "topic": "General", "avgScore": 0.0, "bestScore": 0, "mentions": 0, "totalRuns": 0, "models": {}}, {"id": "6fcb32d4-bcd1-47b6-9890-47e48bad0b92", "text": "Looking for temporary housing in the GTA for insurance claimants, are there any luxury options that minimize the stress of displacement?", "intent": "COMMERCIAL", "topic": "General", "avgScore": 0.0, "bestScore": 0, "mentions": 0, "totalRuns": 0, "models": {}}, {"id": "957b56ee-c7eb-4e71-8bd5-daa9a23c5219", "text": "Looking to book a serviced condo in the GTA with airport pickup included. Any recommendations?", "intent": "TRANSACTIONAL", "topic": "General", "avgScore": 0.0, "bestScore": 0, "mentions": 0, "totalRuns": 0, "models": {}}, {"id": "ccd75be9-b824-4da8-bdfc-4fedcf3d5a7c", "text": "Need to secure a 2-bedroom condo in Mississauga with grocery pre-stocking for an upcoming relocation.", "intent": "TRANSACTIONAL", "topic": "General", "avgScore": 0.0, "bestScore": 0, "mentions": 0, "totalRuns": 0, "models": {}}, {"id": "34ca37e6-60a3-4440-b825-aaeb84b728b0", "text": "Trying to find extended stay options in Midtown Toronto for a family holiday this December.", "intent": "TRANSACTIONAL", "topic": "General", "avgScore": 0.0, "bestScore": 0, "mentions": 0, "totalRuns": 0, "models": {}}, {"id": "ce660a16-acf8-4b50-bab4-d01eed852ef0", "text": "In search of luxury condo rentals in the Entertainment District for a professional conference in January 2026.", "intent": "TRANSACTIONAL", "topic": "General", "avgScore": 0.0, "bestScore": 0, "mentions": 0, "totalRuns": 0, "models": {}}, {"id": "a5935ac3-4876-4f3e-87cb-bb49b823d78e", "text": "What are some of the most popular luxury condo rental providers in the GTA for a month-long stay in 2026?", "intent": "COMMERCIAL", "topic": "General", "avgScore": 0.0, "bestScore": 0, "mentions": 0, "totalRuns": 0, "models": {}}, {"id": "564a41aa-e40e-46d6-92d6-2dcaf975ac89", "text": "What are the advantages of staying in North York compared to Downtown Toronto for medical reasons?", "intent": "INFORMATIONAL", "topic": "General", "avgScore": 0.0, "bestScore": 0, "mentions": 0, "totalRuns": 0, "models": {}}, {"id": "9b947118-a01b-40f3-a70e-f0aeb6f86011", "text": "What are the top differences between staying at Ten York and the Element for an extended business trip?", "intent": "INFORMATIONAL", "topic": "General", "avgScore": 0.0, "bestScore": 0, "mentions": 0, "totalRuns": 0, "models": {}}, {"id": "423894a7-7649-4cf6-ae72-d6440a381df7", "text": "What's the best way to book a furnished suite in North York for a 60-day medical stay?", "intent": "TRANSACTIONAL", "topic": "General", "avgScore": 0.0, "bestScore": 0, "mentions": 0, "totalRuns": 0, "models": {}}, {"id": "2171af6d-1da9-47ec-9810-739c13aae6ec", "text": "What's the difference between corporate housing and long-term hotel stays in Toronto?", "intent": "INFORMATIONAL", "topic": "General", "avgScore": 0.0, "bestScore": 0, "mentions": 0, "totalRuns": 0, "models": {}}, {"id": "b6ff79ff-9e6d-4b50-8b7f-8cffca9453cf", "text": "What's the real deal with the cleanliness and maintenance of luxury corporate condos in Greater Toronto Area? Any shared stories?", "intent": "SENTIMENT", "topic": "General", "avgScore": 0.0, "bestScore": 0, "mentions": 0, "totalRuns": 0, "models": {}}, {"id": "9ed1d48d-37ea-4017-a4cb-dab858d22a68", "text": "Which corporate housing options near Downtown Toronto offer the most convenient amenities for business travelers staying more than a month?", "intent": "COMMERCIAL", "topic": "General", "avgScore": 0.0, "bestScore": 0, "mentions": 0, "totalRuns": 0, "models": {}}, {"id": "78f26642-9f2d-47a6-81c3-33e703633240", "text": "Which Toronto corporate housing providers offer a seamless home-away-from-home experience for business travelers in 2026?", "intent": "COMMERCIAL", "topic": "General", "avgScore": 0.0, "bestScore": 0, "mentions": 0, "totalRuns": 0, "models": {}}, {"id": "d52cd2c7-a9e8-4935-9390-6dcee0206ade", "text": "Why would someone choose a serviced condo over a regular apartment rental for a longer stay in Toronto?", "intent": "INFORMATIONAL", "topic": "General", "avgScore": 0.0, "bestScore": 0, "mentions": 0, "totalRuns": 0, "models": {}}, {"id": "b6d240eb-4dbe-4386-8e36-868be242051f", "text": "Do professionals relocating for work find corporate housing more convenient than a short-term rental in Toronto?", "intent": "SENTIMENT", "topic": "General", "avgScore": 0.0, "bestScore": 0, "mentions": 0, "totalRuns": 0, "models": {}}, {"id": "04f84219-c320-4634-a9e7-539c161cd71a", "text": "Are there any hidden costs when staying in corporate housing in Toronto? I'm curious about unexpected fees or issues from other renters.", "intent": "SENTIMENT", "topic": "General", "avgScore": 0.0, "bestScore": 0, "mentions": 0, "totalRuns": 0, "models": {}}, {"id": "c55f5567-4a36-4e88-9666-884650692856", "text": "Are there any significant differences in the design or amenities between suites at the Well and Hullmark Centre?", "intent": "INFORMATIONAL", "topic": "General", "avgScore": 0.0, "bestScore": 0, "mentions": 0, "totalRuns": 0, "models": {}}, {"id": "8451b044-642c-4c37-8cf5-6b3902011fa4", "text": "Are there any top-rated serviced condos in the GTA with a focus on cleanliness and modern amenities for long-term stays?", "intent": "COMMERCIAL", "topic": "General", "avgScore": 0.0, "bestScore": 0, "mentions": 0, "totalRuns": 0, "models": {}}, {"id": "2769ab61-b37a-4775-afc0-4d2edfbe6538", "text": "Are there positive reviews from people who stayed near Toronto's Hospital for Sick Children for long-term visits?", "intent": "SENTIMENT", "topic": "General", "avgScore": 0.0, "bestScore": 0, "mentions": 0, "totalRuns": 0, "models": {}}, {"id": "ad3ccb9c-7f57-47a0-9fab-192200703ae2", "text": "Considering a 6-week stay in Toronto for a work assignment, what luxury furnished condo rentals offer the best overall experience?", "intent": "COMMERCIAL", "topic": "General", "avgScore": 0.0, "bestScore": 0, "mentions": 0, "totalRuns": 0, "models": {}}, {"id": "e04e5032-c255-477d-8722-5e6a999f1cdc", "text": "I need to relocate to Toronto for a temporary project. What housing options should I consider?", "intent": "INFORMATIONAL", "topic": "General", "avgScore": 0.0, "bestScore": 0, "mentions": 0, "totalRuns": 0, "models": {}}, {"id": "d30882f5-d013-43e1-84ad-a06819168761", "text": "Does anyone regret renting a long-term corporate condo in Toronto?", "intent": "SENTIMENT", "topic": "General", "avgScore": 0.0, "bestScore": 0, "mentions": 0, "totalRuns": 0, "models": {}}, {"id": "c7b596ac-0f31-4a73-b1e6-c59ea6b3c793", "text": "For a two-month family stay, how do furnished condos in the Entertainment District compare to those near the Waterfront in Toronto?", "intent": "INFORMATIONAL", "topic": "General", "avgScore": 0.0, "bestScore": 0, "mentions": 0, "totalRuns": 0, "models": {}}, {"id": "76dac037-eb86-4fbb-a60d-573fe8e12747", "text": "For long-term medical stays in Toronto near major hospitals, which serviced condos are most recommended?", "intent": "COMMERCIAL", "topic": "General", "avgScore": 0.0, "bestScore": 0, "mentions": 0, "totalRuns": 0, "models": {}}, {"id": "c04bf58d-c8cd-4573-b959-ec764c67d5c5", "text": "Has anyone stayed with a corporate housing provider in Toronto before, specifically for a medical appointment?", "intent": "SENTIMENT", "topic": "General", "avgScore": 0.0, "bestScore": 0, "mentions": 0, "totalRuns": 0, "models": {}}, {"id": "4acf9581-ce3c-4b5f-a6f0-9a14eb216048", "text": "Help me book a downtown condo for three months. Looking for easy access to Union Station.", "intent": "TRANSACTIONAL", "topic": "General", "avgScore": 0.0, "bestScore": 0, "mentions": 0, "totalRuns": 0, "models": {}}, {"id": "4e14eee8-7751-4cb9-a28d-255a891bec0a", "text": "How do Hullmark Centre and The Livmore condominiums in Toronto compare for corporate housing?", "intent": "INFORMATIONAL", "topic": "General", "avgScore": 0.0, "bestScore": 0, "mentions": 0, "totalRuns": 0, "models": {}}, {"id": "7d1dc86e-c209-40b1-a175-6be629c977ef", "text": "How do serviced condos in Downtown Toronto compare to those in Midtown for corporate housing needs?", "intent": "INFORMATIONAL", "topic": "General", "avgScore": 0.0, "bestScore": 0, "mentions": 0, "totalRuns": 0, "models": {}}, {"id": "01401ab9-4671-4bc3-a269-e259564c4930", "text": "Switching from short-term hotel stays for our frequent Toronto business trips, what corporate housing options do other companies use?", "intent": "INVESTIGATIONAL", "topic": "Discovery Prompts", "avgScore": 100.0, "bestScore": 100, "mentions": 1, "totalRuns": 1, "models": {"gpt-4o-mini": {"mentioned": true, "score": 100, "rank": 1, "sentiment": "positive", "snippet": "Transitioning from short-term hotel stays to corporate housing can offer enhanced comfort and cost-effectiveness for frequent business trips to Toronto. Many companies opt for corporate housing providers that offer fully furnished apartments tailored for business travelers. Here are some reputable o"}}}, {"id": "63bd9f12-396b-4f07-8d66-c922a63ab918", "text": "We have a policyholder needing temporary housing in Toronto. What are the best luxury options available?", "intent": "COMMERCIAL", "topic": "Discovery Prompts", "avgScore": 100.0, "bestScore": 100, "mentions": 1, "totalRuns": 1, "models": {"gpt-4o-mini": {"mentioned": true, "score": 100, "rank": 1, "sentiment": "positive", "snippet": "For a policyholder seeking luxury temporary housing in Toronto, several reputable providers offer high-end, fully furnished accommodations suitable for extended stays. Here are some top options:\n\n**[DelSuites](http://www.delsuites.com/?utm_source=openai)**  \n**Open now · Furnished apartment building"}}}, {"id": "f7694a94-a63a-453d-b3ad-b4b2360f6fbd", "text": "We've got a three-month medical assignment in Toronto. Which areas would be best for convenient access to major hospitals?", "intent": "COMMERCIAL", "topic": "Discovery Prompts", "avgScore": 0.0, "bestScore": 0, "mentions": 0, "totalRuns": 1, "models": {"gpt-4o-mini": {"mentioned": false, "score": 0, "rank": null, "sentiment": null, "snippet": "For convenient access to major hospitals during your three-month assignment in Toronto, consider staying in the following neighborhoods:\n\n**1. Discovery District (Downtown Toronto):**\n- **Proximity to Hospitals:** This area is home to several major hospitals, including Mount Sinai Hospital, Toronto "}}}, {"id": "6cd90dc8-f6bd-45e0-9a21-e668c47f27fb", "text": "Considering a switch from hotel stays to corporate housing in Toronto, what are the pros and cons?", "intent": "INVESTIGATIONAL", "topic": "Discovery Prompts", "avgScore": 0.0, "bestScore": 0, "mentions": 0, "totalRuns": 1, "models": {"gpt-4o-mini": {"mentioned": false, "score": 0, "rank": null, "sentiment": null, "snippet": "Switching from hotel stays to corporate housing in Toronto offers several advantages and considerations:\n\n**Pros:**\n\n- **Cost Efficiency:** For stays of 30 days or more, corporate housing is generally more economical. In Toronto, extended stay hotels average about $7,800 per month, while corporate h"}}}, {"id": "00da8d1d-9916-40f1-aa7c-658c58b1436c", "text": "Can I book a corporate housing suite in Toronto for an immediate move-in this month without breaking the bank?", "intent": "TRANSACTIONAL", "topic": "Discovery Prompts", "avgScore": 33.0, "bestScore": 33, "mentions": 1, "totalRuns": 1, "models": {"gpt-4o-mini": {"mentioned": true, "score": 33, "rank": 3, "sentiment": "positive", "snippet": "Yes, you can book a corporate housing suite in Toronto for an immediate move-in this month without breaking the bank. Several providers offer fully furnished accommodations with flexible terms and competitive rates. Here are some options to consider:\n\n**[Royal BnB](https://www.royalbnb.ca/?utm_sourc"}}}, {"id": "43b37007-3cbb-4267-9e10-7c81814b8cd7", "text": "As a family visiting Toronto for an extended vacation, is there corporate housing that feels more residential and less like a hotel?", "intent": "COMMERCIAL", "topic": "Discovery Prompts", "avgScore": 0.0, "bestScore": 0, "mentions": 0, "totalRuns": 1, "models": {"gpt-4o-mini": {"mentioned": false, "score": 0, "rank": null, "sentiment": null, "snippet": "Yes, there are several corporate housing options in Toronto that offer a residential feel, making them suitable for extended family vacations. Here are some providers you might consider:\n\n**[MAC Furnished Residences](https://www.google.com/maps/search/MAC+Furnished+Residences%2C+Toronto%2C+Canada?ut"}}}, {"id": "43c87e68-e726-4686-8a71-44bd362fcd10", "text": "What's the cancellation policy typically like for long-term corporate rentals in Toronto?", "intent": "INFORMATIONAL", "topic": "Discovery Prompts", "avgScore": 0.0, "bestScore": 0, "mentions": 0, "totalRuns": 1, "models": {"gpt-4o-mini": {"mentioned": false, "score": 0, "rank": null, "sentiment": null, "snippet": "Cancellation policies for long-term corporate rentals in Toronto vary among providers, but they generally include the following terms:\n\n- **Advance Notice**: Many companies require a minimum notice period for cancellations. For instance, Corporate Stays stipulates a 30-day notice for cancellations, "}}}, {"id": "5f4e2704-51ff-4ad5-bef9-0522f9b86ea1", "text": "Looking for corporate housing in North York with flexible check-in times, what's typically available?", "intent": "TRANSACTIONAL", "topic": "Discovery Prompts", "avgScore": 0.0, "bestScore": 0, "mentions": 0, "totalRuns": 1, "models": {"gpt-4o-mini": {"mentioned": false, "score": 0, "rank": null, "sentiment": null, "snippet": "In North York, several corporate housing providers offer flexible check-in times to accommodate your needs. Here are some options:\n\n**[FoxySuites](https://www.google.com/maps/search/FoxySuites%2C+Toronto%2C+Canada?utm_source=openai)**\n_Toronto, Canada_\nOffers fully furnished, turnkey luxury suites i"}}}, {"id": "84c25b8d-d503-4b01-8eef-4882d6209e5b", "text": "Are there any Toronto-based corporate housing options offering grocery pre-stocking services?", "intent": "INFORMATIONAL", "topic": "Discovery Prompts", "avgScore": 100.0, "bestScore": 100, "mentions": 1, "totalRuns": 1, "models": {"gpt-4o-mini": {"mentioned": true, "score": 100, "rank": 1, "sentiment": "positive", "snippet": "Yes, several Toronto-based corporate housing providers offer grocery pre-stocking services to enhance your stay:\n\n- **DelSuites**: Provides a pre-arrival grocery service where items are purchased through third-party services and delivered to your accommodation, placed in your refrigerator and cupboa"}}}, {"id": "d1b8d8c6-a3e4-4ddc-8d86-fcf67ad8052b", "text": "I need to relocate my team to Toronto for a few months. What should I look for in a corporate housing provider?", "intent": "INFORMATIONAL", "topic": "Discovery Prompts", "avgScore": 100.0, "bestScore": 100, "mentions": 1, "totalRuns": 1, "models": {"gpt-4o-mini": {"mentioned": true, "score": 100, "rank": 1, "sentiment": "positive", "snippet": "When selecting a corporate housing provider in Toronto for your team's temporary relocation, consider the following factors:\n\n1. **Location**: Choose accommodations situated near your team's workplace or key business areas to minimize commute times.\n\n2. **Amenities**: Ensure the provider offers esse"}}}]}, "citations": {"DelSuites": {"total": 39, "uniqueUrls": 35, "uniqueDomains": 19, "domainTypes": [{"type": "category_page", "count": 18}, {"type": "homepage", "count": 17}, {"type": "blog_article", "count": 4}], "contentTypes": [{"type": "category_page", "count": 18}, {"type": "brand_homepage", "count": 17}, {"type": "blog_article", "count": 3}, {"type": "comparison", "count": 1}], "topDomains": [{"domain": "google.com", "count": 12}, {"domain": "delsuites.com", "count": 5}, {"domain": "macsuites.ca", "count": 4}, {"domain": "medshousing.com", "count": 2}, {"domain": "corporatestays.com", "count": 2}, {"domain": "vista-corporate-housing.ueniweb.com", "count": 1}, {"domain": "sohoresidences.com", "count": 1}, {"domain": "canadasuites.com", "count": 1}, {"domain": "atlassuites.com", "count": 1}, {"domain": "en.wikipedia.org", "count": 1}, {"domain": "localwiki.org", "count": 1}, {"domain": "compassfurnishedapartments.com", "count": 1}, {"domain": "altovita.com", "count": 1}, {"domain": "royalbnb.ca", "count": 1}, {"domain": "toronto.ca", "count": 1}, {"domain": "smartmicrovending.ca", "count": 1}, {"domain": "umabox.ca", "count": 1}, {"domain": "carestaysuites.com", "count": 1}, {"domain": "urbanflatstoronto.com", "count": 1}], "topListicles": []}}, "competitors": {"DelSuites": [{"name": "MAC Furnished Residences", "mentions": 3, "avgScore": 0, "topSentiment": "neutral", "models": ["gpt-4o-mini"], "modelMentions": {"gpt-4o-mini": 3}, "summaries": []}, {"name": "CorporateStays", "mentions": 3, "avgScore": 0, "topSentiment": "neutral", "models": ["gpt-4o-mini"], "modelMentions": {"gpt-4o-mini": 3}, "summaries": []}, {"name": "CareStay Suites", "mentions": 2, "avgScore": 0, "topSentiment": "neutral", "models": ["gpt-4o-mini"], "modelMentions": {"gpt-4o-mini": 2}, "summaries": []}, {"name": "Vista Corporate Housing", "mentions": 1, "avgScore": 0, "topSentiment": "neutral", "models": ["gpt-4o-mini"], "modelMentions": {"gpt-4o-mini": 1}, "summaries": []}, {"name": "Canada Suites", "mentions": 1, "avgScore": 0, "topSentiment": "neutral", "models": ["gpt-4o-mini"], "modelMentions": {"gpt-4o-mini": 1}, "summaries": []}, {"name": "SoHo Residences Toronto – Luxury Extended Stays", "mentions": 1, "avgScore": 0, "topSentiment": "neutral", "models": ["gpt-4o-mini"], "modelMentions": {"gpt-4o-mini": 1}, "summaries": []}, {"name": "Atlas Suites CN Tower And Convention Centre", "mentions": 1, "avgScore": 0, "topSentiment": "neutral", "models": ["gpt-4o-mini"], "modelMentions": {"gpt-4o-mini": 1}, "summaries": []}, {"name": "Royal BnB", "mentions": 1, "avgScore": 0, "topSentiment": "neutral", "models": ["gpt-4o-mini"], "modelMentions": {"gpt-4o-mini": 1}, "summaries": []}, {"name": "Mac Furnished Residences Front Street West", "mentions": 1, "avgScore": 0, "topSentiment": "neutral", "models": ["gpt-4o-mini"], "modelMentions": {"gpt-4o-mini": 1}, "summaries": []}, {"name": "Corporate Residences Toronto", "mentions": 1, "avgScore": 0, "topSentiment": "neutral", "models": ["gpt-4o-mini"], "modelMentions": {"gpt-4o-mini": 1}, "summaries": []}, {"name": "Toronto Corporate Rental", "mentions": 1, "avgScore": 0, "topSentiment": "neutral", "models": ["gpt-4o-mini"], "modelMentions": {"gpt-4o-mini": 1}, "summaries": []}, {"name": "National Corporate Housing", "mentions": 1, "avgScore": 0, "topSentiment": "neutral", "models": ["gpt-4o-mini"], "modelMentions": {"gpt-4o-mini": 1}, "summaries": []}, {"name": "Corporate Housing Toronto", "mentions": 1, "avgScore": 0, "topSentiment": "neutral", "models": ["gpt-4o-mini"], "modelMentions": {"gpt-4o-mini": 1}, "summaries": []}, {"name": "AvenueWest Toronto", "mentions": 1, "avgScore": 0, "topSentiment": "neutral", "models": ["gpt-4o-mini"], "modelMentions": {"gpt-4o-mini": 1}, "summaries": []}, {"name": "FoxySuites", "mentions": 1, "avgScore": 0, "topSentiment": "neutral", "models": ["gpt-4o-mini"], "modelMentions": {"gpt-4o-mini": 1}, "summaries": []}, {"name": "Premiere Suites", "mentions": 1, "avgScore": 0, "topSentiment": "neutral", "models": ["gpt-4o-mini"], "modelMentions": {"gpt-4o-mini": 1}, "summaries": []}, {"name": "Uma", "mentions": 1, "avgScore": 0, "topSentiment": "neutral", "models": ["gpt-4o-mini"], "modelMentions": {"gpt-4o-mini": 1}, "summaries": []}, {"name": "Smart Micro Vending", "mentions": 1, "avgScore": 0, "topSentiment": "neutral", "models": ["gpt-4o-mini"], "modelMentions": {"gpt-4o-mini": 1}, "summaries": []}]}, "sentiment": {"DelSuites": {"total_mentions": 5, "positive": 5, "neutral": 0, "negative": 0, "uncertain": 0, "mentions": [{"prompt": "Switching from short-term hotel stays for our frequent Toronto business trips, what corporate housing options do other companies use?", "model": "gpt-4o-mini", "rank": 1, "score": 100, "sentiment": "positive", "reason": "Mentioned as a provider of fully furnished and serviced condominiums in the Greater Toronto Area, ideal for extended stays.", "context": "…336, Toronto, ON M5V 1L9, Canada_  \nOffers upscale housing solutions with 16 locations throughout Toronto and Mississauga, providing fully furnished apartments equipped with a range of amenities.\n\n**[DelSuites](http://www.delsuites.com/?utm_source=openai)**  \n**Open now · Furnished apartment building · 4.2 (12 reviews)**  \n_300 Front St W, Toronto, ON M5V 0E9, Canada_  \nProvides fully furnished and serviced condominiums in 17 locations throughout the Greater Toronto Area, ideal for extended stays.\n\nThese providers offer a range of options to suit different needs and budgets, ensuring a comfort…", "competitors": ["MAC Furnished Residences", "Vista Corporate Housing"]}, {"prompt": "We have a policyholder needing temporary housing in Toronto. What are the best luxury options available?", "model": "gpt-4o-mini", "rank": 1, "score": 100, "sentiment": "positive", "reason": "Mentioned as a luxury provider offering fully furnished accommodations with various amenities.", "context": "For a policyholder seeking luxury temporary housing in Toronto, several reputable providers offer high-end, fully furnished accommodations suitable for extended stays. Here are some top options:\n\n**[DelSuites](http://www.delsuites.com/?utm_source=openai)**  \n**Open now · Furnished apartment building · 4.2 (12 reviews)**  \n_300 Front St W, Toronto, ON M5V 0E9, Canada_  \nProvides luxury temporary housing with fully equipped kitchens, en-suite laundry, and all-inclusive rates. Suitable for extended stays, relocations, and temporary assignments.\n\n**[Canada Suites](http://canadasuites.com/?utm_sou…", "competitors": ["Canada Suites", "SoHo Residences Toronto – Luxury Extended Stays", "Atlas Suites CN Tower And Convention Centre"]}, {"prompt": "Can I book a corporate housing suite in Toronto for an immediate move-in this month without breaking the bank?", "model": "gpt-4o-mini", "rank": 3, "score": 33, "sentiment": "positive", "reason": "Mentioned as a provider of furnished short-term apartment rentals in Toronto.", "context": "…locations, including Downtown, North York, and Mississauga. Their suites are designed for business travelers and relocating professionals, providing a comfortable and flexible living experience.\n\n**[Delsuites](http://www.delsuites.com/?utm_source=openai)**  \n**Closed · Executive suite rental agency · 4.8 (64 reviews)**  \n_4800 Dufferin St, North York, ON M3H 5S9, Canada_  \nOffers furnished short-term apartment rentals in Toronto's vibrant communities. Their properties are thoughtfully designed and located in downtown Toronto, providing convenient access to various amenities.\n\n**[Toronto](http…", "competitors": ["Royal BnB", "Mac Furnished Residences Front Street West"]}, {"prompt": "Are there any Toronto-based corporate housing options offering grocery pre-stocking services?", "model": "gpt-4o-mini", "rank": 1, "score": 100, "sentiment": "positive", "reason": "Mentioned as providing a pre-arrival grocery service with detailed features.", "context": "Yes, several Toronto-based corporate housing providers offer grocery pre-stocking services to enhance your stay:\n\n- **DelSuites**: Provides a pre-arrival grocery service where items are purchased through third-party services and delivered to your accommodation, placed in your refrigerator and cupboards for easy access. Orders must be submitted seven days prior to arrival. ([delsuites.com](https://www.delsuites.com/concierge/grocery_service.php?utm_source=openai))\n\n- **MAC Furnished Residences**: Offers fully furn…", "competitors": ["MAC Furnished Residences", "CareStay Suites", "Uma", "Smart Micro Vending"]}, {"prompt": "I need to relocate my team to Toronto for a few months. What should I look for in a corporate housing provider?", "model": "gpt-4o-mini", "rank": 1, "score": 100, "sentiment": "positive", "reason": "DelSuites is mentioned as a corporate housing provider in Toronto, offering furnished short-term apartment rentals.", "context": "…(35 reviews)**  \n_117 Peter St, Toronto, ON M5V 0M3, Canada_  \nProvides boutique, fully furnished apartments in downtown Toronto, ideal for professionals and families seeking a home-like setting.\n\n**[DelSuites](http://www.delsuites.com/?utm_source=openai)**  \n**Open now · Furnished apartment building · 4.2 (12 reviews)**  \n_300 Front St W, Toronto, ON M5V 0E9, Canada_  \nOffers furnished short-term apartment rentals in Toronto's vibrant communities, with stays of 30 nights or more.\n\nBy evaluating these providers based on the outlined criteria, you can select the most suitable corporate housing…", "competitors": []}]}}, "modelCitations": {"DelSuites": {"gpt-4o-mini": {"total": 39, "uniqueDomains": 19, "topDomains": [{"domain": "google.com", "count": 12}, {"domain": "delsuites.com", "count": 5}, {"domain": "macsuites.ca", "count": 4}, {"domain": "medshousing.com", "count": 2}, {"domain": "corporatestays.com", "count": 2}, {"domain": "vista-corporate-housing.ueniweb.com", "count": 1}, {"domain": "sohoresidences.com", "count": 1}, {"domain": "canadasuites.com", "count": 1}, {"domain": "atlassuites.com", "count": 1}, {"domain": "en.wikipedia.org", "count": 1}], "domainTypes": [{"type": "category_page", "count": 18}, {"type": "homepage", "count": 17}, {"type": "blog_article", "count": 4}], "contentTypes": [{"type": "category_page", "count": 18}, {"type": "brand_homepage", "count": 17}, {"type": "blog_article", "count": 3}, {"type": "comparison", "count": 1}]}}}};
@@ -434,6 +498,8 @@ const MODEL_ORDER=['google-aio','google-ai-mode','gemini-2.5-flash','sonar','gpt
 const COMP_DOMAINS={"MAC Furnished Residences": "macfurnishedresidences.com", "CorporateStays": "corporatestays.com", "CareStay Suites": "carestaysuites.com", "Vista Corporate Housing": "vistacorporatehousing.com", "Canada Suites": "canadasuites.com", "SoHo Residences Toronto – Luxury Extended Stays": "sohoresidencestorontoluxuryextendedstays.com", "Atlas Suites CN Tower And Convention Centre": "atlassuitescntowerandconventioncentre.com", "Royal BnB": "royalbnb.com", "Mac Furnished Residences Front Street West": "macfurnishedresidencesfrontstreetwest.com", "Corporate Residences Toronto": "corporateresidencestoronto.com", "Toronto Corporate Rental": "torontocorporaterental.com", "National Corporate Housing": "nationalcorporatehousing.com", "Corporate Housing Toronto": "corporatehousingtoronto.com", "AvenueWest Toronto": "avenuewesttoronto.com", "FoxySuites": "foxysuites.com", "Premiere Suites": "premieresuites.com", "Uma": "uma.com", "Smart Micro Vending": "smartmicrovending.com"};
 const BRAND_CFG={"delsuites": {"key": "DelSuites", "name": "DelSuites", "url": "delsuites.com"}};
 const RAW_HISTORY={"delsuites": {"runDates": ["2026-08-28"], "prompts": [{"id": "f2f7fa91-29dc-4a6d-8cd9-3ef833a6a278", "text": "We need to secure a furnished apartment in Markham for our insurer to cover a client's temporary displacement.", "intent": "TRANSACTIONAL", "topic": "General", "entries": []}, {"id": "cd634707-93e7-4514-8993-3647a3727d0d", "text": "I'm looking for family-friendly furnished rentals in Toronto for an extended vacation. What are my best picks?", "intent": "COMMERCIAL", "topic": "General", "entries": []}, {"id": "57640b0f-062c-4ad5-a834-d5024b9af481", "text": "I've heard about extended-stay tax exemptions. How does this affect corporate housing rentals?", "intent": "INFORMATIONAL", "topic": "General", "entries": []}, {"id": "e8521ad9-d4e4-438d-80aa-34db59bfd76a", "text": "Anyone had an issue with the cancellation policy for extended-stay condos in Toronto?", "intent": "SENTIMENT", "topic": "General", "entries": []}, {"id": "80e32b24-0565-4cb4-9fdd-50cb92861030", "text": "Looking for a luxury condo rental in Toronto for a three-month work assignment. Can you suggest options?", "intent": "TRANSACTIONAL", "topic": "General", "entries": []}, {"id": "9546470f-dbe6-4e1d-9d07-4dcb3716fd04", "text": "Looking for experiences: How do extended-stay condos compare to hotels in terms of comfort and value in Toronto?", "intent": "SENTIMENT", "topic": "General", "entries": []}, {"id": "6fcb32d4-bcd1-47b6-9890-47e48bad0b92", "text": "Looking for temporary housing in the GTA for insurance claimants, are there any luxury options that minimize the stress of displacement?", "intent": "COMMERCIAL", "topic": "General", "entries": []}, {"id": "957b56ee-c7eb-4e71-8bd5-daa9a23c5219", "text": "Looking to book a serviced condo in the GTA with airport pickup included. Any recommendations?", "intent": "TRANSACTIONAL", "topic": "General", "entries": []}, {"id": "ccd75be9-b824-4da8-bdfc-4fedcf3d5a7c", "text": "Need to secure a 2-bedroom condo in Mississauga with grocery pre-stocking for an upcoming relocation.", "intent": "TRANSACTIONAL", "topic": "General", "entries": []}, {"id": "34ca37e6-60a3-4440-b825-aaeb84b728b0", "text": "Trying to find extended stay options in Midtown Toronto for a family holiday this December.", "intent": "TRANSACTIONAL", "topic": "General", "entries": []}, {"id": "ce660a16-acf8-4b50-bab4-d01eed852ef0", "text": "In search of luxury condo rentals in the Entertainment District for a professional conference in January 2026.", "intent": "TRANSACTIONAL", "topic": "General", "entries": []}, {"id": "a5935ac3-4876-4f3e-87cb-bb49b823d78e", "text": "What are some of the most popular luxury condo rental providers in the GTA for a month-long stay in 2026?", "intent": "COMMERCIAL", "topic": "General", "entries": []}, {"id": "564a41aa-e40e-46d6-92d6-2dcaf975ac89", "text": "What are the advantages of staying in North York compared to Downtown Toronto for medical reasons?", "intent": "INFORMATIONAL", "topic": "General", "entries": []}, {"id": "9b947118-a01b-40f3-a70e-f0aeb6f86011", "text": "What are the top differences between staying at Ten York and the Element for an extended business trip?", "intent": "INFORMATIONAL", "topic": "General", "entries": []}, {"id": "423894a7-7649-4cf6-ae72-d6440a381df7", "text": "What's the best way to book a furnished suite in North York for a 60-day medical stay?", "intent": "TRANSACTIONAL", "topic": "General", "entries": []}, {"id": "2171af6d-1da9-47ec-9810-739c13aae6ec", "text": "What's the difference between corporate housing and long-term hotel stays in Toronto?", "intent": "INFORMATIONAL", "topic": "General", "entries": []}, {"id": "b6ff79ff-9e6d-4b50-8b7f-8cffca9453cf", "text": "What's the real deal with the cleanliness and maintenance of luxury corporate condos in Greater Toronto Area? Any shared stories?", "intent": "SENTIMENT", "topic": "General", "entries": []}, {"id": "9ed1d48d-37ea-4017-a4cb-dab858d22a68", "text": "Which corporate housing options near Downtown Toronto offer the most convenient amenities for business travelers staying more than a month?", "intent": "COMMERCIAL", "topic": "General", "entries": []}, {"id": "78f26642-9f2d-47a6-81c3-33e703633240", "text": "Which Toronto corporate housing providers offer a seamless home-away-from-home experience for business travelers in 2026?", "intent": "COMMERCIAL", "topic": "General", "entries": []}, {"id": "d52cd2c7-a9e8-4935-9390-6dcee0206ade", "text": "Why would someone choose a serviced condo over a regular apartment rental for a longer stay in Toronto?", "intent": "INFORMATIONAL", "topic": "General", "entries": []}, {"id": "b6d240eb-4dbe-4386-8e36-868be242051f", "text": "Do professionals relocating for work find corporate housing more convenient than a short-term rental in Toronto?", "intent": "SENTIMENT", "topic": "General", "entries": []}, {"id": "04f84219-c320-4634-a9e7-539c161cd71a", "text": "Are there any hidden costs when staying in corporate housing in Toronto? I'm curious about unexpected fees or issues from other renters.", "intent": "SENTIMENT", "topic": "General", "entries": []}, {"id": "c55f5567-4a36-4e88-9666-884650692856", "text": "Are there any significant differences in the design or amenities between suites at the Well and Hullmark Centre?", "intent": "INFORMATIONAL", "topic": "General", "entries": []}, {"id": "8451b044-642c-4c37-8cf5-6b3902011fa4", "text": "Are there any top-rated serviced condos in the GTA with a focus on cleanliness and modern amenities for long-term stays?", "intent": "COMMERCIAL", "topic": "General", "entries": []}, {"id": "2769ab61-b37a-4775-afc0-4d2edfbe6538", "text": "Are there positive reviews from people who stayed near Toronto's Hospital for Sick Children for long-term visits?", "intent": "SENTIMENT", "topic": "General", "entries": []}, {"id": "ad3ccb9c-7f57-47a0-9fab-192200703ae2", "text": "Considering a 6-week stay in Toronto for a work assignment, what luxury furnished condo rentals offer the best overall experience?", "intent": "COMMERCIAL", "topic": "General", "entries": []}, {"id": "e04e5032-c255-477d-8722-5e6a999f1cdc", "text": "I need to relocate to Toronto for a temporary project. What housing options should I consider?", "intent": "INFORMATIONAL", "topic": "General", "entries": []}, {"id": "d30882f5-d013-43e1-84ad-a06819168761", "text": "Does anyone regret renting a long-term corporate condo in Toronto?", "intent": "SENTIMENT", "topic": "General", "entries": []}, {"id": "c7b596ac-0f31-4a73-b1e6-c59ea6b3c793", "text": "For a two-month family stay, how do furnished condos in the Entertainment District compare to those near the Waterfront in Toronto?", "intent": "INFORMATIONAL", "topic": "General", "entries": []}, {"id": "76dac037-eb86-4fbb-a60d-573fe8e12747", "text": "For long-term medical stays in Toronto near major hospitals, which serviced condos are most recommended?", "intent": "COMMERCIAL", "topic": "General", "entries": []}, {"id": "c04bf58d-c8cd-4573-b959-ec764c67d5c5", "text": "Has anyone stayed with a corporate housing provider in Toronto before, specifically for a medical appointment?", "intent": "SENTIMENT", "topic": "General", "entries": []}, {"id": "4acf9581-ce3c-4b5f-a6f0-9a14eb216048", "text": "Help me book a downtown condo for three months. Looking for easy access to Union Station.", "intent": "TRANSACTIONAL", "topic": "General", "entries": []}, {"id": "4e14eee8-7751-4cb9-a28d-255a891bec0a", "text": "How do Hullmark Centre and The Livmore condominiums in Toronto compare for corporate housing?", "intent": "INFORMATIONAL", "topic": "General", "entries": []}, {"id": "7d1dc86e-c209-40b1-a175-6be629c977ef", "text": "How do serviced condos in Downtown Toronto compare to those in Midtown for corporate housing needs?", "intent": "INFORMATIONAL", "topic": "General", "entries": []}, {"id": "01401ab9-4671-4bc3-a269-e259564c4930", "text": "Switching from short-term hotel stays for our frequent Toronto business trips, what corporate housing options do other companies use?", "intent": "INVESTIGATIONAL", "topic": "Discovery Prompts", "entries": [{"date": "2026-08-28", "model": "gpt-4o-mini", "hit": true, "sc": 100, "rk": 1, "snt": "positive", "rsn": "Mentioned as a provider of fully furnished and serviced condominiums in the Greater Toronto Area, ideal for extended stays.", "ctx": "…336, Toronto, ON M5V 1L9, Canada_  \nOffers upscale housing solutions with 16 locations throughout Toronto and Mississauga, providing fully furnished apartments equipped with a range of amenities.\n\n**[DelSuites](http://www.delsuites.com/?utm_source=openai)**  \n**Open now · Furnished apartment building · 4.2 (12 reviews)**  \n_300 Front St W, Toronto, ON M5V 0E9, Canada_  \nProvides fully furnished and serviced condominiums in 17 locations throughout the Greater Toronto Area, ideal for extended stays.\n\nThese providers offer a range of options to suit different needs and budgets, ensuring a comfort…", "srcs": [{"u": "http://www.delsuites.com/?utm_source=openai", "t": "DelSuites", "pt": "homepage", "ct": "brand_homepage"}, {"u": "https://vista-corporate-housing.ueniweb.com/?utm_campaign=gmb&utm_source=openai", "t": "Vista Corporate Housing", "pt": "homepage", "ct": "brand_homepage"}, {"u": "http://www.macsuites.ca/?utm_source=openai", "t": "MAC Furnished Residences", "pt": "homepage", "ct": "brand_homepage"}], "comps": ["MAC Furnished Residences", "Vista Corporate Housing"]}]}, {"id": "63bd9f12-396b-4f07-8d66-c922a63ab918", "text": "We have a policyholder needing temporary housing in Toronto. What are the best luxury options available?", "intent": "COMMERCIAL", "topic": "Discovery Prompts", "entries": [{"date": "2026-08-28", "model": "gpt-4o-mini", "hit": true, "sc": 100, "rk": 1, "snt": "positive", "rsn": "Mentioned as a luxury provider offering fully furnished accommodations with various amenities.", "ctx": "For a policyholder seeking luxury temporary housing in Toronto, several reputable providers offer high-end, fully furnished accommodations suitable for extended stays. Here are some top options:\n\n**[DelSuites](http://www.delsuites.com/?utm_source=openai)**  \n**Open now · Furnished apartment building · 4.2 (12 reviews)**  \n_300 Front St W, Toronto, ON M5V 0E9, Canada_  \nProvides luxury temporary housing with fully equipped kitchens, en-suite laundry, and all-inclusive rates. Suitable for extended stays, relocations, and temporary assignments.\n\n**[Canada Suites](http://canadasuites.com/?utm_sou…", "srcs": [{"u": "https://www.sohoresidences.com/?utm_source=openai", "t": "SoHo Residences Toronto – Luxury Extended Stays", "pt": "homepage", "ct": "brand_homepage"}, {"u": "http://canadasuites.com/?utm_source=openai", "t": "Canada Suites", "pt": "homepage", "ct": "brand_homepage"}, {"u": "http://www.atlassuites.com/?utm_source=openai", "t": "Atlas Suites CN Tower And Convention Centre", "pt": "homepage", "ct": "brand_homepage"}, {"u": "http://www.delsuites.com/?utm_source=openai", "t": "DelSuites", "pt": "homepage", "ct": "brand_homepage"}], "comps": ["Canada Suites", "SoHo Residences Toronto – Luxury Extended Stays", "Atlas Suites CN Tower And Convention Centre"]}]}, {"id": "f7694a94-a63a-453d-b3ad-b4b2360f6fbd", "text": "We've got a three-month medical assignment in Toronto. Which areas would be best for convenient access to major hospitals?", "intent": "COMMERCIAL", "topic": "Discovery Prompts", "entries": [{"date": "2026-08-28", "model": "gpt-4o-mini", "hit": false, "sc": 0, "rk": null, "snt": null, "rsn": "", "ctx": "", "srcs": [{"u": "https://www.medshousing.com/en/hospitals/mount-sinai-hospital-toronto/?utm_source=openai", "t": "Housings near Mount Sinai Hospital Toronto", "pt": "blog_article", "ct": "blog_article"}, {"u": "https://en.wikipedia.org/wiki/Toronto_General_Hospital?utm_source=openai", "t": "Toronto General Hospital", "pt": "category_page", "ct": "category_page"}, {"u": "https://www.medshousing.com/en/hospitals/sunnybrook-health-sciences-centre-bayview-campus/?utm_source=openai", "t": "Housings near Sunnybrook Health Sciences Centre - Bayview Campus", "pt": "blog_article", "ct": "blog_article"}, {"u": "https://localwiki.org/toronto/Hospital_Row?utm_source=openai", "t": "Hospital Row - Toronto - LocalWiki", "pt": "category_page", "ct": "category_page"}], "comps": []}]}, {"id": "6cd90dc8-f6bd-45e0-9a21-e668c47f27fb", "text": "Considering a switch from hotel stays to corporate housing in Toronto, what are the pros and cons?", "intent": "INVESTIGATIONAL", "topic": "Discovery Prompts", "entries": [{"date": "2026-08-28", "model": "gpt-4o-mini", "hit": false, "sc": 0, "rk": null, "snt": null, "rsn": "", "ctx": "", "srcs": [{"u": "https://www.compassfurnishedapartments.com/article/the-advantages-of-corporate-housing-over-hotels/?utm_source=openai", "t": "Corporate Housing vs. Hotels: What's The Difference? | Compass", "pt": "blog_article", "ct": "blog_article"}, {"u": "https://www.altovita.com/blog/corporate-housing-vs-hotels?utm_source=openai", "t": "Corporate Housing vs Hotels: Pros & Cons for Business Stays", "pt": "blog_article", "ct": "comparison"}, {"u": "https://corporatestays.com/corporate-housing-vs-hotels-cost-canada/?utm_source=openai", "t": "Corporate housing vs. hotels in Canada | Corporate Stays", "pt": "category_page", "ct": "category_page"}], "comps": ["CorporateStays"]}]}, {"id": "00da8d1d-9916-40f1-aa7c-658c58b1436c", "text": "Can I book a corporate housing suite in Toronto for an immediate move-in this month without breaking the bank?", "intent": "TRANSACTIONAL", "topic": "Discovery Prompts", "entries": [{"date": "2026-08-28", "model": "gpt-4o-mini", "hit": true, "sc": 33, "rk": 3, "snt": "positive", "rsn": "Mentioned as a provider of furnished short-term apartment rentals in Toronto.", "ctx": "…locations, including Downtown, North York, and Mississauga. Their suites are designed for business travelers and relocating professionals, providing a comfortable and flexible living experience.\n\n**[Delsuites](http://www.delsuites.com/?utm_source=openai)**  \n**Closed · Executive suite rental agency · 4.8 (64 reviews)**  \n_4800 Dufferin St, North York, ON M3H 5S9, Canada_  \nOffers furnished short-term apartment rentals in Toronto's vibrant communities. Their properties are thoughtfully designed and located in downtown Toronto, providing convenient access to various amenities.\n\n**[Toronto](http…", "srcs": [{"u": "http://www.delsuites.com/?utm_source=openai", "t": "Delsuites", "pt": "homepage", "ct": "brand_homepage"}, {"u": "https://www.royalbnb.ca/?utm_source=openai", "t": "Royal BnB", "pt": "homepage", "ct": "brand_homepage"}, {"u": "https://www.macsuites.ca/?utm_source=openai", "t": "Mac Furnished Residences Front Street West", "pt": "homepage", "ct": "brand_homepage"}, {"u": "http://www.toronto.ca/?utm_source=openai", "t": "Toronto", "pt": "homepage", "ct": "brand_homepage"}], "comps": ["Royal BnB", "Mac Furnished Residences Front Street West"]}]}, {"id": "43b37007-3cbb-4267-9e10-7c81814b8cd7", "text": "As a family visiting Toronto for an extended vacation, is there corporate housing that feels more residential and less like a hotel?", "intent": "COMMERCIAL", "topic": "Discovery Prompts", "entries": [{"date": "2026-08-28", "model": "gpt-4o-mini", "hit": false, "sc": 0, "rk": null, "snt": null, "rsn": "", "ctx": "", "srcs": [{"u": "https://www.google.com/maps/search/Toronto+Corporate+Rental%2C+Toronto%2C+Canada?utm_source=openai", "t": "Toronto Corporate Rental", "pt": "category_page", "ct": "category_page"}, {"u": "https://www.google.com/maps/search/Corporate+Residences+Toronto%2C+Toronto%2C+Canada?utm_source=openai", "t": "Corporate Residences Toronto", "pt": "category_page", "ct": "category_page"}, {"u": "https://www.google.com/maps/search/National+Corporate+Housing%2C+Toronto%2C+Canada?utm_source=openai", "t": "National Corporate Housing", "pt": "category_page", "ct": "category_page"}, {"u": "https://www.google.com/maps/search/AvenueWest+Toronto%2C+Toronto%2C+Canada?utm_source=openai", "t": "AvenueWest Toronto", "pt": "category_page", "ct": "category_page"}, {"u": "https://www.google.com/maps/search/Corporate+Housing+Toronto%2C+Toronto%2C+Canada?utm_source=openai", "t": "Corporate Housing Toronto", "pt": "category_page", "ct": "category_page"}, {"u": "https://www.google.com/maps/search/MAC+Furnished+Residences%2C+Toronto%2C+Canada?utm_source=openai", "t": "MAC Furnished Residences", "pt": "category_page", "ct": "category_page"}], "comps": ["MAC Furnished Residences", "Corporate Residences Toronto", "Toronto Corporate Rental", "National Corporate Housing", "Corporate Housing Toronto", "AvenueWest Toronto"]}]}, {"id": "43c87e68-e726-4686-8a71-44bd362fcd10", "text": "What's the cancellation policy typically like for long-term corporate rentals in Toronto?", "intent": "INFORMATIONAL", "topic": "Discovery Prompts", "entries": [{"date": "2026-08-28", "model": "gpt-4o-mini", "hit": false, "sc": 0, "rk": null, "snt": null, "rsn": "", "ctx": "", "srcs": [{"u": "https://corporatestays.com/terms-and-conditions/?utm_source=openai", "t": "Terms & Conditions | Corporate Stays", "pt": "category_page", "ct": "category_page"}], "comps": ["CorporateStays"]}]}, {"id": "5f4e2704-51ff-4ad5-bef9-0522f9b86ea1", "text": "Looking for corporate housing in North York with flexible check-in times, what's typically available?", "intent": "TRANSACTIONAL", "topic": "Discovery Prompts", "entries": [{"date": "2026-08-28", "model": "gpt-4o-mini", "hit": false, "sc": 0, "rk": null, "snt": null, "rsn": "", "ctx": "", "srcs": [{"u": "https://www.google.com/maps/search/Premiere+Suites+at+Spectrum+Condos%2C+North+York%2C+Canada?utm_source=openai", "t": "Premiere Suites at Spectrum Condos", "pt": "category_page", "ct": "category_page"}, {"u": "https://www.google.com/maps/search/Corporate+Stays+at+Pivot+Building%2C+North+York%2C+Canada?utm_source=openai", "t": "Corporate Stays at Pivot Building", "pt": "category_page", "ct": "category_page"}, {"u": "https://www.google.com/maps/search/Premiere+Suites+at+Skymark+Centre+at+Avondale%2C+North+York%2C+Canada?utm_source=openai", "t": "Premiere Suites at Skymark Centre at Avondale", "pt": "category_page", "ct": "category_page"}, {"u": "https://www.google.com/maps/search/Premiere+Suites+at+The+Hullmark+Centre%2C+North+York%2C+Canada?utm_source=openai", "t": "Premiere Suites at The Hullmark Centre", "pt": "category_page", "ct": "category_page"}, {"u": "https://www.google.com/maps/search/FoxySuites%2C+Toronto%2C+Canada?utm_source=openai", "t": "FoxySuites", "pt": "category_page", "ct": "category_page"}, {"u": "https://www.google.com/maps/search/CareStay+Suites%2C+Toronto%2C+Canada?utm_source=openai", "t": "CareStay Suites", "pt": "category_page", "ct": "category_page"}], "comps": ["FoxySuites", "Premiere Suites", "CorporateStays", "CareStay Suites"]}]}, {"id": "84c25b8d-d503-4b01-8eef-4882d6209e5b", "text": "Are there any Toronto-based corporate housing options offering grocery pre-stocking services?", "intent": "INFORMATIONAL", "topic": "Discovery Prompts", "entries": [{"date": "2026-08-28", "model": "gpt-4o-mini", "hit": true, "sc": 100, "rk": 1, "snt": "positive", "rsn": "Mentioned as providing a pre-arrival grocery service with detailed features.", "ctx": "Yes, several Toronto-based corporate housing providers offer grocery pre-stocking services to enhance your stay:\n\n- **DelSuites**: Provides a pre-arrival grocery service where items are purchased through third-party services and delivered to your accommodation, placed in your refrigerator and cupboards for easy access. Orders must be submitted seven days prior to arrival. ([delsuites.com](https://www.delsuites.com/concierge/grocery_service.php?utm_source=openai))\n\n- **MAC Furnished Residences**: Offers fully furn…", "srcs": [{"u": "https://macsuites.ca/?utm_source=openai", "t": "Corporate Housing Toronto | MAC Suites", "pt": "homepage", "ct": "brand_homepage"}, {"u": "https://smartmicrovending.ca/?utm_source=openai", "t": "Micro Markets & Smart Vending, Toronto & GTA | Smart Micro Vending", "pt": "homepage", "ct": "brand_homepage"}, {"u": "https://www.delsuites.com/concierge/grocery_service.php?utm_source=openai", "t": "Grocery Delivery Service in Toronto | DelSuites", "pt": "category_page", "ct": "category_page"}, {"u": "https://www.umabox.ca/?utm_source=openai", "t": "Uma — Real food, where there isn't any.", "pt": "homepage", "ct": "brand_homepage"}, {"u": "https://www.carestaysuites.com/corporate?utm_source=openai", "t": "Corporate Housing Toronto | CareStay Suites", "pt": "category_page", "ct": "category_page"}], "comps": ["MAC Furnished Residences", "CareStay Suites", "Uma", "Smart Micro Vending"]}]}, {"id": "d1b8d8c6-a3e4-4ddc-8d86-fcf67ad8052b", "text": "I need to relocate my team to Toronto for a few months. What should I look for in a corporate housing provider?", "intent": "INFORMATIONAL", "topic": "Discovery Prompts", "entries": [{"date": "2026-08-28", "model": "gpt-4o-mini", "hit": true, "sc": 100, "rk": 1, "snt": "positive", "rsn": "DelSuites is mentioned as a corporate housing provider in Toronto, offering furnished short-term apartment rentals.", "ctx": "…(35 reviews)**  \n_117 Peter St, Toronto, ON M5V 0M3, Canada_  \nProvides boutique, fully furnished apartments in downtown Toronto, ideal for professionals and families seeking a home-like setting.\n\n**[DelSuites](http://www.delsuites.com/?utm_source=openai)**  \n**Open now · Furnished apartment building · 4.2 (12 reviews)**  \n_300 Front St W, Toronto, ON M5V 0E9, Canada_  \nOffers furnished short-term apartment rentals in Toronto's vibrant communities, with stays of 30 nights or more.\n\nBy evaluating these providers based on the outlined criteria, you can select the most suitable corporate housing…", "srcs": [{"u": "http://www.delsuites.com/?utm_source=openai", "t": "DelSuites", "pt": "homepage", "ct": "brand_homepage"}, {"u": "https://urbanflatstoronto.com/?utm_source=openai", "t": "Urban Flats Toronto", "pt": "homepage", "ct": "brand_homepage"}, {"u": "http://www.macsuites.ca/?utm_source=openai", "t": "MAC Furnished Residences", "pt": "homepage", "ct": "brand_homepage"}], "comps": []}]}]}};
+/* labs: official scores, tracked competitors, fan-out searches, data notes */
+const LABS={"delsuites": {"static": true}};
 const ICONS={
   alert:'<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 2.5L1.5 13.5h13L8 2.5z"/><path d="M8 7v3"/><circle cx="8" cy="12" r=".5" fill="currentColor" stroke="none"/></svg>',
   list:'<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 4h12M2 8h12M2 12h7"/></svg>',
@@ -445,8 +511,7 @@ const ICONS={
   shield:'<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 1.5L1.5 4.5V9c0 3.5 3 5.5 6.5 6 3.5-.5 6.5-2.5 6.5-6V4.5L8 1.5z"/></svg>',
   target:'<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="3"/><path d="M8 5V2M8 14v-3M5 8H2M14 8h-3"/></svg>'
 };
-const ACTIONS={"delsuites": []};
-let currentBrand='delsuites',activeModel='all',promptFilter='all',intentFilter='all',topicFilter='all',actFilter='all',searchQuery='';
+let currentBrand='delsuites',activeModel='all',promptFilter='all',intentFilter='all',topicFilter='all',searchQuery='';
 let sortCol='visibility',sortDir='desc';
 let currentTimeRange='all';
 let customStartDate=null,customEndDate=null;
@@ -493,9 +558,15 @@ let sentimentFilter='all';
 function setSentFilter(f,btn){sentimentFilter=f;document.querySelectorAll('#sentFilterBar .fb-btn').forEach(function(x){x.classList.remove('active');});btn.classList.add('active');renderSentiment();}
 
 /* ── Time range helpers ─────────────────────────────────────────────────── */
-function _daysBack(dateStr,days){var d=new Date(dateStr+'T00:00:00');d.setDate(d.getDate()-days);return d.toISOString().split('T')[0];}
+/* labs: UTC on both ends (upstream mixed local midnight with toISOString, so "Last 7 days" reached a day further back east of UTC) */
+function _daysBack(dateStr,days){var d=new Date(dateStr+'T00:00:00Z');d.setUTCDate(d.getUTCDate()-days);return d.toISOString().split('T')[0];}
 function _extractDomainJS(url){try{var parsed=new URL(url);var h=parsed.hostname.toLowerCase();return h.startsWith('www.')?h.slice(4):h;}catch(e){return url;}}
-function _normComp(name){var n=name.trim().toLowerCase();n=n.replace(/\.(ai|com|io|co|org|net|app)$/,'');n=n.replace(/\s+ai$/,'');n=n.replace(/ai$/,'');n=n.replace(/\s+(digital|agency|media|platform|labs?|technologies?|solutions?)$/,'');return n.replace(/[\s\-]/g,'');}
+/* same as normalize_comp_name() in build_labs.py: accents don't count ("Hôma" = "Homa"), and a
+   stub under 4 letters ("SEO Labs" -> "seo") keeps the name as written, so "SEO Labs",
+   "SEO.com" and "SEO" stay apart */
+function _noAccents(s){return String(s||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'');}
+function _normComp(name){var n=_noAccents(name).trim().toLowerCase();n=n.replace(/\.(ai|com|io|co|org|net|app)$/,'');n=n.replace(/\s+ai$/,'');n=n.replace(/ai$/,'');n=n.replace(/\s+(digital|agency|media|platform|labs?|technologies?|solutions?)$/,'');n=n.replace(/[\s\-]/g,'');return n.length>=4?n:_plainName(name);}
+function _plainName(n){return _noAccents(n).toLowerCase().replace(/[^\p{L}\p{N}]+/gu,'');}
 function _dedupeComps(comps){var groups={};comps.forEach(function(c){var norm=_normComp(c.name);if(!groups[norm]){groups[norm]={canonical:c.name,canonicalMentions:c.mentions,mentions:0,avgScore:0,topSentiment:c.topSentiment,models:[],modelMentions:{}};}var g=groups[norm];g.mentions+=c.mentions;if(c.mentions>g.canonicalMentions){g.canonical=c.name;g.canonicalMentions=c.mentions;}(c.models||[]).forEach(function(m){if(g.models.indexOf(m)===-1)g.models.push(m);});if(c.modelMentions){Object.keys(c.modelMentions).forEach(function(mk){g.modelMentions[mk]=(g.modelMentions[mk]||0)+c.modelMentions[mk];});}});return Object.values(groups).map(function(g){return {name:g.canonical,mentions:g.mentions,avgScore:0,topSentiment:g.topSentiment,models:g.models,modelMentions:g.modelMentions};}).sort(function(a,b){return b.mentions-a.mentions;});}
 
 function _computeFilteredData(brandKey){
@@ -558,7 +629,7 @@ function _computeFilteredData(brandKey){
   var totalCit=Object.values(urlData).reduce(function(a,x){return a+x.count;},0);
   var origCit=D_ORIG.citations[bk];
   /* Use actual page/content type counts from filtered data; fall back to proportional scaling if pt/ct not in raw data */
-  var hasPtCt=rh.prompts.length>0&&rh.prompts[0].entries.length>0&&'pt' in (rh.prompts[0].entries[0].srcs||[{}])[0];
+  var hasPtCt=rh.prompts.length>0&&rh.prompts[0].entries.length>0&&'pt' in ((rh.prompts[0].entries[0].srcs||[])[0]||{});
   var domainTypesArr,contentTypesArr;
   if(hasPtCt||Object.keys(domainTypeCounts).length>0){
     domainTypesArr=Object.keys(domainTypeCounts).map(function(t){return {type:t,count:domainTypeCounts[t]};}).sort(function(a,b){return b.count-a.count;});
@@ -618,7 +689,9 @@ function _computeFilteredData(brandKey){
 
 function _applyTimeRange(){
   var bk=BRAND_CFG[currentBrand].key;
-  if(currentTimeRange==='all'){
+  /* a frozen one-off report (labs.static) was built by an older builder whose totals differ a little
+     from its own answers, so "All data" is recounted from the answers like every other range */
+  if(currentTimeRange==='all'&&!_labs().static){
     D.prompts[bk]=D_ORIG.prompts[bk];
     D.citations[bk]=D_ORIG.citations[bk];
     D.competitors[bk]=D_ORIG.competitors[bk];
@@ -668,7 +741,7 @@ function setTimeRange(range,btn){
   renderAll();
 }
 
-function setBrand(b,btn){currentBrand=b;sortCol='visibility';sortDir='desc';topicFilter='all';['prompt','visibility','position','sentiment','competitors'].forEach(function(c){var arr=document.getElementById('sa-'+c);var th=document.getElementById('th-'+c);if(!arr||!th)return;if(c==='visibility'){th.classList.add('sorted');arr.classList.add('sorted');arr.innerHTML='&#8595;';}else{th.classList.remove('sorted');arr.classList.remove('sorted');arr.innerHTML='&#8597;';}});document.querySelectorAll('.bt-btn').forEach(x=>x.classList.remove('active'));btn.classList.add('active');_compCitsCache={};_rebuildTopicMenu();_applyTimeRange();renderAll();}
+function setBrand(b,btn){currentBrand=b;sortCol='visibility';sortDir='desc';topicFilter='all';foType='all';foText='';foShowAll=false;foPick='';['prompt','visibility','position','sentiment','competitors'].forEach(function(c){var arr=document.getElementById('sa-'+c);var th=document.getElementById('th-'+c);if(!arr||!th)return;if(c==='visibility'){th.classList.add('sorted');arr.classList.add('sorted');arr.innerHTML='&#8595;';}else{th.classList.remove('sorted');arr.classList.remove('sorted');arr.innerHTML='&#8597;';}});document.querySelectorAll('.bt-btn').forEach(x=>x.classList.remove('active'));btn.classList.add('active');_compCitsCache={};_rebuildTopicMenu();_applyTimeRange();renderAll();}
 /* ── Filter dropdown helpers ─────────────────────────────────────────────── */
 var _fltDdOpen=null;
 function toggleFltDd(ddId,menuId,triggerId){
@@ -723,7 +796,7 @@ function pickIntent(it,opt){
   _compCitsCache={};
   renderAll();
 }
-/* topic options are per-brand and open-vocabulary (from the AI Peekaboo category field), so the
+/* topic options are per-brand and open-vocabulary (from the prompt category field), so the
    dropdown menu is rebuilt from whatever topics are actually present in the current brand's data */
 function _rebuildTopicMenu(){
   var rh=RAW_HISTORY[currentBrand];
@@ -782,10 +855,11 @@ function _intentPromptTexts(bk){
 /* rebuild competitors from RAW_HISTORY filtered by current intentFilter+model */
 function _buildIntentFilteredComps(bk){
   var rh=RAW_HISTORY[currentBrand];if(!rh)return[];
-  var compMap={};
+  var compMap={},inR=_rangeFn();
   (rh.prompts||[]).forEach(function(rp){
     if(!_passesIntentTopic(rp.intent,rp.topic))return;
     (rp.entries||[]).forEach(function(e){
+      if(!inR(e.date))return; /* labs: upstream ignored the date range here */
       if(activeModel!=='all'&&e.model!==activeModel)return;
       (e.comps||[]).forEach(function(c){
         if(!c)return;
@@ -799,20 +873,27 @@ function _buildIntentFilteredComps(bk){
   return Object.values(compMap).sort(function(a,b){return b.mentions-a.mentions;});
 }
 /* rebuild citation aggregates (domains/page types/content types) from RAW_HISTORY filtered by current intentFilter+model */
+var _citMemo={key:null,val:null};
 function _buildIntentCitations(bk){
+  var _mk=[currentBrand,currentTimeRange,customStartDate,customEndDate,activeModel,intentFilter,topicFilter].join('|');
+  if(_citMemo.key===_mk)return _citMemo.val;
+  var _v=_buildIntentCitationsRaw(bk);_citMemo={key:_mk,val:_v};return _v;
+}
+function _buildIntentCitationsRaw(bk){
   var rh=RAW_HISTORY[currentBrand];
   var fallbackListicles=(D.citations[bk]||{}).topListicles||[];
   if(!rh)return{total:0,uniqueDomains:0,domainTypes:[],contentTypes:[],topDomains:[],topListicles:fallbackListicles};
-  var domainCounts={},contentCounts={},typeCounts={},total=0;
+  var domainCounts={},contentCounts={},typeCounts={},total=0,inR=_rangeFn();
   (rh.prompts||[]).forEach(function(rp){
     if(!_passesIntentTopic(rp.intent,rp.topic))return;
     (rp.entries||[]).forEach(function(e){
+      if(!inR(e.date))return; /* labs: upstream ignored the date range here */
       if(activeModel!=='all'&&e.model!==activeModel)return;
       (e.srcs||[]).forEach(function(src){
         if(!src||!src.u)return;
-        var dom;
-        try{dom=new URL(src.u).hostname.replace(/^www\./,'');}catch(err){return;}
-        domainCounts[dom]=(domainCounts[dom]||0)+1;
+        var dom=null; /* a citation whose URL can't be read still counts in the totals and types, just not under a domain */
+        try{dom=new URL(src.u).hostname.replace(/^www\./,'');}catch(err){}
+        if(dom)domainCounts[dom]=(domainCounts[dom]||0)+1;
         if(src.pt)typeCounts[src.pt]=(typeCounts[src.pt]||0)+1;
         if(src.ct)contentCounts[src.ct]=(contentCounts[src.ct]||0)+1;
         total++;
@@ -826,7 +907,8 @@ function _buildIntentCitations(bk){
 }
 function _intentLabel(it){return it.charAt(0)+it.slice(1).toLowerCase();}
 function switchTab(t,btn){document.querySelectorAll('.stab').forEach(x=>x.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));document.getElementById('panel-'+t).classList.add('active');}
-function renderAll(){renderStats();renderOverview();renderPrompts();renderSentiment();renderCompetitors();renderCitations();renderActionsGrid();}
+/* labs: one failing block must not blank the rest of the page */
+function renderAll(){[renderLabsNotes,renderStats,renderOverview,renderPrompts,renderFanout,renderSentiment,renderCompetitors,renderCitations].forEach(function(f){try{f();}catch(e){if(window.console)console.error(f.name,e);}});}
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 function safeUrl(u){try{var p=new URL(u);return(p.protocol==='https:'||p.protocol==='http:')?u:'#';}catch(e){return '#';}}
 function fav(d,sz){return 'https://www.google.com/s2/favicons?domain='+d+'&sz='+(sz||32);}
@@ -840,6 +922,10 @@ function renderOverview(){
   var pd=_filterPdByIntent(D.prompts[bk]);
   var s=D.sentiment[bk];
   var comps=(intentFilter!=='all'||topicFilter!=='all')?_dedupeComps(_buildIntentFilteredComps(bk)):_dedupeComps(D.competitors[bk]);
+  /* labs: tracked competitors vs every other name the AIs mention (regulators, comparison sites, banks...) */
+  var _norms=_trackedNorms(),_split=_hasTracked();
+  var compsOther=_split?comps.filter(function(c){return !_isTracked(c.name,_norms);}):[];
+  if(_split)comps=comps.filter(function(c){return _isTracked(c.name,_norms);});
   var cit=D.citations[bk];
   var brandName=BRAND_CFG[currentBrand].name;
 
@@ -864,12 +950,39 @@ function renderOverview(){
       rp.entries.filter(function(e){return inRangeDates.indexOf(e.date)>-1&&(activeModel==='all'||e.model===activeModel);}).forEach(function(e){
         dayTotals[e.date]=(dayTotals[e.date]||0)+1;
         if(e.hit)dayBrandHits[e.date]=(dayBrandHits[e.date]||0)+1;
-        top5comps.forEach(function(c){if((e.comps||[]).indexOf(c.name)>-1)dayCompHits[c.name][e.date]=(dayCompHits[c.name][e.date]||0)+1;});
+        top5comps.forEach(function(c){if((e.comps||[]).some(function(n){return _normComp(n)===_normComp(c.name);}))dayCompHits[c.name][e.date]=(dayCompHits[c.name][e.date]||0)+1;});
       });
     });
   }
   var brandVis=inRangeDates.map(function(d){return dayTotals[d]>0?Math.round(dayBrandHits[d]/dayTotals[d]*100):null;});
   var compVisSeries=top5comps.map(function(c){return {name:c.name,data:inRangeDates.map(function(d){return dayTotals[d]>0?Math.round((dayCompHits[c.name][d]||0)/dayTotals[d]*100):null;})};});
+  /* labs: chart the official score per run (brand + every tracked competitor) when available;
+     the mention-rate series above stays as the fallback */
+  var chartLabels=inRangeDates.map(function(d){return d.slice(5);}),chartBrand=brandVis,chartComps=compVisSeries,chartMax=100,_visUnit='%';
+  var _ts=_official().timeseries,_officialAvail=!!(_ts&&_ts.brand&&(_ts.brand.series||[]).length);
+  /* the official score is one number per run for all models and prompts, so it can't follow the
+     model, intent and topic filters: with one on, chart the share of answers that name each brand instead */
+  var _filtersOn=activeModel!=='all'||intentFilter!=='all'||topicFilter!=='all';
+  var _officialChart=_officialAvail&&!_filtersOn;
+  if(_officialAvail&&_filtersOn){
+    var _vv=chartBrand.concat.apply(chartBrand,chartComps.map(function(c){return c.data;})).filter(function(v){return v!==null&&v!==undefined;});
+    chartMax=Math.min(100,Math.max(10,Math.ceil(Math.max.apply(null,_vv.concat([0]))*1.2/5)*5));
+  }
+  if(_officialChart){
+    var _inR=_rangeFn();
+    var _toMap=function(series){var m={};(series||[]).forEach(function(p){m[p.date]=p.score;});return m;};
+    var _tsComps=(_ts.competitors||[]).filter(function(c){return (c.series||[]).some(function(p){return p.score!==null;});});
+    var _bMap=_toMap(_ts.brand.series),_cMaps=_tsComps.map(function(c){return _toMap(c.series);});
+    var _has=function(v){return v!==null&&v!==undefined;};
+    var _dates=_ts.brand.series.map(function(p){return p.date;}).filter(function(d){return _inR(d)&&(_has(_bMap[d])||_cMaps.some(function(m){return _has(m[d]);}));});
+    chartLabels=_dates.map(function(d){return d.slice(5);});
+    chartBrand=_dates.map(function(d){return _has(_bMap[d])?_bMap[d]:null;});
+    chartComps=_tsComps.map(function(c,i){return {name:c.name,data:_dates.map(function(d){return _has(_cMaps[i][d])?_cMaps[i][d]:null;})};});
+    var _vals=chartBrand.concat.apply(chartBrand,chartComps.map(function(c){return c.data;})).filter(_has);
+    chartMax=Math.max(10,Math.ceil(Math.max.apply(null,_vals.concat([0]))*1.2/5)*5);
+    _visUnit='';
+    isLastRun=_dates.length<=1;
+  }
 
   /* ── Competitor mentions ────────────────────────────────────────────── */
   var compFiltered=activeModel==='all'?comps:comps.filter(function(c){return c.models&&c.models.indexOf(activeModel)>-1;});
@@ -879,24 +992,19 @@ function renderOverview(){
   }
 
   /* ── Sentiment ──────────────────────────────────────────────────────── */
-  var sMentions=activeModel==='all'?s.mentions:s.mentions.filter(function(m){return m.model===activeModel;});
+  /* labs: intent and topic apply here too (sentiment mentions carry the prompt text) */
+  var _sentTexts=_intentPromptTexts(bk);
+  var sMentions=s.mentions;
+  if(_sentTexts)sMentions=sMentions.filter(function(m){return _sentTexts.has(m.prompt);});
+  if(activeModel!=='all')sMentions=sMentions.filter(function(m){return m.model===activeModel;});
   var sentCounts={positive:0,neutral:0,negative:0,uncertain:0};
   sMentions.forEach(function(m){if(sentCounts.hasOwnProperty(m.sentiment))sentCounts[m.sentiment]++;});
 
   /* ── Model-filtered citations ───────────────────────────────────────── */
-  var activeCit=cit;
-  if(activeModel!=='all'&&D.modelCitations&&D.modelCitations[bk]&&D.modelCitations[bk][activeModel]){
-    var mc=D.modelCitations[bk][activeModel];
-    activeCit={
-      total:mc.total||cit.total,
-      uniqueUrls:cit.uniqueUrls,
-      uniqueDomains:mc.uniqueDomains||cit.uniqueDomains,
-      domainTypes:(mc.domainTypes&&mc.domainTypes.length)?mc.domainTypes:cit.domainTypes,
-      contentTypes:(mc.contentTypes&&mc.contentTypes.length)?mc.contentTypes:cit.contentTypes,
-      topDomains:(mc.topDomains&&mc.topDomains.length)?mc.topDomains:cit.topDomains,
-      topListicles:cit.topListicles,
-    };
-  }
+  /* labs: recounted from the raw answers so time range, model, intent and topic all apply, and
+     "All data" matches a range that covers every run (the build-time totals and the model
+     fallback this replaces ignored intent/topic, or fell back to every model's data) */
+  var activeCit=_buildIntentCitations(bk);
 
   /* ── Content & page types ───────────────────────────────────────────── */
   var ct=activeCit.contentTypes.slice(0,6);
@@ -906,11 +1014,14 @@ function renderOverview(){
   var dtLabels=dt.map(function(x){return x.type.replace(/_/g,' ').replace(/\b\w/g,function(c){return c.toUpperCase();});});
   var dtData=dt.map(function(x){return x.count;});
 
+  function _donutBody(id,n){return n>0?'<div class="cc-body" style="height:210px;position:relative"><canvas id="'+id+'"></canvas></div>':'<div class="cc-body" style="height:210px;display:flex;align-items:center;justify-content:center"><p style="color:var(--ink4);font-size:12px">No data for these filters.</p></div>';}
+
   /* ── Bar helper ─────────────────────────────────────────────────────── */
   function ovBars(items,maxVal,fillClass){
     return items.map(function(item){
       var pct=maxVal>0?Math.round(item.val/maxVal*100):0;
-      return '<div class="ov-bar-row"><div class="ov-bar-lbl"><img src="'+fav(item.icon)+'" onerror="this.style.opacity=\'0\'" alt=""><span>'+item.label+'</span></div><div class="ov-bar-track"><div class="ov-bar-fill '+fillClass+'" style="width:'+pct+'%"></div></div><div class="ov-bar-val">'+item.sub+'</div></div>';
+      /* labs: names come from AI answers, so they are escaped */
+      return '<div class="ov-bar-row"><div class="ov-bar-lbl"><img src="'+fav(encodeURIComponent(item.icon))+'" onerror="this.style.opacity=\'0\'" alt=""><span title="'+esc(item.label)+'">'+esc(item.label)+'</span></div><div class="ov-bar-track"><div class="ov-bar-fill '+fillClass+'" style="width:'+pct+'%"></div></div><div class="ov-bar-val">'+esc(item.sub)+'</div></div>';
     }).join('');
   }
 
@@ -924,7 +1035,13 @@ function renderOverview(){
   var compMax=top8[0]?(activeModel!=='all'?(top8[0].modelMentions||top8[0].mentions):top8[0].mentions):1;if(compMax===0)compMax=1;
   var compItems=top8.map(function(c){var cd=COMP_DOMAINS[c.name]||(c.name.toLowerCase().replace(/\s/g,'')+'.com');var mentionVal=activeModel!=='all'?(c.modelMentions||0):c.mentions;return {icon:cd,label:c.name,val:mentionVal,sub:mentionVal+' mentions'};});
   var brandMentionCount=inRangeDates.reduce(function(s,d){return s+(dayBrandHits[d]||0);},0);
-  var _brandDomOv=BRAND_CFG[currentBrand].url||'aipeekaboo.com';
+  /* labs: names the AIs mention that are not tracked competitors */
+  var otherFiltered=activeModel==='all'?compsOther:compsOther.filter(function(c){return c.models&&c.models.indexOf(activeModel)>-1;});
+  var other8=activeModel==='all'?otherFiltered.slice(0,8):otherFiltered.map(function(c){var cnt=c.modelMentions&&c.modelMentions[activeModel]||0;return Object.assign({},c,{modelMentions:cnt});}).sort(function(a,b){return b.modelMentions-a.modelMentions;}).slice(0,8);
+  var otherMax=other8[0]?(activeModel!=='all'?(other8[0].modelMentions||0):other8[0].mentions):1;if(!otherMax)otherMax=1;
+  var otherItems=other8.map(function(c){var v=activeModel!=='all'?(c.modelMentions||0):c.mentions;return {icon:_compDomain(c.name),label:c.name,val:v,sub:v+' mentions'};});
+  var _brandDomOv=BRAND_CFG[currentBrand].url||'';
+  if(brandMentionCount>compMax)compMax=brandMentionCount; /* one scale for the brand and the competitor bars */
   var _brandPctOv=compMax>0?Math.round(brandMentionCount/compMax*100):0;
   var _brandOvRow='<div class="ov-bar-row" style="background:rgba(79,70,229,.06);padding:6px 0;border-top:1.5px dashed rgba(79,70,229,.3);border-bottom:none"><div class="ov-bar-lbl" style="color:#4f46e5;font-weight:700"><img src="'+fav(_brandDomOv)+'" onerror="this.style.opacity=\'0\'" alt=""><span>You ('+brandName+')</span></div><div class="ov-bar-track"><div class="ov-bar-fill" style="width:'+_brandPctOv+'%;background:rgba(79,70,229,.85)"></div></div><div class="ov-bar-val" style="color:#4f46e5;font-weight:700">'+brandMentionCount+' mentions</div></div>';
 
@@ -933,23 +1050,26 @@ function renderOverview(){
   var domItems=topDom.map(function(d){return {icon:d.domain,label:d.domain,val:d.count,sub:d.count+' citations'};});
 
   /* ── Render HTML ────────────────────────────────────────────────────── */
-  var visSubtitle=brandName+' vs top competitors &middot; '+(isLastRun?'last run snapshot':inRangeDates.length+' data points');
-  document.getElementById('ovContent').innerHTML=
-    '<div class="two-col" style="margin-bottom:14px">'+
-      '<div class="cc"><div class="cc-head"><div class="cc-title">Visibility Over Time</div><div class="cc-sub">'+visSubtitle+'</div></div><div class="cc-body" style="height:260px;position:relative"><canvas id="ov-vis"></canvas></div><div id="ov-vis-legend" style="display:flex;flex-wrap:wrap;gap:8px 14px;padding:8px 14px 4px;border-top:1px solid var(--border)"></div></div>'+
-      '<div class="cc"><div class="cc-head"><div class="cc-title">Competitor Mentions</div><div class="cc-sub">'+(activeModel!=='all'?(MODEL_META[activeModel]||{label:activeModel}).label+' &middot; ':'')+'top 8 by mention count</div></div><div class="cc-body"><div class="ov-bar-wrap">'+ovBars(compItems,compMax,'ov-green')+_brandOvRow+'</div></div></div>'+
-    '</div>'+
-    '<div class="two-col" style="margin-bottom:14px">'+
-      '<div class="cc"><div class="cc-head"><div class="cc-title">Sentiment Breakdown</div><div class="cc-sub">'+sMentions.length+' brand mention'+(sMentions.length!==1?'s':'')+' analysed</div></div><div class="cc-body" style="height:210px;position:relative"><canvas id="ov-sent"></canvas></div></div>'+
-      '<div class="cc"><div class="cc-head"><div class="cc-title">Model Coverage</div><div class="cc-sub">prompts triggering a brand mention per AI model</div></div><div class="cc-body"><div class="ov-bar-wrap">'+ovBars(covItemsFiltered,covMax,'ov-indigo')+'</div></div></div>'+
-    '</div>'+
-    '<div class="two-col" style="margin-bottom:14px">'+
-      '<div class="cc"><div class="cc-head"><div class="cc-title">Content Type Distribution</div><div class="cc-sub">how AI citation sources are classified</div></div><div class="cc-body" style="height:210px;position:relative"><canvas id="ov-ct"></canvas></div></div>'+
-      '<div class="cc"><div class="cc-head"><div class="cc-title">Page Type Distribution</div><div class="cc-sub">structure of pages AI models cite most</div></div><div class="cc-body" style="height:210px;position:relative"><canvas id="ov-dt"></canvas></div></div>'+
-    '</div>'+
-    '<div style="margin-bottom:14px">'+
-      '<div class="cc"><div class="cc-head"><div class="cc-title">Top Cited Domains</div><div class="cc-sub">leading citation sources</div></div><div class="cc-body"><div class="ov-bar-wrap">'+ovBars(domItems,domMax,'ov-violet')+'</div></div></div>'+
-    '</div>';
+  var _modelPrefix=activeModel!=='all'?(MODEL_META[activeModel]||{label:activeModel}).label+' &middot; ':'';
+  var visTitle=_officialChart?'Visibility score over time':(_officialAvail?'Mention rate over time':'Visibility Over Time');
+  var visSubtitle=_officialChart
+    ?esc(brandName)+' vs tracked competitors &middot; visibility score (0–100) per run, all models and prompts'
+    :(_officialAvail
+      ?esc(brandName)+' vs tracked competitors &middot; share of the filtered AI answers that name each brand, per run (the official score only exists for all models and prompts)'
+      :esc(brandName)+' vs top competitors &middot; '+(isLastRun?'last run snapshot':inRangeDates.length+' data points'));
+  var visCard='<div class="cc"><div class="cc-head"><div><div class="cc-title">'+visTitle+'</div><div class="cc-sub">'+visSubtitle+'</div></div></div><div class="cc-body" style="height:260px;position:relative"><canvas id="ov-vis"></canvas></div><div id="ov-vis-legend" style="display:flex;flex-wrap:wrap;gap:8px 14px;padding:8px 14px 4px;border-top:1px solid var(--border)"></div></div>';
+  var compCard='<div class="cc"><div class="cc-head"><div><div class="cc-title">'+(_split?'Tracked competitors':'Competitor Mentions')+'</div><div class="cc-sub">'+_modelPrefix+(_split?'mentions in AI answers':'top 8 by mention count')+'</div></div></div><div class="cc-body"><div class="ov-bar-wrap">'+(compItems.length?ovBars(compItems,compMax,'ov-green'):'<p style="color:var(--ink4);font-size:12px;padding:6px 0">No tracked competitor mentioned for this filter.</p>')+_brandOvRow+'</div></div></div>';
+  var alsoCard='<div class="cc"><div class="cc-head"><div><div class="cc-title">Also named by the AIs</div><div class="cc-sub">'+_modelPrefix+'not tracked: regulators, comparison sites, other brands</div></div></div><div class="cc-body"><div class="ov-bar-wrap">'+(otherItems.length?ovBars(otherItems,otherMax,'ov-violet'):'<p style="color:var(--ink4);font-size:12px;padding:6px 0">No other names for this filter.</p>')+'</div></div></div>';
+  var sentCard='<div class="cc"><div class="cc-head"><div><div class="cc-title">Sentiment Breakdown</div><div class="cc-sub">'+sMentions.length+' brand mention'+(sMentions.length!==1?'s':'')+' analysed</div></div></div>'+_donutBody('ov-sent',sMentions.length)+'</div>';
+  var covCard='<div class="cc"><div class="cc-head"><div><div class="cc-title">Model Coverage</div><div class="cc-sub">prompts where the latest answer of each AI model mentions the brand</div></div></div><div class="cc-body"><div class="ov-bar-wrap">'+ovBars(covItemsFiltered,covMax,'ov-indigo')+'</div></div></div>';
+  var ctCard='<div class="cc"><div class="cc-head"><div><div class="cc-title">Content Type Distribution</div><div class="cc-sub">how AI citation sources are classified</div></div></div>'+_donutBody('ov-ct',ctData.length)+'</div>';
+  var dtCard='<div class="cc"><div class="cc-head"><div><div class="cc-title">Page Type Distribution</div><div class="cc-sub">structure of pages AI models cite most</div></div></div>'+_donutBody('ov-dt',dtData.length)+'</div>';
+  var domCard='<div class="cc"><div class="cc-head"><div><div class="cc-title">Top Cited Domains</div><div class="cc-sub">leading citation sources</div></div></div><div class="cc-body"><div class="ov-bar-wrap">'+(domItems.length?ovBars(domItems,domMax,'ov-violet'):'<p style="color:var(--ink4);font-size:12px;padding:6px 0">No citations for these filters.</p>')+'</div></div></div>';
+  function _row(a,b){return '<div class="two-col" style="margin-bottom:14px">'+a+b+'</div>';}
+  document.getElementById('ovContent').innerHTML=_labsCardsHtml()+
+    _row(visCard,compCard)+
+    (_split?_row(alsoCard,covCard)+_row(sentCard,ctCard)+_row(dtCard,domCard)
+           :_row(sentCard,covCard)+_row(ctCard,dtCard)+'<div style="margin-bottom:14px">'+domCard+'</div>');
 
   var styleId='ov-bar-style';
   if(!document.getElementById(styleId)){var st=document.createElement('style');st.id=styleId;st.textContent='.ov-bar-fill.ov-indigo{background:rgba(79,70,229,.75)}.ov-bar-fill.ov-green{background:rgba(16,185,129,.75)}.ov-bar-fill.ov-violet{background:rgba(139,92,246,.75)}';document.head.appendChild(st);}
@@ -957,10 +1077,10 @@ function renderOverview(){
   var _donutTooltipCb={callbacks:{label:function(ctx){var sum=ctx.dataset.data.reduce(function(a,b){return a+b;},0);return ctx.label+': '+ctx.parsed+(sum>0?' ('+Math.round(ctx.parsed/sum*100)+'%)':'');}}};
 
   /* ── Visibility line chart ──────────────────────────────────────────── */
-  var visColors=['#4f46e5','#10b981','#f59e0b','#ef4444','#8b5cf6','#ec4899'];
-  var visDatasets=[{label:brandName,data:brandVis,borderColor:visColors[0],backgroundColor:visColors[0]+'20',borderWidth:2.5,pointRadius:isLastRun?7:3,pointHoverRadius:7,fill:false,tension:0,showLine:!isLastRun,spanGaps:true}];
-  compVisSeries.forEach(function(cv,ci){visDatasets.push({label:cv.name,data:cv.data,borderColor:visColors[ci+1],backgroundColor:visColors[ci+1]+'20',borderWidth:1.5,pointRadius:isLastRun?6:2,pointHoverRadius:5,fill:false,tension:0,showLine:!isLastRun,borderDash:[],spanGaps:true});});
-  _ovCharts.vis=new Chart(document.getElementById('ov-vis'),{type:'line',data:{labels:inRangeDates.map(function(d){return d.slice(5);}),datasets:visDatasets},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{enabled:false,external:function(context){
+  var visColors=['#4f46e5','#10b981','#f59e0b','#ef4444','#8b5cf6','#ec4899','#0ea5e9','#64748b'];
+  var visDatasets=[{label:brandName,data:chartBrand,borderColor:visColors[0],backgroundColor:visColors[0]+'20',borderWidth:2.5,pointRadius:isLastRun?7:3,pointHoverRadius:7,fill:false,tension:0,showLine:!isLastRun,spanGaps:true}];
+  chartComps.forEach(function(cv,ci){var col=visColors[(ci+1)%visColors.length];visDatasets.push({label:cv.name,data:cv.data,borderColor:col,backgroundColor:col+'20',borderWidth:1.5,pointRadius:isLastRun?6:2,pointHoverRadius:5,fill:false,tension:0,showLine:!isLastRun,borderDash:[],spanGaps:true});});
+  _ovCharts.vis=new Chart(document.getElementById('ov-vis'),{type:'line',data:{labels:chartLabels,datasets:visDatasets},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{enabled:false,external:function(context){
   var tt=context.tooltip;
   var el=document.getElementById('vis-tooltip');
   if(!el){el=document.createElement('div');el.id='vis-tooltip';el.style.cssText='position:absolute;background:#1e293b;color:#fff;border-radius:8px;padding:8px 12px;font-size:12px;pointer-events:none;z-index:100;box-shadow:0 4px 12px rgba(0,0,0,.2);transition:opacity .1s;min-width:140px;';document.body.appendChild(el);}
@@ -970,12 +1090,12 @@ function renderOverview(){
     var dsLabel=dp.dataset.label;
     var domain;
     var bk=currentBrand;
-    var brandDomain=BRAND_CFG[bk]&&BRAND_CFG[bk].domain;
+    var brandDomain=BRAND_CFG[bk]&&BRAND_CFG[bk].url;
     var brandName=BRAND_CFG[bk]&&BRAND_CFG[bk].name;
     if(dsLabel===brandName){domain=brandDomain;}
     else{domain=COMP_DOMAINS[dsLabel]?(COMP_DOMAINS[dsLabel]):(dsLabel.toLowerCase().replace(/\s+(ai|digital|agency|media|labs?)$/,'').replace(/\s+/g,'')+'.com');}
     var favUrl='https://www.google.com/s2/favicons?domain='+domain+'&sz=32';
-    var val=dp.parsed.y!==null?dp.parsed.y+'%':'N/A';
+    var val=dp.parsed.y!==null?dp.parsed.y+_visUnit:'N/A';
     return '<div style="display:flex;align-items:center;gap:6px;padding:2px 0"><img src="'+favUrl+'" style="width:14px;height:14px;border-radius:3px;border:1px solid rgba(255,255,255,.2)" onerror="this.style.display=\'none\'"><span style="flex:1;color:rgba(255,255,255,.85)">'+dsLabel+'</span><span style="font-weight:600;color:#fff">'+val+'</span></div>';
   }).join('');
   el.innerHTML=label+rows;
@@ -983,20 +1103,20 @@ function renderOverview(){
   el.style.opacity='1';
   el.style.left=(pos.left+window.scrollX+tt.caretX+12)+'px';
   el.style.top=(pos.top+window.scrollY+tt.caretY-el.offsetHeight/2)+'px';
-}}},scales:{x:{ticks:{font:baseFont,maxTicksLimit:12},grid:{display:false}},y:{min:0,max:100,ticks:{font:baseFont,callback:function(v){return v+'%';}},grid:{color:'rgba(0,0,0,.05)'}}}}});
+}}},scales:{x:{ticks:{font:baseFont,maxTicksLimit:12},grid:{display:false}},y:{min:0,max:chartMax,ticks:{font:baseFont,callback:function(v){return v+_visUnit;}},grid:{color:'rgba(0,0,0,.05)'}}}}});
   var visLegend=document.getElementById('ov-vis-legend');
-  if(visLegend){var brandDomain=BRAND_CFG[currentBrand].url||'aipeekaboo.com';var legendItems=[{label:brandName,domain:brandDomain,color:visColors[0]}];top5comps.forEach(function(c,ci){var cd=COMP_DOMAINS[c.name]||(c.name.toLowerCase().replace(/\s/g,'')+'.com');legendItems.push({label:c.name,domain:cd,color:visColors[ci+1]});});visLegend.innerHTML=legendItems.map(function(item){return '<div style="display:flex;align-items:center;gap:5px"><div style="width:20px;height:2px;background:'+item.color+';flex-shrink:0"></div><img src="'+fav(item.domain)+'" style="width:14px;height:14px;border-radius:3px;border:1px solid #e5e7eb;flex-shrink:0" onerror="this.style.display=\'none\'"><span style="font-size:11px;color:#374151;white-space:nowrap">'+item.label+'</span></div>';}).join('');}
+  if(visLegend){var brandDomain=BRAND_CFG[currentBrand].url||'';var legendItems=[{label:brandName,domain:brandDomain,color:visColors[0]}];chartComps.forEach(function(c,ci){legendItems.push({label:c.name,domain:_compDomain(c.name),color:visColors[(ci+1)%visColors.length]});});visLegend.innerHTML=legendItems.map(function(item){return '<div style="display:flex;align-items:center;gap:5px"><div style="width:20px;height:2px;background:'+item.color+';flex-shrink:0"></div><img src="'+fav(item.domain)+'" style="width:14px;height:14px;border-radius:3px;border:1px solid #e5e7eb;flex-shrink:0" onerror="this.style.display=\'none\'"><span style="font-size:11px;color:#374151;white-space:nowrap">'+item.label+'</span></div>';}).join('');}
 
   /* ── Sentiment donut ────────────────────────────────────────────────── */
-  _ovCharts.sent=new Chart(document.getElementById('ov-sent'),{type:'doughnut',data:{labels:['Positive','Neutral','Negative','Uncertain'],datasets:[{data:[sentCounts.positive,sentCounts.neutral,sentCounts.negative,sentCounts.uncertain],backgroundColor:['#22c55e','#94a3b8','#ef4444','#f59e0b'],borderWidth:0,hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:baseFont,boxWidth:12,padding:10}},tooltip:_donutTooltipCb}}});
+  if(document.getElementById('ov-sent'))_ovCharts.sent=new Chart(document.getElementById('ov-sent'),{type:'doughnut',data:{labels:['Positive','Neutral','Negative','Uncertain'],datasets:[{data:[sentCounts.positive,sentCounts.neutral,sentCounts.negative,sentCounts.uncertain],backgroundColor:['#22c55e','#94a3b8','#ef4444','#f59e0b'],borderWidth:0,hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:baseFont,boxWidth:12,padding:10}},tooltip:_donutTooltipCb}}});
 
   /* ── Content type donut ─────────────────────────────────────────────── */
   var ctColors=['#6366f1','#8b5cf6','#ec4899','#f43f5e','#f97316','#eab308'];
-  _ovCharts.ct=new Chart(document.getElementById('ov-ct'),{type:'doughnut',data:{labels:ctLabels,datasets:[{data:ctData,backgroundColor:ctColors,borderWidth:0,hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:baseFont,boxWidth:12,padding:8}},tooltip:_donutTooltipCb}}});
+  if(document.getElementById('ov-ct'))_ovCharts.ct=new Chart(document.getElementById('ov-ct'),{type:'doughnut',data:{labels:ctLabels,datasets:[{data:ctData,backgroundColor:ctColors,borderWidth:0,hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:baseFont,boxWidth:12,padding:8}},tooltip:_donutTooltipCb}}});
 
   /* ── Page type donut ────────────────────────────────────────────────── */
   var dtColors=['#3b82f6','#06b6d4','#10b981','#84cc16','#f59e0b','#f97316'];
-  _ovCharts.dt=new Chart(document.getElementById('ov-dt'),{type:'doughnut',data:{labels:dtLabels,datasets:[{data:dtData,backgroundColor:dtColors,borderWidth:0,hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:baseFont,boxWidth:12,padding:8}},tooltip:_donutTooltipCb}}});
+  if(document.getElementById('ov-dt'))_ovCharts.dt=new Chart(document.getElementById('ov-dt'),{type:'doughnut',data:{labels:dtLabels,datasets:[{data:dtData,backgroundColor:dtColors,borderWidth:0,hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:baseFont,boxWidth:12,padding:8}},tooltip:_donutTooltipCb}}});
 }
 /* stats */
 function renderStats(){
@@ -1030,7 +1150,7 @@ function renderStats(){
     if(bsm)bestScoreModel=(MODEL_META[bsm]||{label:bsm}).label;
   }
   var c=D.citations[bk];
-  var citTotal=activeModel!=='all'&&D.modelCitations&&D.modelCitations[bk]&&D.modelCitations[bk][activeModel]?D.modelCitations[bk][activeModel].total:c.total;
+  var citTotal=_buildIntentCitations(bk).total;
   /* sentiment score */
   var s=D.sentiment[bk];
   var sMentions=activeModel==='all'?s.mentions:s.mentions.filter(function(m){return m.model===activeModel;});
@@ -1052,7 +1172,7 @@ function renderStats(){
   var infoSvg='<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="7" cy="7" r="6"/><path d="M7 6v4" stroke-linecap="round"/><circle cx="7" cy="4.5" r=".5" fill="currentColor" stroke="none"/></svg>';
   var bestScoreTip='Highest AI visibility score (0-100) achieved'+(activeModel!=='all'?' for '+(MODEL_META[activeModel]||{label:activeModel}).label:' across all prompts and models')+'. Score reflects prominence and rank in the AI response';
   document.getElementById('statRow').innerHTML=
-    '<div class="stat-card"><div class="sc-label"><span class="info-tip" data-tip="Percentage of total AI model runs where the brand was mentioned (total mentions / total runs across all prompts and models)">'+infoSvg+'</span>AI Visibility</div><div class="sc-val '+visCls+'">'+visPct+'%</div><div class="sc-sub">'+mentioned+' of '+totalRuns+' model runs include a mention</div></div>'+
+    '<div class="stat-card"><div class="sc-label"><span class="info-tip" data-tip="Share of AI answers that mention the brand (mentions / runs). Not the visibility score, which also weighs how early the brand appears: see the visibility scores on the Overview.">'+infoSvg+'</span>Mention rate</div><div class="sc-val '+visCls+'">'+visPct+'%</div><div class="sc-sub">'+mentioned+' of '+totalRuns+' model runs include a mention</div></div>'+
     '<div class="stat-card"><div class="sc-label"><span class="info-tip" data-tip="Total number of individual AI model query executions across all prompts">'+infoSvg+'</span>Model Runs</div><div class="sc-val">'+totalRuns+'</div><div class="sc-sub">'+promptsMentioned+' of '+pd.length+' prompts trigger a mention</div></div>'+
     '<div class="stat-card"><div class="sc-label"><span class="info-tip" data-tip="'+bestScoreTip+'">'+infoSvg+'</span>Best Score</div><div class="sc-val '+(bestScore>0?'good':'bad')+'">'+(bestScore>0?bestScore:'None')+'</div><div class="sc-sub">'+(bestScore===100?'Rank 1 by '+(bestScoreModel||'AI'):bestScore>0?'highest ranking'+(bestScoreModel?' by '+bestScoreModel:''):'not ranked by any model')+'</div></div>'+
     '<div class="stat-card"><div class="sc-label"><span class="info-tip" data-tip="Total number of source URLs cited by AI models when answering prompts in this brand\'s topic area">'+infoSvg+'</span>Total Citations</div><div class="sc-val" style="color:var(--v)">'+citTotal.toLocaleString()+'</div><div class="sc-sub">'+c.uniqueDomains+' unique domains</div></div>'+
@@ -1189,7 +1309,9 @@ function togglePromptExpand(pid,btn){
   if(isOpen){row.style.display='none';btn.innerHTML='&#9654;';_expandedPrompts.delete(pid);}
   else{document.getElementById('expContent-'+pid).innerHTML=buildPromptExpandContent(pid);row.style.display='';btn.innerHTML='&#9660;';_expandedPrompts.add(pid);}
 }
-function buildPromptExpandContent(pid){
+/* labs: the expanded row shows the AI's searches first, then the cited URLs */
+function buildPromptExpandContent(pid){return _foPromptBlock(pid)+_buildPromptUrlTable(pid);}
+function _buildPromptUrlTable(pid){
   var rh=RAW_HISTORY[currentBrand];if(!rh)return '';
   var runDates=rh.runDates||[];var maxDate=runDates.length?runDates[runDates.length-1]:null;
   var cutoffDate=null,lastRunOnly=false,customEndExp=null;
@@ -1244,9 +1366,19 @@ function buildPromptExpandContent(pid){
 }
 function _intentBadge(it){if(!it)return '<span style="color:var(--ink4);font-size:11px">-</span>';var k=String(it).toUpperCase();var m={COMMERCIAL:['Commercial','#7c3aed'],TRANSACTIONAL:['Transactional','#16a34a'],INVESTIGATIONAL:['Investigational','#2563eb'],INFORMATIONAL:['Informational','#0891b2'],NAVIGATIONAL:['Navigational','#64748b'],BRANDED:['Branded','#d97706'],SENTIMENT:['Sentiment','#db2777']};var v=m[k]||[k.charAt(0)+k.slice(1).toLowerCase(),'#64748b'];return '<span style="display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;color:'+v[1]+';background:'+v[1]+'1a;white-space:nowrap">'+v[0]+'</span>';}
 function _topicBadge(t){if(!t)return '<span style="color:var(--ink4);font-size:11px">-</span>';return '<span style="display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;color:var(--ink3);background:var(--surface2);white-space:nowrap">'+esc(t)+'</span>';}
+/* labs: brand absent from every answer in range (and model), while a tracked competitor was named */
+function _isMissing(p){
+  var rh=RAW_HISTORY[currentBrand],inR=_rangeFn(),norms=_trackedNorms();
+  var rp=((rh&&rh.prompts)||[]).find(function(x){return x.id===p.id;});if(!rp)return false;
+  var es=rp.entries.filter(function(e){return inR(e.date)&&(activeModel==='all'||e.model===activeModel);});
+  if(!es.length||es.some(function(e){return e.hit;}))return false;
+  return es.some(function(e){return (e.comps||[]).some(function(c){return _isTracked(c,norms);});});
+}
 function renderPrompts(){
   var bk=BRAND_CFG[currentBrand].key;_pd=D.prompts[bk];_buildPromptComps(currentBrand);_buildPromptCitations(currentBrand);
   document.getElementById('promptsSub').textContent=_pd.length+' prompts tracked · '+(activeModel==='all'?'all models':(MODEL_META[activeModel]||{label:activeModel}).label);
+  var missBtn=document.getElementById('promptMissBtn');
+  if(missBtn){missBtn.style.display=_hasTracked()?'':'none';missBtn.textContent='Missing, competitors named ('+_filterPdByIntent(_pd).filter(_isMissing).length+')';}
   searchQuery=document.getElementById('promptSearch').value;applyPromptFilter();
 }
 function onPromptSearch(q){searchQuery=q;applyPromptFilter();}
@@ -1262,11 +1394,13 @@ function applyPromptFilter(){
     if(activeModel==='all')return !Object.values(p.models).some(function(m){return m&&m.mentioned;});
     return !(p.models[activeModel]&&p.models[activeModel].mentioned);
   });
+  if(promptFilter==='missing')data=data.filter(_isMissing);
   if(intentFilter!=='all')data=data.filter(function(p){return String(p.intent||'').toUpperCase()===intentFilter;});
   if(topicFilter!=='all')data=data.filter(function(p){return String(p.topic||'')===topicFilter;});
   data=sortPrompts(data);
   var tbody=document.getElementById('promptsTbody');
-  if(!data.length){tbody.innerHTML='<tr><td colspan="10" style="text-align:center;padding:32px;color:var(--ink4)">No prompts match filter</td></tr>';return;}
+  if(!data.length){tbody.innerHTML='<tr><td colspan="11" style="text-align:center;padding:32px;color:var(--ink4)">No prompts match filter</td></tr>';return;}
+  var _foR=_foRows(),_foOn=_foModels().length>0;
   tbody.innerHTML=data.map(function(p){
     /* visibility */
     var visBadge,mentionedModels;
@@ -1357,9 +1491,10 @@ function applyPromptFilter(){
       '<td><div class="model-dots">'+dots+'</div></td>'+
       '<td><div class="comp-icons">'+compIcons+'</div></td>'+
       '<td><div class="comp-icons">'+citIcons+'</div></td>'+
+      '<td>'+(function(){var n=_foOn?_foCountFor(pid,_foR):0;return n?'<span class="fo-pill" title="'+n+' searches recorded in this range">'+n+'</span>':'<span style="color:var(--ink4);font-size:11px">-</span>';})()+'</td>'+
     '</tr>'+
     '<tr id="exp-'+pid+'" style="display:none">'+
-      '<td colspan="10" style="padding:0 12px 0 36px;background:var(--surface)">'+
+      '<td colspan="11" style="padding:0 12px 0 36px;background:var(--surface)">'+
         '<div id="expContent-'+pid+'"></div>'+
       '</td>'+
     '</tr>';
@@ -1391,7 +1526,7 @@ function renderSentiment(){
   if(sentimentFilter!=='all')mentions=mentions.filter(function(m){return m.sentiment===sentimentFilter;});
   var tiles=[{cls:'spos',num:tileCounts.positive,lbl:'Positive'},{cls:'sneu',num:tileCounts.neutral,lbl:'Neutral'},{cls:'sneg',num:tileCounts.negative,lbl:'Negative'},{cls:'sunc',num:tileCounts.uncertain,lbl:'Uncertain'}].map(function(t){return '<div class="sent-tile '+t.cls+'"><div class="st-num">'+t.num+'</div><div class="st-lbl">'+t.lbl+'</div></div>';}).join('');
   var el=document.getElementById('sentContent');
-  if(s.total_mentions===0){el.innerHTML='<div class="sent-tiles">'+tiles+'</div><div class="cc"><div class="cc-body"><div class="no-data"><div class="no-data-icon">&#128202;</div><h3>No mentions detected</h3><p>'+BRAND_CFG[currentBrand].name+' was not mentioned in any of the 30 tracked prompts across 5 AI models. See the Actions tab for steps to achieve first mentions.</p></div></div></div>';return;}
+  if(s.total_mentions===0){el.innerHTML='<div class="sent-tiles">'+tiles+'</div><div class="cc"><div class="cc-body"><div class="no-data"><div class="no-data-icon">&#128202;</div><h3>No mentions detected</h3><p>'+esc(BRAND_CFG[currentBrand].name)+' was not mentioned in any tracked prompt in this range.</p></div></div></div>';return;}
   if(!mentions.length){var noDataMsg=sentimentFilter!=='all'?'No '+sentimentFilter+' mentions for this filter. Try a different sentiment or switch to All.':(activeModel==='all'?'No mentions detected for current filter.':'No mentions for '+(MODEL_META[activeModel]||{label:activeModel}).label+'. Switch to "All models" or try Sonar.');el.innerHTML='<div class="sent-tiles">'+tiles+'</div><div class="cc"><div class="cc-body"><div class="no-data"><div class="no-data-icon">&#128269;</div><h3>No matching mentions</h3><p>'+noDataMsg+'</p></div></div></div>';return;}
   var cards=mentions.map(function(mn){
     var mm=MODEL_META[mn.model]||{label:mn.model,domain:'google.com'};
@@ -1402,19 +1537,27 @@ function renderSentiment(){
   el.innerHTML='<div class="sent-tiles">'+tiles+'</div><div class="cc"><div class="cc-head"><div><div class="cc-title">Confirmed Mentions</div><div class="cc-sub">'+mentions.length+' mention'+(mentions.length!==1?'s':'')+', verified against full AI responses</div></div></div><div class="cc-body">'+cards+'</div></div>';
 }
 /* competitors */
+var compScope='tracked';
+function setCompScope(s){compScope=s;renderCompetitors();}
 function renderCompetitors(){
   var bk=BRAND_CFG[currentBrand].key;
   var comps=(intentFilter!=='all'||topicFilter!=='all')?_dedupeComps(_buildIntentFilteredComps(bk)):_dedupeComps(D.competitors[bk].slice());
   if(activeModel!=='all')comps=comps.filter(function(c){return c.models&&c.models.indexOf(activeModel)>-1;});
+  /* labs: official scoreboard on top; the mention list can show tracked, not tracked or all */
+  var board=document.getElementById('compBoard');if(board)board.innerHTML=_scoreboardHtml();
+  var seg=document.getElementById('compScopeSeg'),_cn=_trackedNorms(),_cs=_hasTracked();
+  if(seg){seg.style.display=_cs?'':'none';seg.innerHTML=[['tracked','Tracked'],['other','Not tracked'],['all','All']].map(function(o){return '<button class="'+(compScope===o[0]?'active':'')+'" onclick="setCompScope(\''+o[0]+'\')">'+o[1]+'</button>';}).join('');}
+  if(_cs&&compScope!=='all')comps=comps.filter(function(c){var t=_isTracked(c.name,_cn);return compScope==='tracked'?t:!t;});
   function _dc(c){return activeModel==='all'?c.mentions:(c.modelMentions&&c.modelMentions[activeModel]||0);}
   if(activeModel!=='all')comps=comps.slice().sort(function(a,b){return _dc(b)-_dc(a);});
   var max=comps[0]?_dc(comps[0]):1;if(max===0)max=1;
   var _cpd=_filterPdByIntent(D.prompts[bk]);
-  var _brandMentionsComp=activeModel==='all'?_cpd.reduce(function(s,p){return s+(p.mentions||0);},0):_cpd.reduce(function(s,p){return s+((p.models&&p.models[activeModel]&&p.models[activeModel].mentioned)?1:0);},0);
+  /* labs: count the brand like the competitors, answers in range (upstream counted prompts under a model filter) */
+  var _brandMentionsComp=_brandHitsInRange();
   var _bMentionedPd=_cpd.filter(function(p){return activeModel==='all'?p.mentions>0:(p.models&&p.models[activeModel]&&p.models[activeModel].mentioned);});
   var _brandAvgComp=_bMentionedPd.length?Math.round(_bMentionedPd.reduce(function(s,p){return s+(activeModel==='all'?(p.avgScore||0):((p.models[activeModel]&&p.models[activeModel].score)||0));},0)/_bMentionedPd.length):0;
   var _brandPctComp=max>0?(_brandMentionsComp/max*100).toFixed(0):0;
-  var _brandDomComp=BRAND_CFG[currentBrand].url||'aipeekaboo.com';
+  var _brandDomComp=BRAND_CFG[currentBrand].url||'';
   var _brandCompName=BRAND_CFG[currentBrand].name;
   var _brandCompRow='<div class="comp-row" style="background:rgba(79,70,229,.06);border-bottom:1.5px dashed rgba(79,70,229,.25)"><div class="comp-rank" style="color:#4f46e5;font-size:9px;font-weight:800;letter-spacing:.05em;width:20px">YOU</div><img class="comp-fav" src="'+fav(_brandDomComp)+'" onerror="this.style.display=\'none\'"><div class="comp-name" style="color:#4f46e5;font-weight:700">'+esc(_brandCompName)+'</div><div class="comp-bar-wrap"><div class="comp-bar" style="width:'+_brandPctComp+'%;background:rgba(79,70,229,.85)"></div></div><div class="comp-count" style="color:#4f46e5;font-weight:600">'+_brandMentionsComp+' mentions</div><div class="sdot sdot-pos" title="positive"></div></div>';
   document.getElementById('compList').innerHTML=_brandCompRow+comps.slice(0,15).map(function(c,i){
@@ -1424,10 +1567,13 @@ function renderCompetitors(){
     var sdotCls=c.topSentiment==='positive'?'sdot-pos':c.topSentiment==='negative'?'sdot-neg':'sdot-neu';
     return '<div class="comp-row"><div class="comp-rank">'+(i+1)+'</div><img class="comp-fav" src="'+fav(cd)+'" onerror="this.style.display=\'none\'"><div class="comp-name">'+esc(c.name)+'</div><div class="comp-bar-wrap"><div class="comp-bar" style="width:'+pct+'%"></div></div><div class="comp-count">'+dispVal+' mentions</div><div class="sdot '+sdotCls+'" title="'+c.topSentiment+'"></div></div>';
   }).join('')||'<p style="color:var(--ink4);font-size:13px">No competitors for this filter.</p>';
-  document.getElementById('compSub').textContent=comps.length+' competitors detected'+(activeModel!=='all'?' for '+(MODEL_META[activeModel]||{label:activeModel}).label:'');
+  document.getElementById('compSub').textContent=comps.length+' '+(_cs?({tracked:'tracked competitors',other:'other names (not tracked)',all:'names'}[compScope]):'competitors detected')+(activeModel!=='all'?' for '+(MODEL_META[activeModel]||{label:activeModel}).label:'')+' · mentions in the selected range';
   var top3=comps.slice(0,3);
+  /* labs: upstream printed "average score 0" and "neutral" for every competitor (both are never
+     computed); show who leads and where each name is mentioned instead */
   document.getElementById('compInsight').innerHTML=top3.length?
-    '<div style="margin-bottom:14px"><div class="act-sect-label">Dominant competitors</div><p style="font-size:13px;color:var(--ink2);line-height:1.7;margin-top:6px"><b>'+esc(top3[0].name)+'</b> leads with '+_dc(top3[0])+' AI mentions at an average score of '+top3[0].avgScore+'.'+(top3[1]?' '+esc(top3[1].name)+' ('+_dc(top3[1])+' mentions) and '+(top3[2]?esc(top3[2].name)+' ('+_dc(top3[2])+')':'')+'follow.':'')+'</p></div><div><div class="act-sect-label">By sentiment</div><div style="margin-top:8px;display:flex;flex-direction:column;gap:7px">'+comps.slice(0,7).map(function(c){var cd=COMP_DOMAINS[c.name]||(c.name.toLowerCase().replace(/\s/g,'')+'.com');var col=c.topSentiment==='positive'?'#16a34a':c.topSentiment==='negative'?'#dc2626':'#64748b';return '<div style="display:flex;align-items:center;gap:8px;font-size:12px"><img src="'+fav(cd)+'" style="width:14px;height:14px;border-radius:3px;border:1px solid var(--border)" onerror="this.style.display=\'none\'"><span style="flex:1;color:var(--ink)">'+esc(c.name)+'</span><span style="color:'+col+';font-weight:600;font-size:11px">'+c.topSentiment+'</span><span style="color:var(--ink4)">avg '+c.avgScore+'</span></div>';}).join('')+'</div></div>':
+    '<div style="margin-bottom:14px"><div class="act-sect-label">Most mentioned</div><p style="font-size:13px;color:var(--ink2);line-height:1.7;margin-top:6px"><b>'+esc(top3[0].name)+'</b> leads with '+_dc(top3[0])+' mentions'+(top3[1]?', then '+esc(top3[1].name)+' ('+_dc(top3[1])+')'+(top3[2]?' and '+esc(top3[2].name)+' ('+_dc(top3[2])+')':''):'')+'. '+esc(_brandCompName)+': '+_brandMentionsComp+'.</p></div>'+
+    '<div><div class="act-sect-label">Mentions per AI model</div><div style="margin-top:8px;display:flex;flex-direction:column;gap:7px">'+comps.slice(0,7).map(function(c){var models=MODEL_ORDER.filter(function(m){return c.modelMentions&&c.modelMentions[m];}).map(function(m){return '<span class="fav-wrap" data-tip="'+esc(_modelLabel(m))+'" style="display:inline-flex;align-items:center;gap:2px;margin-left:6px"><img src="'+_modelIcon(m)+'" style="width:12px;height:12px;border-radius:2px" onerror="this.style.display=\'none\'"><span style="font-size:11px;color:var(--ink3)">'+c.modelMentions[m]+'</span></span>';}).join('');return '<div style="display:flex;align-items:center;gap:8px;font-size:12px"><img src="'+fav(_compDomain(c.name))+'" style="width:14px;height:14px;border-radius:3px;border:1px solid var(--border)" onerror="this.style.display=\'none\'"><span style="flex:1;color:var(--ink)">'+esc(c.name)+'</span>'+models+'</div>';}).join('')+'</div></div>':
     '<p style="color:var(--ink4);font-size:13px">No data for this filter.</p>';
 }
 /* citations */
@@ -1568,14 +1714,8 @@ function _buildBrandCits(bk){
 function _barRows(items,total){return items.map(function(x){var pct=total>0?(x.count/total*100).toFixed(1):0;var lbl=x.type.replace(/_/g,' ').replace(/\b\w/g,function(c){return c.toUpperCase();});return '<div class="bar-row"><div class="bar-label">'+lbl+'</div><div class="bar-track"><div class="bar-fill" style="width:'+pct+'%"></div></div><div class="bar-val">'+x.count+'</div></div>';}).join('');}
 function renderCitations(){
   var bk=BRAND_CFG[currentBrand].key,c;
-  /* base citation data */
-  if(intentFilter!=='all'||topicFilter!=='all'){
-    c=_buildIntentCitations(bk);
-  } else if(activeModel!=='all'&&D.modelCitations&&D.modelCitations[bk]&&D.modelCitations[bk][activeModel]){
-    c=Object.assign({},D.modelCitations[bk][activeModel]);
-    c.uniqueDomains=c.topDomains?c.topDomains.length:D.citations[bk].uniqueDomains;
-    c.topListicles=D.citations[bk].topListicles;
-  } else c=D.citations[bk];
+  /* base citation data: recounted from the raw answers, same as the Overview */
+  c=_buildIntentCitations(bk);
   /* competitor/brand filter setup */
   var compCits=_getCompCits(currentBrand);
   var _brandCitsArr=_buildBrandCits(currentBrand);
@@ -1584,7 +1724,7 @@ function renderCitations(){
   var chevDdSvg='<svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" style="width:10px;height:10px;flex-shrink:0"><path d="M1 1l4 4 4-4"/></svg>';
   var allComps=_dedupeComps((D.competitors[bk]||[]).filter(function(cp){return!cp.isBrand;})).slice(0,15);
   var _citBrandName=BRAND_CFG[currentBrand].name;
-  var _citBrandDom=BRAND_CFG[currentBrand].url||'aipeekaboo.com';
+  var _citBrandDom=BRAND_CFG[currentBrand].url||'';
   var activeCd=activeCitComp==='all'?null:useBrandFilter?_citBrandDom:((COMP_DOMAINS&&COMP_DOMAINS[activeCitComp])||(activeCitComp.toLowerCase().replace(/\s+/g,'')+'.com'));
   var triggerContent=(activeCd?'<img src="'+fav(activeCd)+'" onerror="this.style.display=\'none\'">':'')+'<span>'+(activeCitComp==='all'?'All Citations':useBrandFilter?'You ('+_citBrandName+')':activeCitComp)+'</span>'+chevDdSvg;
   var ddOpts='<div class="cit-comp-opt'+(activeCitComp==='all'?' active':'')+'" onclick="setCitComp(\'all\',this)">All Citations</div>';
@@ -1668,39 +1808,353 @@ function renderCitations(){
     '</div>'+
     (ltRows?'<div class="cc"><div class="cc-head"><div class="cc-title">Top Listicle Articles</div><div class="cc-sub">highest-priority inclusion targets</div></div><div class="cc-body np"><table class="dom-table"><thead><tr><th>Domain</th><th>Article</th><th style="text-align:right">Cited</th></tr></thead><tbody>'+ltRows+'</tbody></table></div></div>':'');
 }
-/* actions */
-function setActFilter(f,btn){actFilter=f;document.querySelectorAll('.act-fb').forEach(x=>x.classList.remove('active'));btn.classList.add('active');renderActionsGrid();}
-var SN=['sn1','sn2','sn3','sn4','sn0'];
-var chevSVG='<svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l4 4 4-4"/></svg>';
-function renderActionsGrid(){
-  var actions=ACTIONS[currentBrand];
-  var filtered=actFilter==='all'?actions:actFilter==='high'?actions.filter(function(a){return a.priority==='high';}):actFilter==='medium'?actions.filter(function(a){return a.priority==='medium';}):actions.filter(function(a){return a.cat.toLowerCase().indexOf(actFilter.toLowerCase())>-1;});
-  document.getElementById('actGrid').innerHTML=filtered.map(function(a,idx){
-    var favHtml=(a.favDomains||[]).map(function(d){return favImg(d,'act-fav',d);}).join('');
-    var sigText=a.signals.join(' &middot; ');
-    var steps=a.steps.map(function(s,i){return '<li class="act-step"><span class="act-step-num '+SN[i%5]+'">'+(i+1)+'</span><span>'+s+'</span></li>';}).join('');
-    var platFavs=(a.platDomains||[]).map(function(d){return favImg(d,'act-platform-fav',d);}).join('');
-    var iconHtml=ICONS[a.icon]||a.icon;
-    return '<div class="act-card collapsed" id="actc-'+idx+'">'+
-      '<div class="act-card-head" onclick="toggleAct(\'actc-'+idx+'\')">'+
-        '<div class="act-icon">'+iconHtml+'</div>'+
-        '<div class="act-meta">'+
-          '<div class="act-head-row"><span class="act-effort-label">'+a.effort+'</span><span class="act-head-sep">&middot;</span><span class="act-cat-label">'+a.cat.toUpperCase()+'</span><span class="act-pri-dot pri-'+a.priority+'" title="'+a.priority+' priority"></span></div>'+
-          '<div class="act-title">'+a.title+'</div>'+
-          '<div class="act-sig-fav-row"><div class="act-signals">'+sigText+'</div>'+(favHtml?'<div class="act-favs">'+favHtml+'</div>':'')+' </div>'+
-        '</div>'+
-        '<div class="act-head-right"><button class="act-toggle">'+chevSVG+'</button></div>'+
-      '</div>'+
-      '<div class="act-body">'+
-        '<div class="act-sect"><div class="act-sect-label">Why it matters</div><p>'+a.why+'</p></div>'+
-        '<div class="act-sect"><div class="act-sect-label">Steps</div><ul class="act-steps-list">'+steps+'</ul></div>'+
-        '<div class="act-sect"><div class="act-sect-label">Expected outcome</div><div class="act-outcome">'+a.outcome+'</div></div>'+
-        (platFavs?'<div class="act-plat-row"><span class="act-plat-label">Relevant sources</span>'+platFavs+'</div>':'')+
-      '</div>'+
-    '</div>';
-  }).join('');
+/* ══ labs additions ═══════════════════════════════════════════════════════════
+   Everything below reads LABS (built by labs/tools/build_labs.py). Each block
+   degrades to "nothing shown" when its data is missing, never to an error. */
+function _labs(){return LABS[currentBrand]||{};}
+function _official(){return _labs().official||{};}
+/* date-range predicate for 'YYYY-MM-DD' strings, same rules as the rest of the page */
+function _rangeFn(){
+  var rh=RAW_HISTORY[currentBrand];var rd=(rh&&rh.runDates)||[];var maxD=rd.length?rd[rd.length-1]:null;
+  if(currentTimeRange==='last-run')return function(d){return d===maxD;};
+  if(currentTimeRange==='custom'&&customStartDate&&customEndDate)return function(d){return d>=customStartDate&&d<=customEndDate;};
+  var n={'last-7':7,'last-14':14,'last-20':20}[currentTimeRange];
+  if(n&&maxD){var cut=_daysBack(maxD,n);return function(d){return d>=cut;};}
+  return function(){return true;};
 }
-function toggleAct(id){var card=document.getElementById(id);var wasCollapsed=card.classList.contains('collapsed');document.querySelectorAll('.act-card').forEach(function(c){c.classList.add('collapsed');});if(wasCollapsed)card.classList.remove('collapsed');}
+function _fmtDate(d){if(!d)return '';var p=String(d).split('-');var m=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][parseInt(p[1],10)-1];if(p.length<3||!m)return esc(String(d));return parseInt(p[2],10)+' '+m+' '+parseInt(p[0],10);}
+function _fmtShort(d){return _fmtDate(d).replace(/ \d{4}$/,'');}
+function _modelList(keys){return (keys||[]).map(function(k){return esc(_modelLabel(k));}).join(' and ');}
+function _num(n){return (n===null||n===undefined)?'—':Number(n).toLocaleString('en-US');}
+/* same rule as same_name() in build_labs.py: equal once normalized, or equal identifying words
+   ("Cofidis Portugal" = "Cofidis", "Younited" = "Younited Credit"; "Santander" != "Santander Consumer Finance") */
+var NAME_GENERIC={};('portugal pt españa espana spain es online sa group grupo bank banco credit crédito credito finance financeira financial ltd inc plc de da do of the y e').split(' ').forEach(function(w){NAME_GENERIC[w]=1;});
+function _nameCore(n){return _noAccents(n).toLowerCase().split(/[^\p{L}\p{N}_]+/u).filter(function(w){return w&&!NAME_GENERIC[w];}).join(' ');}
+function _sameName(a,b){if(_normComp(a)===_normComp(b))return true;var ca=_nameCore(a);return !!ca&&ca===_nameCore(b);}
+function _trackedNorms(){return (_labs().tracked||[]).slice();}
+function _isTracked(name,tracked){return (tracked||_trackedNorms()).some(function(t){return _sameName(name,t);});}
+/* brand mentions in range, counted per answer like the competitors */
+function _brandHitsInRange(){var rh=RAW_HISTORY[currentBrand],inR=_rangeFn(),n=0;((rh&&rh.prompts)||[]).forEach(function(rp){if(!_passesIntentTopic(rp.intent,rp.topic))return;(rp.entries||[]).forEach(function(e){if(e.hit&&inR(e.date)&&(activeModel==='all'||e.model===activeModel))n++;});});return n;}
+function _hasTracked(){return (_labs().tracked||[]).length>0;}
+function _compDomain(name){return COMP_DOMAINS[name]||(name.toLowerCase().replace(/\s+/g,'')+'.com');}
+function _modelLabel(k){return (MODEL_META[k]||{label:k}).label;}
+function _modelIcon(k){return fav((MODEL_META[k]||{domain:'google.com'}).domain);}
+
+/* ── data notes ─────────────────────────────────────────────────────────── */
+function renderLabsNotes(){
+  var el=document.getElementById('labsNotes');if(!el)return;
+  var L=_labs(),n=L.notes||{},fo=L.fanout||{},items=[];
+  var inactive=n.inactive||n.archived||[];
+  if(inactive.length)items.push((inactive.length===1?'1 prompt that is no longer active is':inactive.length+' prompts that are no longer active are')+' left out of the report’s own numbers (the visibility scores still include '+(inactive.length===1?'it':'them')+'): '+inactive.map(function(a){return '“'+esc(a.text)+'”'+(a.status&&a.status!=='archived'?' ('+esc(a.status)+')':'');}).join(', ')+'.');
+  var byDate={};(n.partialRuns||[]).forEach(function(p){(byDate[p.date]=byDate[p.date]||[]).push(p);});
+  Object.keys(byDate).sort().forEach(function(d){
+    var parts=byDate[d].map(function(p){return p.count===0?'no '+esc(_modelLabel(p.model))+' answers':esc(_modelLabel(p.model))+' answered '+p.count+' prompt'+(p.count===1?'':'s')+' (usually '+p.typical+')';});
+    items.push('Run of '+_fmtDate(d)+': '+parts.join('; ')+'. That run is incomplete, so its counts are low.');
+  });
+  (n.capped||[]).length&&items.push(n.capped.length+' prompt'+(n.capped.length>1?'s have':' has')+' reached the 100-run history limit, so their oldest runs are missing.');
+  (n.failedPrompts||[]).length&&items.push(n.failedPrompts.length+' prompt'+(n.failedPrompts.length>1?'s':'')+' could not be loaded and show no runs.');
+  (n.failedEndpoints||[]).length&&items.push('No data was returned for: '+n.failedEndpoints.map(esc).join(', ')+'. Cards that need that data are hidden; the trend chart falls back to the report’s mention rates.');
+  if((fo.errors||[]).length)items.push('Fan-out searches could not be loaded for '+fo.errors.length+' of '+(fo.prompts||'?')+' prompts, so the Fan-out tab is incomplete.');
+  if((fo.truncated||[]).length)items.push('Fan-out searches were cut short for '+fo.truncated.length+' prompt'+(fo.truncated.length>1?'s':'')+'.');
+  if(fo.firstDate)items.push('Fan-out searches are recorded for '+_modelList(fo.models)+' only. The first were recorded on '+_fmtDate(fo.firstDate)+'; see the Fan-out tab for how complete each run is.');
+  if(!items.length){el.innerHTML='';return;}
+  var wasOpen=el.querySelector('details')&&el.querySelector('details').open;
+  el.innerHTML='<details class="labs-notes"'+(wasOpen?' open':'')+'><summary><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 2.5L1.5 13.5h13L8 2.5z"/><path d="M8 7v3"/><circle cx="8" cy="12" r=".5" fill="currentColor" stroke="none"/></svg>Data notes ('+items.length+')<span style="font-weight:400;color:#92400e">: read these before comparing numbers</span></summary><ul>'+items.map(function(i){return '<li>'+i+'</li>';}).join('')+'</ul></details>';
+}
+
+/* ── visibility scores (fixed 90-day window) ──────────────────────── */
+function _labsCardsHtml(){
+  var off=_official(),v=off.visibility,bm=off.byModel,cp=off.competitors;
+  if(!v&&!bm&&!cp)return '';
+  var info='<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="7" cy="7" r="6"/><path d="M7 6v4" stroke-linecap="round"/><circle cx="7" cy="4.5" r=".5" fill="currentColor" stroke="none"/></svg>';
+  function card(label,tip,val,sub){return '<div class="labs-card"><div class="sc-label"><span class="info-tip" data-tip="'+esc(tip)+'">'+info+'</span>'+label+'</div><div class="sc-val">'+val+'</div><div class="sc-sub">'+sub+'</div></div>';}
+  var cards=[];
+  if(v&&v.visibility)cards.push(card('Visibility score','Visibility score (0–100): each answer scores higher the earlier the brand appears in it, and answers without the brand score 0.',v.visibility.score+'<span style="font-size:14px;color:var(--ink4);font-weight:600">/100</span>','trend '+esc(v.visibility.trend||'n/a')+' · '+_num(v.visibility.runCount)+' answers'));
+  if(v&&v.marketShare)cards.push(card('Share of voice','The brand’s share of all brand mentions (the brand plus every competitor) in the AI answers.',v.marketShare.percentage+'%',_num(v.marketShare.brandMentions)+' of '+_num(v.marketShare.totalMentions)+' brand mentions'));
+  if(cp&&cp.summary&&cp.summary.brandRankAmongCompetitors){
+    /* the API breaks ties in its own order, so a brand that no AI named can come out "#2";
+       the position here is 1 + the competitors with a higher score, and ties are said */
+    var rankTip='Position among the tracked competitors, by visibility score in the latest run.',of=cp.summary.totalCompetitors+1;
+    var bs=cp.brand?cp.brand.score:null,others=(cp.competitors||[]).map(function(c){return c.score;});
+    var known=typeof bs==='number'&&others.length>0&&others.every(function(x){return typeof x==='number';});
+    if(bs===0)cards.push(card('Rank',rankTip,'Not named','no AI named it in the latest run · '+of+' brands tracked'));
+    else{
+      var tied=known?others.filter(function(x){return x===bs;}).length:0;
+      var pos=known?others.filter(function(x){return x>bs;}).length+1:cp.summary.brandRankAmongCompetitors;
+      cards.push(card('Rank',rankTip,'#'+pos+'<span style="font-size:14px;color:var(--ink4);font-weight:600"> of '+of+'</span>',(tied?'tied with '+tied+' · ':'')+'vs tracked competitors · latest run'));
+    }
+  }
+  if(bm&&bm.models&&bm.models.length){
+    var mx=Math.max.apply(null,bm.models.map(function(m){return m.visibilityScore||0;}).concat([1]));
+    var rows=bm.models.slice().sort(function(a,b){return (b.visibilityScore||0)-(a.visibilityScore||0);}).map(function(m){
+      var mm=MODEL_META[m.model]||{domain:'google.com'};
+      return '<div class="lm-row"><img src="'+fav(mm.domain)+'" onerror="this.style.visibility=\'hidden\'"><span class="lm-lbl">'+esc(m.label||_modelLabel(m.model))+'</span><div class="lm-track"><div class="lm-fill" style="width:'+Math.round((m.visibilityScore||0)/mx*100)+'%"></div></div><span class="lm-val">'+(m.visibilityScore===null?'—':m.visibilityScore)+'</span><span class="lm-meta">'+_num(m.runCount)+' runs'+(m.averagePosition?' · pos '+m.averagePosition:'')+'</span></div>';
+    }).join('');
+    cards.push('<div class="labs-card"><div class="sc-label"><span class="info-tip" data-tip="Visibility score per AI model, with the number of answers and the brand’s average position when it is mentioned.">'+info+'</span>Score per AI</div>'+rows+'</div>');
+  }
+  var w=(bm&&bm.range)||(cp&&cp.metricsWindow)||null;
+  var when=w?_fmtShort(w.from)+' to '+_fmtDate(w.to):'last 90 days';
+  var built=_labs().generatedAt?' · built '+_fmtDate(String(_labs().generatedAt).slice(0,10))+', '+esc(String(_labs().generatedAt).slice(11,16))+' UTC':'';
+  return '<div class="labs-sec-head"><span class="labs-sec-title">Visibility scores</span><span class="labs-sec-sub">'+when+' · all prompts and models · the filters above don’t change these'+built+'</span></div><div class="labs-row">'+cards.join('')+'</div>';
+}
+
+/* ── tracked competitor scoreboard (Competitors tab) ───────────────────── */
+function _scoreboardHtml(){
+  var off=_official(),cp=off.competitors;if(!cp||!cp.competitors||!cp.competitors.length)return '';
+  var brandName=BRAND_CFG[currentBrand].name,brandDom=BRAND_CFG[currentBrand].url;
+  var items=cp.competitors.map(function(c){var d=_extractDomainJS(c.url||'')||_compDomain(c.name);return {name:c.name,domain:d,vis:c.visibility,score:c.score,change:c.change,sent:c.sentimentPositive,pos:c.avgPosition,visits:c.monthlyVisits,you:false};});
+  items.push({name:brandName,domain:brandDom,vis:cp.brand?cp.brand.visibility:null,score:cp.brand?cp.brand.score:null,change:null,sent:null,pos:null,visits:off.traffic?off.traffic.monthlyVisits:null,you:true});
+  items.sort(function(a,b){return ((b.vis===null?-1:b.vis)-(a.vis===null?-1:a.vis))||((b.score||0)-(a.score||0));});
+  var rows=items.map(function(it,i){
+    var chg=it.change?'<span class="'+(/^-/.test(it.change)?'chg-down':/^\+/.test(it.change)&&it.change!=='+0%'?'chg-up':'')+'">'+esc(it.change)+'</span>':'—';
+    return '<tr'+(it.you?' class="sb-you"':'')+'><td style="color:var(--ink4);width:24px">'+(i+1)+'</td><td><span class="sb-name"><img src="'+fav(it.domain)+'" onerror="this.style.visibility=\'hidden\'">'+esc(it.name)+(it.you?'<span class="tag tag-you">You</span>':'')+'</span></td>'+
+      '<td>'+(it.vis===null||it.vis===undefined?'—':it.vis)+'</td><td>'+(it.score===null||it.score===undefined?'—':it.score)+'</td><td>'+chg+'</td><td>'+(it.sent===null||it.sent===undefined?'—':it.sent+'%')+'</td><td>'+(it.pos?'#'+it.pos:'—')+'</td><td>'+(it.visits?_num(it.visits):'—')+'</td></tr>';
+  }).join('');
+  var w=cp.metricsWindow?_fmtShort(cp.metricsWindow.from)+' to '+_fmtDate(cp.metricsWindow.to):'last 90 days';
+  return '<div class="cc"><div class="cc-head"><div><div class="cc-title">Tracked competitors</div><div class="cc-sub">Visibility, sentiment and position: '+w+' · score and change: latest run · the filters above don’t change this table</div></div></div>'+
+    '<div class="cc-body np sb-wrap"><table class="sb-table"><thead><tr><th>#</th><th>Brand</th><th>Visibility</th><th>Score</th><th>Change</th><th>Positive sentiment</th><th>Avg position</th><th>Monthly visits</th></tr></thead><tbody>'+rows+'</tbody></table></div></div>';
+}
+
+/* ── fan-out searches ───────────────────────────────────────────────────── */
+var FO_TYPES={site:'Site search',local:'Local',discovery:'Discovery',comparison:'Comparison',brand:'Brand lookup',pricing:'Pricing',reviews:'Reviews',careers:'Careers',howto:'How-to',research:'Research',regulation:'Regulation',news:'News',other:'Other'};
+var FO_STOP={};('de da do das dos em no na nos nas o a os as e ou para por com sem um uma que qual quais como aos ao à às pelo pela pelos pelas num numa sobre entre the of in for and or to on with vs y el la los las en del con al un una les des du et pour sur avec le').split(' ').forEach(function(w){FO_STOP[w]=1;});
+var foType='all',foText='',foShowAll=false,foPick='',_foSets={};
+function _foTypeLabel(t){return t?(FO_TYPES[t]||t):'Not yet categorised';}
+function _foModels(){return (_labs().fanout||{}).models||[];}
+function _foPromptMap(){var m={};((RAW_HISTORY[currentBrand]||{}).prompts||[]).forEach(function(rp){m[rp.id]=rp;});return m;}
+/* searches passing the date, model, intent and topic filters */
+function _foRows(){
+  var fo=_labs().fanout||{},pm=_foPromptMap(),inR=_rangeFn();
+  return (fo.queries||[]).filter(function(q){
+    var rp=pm[q.p];if(!rp||!_passesIntentTopic(rp.intent,rp.topic))return false;
+    if(activeModel!=='all'&&q.m!==activeModel)return false;
+    return inR(q.d);
+  });
+}
+function _foSiteDomains(q){var out=[],re=/site:([^\s"'()]+)/gi,x;while((x=re.exec(q))){out.push(x[1].toLowerCase().replace(/^https?:\/\//,'').replace(/^www\./,'').replace(/\/.*$/,''));}return out;}
+function _foQueryHtml(q){return esc(q).replace(/site:([^\s"'()&]+)/gi,'<span class="fo-site">site:$1</span>');}
+function _nameRe(names){
+  var parts=(Array.isArray(names)?names:[names]).map(function(n){return String(n||'').trim();}).filter(function(s){return s.length>=3;})
+    .sort(function(a,b){return b.length-a.length;}).map(function(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&').replace(/\s+/g,'\\s+');});
+  if(!parts.length)return null;
+  try{return new RegExp('(^|[^\\p{L}\\p{N}])(?:'+parts.join('|')+')(?=$|[^\\p{L}\\p{N}])','giu');}catch(err){return new RegExp('(^|\\W)(?:'+parts.join('|')+')(?=$|\\W)','gi');}
+}
+/* brand groups found in searches: the brand (its own names come from the builder, see
+   brand_self_names), each tracked competitor (all its spellings), other names */
+function _foBrandGroups(){
+  var bk=BRAND_CFG[currentBrand].key,brandName=BRAND_CFG[currentBrand].name,norms=_trackedNorms(),al=_labs().aliases||{};
+  var own=[brandName,brandName.replace(/\s*\([^)]*\)\s*$/,'')].concat(al[brandName]||[]).filter(function(n,i,a){return n&&a.indexOf(n)===i;});
+  var groups=[{name:brandName,kind:'you',spellings:own}],byNorm={};
+  own.forEach(function(n){byNorm[_normComp(n)]=groups[0];});
+  (_labs().tracked||[]).forEach(function(n){var k=_normComp(n);if(byNorm[k])return;var g={name:n,kind:'tracked',spellings:[n].concat(al[n]||[])};groups.push(g);byNorm[k]=g;(al[n]||[]).forEach(function(a){byNorm[_normComp(a)]=g;});});
+  _dedupeComps(D_ORIG.competitors[bk]||[]).slice(0,80).forEach(function(c){
+    /* another spelling of a name already listed ("hôma" for "Homa"): searches may use it too */
+    var k=_normComp(c.name);if(byNorm[k]){if(byNorm[k].spellings.indexOf(c.name)===-1)byNorm[k].spellings.push(c.name);return;}
+    if(_isTracked(c.name,norms)){var tg=groups.find(function(g){return g.kind==='tracked'&&_sameName(c.name,g.name);});if(tg){tg.spellings.push(c.name);byNorm[k]=tg;return;}}
+    var g={name:c.name,kind:'other',spellings:[c.name]};groups.push(g);byNorm[k]=g;
+  });
+  return groups;
+}
+/* one pattern per spelling: the brand's and the tracked competitors' first, then the other
+   names, longest first within each. The AIs write brands with a capital ("Hoka", "ANOgov",
+   "DEGIRO") and words in lowercase, so other brands' names, and short names like "ERA", count
+   only when written with a capital or exactly as the brand writes them: "Casa" the store,
+   not the word "casa"; "Licitaciones" the company, not "licitaciones" */
+function _foMatcher(groups){
+  var items=[];
+  groups.forEach(function(g,gi){(g.spellings||[]).forEach(function(s){
+    s=String(s||'').trim();var re=_nameRe([s]);if(re)items.push({gi:gi,s:s,len:s.length,other:g.kind==='other'?1:0,strict:g.kind!=='you'||s.length<=4,re:re});
+  });});
+  return items.sort(function(a,b){return (a.other-b.other)||(b.len-a.len);});
+}
+/* brand names in one search: each stretch of text goes to the first name in that order that
+   covers it, so "Zara Home" is not also "Zara", and an untracked "WiZink Extra" or "Santander
+   Totta" doesn't take searches from the brand or from tracked Santander. Returns the groups
+   found and the text without them. */
+function _foMatch(q,items){
+  var taken=[],hits={};
+  items.forEach(function(it){
+    it.re.lastIndex=0;var m;
+    while((m=it.re.exec(q))){
+      var st=m.index+m[1].length,en=m.index+m[0].length,t=q.slice(st,en);
+      if(it.strict&&t!==it.s&&t===t.toLowerCase())continue;
+      if(!taken.some(function(x){return st<x[1]&&en>x[0];})){taken.push([st,en]);hits[it.gi]=1;}
+    }
+  });
+  var rest=q;taken.sort(function(a,b){return b[0]-a[0];}).forEach(function(t){rest=rest.slice(0,t[0])+' '+rest.slice(t[1]);});
+  return {hits:hits,rest:rest};
+}
+function _foNoSite(q){return String(q||'').replace(/site:\S+/gi,' ');}
+function _foBrands(rows){
+  var groups=_foBrandGroups(),items=_foMatcher(groups),found=groups.map(function(){return [];});
+  rows.forEach(function(r){var h=_foMatch(_foNoSite(r.q),items).hits;Object.keys(h).forEach(function(gi){found[gi].push(r);});});
+  var all=groups.map(function(g,gi){return {name:g.name,kind:g.kind,rows:found[gi],count:found[gi].length};})
+    .filter(function(c){return c.count>0;}).sort(function(a,b){return b.count-a.count;});
+  /* an untracked name in more than 30% of the searches ("SEO" for an SEO agency) is the
+     category, not a brand: listed apart, like the context words of the themes */
+  var common=rows.length>=20?all.filter(function(c){return c.kind==='other'&&c.count/rows.length>0.3;}):[];
+  var out=all.filter(function(c){return common.indexOf(c)===-1;});
+  out.common=common;
+  return out;
+}
+/* words of a search, without site: operators, brand names, stop words or years */
+function _foTokens(q,items){
+  var t=_foMatch(_foNoSite(q),items||[]).rest.toLowerCase();
+  return t.replace(/["“”'’()\[\],.;:!?|/]/g,' ').split(/\s+/).filter(function(w){return w&&w.length>2&&!FO_STOP[w]&&!/^(19|20)\d\d$/.test(w)&&!/^\d+$/.test(w);});
+}
+/* recurring themes = keywords found in 3+ searches. Words present in more than 30% of the
+   searches (the category and the market, e.g. "crédito", "portugal") are context, not themes.
+   Plurals fold into the singular; each theme shows the phrase it most often appears in. */
+function _foThemes(rows){
+  var items=_foMatcher(_foBrandGroups()),toks=rows.map(function(r){return _foTokens(r.q,items);}),n=rows.length,wdf={};
+  toks.forEach(function(ts){var seen={};ts.forEach(function(w){if(!seen[w]){seen[w]=1;wdf[w]=(wdf[w]||0)+1;}});});
+  var root=function(w){if(/es$/.test(w)&&wdf[w.slice(0,-2)])return w.slice(0,-2);if(/s$/.test(w)&&wdf[w.slice(0,-1)])return w.slice(0,-1);return w;};
+  var th={};
+  toks.forEach(function(ts,i){var seen={};ts.forEach(function(w){
+    var k=root(w),t=th[k]||(th[k]={key:k,rows:[],forms:{}});
+    t.forms[w]=(t.forms[w]||0)+1;
+    if(!seen[k]){seen[k]=1;t.rows.push(rows[i]);}
+  });});
+  var all=Object.keys(th).map(function(k){var t=th[k];t.label=Object.keys(t.forms).sort(function(a,b){return t.forms[b]-t.forms[a];})[0];return t;});
+  /* a word (with its plurals) in more than 30% of the searches is context, not a theme */
+  var common=n>=20?all.filter(function(t){return t.rows.length/n>0.3;}).sort(function(a,b){return b.rows.length-a.rows.length;}):[];
+  var themes=all.filter(function(t){return common.indexOf(t)===-1&&t.rows.length>=3;}).map(function(t){
+    /* example = the search written most often among this theme's searches, as written */
+    var freq={},orig={};t.rows.forEach(function(r){var k=r.q.toLowerCase();freq[k]=(freq[k]||0)+1;if(!orig[k])orig[k]=r.q;});
+    var best=Object.keys(freq).sort(function(a,b){return (freq[b]-freq[a])||(a.length-b.length);})[0];
+    t.example=orig[best]||'';t.exampleCount=freq[best]||0;return t;
+  });
+  themes.sort(function(a,b){return b.rows.length-a.rows.length;});
+  return {themes:themes,common:common.map(function(t){return {word:t.label,count:t.rows.length};})};
+}
+function _foKindTag(kind){return kind==='you'?'<span class="tag tag-you">You</span>':kind==='tracked'?'<span class="tag tag-tracked">Tracked</span>':kind==='competitor'?'<span class="tag tag-tracked">Competitor</span>':kind==='third'?'<span class="tag tag-other">Third party</span>':'<span class="tag tag-other">Not tracked</span>';}
+/* the name part of a domain, like domain_stem() in build_labs.py: "www.elcorteingles.pt" -> "elcorteingles",
+   "foo.com.pt" -> "foo", "app.n26.com" -> "n26" */
+var SECOND_LEVEL={com:1,co:1,org:1,net:1,gov:1,edu:1,ac:1,nom:1,gob:1,mil:1};
+function _domainStem(d){var l=String(d||'').toLowerCase().replace(/^https?:\/\//,'').split('/')[0].split('.').filter(function(x){return x&&x!=='www';});var s=l.length<2?(l[0]||''):(l.length>=3&&SECOND_LEVEL[l[l.length-2]]?l[l.length-3]:l[l.length-2]);return _plainName(s);}
+function _foDomainKind(d){
+  var own=(BRAND_CFG[currentBrand].url||'').toLowerCase();
+  /* the brand's own site, in any country (elcorteingles.es for elcorteingles.pt) */
+  if(own&&(d===own||d.slice(-own.length-1)==='.'+own||_domainStem(d)===_domainStem(own)))return 'you';
+  var cp=(_official().competitors||{}).competitors||[];
+  for(var i=0;i<cp.length;i++){var cd=_extractDomainJS(cp[i].url||'');if(cd&&(d===cd||d.slice(-cd.length-1)==='.'+cd))return 'competitor';}
+  return 'other';
+}
+function setFoType(t){foType=(foType===t?'all':t);foShowAll=false;renderFanout();}
+/* a pick is one theme, site or brand from the cards: the list then shows exactly the searches it counted */
+function setFoPick(key){foPick=(foPick===key?'':key);foType='all';foText='';foShowAll=false;renderFanout();if(foPick){var a=document.getElementById('foAll');if(a)a.scrollIntoView({behavior:'smooth',block:'start'});}}
+function onFoSearch(v){foText=v;foShowAll=false;_renderFoTable();}
+function foMore(){foShowAll=true;_renderFoTable();}
+function _foPickLabel(key){var i=key.indexOf(':'),kind=key.slice(0,i),v=key.slice(i+1);return (kind==='theme'?'theme':kind==='site'?'site':'brand')+' “'+v+'”';}
+function _foFiltered(){
+  var rows=_foRows();
+  if(foPick){var set=_foSets[foPick];rows=set?rows.filter(function(r){return set.has(r);}):[];}
+  if(foType!=='all')rows=rows.filter(function(r){return (r.t||'')===(foType==='__none__'?'':foType);});
+  if(foText){var t=foText.toLowerCase();rows=rows.filter(function(r){return r.q.toLowerCase().indexOf(t)>-1;});}
+  return rows;
+}
+function _renderFoTable(){
+  var box=document.getElementById('foTableBox');if(!box)return;
+  var rows=_foFiltered(),pm=_foPromptMap();
+  rows=rows.slice().sort(function(a,b){return (b.d||'').localeCompare(a.d||'')||((pm[a.p]||{}).text||'').localeCompare((pm[b.p]||{}).text||'')||(a.r||'').localeCompare(b.r||'')||a.s-b.s;});
+  var shown=foShowAll?rows:rows.slice(0,100);
+  var brandName=BRAND_CFG[currentBrand].name;
+  var body=shown.map(function(r){
+    var rp=pm[r.p]||{text:''};
+    var hit=r.h===true?'<span class="fo-hit" title="'+esc(brandName)+' is in this answer">✓</span>':r.h===false?'<span class="fo-miss" title="'+esc(brandName)+' is not in this answer">✗</span>':'<span class="fo-miss">—</span>';
+    return '<tr><td class="fo-q">'+_foQueryHtml(r.q)+'</td><td><span class="fo-cat">'+esc(_foTypeLabel(r.t))+'</span></td><td style="white-space:nowrap"><img src="'+_modelIcon(r.m)+'" style="width:13px;height:13px;border-radius:2px;vertical-align:-2px;margin-right:4px" onerror="this.style.display=\'none\'">'+esc(_modelLabel(r.m))+'</td><td style="color:var(--ink3);max-width:300px" title="'+esc(rp.text)+'">'+esc(rp.text.length>70?rp.text.slice(0,70)+'…':rp.text)+'</td><td style="white-space:nowrap;color:var(--ink3)">'+_fmtShort(r.d)+'</td><td style="text-align:center">'+hit+'</td></tr>';
+  }).join('');
+  var sub=document.getElementById('foTableSub');
+  if(sub)sub.innerHTML=rows.length+' search'+(rows.length!==1?'es':'')+(foPick?' · '+esc(_foPickLabel(foPick))+' <button class="fb-btn" style="padding:0 8px;margin-left:4px" onclick="setFoPick(\'\')">clear ✕</button>':'')+(foType!=='all'?' · '+esc(_foTypeLabel(foType==='__none__'?null:foType)):'')+(foText?' · containing “'+esc(foText)+'”':'');
+  box.innerHTML=rows.length?'<table class="fo-tbl"><thead><tr><th>Search</th><th>Category</th><th>Model</th><th>Prompt</th><th>Run</th><th title="Is '+esc(brandName)+' in the answer that ran this search?">'+esc(brandName)+' in answer</th></tr></thead><tbody>'+body+'</tbody></table>'+(rows.length>shown.length?'<div class="fo-more"><button onclick="foMore()">Show all '+rows.length+'</button></div>':''):'<div class="fo-empty" style="padding:18px">No searches match these filters.</div>';
+}
+/* answers behind a set of searches: how many mention the brand (each answer counted once) */
+function _foHits(rows){var runs={},hits=0,known=0;rows.forEach(function(r){if(runs[r.r])return;runs[r.r]=1;if(r.h===true||r.h===false){known++;if(r.h)hits++;}});return known?hits+' of '+known:'—';}
+function _foModelIcons(rows){var m={};rows.forEach(function(r){m[r.m]=1;});return Object.keys(m).map(function(k){return '<img src="'+_modelIcon(k)+'" title="'+esc(_modelLabel(k))+'" style="width:13px;height:13px;border-radius:2px;margin-right:3px" onerror="this.style.display=\'none\'">';}).join('');}
+function _foPickAttrs(key){var on=foPick===key;return ' class="fo-clickable'+(on?' fo-active':'')+'" data-k="'+esc(key)+'" onclick="setFoPick(this.dataset.k)" title="'+(on?'Click to clear':'Click to list these searches')+'"';}
+function renderFanout(){
+  var el=document.getElementById('fanoutContent');if(!el)return;
+  var L=_labs(),fo=L.fanout||{},fm=_foModels(),brandName=BRAND_CFG[currentBrand].name;
+  var all=fo.queries||[],fmList=_modelList(fm);
+  if(!all.length){el.innerHTML='<div class="cc"><div class="cc-body"><div class="no-data"><div class="no-data-icon">&#128269;</div><h3>No fan-out searches to show</h3><p>'+((fo.errors||[]).length?'The searches could not be loaded for '+fo.errors.length+' of '+(fo.prompts||'?')+' prompts during this build, so there may be some.':'The web searches '+(fmList||'ChatGPT and Gemini')+' run while answering are recorded. None were recorded for this brand in the last 90 days.')+'</p></div></div></div>';return;}
+  if(activeModel!=='all'&&fm.indexOf(activeModel)===-1){el.innerHTML='<div class="cc"><div class="cc-body"><div class="no-data"><div class="no-data-icon">&#128269;</div><h3>Not recorded for '+esc(_modelLabel(activeModel))+'</h3><p>Fan-out searches are recorded for '+fmList+' only. Pick one of them, or All models, in the model filter.</p></div></div></div>';return;}
+  var rows=_foRows(),inR=_rangeFn(),filtersOn=currentTimeRange!=='all'||activeModel!=='all'||intentFilter!=='all'||topicFilter!=='all';
+  /* per run, under the same filters as the rest of the tab: answers with recorded searches vs
+     all answers from the fan-out models */
+  var den={},runsWith={};
+  ((RAW_HISTORY[currentBrand]||{}).prompts||[]).forEach(function(rp){
+    if(!_passesIntentTopic(rp.intent,rp.topic))return;
+    (rp.entries||[]).forEach(function(e){if(fm.indexOf(e.model)>-1&&(activeModel==='all'||e.model===activeModel)&&inR(e.date))den[e.date]=(den[e.date]||0)+1;});
+  });
+  rows.forEach(function(q){if(q.r)runsWith[q.r]=q.d;});
+  var num={};Object.keys(runsWith).forEach(function(r){var d=runsWith[r];num[d]=(num[d]||0)+1;});
+  var runRows=Object.keys(num).sort().reverse().map(function(d){var a=num[d],b=den[d]||0;return '<tr><td>'+_fmtDate(d)+'</td><td class="n">'+a+'</td><td class="n">'+b+'</td><td class="n">'+(b?Math.round(a/b*100)+'%':'—')+'</td></tr>';}).join('');
+  /* first run from which every run has most answers recorded (whole history, no filters) */
+  var gNum={},gDen={},gRuns={};
+  all.forEach(function(q){if(q.r)gRuns[q.r]=q.d;});Object.keys(gRuns).forEach(function(r){gNum[gRuns[r]]=(gNum[gRuns[r]]||0)+1;});
+  ((RAW_HISTORY[currentBrand]||{}).prompts||[]).forEach(function(rp){(rp.entries||[]).forEach(function(e){if(fm.indexOf(e.model)>-1)gDen[e.date]=(gDen[e.date]||0)+1;});});
+  var fullFrom=null;Object.keys(gDen).sort().reverse().some(function(d){if(gDen[d]&&(gNum[d]||0)/gDen[d]>=0.5){fullFrom=d;return false;}return true;});
+  var cov=fo.coverage||{},answers=Object.keys(runsWith).length;
+  var byModel={};rows.forEach(function(q){byModel[q.m]=(byModel[q.m]||0)+1;});
+  var modelLine=fm.filter(function(m){return activeModel==='all'||m===activeModel;}).map(function(m){return esc(_modelLabel(m))+' '+(byModel[m]||0);}).join(' · ');
+  var win=fo.window&&fo.window.from?_fmtDate(String(fo.window.from).slice(0,10))+' to '+_fmtDate(String(fo.window.to).slice(0,10)):'the last 90 days';
+  var covHtml='<div class="cc"><div class="cc-head"><div><div class="cc-title">What the AIs searched for</div><div class="cc-sub">Before answering, '+fmList+' search the web. Those searches are recorded for every tracked prompt.</div></div></div><div class="cc-body"><div class="fo-cov">'+
+    '<div><div class="fo-num">'+_num(rows.length)+'</div><div class="sc-sub" style="margin-top:6px">searches from '+_num(answers)+' answers'+(filtersOn?' in the selected filters':'')+' · '+modelLine+'</div>'+
+    '<div class="sc-sub" style="margin-top:10px;line-height:1.6">Recording, '+win+', all prompts: of the '+_num(cov.total)+' '+fmList+' answers, '+_num(cov.captured)+' have their searches on record, '+_num(cov.not_reported)+' didn’t report their searches'+(cov.none?', '+_num(cov.none)+' answered without searching':'')+' and '+_num(cov.not_recorded)+' have none on record. Recording started on '+_fmtDate(fo.firstDate)+(fullFrom?' and covers most answers from the '+_fmtDate(fullFrom)+' run':'')+'.'+(fo.typesPending?' '+fo.typesPending+' searches are not categorised yet.':'')+'</div></div>'+
+    '<div><table class="fo-runs"><thead><tr><th>Run</th><th style="text-align:right">Answers with searches</th><th style="text-align:right">'+fm.filter(function(m){return activeModel==='all'||m===activeModel;}).map(function(m){return esc(_modelLabel(m));}).join(' + ')+' answers</th><th style="text-align:right">Share</th></tr></thead><tbody>'+(runRows||'<tr><td colspan="4" style="color:var(--ink4)">No recorded searches in the selected filters.</td></tr>')+'</tbody></table></div>'+
+    '</div></div></div>';
+  _foSets={};
+  if(!rows.length){foPick='';el.innerHTML=covHtml+'<div class="cc"><div class="cc-body"><div class="no-data"><h3>No searches in this range</h3><p>Recording started on '+_fmtDate(fo.firstDate)+'. Widen the date range or clear the intent and topic filters.</p></div></div></div>';return;}
+  /* themes */
+  var th=_foThemes(rows),themes=th.themes.slice(0,15);
+  th.themes.forEach(function(t){_foSets['theme:'+t.label]=new Set(t.rows);});
+  var themeRows=themes.map(function(t){
+    var prompts={};t.rows.forEach(function(r){prompts[r.p]=1;});
+    return '<tr'+_foPickAttrs('theme:'+t.label)+'><td class="fo-q"><b>'+esc(t.label)+'</b>'+(t.example&&t.example.toLowerCase()!==t.label?'<div style="font-size:11.5px;color:var(--ink4)">e.g. “'+esc(t.example)+'”'+(t.exampleCount>1?' ×'+t.exampleCount:'')+'</div>':'')+'</td><td style="text-align:right">'+t.rows.length+'</td><td style="text-align:right">'+Object.keys(prompts).length+'</td><td style="white-space:nowrap">'+_foModelIcons(t.rows)+'</td><td style="text-align:right;white-space:nowrap">'+_foHits(t.rows)+'</td></tr>';
+  }).join('');
+  var themeHtml='<div class="cc"><div class="cc-head"><div><div class="cc-title">Recurring themes</div><div class="cc-sub">words in 3 or more searches, brand names left out · click one to list its searches</div></div></div>'+
+    (th.common.length?'<div style="padding:8px 18px;border-bottom:1px solid var(--border);font-size:12px;color:var(--ink3)">In most searches, so not listed: '+th.common.map(function(c){return '<b>'+esc(c.word)+'</b> ('+c.count+')';}).join(', ')+'</div>':'')+
+    '<div class="cc-body np">'+(themeRows?'<table class="fo-tbl"><thead><tr><th>Theme</th><th style="text-align:right">Searches</th><th style="text-align:right">Prompts</th><th>Models</th><th style="text-align:right" title="Answers that ran these searches, and how many of them mention '+esc(brandName)+'">'+esc(brandName)+' in answer</th></tr></thead><tbody>'+themeRows+'</tbody></table>':'<div class="fo-empty" style="padding:14px 18px">No word repeats in 3 searches yet. This fills in as more runs are recorded.</div>')+'</div></div>';
+  /* sites searched directly */
+  var siteMap={};rows.forEach(function(r){_foSiteDomains(r.q).filter(function(d,i,a){return a.indexOf(d)===i;}).forEach(function(d){(siteMap[d]=siteMap[d]||[]).push(r);});});
+  var sites=Object.keys(siteMap).map(function(d){_foSets['site:'+d]=new Set(siteMap[d]);return {d:d,rows:siteMap[d]};}).sort(function(a,b){return b.rows.length-a.rows.length;});
+  var siteHtml='<div class="cc"><div class="cc-head"><div><div class="cc-title">Sites searched directly</div><div class="cc-sub">“site:” searches: the AI looked inside one website · click one to list its searches</div></div></div><div class="cc-body">'+
+    (sites.length?sites.slice(0,12).map(function(s){var kind=_foDomainKind(s.d);return '<div'+_foPickAttrs('site:'+s.d).replace('class="','class="comp-row ')+' style="padding-left:4px"><img class="comp-fav" src="'+fav(s.d)+'" onerror="this.style.visibility=\'hidden\'"><div class="comp-name">'+esc(s.d)+_foKindTag(kind==='other'?'third':kind)+'</div><div class="comp-count">'+s.rows.length+' search'+(s.rows.length!==1?'es':'')+'</div></div>';}).join(''):'<div class="fo-empty">No site: searches in this range.</div>')+'</div></div>';
+  /* brands named in searches */
+  var brands=_foBrands(rows),bMax=brands.length?brands[0].count:1;
+  brands.forEach(function(b){_foSets['brand:'+b.name]=new Set(b.rows);});
+  var brandHtml='<div class="cc"><div class="cc-head"><div><div class="cc-title">Brands named in searches</div><div class="cc-sub">searches that contain a brand’s name · click one to list them</div></div></div>'+
+    (brands.common.length?'<div style="padding:8px 18px;border-bottom:1px solid var(--border);font-size:12px;color:var(--ink3)">In most searches, so not listed: '+brands.common.map(function(c){return '<b>'+esc(c.name)+'</b> ('+c.count+')';}).join(', ')+'</div>':'')+
+    '<div class="cc-body">'+
+    (brands.length?brands.slice(0,12).map(function(b){var dom=b.kind==='you'?(BRAND_CFG[currentBrand].url||''):_compDomain(b.name);return '<div'+_foPickAttrs('brand:'+b.name).replace('class="','class="comp-row ')+' style="padding-left:4px"><img class="comp-fav" src="'+fav(dom)+'" onerror="this.style.visibility=\'hidden\'"><div class="comp-name">'+esc(b.name)+_foKindTag(b.kind)+'</div><div class="comp-bar-wrap"><div class="comp-bar" style="width:'+Math.round(b.count/bMax*100)+'%;'+(b.kind==='you'?'background:rgba(79,70,229,.85)':'')+'"></div></div><div class="comp-count">'+b.count+' search'+(b.count!==1?'es':'')+'</div></div>';}).join(''):'<div class="fo-empty">No brand names in these searches.</div>')+'</div></div>';
+  if(foPick&&!_foSets[foPick])foPick='';
+  /* categories */
+  var cats={};rows.forEach(function(r){var k=r.t||'__none__';cats[k]=(cats[k]||0)+1;});
+  var catList=Object.keys(cats).map(function(k){return {k:k,n:cats[k]};}).sort(function(a,b){return (a.k==='__none__')-(b.k==='__none__')||b.n-a.n;});
+  var catMax=Math.max.apply(null,catList.map(function(c){return c.n;}));
+  var catHtml=catList.map(function(c){var on=foType===c.k;return '<div class="bar-row fo-clickable'+(on?' fo-active':'')+'" data-k="'+esc(c.k)+'" onclick="setFoType(this.dataset.k)" style="'+(on?'background:var(--v-bg);':'')+'border-radius:6px;padding:4px 6px"><div class="bar-label">'+esc(_foTypeLabel(c.k==='__none__'?null:c.k))+'</div><div class="bar-track"><div class="bar-fill" style="width:'+Math.round(c.n/catMax*100)+'%"></div></div><div class="bar-cnt">'+c.n+'</div></div>';}).join('');
+  var catChips='<button class="fb-btn'+(foType==='all'?' active':'')+'" onclick="setFoType(\'all\')">All categories</button>'+catList.map(function(c){return '<button class="fb-btn'+(foType===c.k?' active':'')+'" data-k="'+esc(c.k)+'" onclick="setFoType(this.dataset.k)">'+esc(_foTypeLabel(c.k==='__none__'?null:c.k))+' '+c.n+'</button>';}).join('');
+  var tableHtml='<div class="cc" id="foAll"><div class="cc-head"><div><div class="cc-title">All searches</div><div class="cc-sub" id="foTableSub"></div></div><input class="search-inp" id="foSearch" placeholder="Search the searches..." value="'+esc(foText)+'" oninput="onFoSearch(this.value)"></div><div class="filter-bar">'+catChips+'</div><div class="cc-body np" id="foTableBox"></div></div>';
+  el.innerHTML=covHtml+'<div class="two-col" style="margin-bottom:0;align-items:start"><div>'+themeHtml+'</div><div>'+brandHtml+siteHtml+'</div></div>'+
+    '<div class="cc"><div class="cc-head"><div><div class="cc-title">Searches by category</div><div class="cc-sub">categories assigned automatically · click one to filter the list below</div></div></div><div class="cc-body">'+catHtml+'</div></div>'+tableHtml;
+  _renderFoTable();
+}
+/* searches behind one prompt, grouped by answer (Prompts tab, expanded row) */
+function _foPromptBlock(pid){
+  var fm=_foModels();if(!fm.length)return '';
+  var rows=_foRows().filter(function(r){return r.p===pid;});
+  var brandName=BRAND_CFG[currentBrand].name,fo=_labs().fanout||{};
+  if(!rows.length)return '<div class="fo-block"><div class="fo-block-title">Searches the AIs ran</div><div class="fo-empty">None recorded for this prompt in this range'+(fo.firstDate?' (recording started '+_fmtDate(fo.firstDate)+', '+_modelList(fm)+' only)':'')+'.</div></div>';
+  var runs={},order=[];
+  rows.forEach(function(r){if(!runs[r.r]){runs[r.r]={d:r.d,m:r.m,h:r.h,rows:[]};order.push(r.r);}runs[r.r].rows.push(r);});
+  order.sort(function(a,b){return (runs[b].d||'').localeCompare(runs[a].d||'')||(runs[a].m||'').localeCompare(runs[b].m||'');});
+  return '<div class="fo-block"><div class="fo-block-title">Searches the AIs ran ('+rows.length+')</div>'+order.map(function(id){
+    var run=runs[id];run.rows.sort(function(a,b){return a.s-b.s;});
+    var hit=run.h===true?'<span class="fo-hit">'+esc(brandName)+' in answer</span>':run.h===false?'<span class="fo-miss">'+esc(brandName)+' not in answer</span>':'';
+    return '<div class="fo-run"><div class="fo-run-meta"><img src="'+_modelIcon(run.m)+'" onerror="this.style.display=\'none\'"><span><b>'+esc(_modelLabel(run.m))+'</b> · '+_fmtShort(run.d)+'<br>'+hit+'</span></div><ol>'+run.rows.map(function(r){return '<li>'+_foQueryHtml(r.q)+' <span class="fo-cat">'+esc(_foTypeLabel(r.t))+'</span></li>';}).join('')+'</ol></div>';
+  }).join('')+'</div>';
+}
+function _foCountFor(pid,rows){return rows.filter(function(r){return r.p===pid;}).length;}
 _rebuildTopicMenu();
 _applyTimeRange();
 renderAll();
