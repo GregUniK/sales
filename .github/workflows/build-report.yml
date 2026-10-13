@@ -1,5 +1,8 @@
-name: Build PeekaBoo Report
+name: Build visibility report
 
+# One-off report for a prospect: slug/index.html. Built with the same builder and template as the
+# recurring client reports (GregUniK/ai-visibility, labs/tools), so a new report has the fixed
+# Overview filters, the fan-out tab and no third-party tag.
 on:
   workflow_dispatch:
     inputs:
@@ -7,7 +10,7 @@ on:
         description: 'Report slug (lowercase, used as URL path)'
         required: true
       brand_id:
-        description: 'PeekaBoo brand UUID'
+        description: 'Tracked brand UUID'
         required: true
       brand_name:
         description: 'Brand display name'
@@ -33,15 +36,22 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Clone report tool
-        run: git clone --depth=1 https://github.com/filipelinsduarte/ai-visibility-report /tmp/report-tool
+      - name: Get the report builder
+        run: git clone --depth=1 https://github.com/GregUniK/ai-visibility /tmp/report-tool
 
       - name: Install dependencies
-        run: pip install -r /tmp/report-tool/requirements.txt
+        run: pip install -r /tmp/report-tool/labs/tools/requirements.txt
 
-      - name: Create config and actions stub
+      - name: Check the slug
         env:
-          PEEKABOO_KEY: ${{ secrets.PEEKABOO_SALES_KEY }}
+          BRAND_SLUG: ${{ inputs.slug }}
+        run: |
+          case "$BRAND_SLUG" in
+            ''|*[!a-z0-9-]*) echo "Slug must be lowercase letters, digits and hyphens"; exit 1;;
+          esac
+
+      - name: Create config
+        env:
           BRAND_ID: ${{ inputs.brand_id }}
           BRAND_NAME: ${{ inputs.brand_name }}
           BRAND_SLUG: ${{ inputs.slug }}
@@ -49,85 +59,38 @@ jobs:
         run: |
           python3 -c "
           import json, os
-          slug = os.environ['BRAND_SLUG']
-          cfg = {
-            'aipeekaboo_api_key': os.environ['PEEKABOO_KEY'],
-            'skip_nlp': True,
-            'llm_api_key': 'none',
-            'brands': [{
-              'id': os.environ['BRAND_ID'],
-              'name': os.environ['BRAND_NAME'],
-              'key': slug,
-              'domain': os.environ['BRAND_DOMAIN']
-            }],
-            'output_file': 'report.html'
-          }
-          with open('/tmp/report-tool/config.json', 'w') as f:
-            json.dump(cfg, f, indent=2)
-          with open(f'/tmp/report-tool/actions_{slug}.json', 'w') as f:
-            f.write('[]')
-          print('Config created for', slug)
-          "
-
-      - name: Patch build_fast.py (skip LLM actions generation)
-        run: |
-          python3 -c "
-          import pathlib
-          p = pathlib.Path('/tmp/report-tool/build_fast.py')
-          content = p.read_text(encoding='utf-8')
-          # Replace the generate_actions call with an empty list — no LLM needed
-          patched = content.replace(
-            'ACTIONS[brand_key] = generate_actions(cfg, brand_name, brand_domain, brand_data)',
-            'ACTIONS[brand_key] = []'
-          )
-          if patched == content:
-            print('WARNING: patch target not found — check upstream build_fast.py')
-          else:
-            p.write_text(patched, encoding='utf-8')
-            print('Patched: LLM actions generation skipped')
+          cfg = {'brands': [{
+            'id': os.environ['BRAND_ID'],
+            'name': os.environ['BRAND_NAME'],
+            'key': os.environ['BRAND_SLUG'],
+            'domain': os.environ['BRAND_DOMAIN'],
+          }]}
+          json.dump(cfg, open('/tmp/report-tool/sales-config.json', 'w'), indent=2)
           "
 
       - name: Build report
+        env:
+          AIV_API_KEY: ${{ secrets.PEEKABOO_SALES_KEY }}
+          BRAND_SLUG: ${{ inputs.slug }}
         run: |
-          cd /tmp/report-tool
-          python3 build_fast.py --config config.json
+          mkdir -p "$BRAND_SLUG"
+          python3 /tmp/report-tool/labs/tools/build_labs.py --live \
+            --config /tmp/report-tool/sales-config.json --out "$BRAND_SLUG/index.html"
 
-      - name: Post-process (noindex + strip Actions tab)
+      - name: Check the page
         env:
           BRAND_SLUG: ${{ inputs.slug }}
         run: |
-          python3 -c "
-          import pathlib, os
-          slug = os.environ['BRAND_SLUG']
-          src = pathlib.Path('/tmp/report-tool/report.html')
-          dst = pathlib.Path(slug) / 'index.html'
-          dst.parent.mkdir(exist_ok=True)
-          html = src.read_text(encoding='utf-8')
-          noindex = '<meta name=\"robots\" content=\"noindex,nofollow\">'
-          if noindex not in html:
-            html = html.replace('<head>', '<head>\n  ' + noindex, 1)
-          html = html.replace('<button class=\"stab\" onclick=\"switchTab(\'actions\',this)\">Actions</button>', '')
-          tag = '<div id=\"panel-actions\"'
-          start = html.find(tag)
-          if start != -1:
-            depth, i = 0, start
-            while i < len(html):
-              if html[i:i+4] == '<div': depth += 1
-              elif html[i:i+6] == '</div>':
-                depth -= 1
-                if depth == 0:
-                  html = html[:start] + html[i+6:]
-                  break
-              i += 1
-          dst.write_text(html, encoding='utf-8')
-          print(f'Written to {dst} ({len(html)} bytes)')
-          "
+          f="$BRAND_SLUG/index.html"
+          test -s "$f"
+          grep -q 'name="robots" content="noindex,nofollow"' "$f"
+          if grep -qi 'G-YV8FCLN403' "$f"; then echo "third-party tag in the page"; exit 1; fi
 
       - name: Commit and push
         env:
           BRAND_SLUG: ${{ inputs.slug }}
         run: |
-          git config user.name "PeekaBoo Bot"
+          git config user.name "Report Bot"
           git config user.email "bot@gregunik.github.io"
           git add "${BRAND_SLUG}/index.html"
           if git diff --staged --quiet; then
