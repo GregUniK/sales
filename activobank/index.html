@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
 <title>AI Visibility Report: ActivoBank</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -13,7 +14,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
   --ink:#111827;--ink2:#374151;--ink3:#6b7280;--ink4:#9ca3af;
   --v:#4f46e5;--v-bg:#eef2ff;--v-bd:#c7d2fe;--v-text:#3730a3;
   --radius:10px;
-  --good:#15803d;--good-bg:#f0fdf4;--good-bd:#bbf7d0;
+  --good:#15803d;--good-bg:#f0fdf4;
   --warn:#b45309;--warn-bg:#fffbeb;
   --bad:#b91c1c;--bad-bg:#fef2f2;
 }
@@ -71,8 +72,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
 .pt-sort:hover{color:var(--ink2)}
 .sort-arr{font-size:9px;margin-left:3px;opacity:.5;display:inline-block;width:8px;text-align:center}
 .pt-sort.sorted .sort-arr{opacity:1;color:var(--v)}
-.score-pill{display:inline-flex;align-items:center;justify-content:center;min-width:38px;padding:2px 7px;border-radius:20px;font-size:12px;font-weight:600}
-.sp-good{background:var(--good-bg);color:var(--good)}.sp-med{background:var(--warn-bg);color:var(--warn)}.sp-zero{background:var(--surface2);color:var(--ink4)}
 .model-dots{display:flex;gap:5px;align-items:center}
 .mdot-wrap{position:relative;display:inline-flex;cursor:default}
 .mdot-wrap::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 5px);left:50%;transform:translateX(-50%);background:#111827;color:#fff;font-size:10px;white-space:nowrap;padding:3px 7px;border-radius:5px;opacity:0;pointer-events:none;transition:opacity .12s;z-index:300}
@@ -80,7 +79,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
 .mdot-img{width:20px;height:20px;border-radius:4px;border:1.5px solid var(--border);object-fit:contain;display:block;background:#fff}
 .mdot-miss{opacity:.2;filter:grayscale(1)}
 .comp-iw{position:relative;display:inline-flex;cursor:default}
-.comp-iw img{width:22px;height:22px;border-radius:4px;border:1.5px solid var(--border);background:var(--bg2)}
+.comp-iw img{width:22px;height:22px;border-radius:4px;border:1.5px solid var(--border)}
 .comp-itip{position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:#1e293b;color:#fff;font-size:11px;line-height:1.45;padding:5px 8px;border-radius:6px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .15s;z-index:30}
 .comp-iw:hover .comp-itip{opacity:1}
 .comp-itip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:4px solid transparent;border-top-color:#1e293b}
@@ -155,8 +154,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
 .ov-bar-track{flex:1;height:8px;background:var(--surface2);border-radius:4px;overflow:hidden}
 .ov-bar-fill{height:100%;border-radius:4px;transition:width .35s ease}
 .ov-bar-val{font-size:12px;font-weight:600;color:var(--ink3);min-width:42px;text-align:right;white-space:nowrap}
-.dom-expand-btn{display:inline-flex;align-items:center;gap:4px;cursor:pointer;color:var(--v);font-size:11px;font-weight:500;padding:2px 8px;border-radius:4px;border:1px solid var(--v-bd);background:var(--v-bg);white-space:nowrap;transition:all .12s}
-.dom-expand-btn:hover{background:var(--v-bd)}
 .dom-chev{width:12px;height:12px;flex-shrink:0;color:var(--ink4);transition:transform .2s;margin-right:6px;cursor:pointer}
 .dom-row-clickable{cursor:pointer}
 .dom-row-clickable:hover td{background:var(--surface)!important}
@@ -226,7 +223,7 @@ tr.dom-row-open .dom-chev{transform:rotate(180deg)}
 .cit-comp-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:14px 18px 0;margin-bottom:4px}
 .cit-comp-label{font-size:11px;font-weight:600;color:var(--ink4);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
 .cit-comp-dd{position:relative;display:inline-block}
-.cit-comp-trigger{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:8px;border:1.5px solid var(--border);background:var(--bg2);color:var(--ink2);font-size:13px;font-weight:500;cursor:pointer;transition:all .15s;min-width:180px}
+.cit-comp-trigger{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:8px;border:1.5px solid var(--border);color:var(--ink2);font-size:13px;font-weight:500;cursor:pointer;transition:all .15s;min-width:180px}
 .cit-comp-trigger:hover,.cit-comp-trigger:focus{border-color:var(--v);outline:none}
 .cit-comp-trigger img{width:14px;height:14px;border-radius:3px;flex-shrink:0}
 .cit-comp-trigger span{flex:1}
@@ -264,24 +261,105 @@ tr.dom-row-open .dom-chev{transform:rotate(180deg)}
   .wrap,.header,.model-bar,.subnav{padding-left:14px;padding-right:14px}
 }
 @media(max-width:480px){.stat-row,.sent-tiles,.act-grid{grid-template-columns:1fr}}
+/* ── labs additions ─────────────────────────────────────────────────────── */
+.labs-pill{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#92400e;background:#fef3c7;border:1px solid #fcd34d;border-radius:20px;padding:2px 8px}
+.labs-notes{margin:14px 0 0;border:1px solid #fcd34d;background:#fffbeb;border-radius:var(--radius);font-size:12.5px;color:#78350f}
+.labs-notes summary{cursor:pointer;padding:9px 14px;font-weight:600;list-style:none;display:flex;align-items:center;gap:8px}
+.labs-notes summary::-webkit-details-marker{display:none}
+.labs-notes ul{margin:0;padding:0 14px 10px 34px;line-height:1.7}
+.labs-sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:2px 0 8px;flex-wrap:wrap}
+.labs-sec-title{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+.labs-sec-sub{font-size:12px;color:var(--ink4)}
+.labs-row{display:grid;grid-template-columns:repeat(3,1fr) 1.7fr;gap:12px;margin-bottom:14px}
+.labs-card{background:var(--paper);border:1px solid var(--border);border-top:3px solid var(--v);border-radius:var(--radius);padding:14px 18px}
+.lm-row{display:flex;align-items:center;gap:8px;font-size:12px;padding:2px 0}
+.lm-row img{width:14px;height:14px;border-radius:3px;flex-shrink:0}
+.lm-lbl{width:118px;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lm-track{flex:1;height:6px;background:var(--surface2);border-radius:3px;overflow:hidden;min-width:30px}
+.lm-fill{height:100%;background:var(--v);border-radius:3px}
+.lm-val{width:24px;text-align:right;font-weight:700;color:var(--ink)}
+.lm-meta{width:104px;text-align:right;color:var(--ink4);font-size:11px;white-space:nowrap}
+.seg{display:inline-flex;border:1px solid var(--border);border-radius:7px;overflow:hidden;background:var(--surface)}
+.seg button{padding:4px 10px;font-size:12px;border:none;background:transparent;color:var(--ink3);cursor:pointer;white-space:nowrap}
+.seg button.active{background:var(--ink);color:#fff;font-weight:600}
+.tag{display:inline-block;padding:1px 7px;border-radius:20px;font-size:10.5px;font-weight:600;white-space:nowrap;margin-left:6px}
+.tag-you{background:var(--v-bg);color:var(--v-text)}.tag-tracked{background:#ecfdf5;color:#047857}.tag-other{background:var(--surface2);color:var(--ink3)}
+.sb-wrap{overflow-x:auto}
+.sb-table{width:100%;border-collapse:collapse;font-size:13px}
+.sb-table th{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--ink4);padding:8px 12px;text-align:right;border-bottom:1px solid var(--border);background:var(--surface);white-space:nowrap}
+.sb-table th:nth-child(-n+2),.sb-table td:nth-child(-n+2){text-align:left}
+.sb-table td{padding:8px 12px;border-bottom:1px solid var(--border);text-align:right;white-space:nowrap}
+.sb-table tr:last-child td{border-bottom:none}
+.sb-table tr.sb-you td{background:rgba(79,70,229,.06);color:var(--v-text);font-weight:600}
+.sb-name{display:flex;align-items:center;gap:7px}
+.sb-name img{width:16px;height:16px;border-radius:3px;border:1px solid var(--border)}
+.chg-up{color:var(--good)}.chg-down{color:var(--bad)}
+.fo-num{font-size:30px;font-weight:700;line-height:1;color:var(--ink)}
+.fo-cov{display:grid;grid-template-columns:1fr 1.6fr;gap:22px;align-items:start}
+.fo-runs{width:100%;border-collapse:collapse;font-size:12px}
+.fo-runs td,.fo-runs th{padding:5px 8px;border-bottom:1px solid var(--border);text-align:left}
+.fo-runs th{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink4)}
+.fo-runs td.n{text-align:right;font-variant-numeric:tabular-nums}
+.fo-cat{display:inline-block;padding:1px 7px;border-radius:20px;font-size:10.5px;font-weight:600;background:var(--surface2);color:var(--ink3);white-space:nowrap}
+.fo-q{font-size:12.5px;color:var(--ink);line-height:1.45}
+.fo-site{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;background:var(--v-bg);color:var(--v-text);padding:0 4px;border-radius:4px}
+.fo-clickable{cursor:pointer}.fo-clickable:hover td,.fo-clickable:hover{background:var(--surface)}
+.fo-active td,.comp-row.fo-active,.bar-row.fo-active{background:var(--v-bg)!important}
+.fo-hit{color:var(--good);font-weight:700}.fo-miss{color:var(--ink4)}
+.fo-block{padding:10px 0 6px}
+.fo-block-title{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink4);margin-bottom:4px}
+.fo-run{display:flex;gap:12px;padding:7px 0;border-top:1px solid var(--border)}
+.fo-run-meta{width:210px;flex-shrink:0;font-size:11.5px;color:var(--ink3);display:flex;align-items:flex-start;gap:6px;flex-wrap:wrap}
+.fo-run-meta img{width:13px;height:13px;border-radius:2px;margin-top:2px}
+.fo-run ol{margin:0;padding-left:18px;font-size:12.5px;color:var(--ink);line-height:1.6}
+.fo-empty{padding:10px 0;color:var(--ink4);font-size:12px}
+.fo-pill{display:inline-block;min-width:22px;text-align:center;padding:1px 7px;border-radius:20px;font-size:11px;font-weight:700;background:var(--v-bg);color:var(--v-text)}
+.fo-tbl{width:100%;border-collapse:collapse}
+.fo-tbl th{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--ink4);padding:8px 12px;text-align:left;border-bottom:1px solid var(--border);background:var(--surface);white-space:nowrap}
+.fo-tbl td{padding:8px 12px;border-bottom:1px solid var(--border);vertical-align:top;font-size:12.5px}
+.fo-tbl tr:last-child td{border-bottom:none}
+.fo-more{padding:10px 18px;font-size:12px}
+.fo-more button{background:none;border:none;color:var(--v);cursor:pointer;font-size:12px;font-weight:600}
+@media(max-width:1100px){.labs-row{grid-template-columns:repeat(2,1fr)}.fo-cov{grid-template-columns:1fr}}
+@media(max-width:480px){.labs-row{grid-template-columns:1fr}.fo-run{flex-direction:column}.fo-run-meta{width:auto}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-YV8FCLN403"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-YV8FCLN403');</script>
 </head>
 <body>
 <header class="header">
   <div class="h-left">
     <span class="h-title">AI Visibility Report</span>
+    
     <span class="h-sep">|</span>
     <div class="brand-toggle"><button class="bt-btn active" onclick="setBrand('activobank',this)"><img src="https://www.google.com/s2/favicons?domain=activobank.pt&sz=32" onerror="this.style.display='none'">ActivoBank</button></div>
   </div>
-  <div class="time-filter">
-    <button class="tf-btn active" onclick="setTimeRange('all',this)">All data</button>
-    <button class="tf-btn" onclick="setTimeRange('last-20',this)">Last 20 days</button>
-    <button class="tf-btn" onclick="setTimeRange('last-14',this)">Last 14 days</button>
-    <button class="tf-btn" onclick="setTimeRange('last-7',this)">Last 7 days</button>
-    <button class="tf-btn" onclick="setTimeRange('last-run',this)">Last run</button>
+  <div style="position:relative;display:flex;align-items:center;gap:8px">
+    <div class="time-filter">
+      <button class="tf-btn active" onclick="setTimeRange('all',this)">All data</button>
+      <button class="tf-btn" onclick="setTimeRange('last-20',this)">Last 20 days</button>
+      <button class="tf-btn" onclick="setTimeRange('last-14',this)">Last 14 days</button>
+      <button class="tf-btn" onclick="setTimeRange('last-7',this)">Last 7 days</button>
+      <button class="tf-btn" onclick="setTimeRange('last-run',this)">Last run</button>
+      <button class="tf-btn" id="customTfBtn" onclick="toggleCustomPicker(this)">Custom</button>
+    </div>
+    <div id="customDatePicker" style="display:none;position:absolute;top:calc(100% + 8px);right:0;background:var(--paper);border:1.5px solid var(--border2);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.13);padding:16px 18px;z-index:500;min-width:280px">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ink4);margin-bottom:12px">Custom date range</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+        <div>
+          <label style="display:block;font-size:11px;font-weight:600;color:var(--ink3);margin-bottom:5px">Start date</label>
+          <input type="date" id="customStart" style="width:100%;padding:6px 10px;border:1.5px solid var(--border2);border-radius:7px;font-size:13px;color:var(--ink);background:var(--paper);outline:none;cursor:pointer" onfocus="this.style.borderColor='var(--v)'" onblur="this.style.borderColor='var(--border2)'">
+        </div>
+        <div>
+          <label style="display:block;font-size:11px;font-weight:600;color:var(--ink3);margin-bottom:5px">End date</label>
+          <input type="date" id="customEnd" style="width:100%;padding:6px 10px;border:1.5px solid var(--border2);border-radius:7px;font-size:13px;color:var(--ink);background:var(--paper);outline:none;cursor:pointer" onfocus="this.style.borderColor='var(--v)'" onblur="this.style.borderColor='var(--border2)'">
+        </div>
+      </div>
+      <div id="customPickerError" style="display:none;font-size:12px;color:var(--bad);margin-bottom:10px"></div>
+      <div style="display:flex;gap:8px">
+        <button onclick="applyCustomRange()" style="flex:1;padding:7px 0;background:var(--ink);color:#fff;border:none;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer">Apply</button>
+        <button onclick="closeCustomPicker()" style="padding:7px 14px;background:var(--surface);color:var(--ink3);border:1px solid var(--border);border-radius:7px;font-size:13px;cursor:pointer">Cancel</button>
+      </div>
+    </div>
   </div>
   <div class="h-meta" id="hMeta">May 2026 &middot; 5 AI models</div>
 </header>
@@ -311,17 +389,46 @@ tr.dom-row-open .dom-chev{transform:rotate(180deg)}
       </div>
     </div>
   </div>
+  <span class="mb-label" style="margin-left:10px">Filter by intent</span>
+  <div class="flt-dd" id="intentDd">
+    <button class="flt-trigger" id="intentTrigger" onclick="toggleFltDd('intentDd','intentMenu','intentTrigger')">
+      <span class="flt-trigger-label" id="intentTriggerLabel">All intents</span>
+      <span class="flt-chev">&#9660;</span>
+    </button>
+    <div class="flt-menu" id="intentMenu">
+      <div class="flt-opt selected" onclick="pickIntent('all',this)">All intents</div>
+      <div class="flt-opt" onclick="pickIntent('COMMERCIAL',this)"><span class="flt-opt-dot" style="background:#7c3aed1a;border:1.5px solid #7c3aed"></span>Commercial</div>
+      <div class="flt-opt" onclick="pickIntent('TRANSACTIONAL',this)"><span class="flt-opt-dot" style="background:#16a34a1a;border:1.5px solid #16a34a"></span>Transactional</div>
+      <div class="flt-opt" onclick="pickIntent('INVESTIGATIONAL',this)"><span class="flt-opt-dot" style="background:#2563eb1a;border:1.5px solid #2563eb"></span>Investigational</div>
+      <div class="flt-opt" onclick="pickIntent('INFORMATIONAL',this)"><span class="flt-opt-dot" style="background:#0891b21a;border:1.5px solid #0891b2"></span>Informational</div>
+      <div class="flt-opt" onclick="pickIntent('NAVIGATIONAL',this)"><span class="flt-opt-dot" style="background:#64748b1a;border:1.5px solid #64748b"></span>Navigational</div>
+      <div class="flt-opt" onclick="pickIntent('BRANDED',this)"><span class="flt-opt-dot" style="background:#d974061a;border:1.5px solid #d97406"></span>Branded</div>
+      <div class="flt-opt" onclick="pickIntent('SENTIMENT',this)"><span class="flt-opt-dot" style="background:#db27771a;border:1.5px solid #db2777"></span>Sentiment</div>
+    </div>
+  </div>
+  <span class="mb-label" style="margin-left:10px">Filter by topic</span>
+  <div class="flt-dd" id="topicDd">
+    <button class="flt-trigger" id="topicTrigger" onclick="toggleFltDd('topicDd','topicMenu','topicTrigger')">
+      <span class="flt-trigger-label" id="topicTriggerLabel">All topics</span>
+      <span class="flt-chev">&#9660;</span>
+    </button>
+    <div class="flt-menu" id="topicMenu">
+      <div class="flt-opt selected" onclick="pickTopic('all',this)">All topics</div>
+    </div>
+  </div>
 </div>
 <nav class="subnav">
   <div class="sn-inner">
     <button class="stab active" onclick="switchTab('overview',this)">Overview</button>
     <button class="stab" onclick="switchTab('prompts',this)">Prompts</button>
+    
     <button class="stab" onclick="switchTab('sentiment',this)">Sentiment</button>
     <button class="stab" onclick="switchTab('competitors',this)">Competitors</button>
     <button class="stab" onclick="switchTab('citations',this)">Citations</button>
   </div>
 </nav>
 <div class="wrap">
+  <div id="labsNotes"></div>
   <div class="stat-strip"><div class="stat-row" id="statRow"></div></div>
 </div>
 <div class="wrap">
@@ -336,36 +443,26 @@ tr.dom-row-open .dom-chev{transform:rotate(180deg)}
       <button class="fb-btn active" onclick="setPromptFilter('all',this)">All</button>
       <button class="fb-btn" onclick="setPromptFilter('mentioned',this)">Mentioned</button>
       <button class="fb-btn" onclick="setPromptFilter('not',this)">Not mentioned</button>
-      <span style="display:inline-block;width:1px;height:18px;background:var(--border);margin:0 8px;vertical-align:middle;flex-shrink:0"></span>
-      <div class="flt-dd" id="intentDd">
-        <button class="flt-trigger" id="intentTrigger" onclick="toggleFltDd('intentDd','intentMenu','intentTrigger')" style="min-width:120px">
-          <span class="flt-trigger-label" id="intentTriggerLabel">All intents</span>
-          <span class="flt-chev">&#9660;</span>
-        </button>
-        <div class="flt-menu" id="intentMenu">
-          <div class="flt-opt selected" onclick="pickIntent('all',this)">All intents</div>
-          <div class="flt-opt" onclick="pickIntent('COMMERCIAL',this)"><span class="flt-opt-dot" style="background:#7c3aed1a;border:1.5px solid #7c3aed"></span>Commercial</div>
-          <div class="flt-opt" onclick="pickIntent('TRANSACTIONAL',this)"><span class="flt-opt-dot" style="background:#16a34a1a;border:1.5px solid #16a34a"></span>Transactional</div>
-          <div class="flt-opt" onclick="pickIntent('INVESTIGATIONAL',this)"><span class="flt-opt-dot" style="background:#2563eb1a;border:1.5px solid #2563eb"></span>Investigational</div>
-          <div class="flt-opt" onclick="pickIntent('INFORMATIONAL',this)"><span class="flt-opt-dot" style="background:#0891b21a;border:1.5px solid #0891b2"></span>Informational</div>
-          <div class="flt-opt" onclick="pickIntent('NAVIGATIONAL',this)"><span class="flt-opt-dot" style="background:#64748b1a;border:1.5px solid #64748b"></span>Navigational</div>
-          <div class="flt-opt" onclick="pickIntent('BRANDED',this)"><span class="flt-opt-dot" style="background:#d974061a;border:1.5px solid #d97406"></span>Branded</div>
-          <div class="flt-opt" onclick="pickIntent('SENTIMENT',this)"><span class="flt-opt-dot" style="background:#db27771a;border:1.5px solid #db2777"></span>Sentiment</div>
-        </div>
-      </div>
+      <button class="fb-btn" id="promptMissBtn" onclick="setPromptFilter('missing',this)" title="Prompts where tracked competitors were named in the answers and the brand never was">Missing, competitors named</button>
     </div>
     <div class="cc-body np">
       <table class="ptable"><thead><tr>
+        <th style="width:28px"></th>
         <th class="pt-sort" onclick="setSortCol('prompt')" id="th-prompt">Prompt<span class="sort-arr" id="sa-prompt">&#8597;</span></th>
+        <th>Intent</th>
+        <th>Topic</th>
         <th class="pt-sort" onclick="setSortCol('visibility')" id="th-visibility">Visibility<span class="sort-arr sorted" id="sa-visibility">&#8595;</span></th>
         <th class="pt-sort" onclick="setSortCol('position')" id="th-position">Avg Position<span class="sort-arr" id="sa-position">&#8597;</span></th>
-        <th class="pt-sort" onclick="setSortCol('sentiment')" id="th-sentiment">Sentiment<span class="sort-arr" id="sa-sentiment">&#8597;</span></th>
+        <th class="pt-sort" onclick="setSortCol('sentiment')" id="th-sentiment">Sentiment<span class="info-tip" data-tip="Average sentiment of AI responses that mention the brand for this prompt. Positive = spoken about favorably." onclick="event.stopPropagation()" style="margin-left:4px"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="7" cy="7" r="6"/><path d="M7 6v4" stroke-linecap="round"/><circle cx="7" cy="4.5" r=".5" fill="currentColor" stroke="none"/></svg></span><span class="sort-arr" id="sa-sentiment">&#8597;</span></th>
         <th>Models</th>
-        <th class="pt-sort" onclick="setSortCol('competitors')" id="th-competitors">Top Competitors<span class="sort-arr" id="sa-competitors">&#8597;</span></th>
+        <th class="pt-sort" onclick="setSortCol('competitors')" id="th-competitors">Top Competitors<span class="info-tip" data-tip="Brands mentioned most often alongside this brand in AI responses for this prompt." onclick="event.stopPropagation()" style="margin-left:4px"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="7" cy="7" r="6"/><path d="M7 6v4" stroke-linecap="round"/><circle cx="7" cy="4.5" r=".5" fill="currentColor" stroke="none"/></svg></span><span class="sort-arr" id="sa-competitors">&#8597;</span></th>
+        <th>Top Citations<span class="info-tip" data-tip="Domains most frequently cited by AI models when answering this prompt." style="margin-left:4px"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="7" cy="7" r="6"/><path d="M7 6v4" stroke-linecap="round"/><circle cx="7" cy="4.5" r=".5" fill="currentColor" stroke="none"/></svg></span></th>
+        <th>Fan-out<span class="info-tip" data-tip="Web searches ChatGPT and Gemini ran while answering this prompt, in the selected range. Expand the row to read them." style="margin-left:4px"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="7" cy="7" r="6"/><path d="M7 6v4" stroke-linecap="round"/><circle cx="7" cy="4.5" r=".5" fill="currentColor" stroke="none"/></svg></span></th>
       </tr></thead><tbody id="promptsTbody"></tbody></table>
     </div>
   </div>
 </div>
+<div id="panel-fanout" class="panel"><div id="fanoutContent"></div></div>
 <div id="panel-sentiment" class="panel">
   <div class="filter-bar" id="sentFilterBar">
     <button class="fb-btn active" onclick="setSentFilter('all',this)">All</button>
@@ -377,9 +474,10 @@ tr.dom-row-open .dom-chev{transform:rotate(180deg)}
   <div id="sentContent"></div>
 </div>
 <div id="panel-competitors" class="panel">
+  <div id="compBoard"></div>
   <div class="two-col">
     <div class="cc">
-      <div class="cc-head"><div><div class="cc-title">Top Competitors</div><div class="cc-sub" id="compSub"></div></div></div>
+      <div class="cc-head"><div><div class="cc-title">Named in AI answers</div><div class="cc-sub" id="compSub"></div></div><div class="seg" id="compScopeSeg"></div></div>
       <div class="cc-body" id="compList"></div>
     </div>
     <div class="cc">
@@ -400,6 +498,8 @@ const MODEL_ORDER=['google-aio','google-ai-mode','gemini-2.5-flash','sonar','gpt
 const COMP_DOMAINS={};
 const BRAND_CFG={"activobank": {"key": "ActivoBank", "name": "ActivoBank", "url": "activobank.pt"}};
 const RAW_HISTORY={"activobank": {"runDates": [], "prompts": [{"id": "d0774c5d-c5b9-4764-afdb-fa10563f5621", "text": "Qual o melhor credito pessoal em portugal?", "entries": []}, {"id": "d1d633c8-f5d8-4951-bac3-7065235160fb", "text": "vantagens e desvantagens crédito pessoal online vs presencial", "entries": []}, {"id": "9a6affe1-65b2-4ce4-96cb-b78ca7b217c2", "text": "Crédito pessoal afeta o score de crédito?", "entries": []}, {"id": "a02028d9-bb0c-4283-8510-9a7e74c83779", "text": "Melhor crédito pessoal com aprovação rápida", "entries": []}, {"id": "a14ceaf3-49ec-40c8-81e5-1f5ae0f57aeb", "text": "Crédito pessoal rápido vs crédito tradicional", "entries": []}, {"id": "a2c150b0-ae50-42b8-8d46-65d13307a74b", "text": "Crédito pessoal para obras vs crédito habitação adicional", "entries": []}, {"id": "bb08e17e-2972-427f-a983-0ddc28fa951a", "text": "Crédito pessoal com taxa mais baixa em Portugal", "entries": []}, {"id": "bf62dc86-147a-4918-a2f2-089213c70f1c", "text": "Crédito pessoal sem comprovativo de rendimentos é possível?", "entries": []}, {"id": "cc482481-695a-416d-ac0e-f2871372cbf1", "text": "Posso pedir crédito pessoal estando desempregado?", "entries": []}, {"id": "cfaa5e9d-a91b-4743-b054-15e58d5f411d", "text": "condições e juros Crédito pessoal para férias", "entries": []}, {"id": "8e6f617e-a181-4eb5-b7ce-d6ccd571d7a9", "text": "Crédito pessoal sem fiador em Portugal", "entries": []}, {"id": "d5cdf0f2-a5d7-444d-96a3-36f695d3d2dc", "text": "Crédito pessoal com taxa fixa vs taxa variável", "entries": []}, {"id": "e6cbc1cc-cd11-48b8-ae82-81f20d0b4daf", "text": "Onde pedir crédito pessoal online com resposta rápida", "entries": []}, {"id": "e948e2c4-750f-43f8-8fa3-c9c03ac86bc2", "text": "Qual é a taxa de juro média do crédito pessoal em Portugal", "entries": []}, {"id": "eb40d5e7-061b-46c0-b9ce-31b645365fd5", "text": "Crédito pessoal com fiador vs sem fiador", "entries": []}, {"id": "f04dcce0-49cb-46a2-9553-df39336eebbb", "text": "Crédito pessoal aprovado na hora — é possível?", "entries": []}, {"id": "f10f47c6-6ff3-499b-b911-8d929b994a2f", "text": "Crédito pessoal imediato na conta", "entries": []}, {"id": "f77eb22d-92d2-4f7a-a831-06c4268eb6fa", "text": "Simular crédito pessoal online em Portugal", "entries": []}, {"id": "f84adad4-4a5e-4706-9e67-792e40f504e5", "text": "Quanto posso pedir num crédito pessoal", "entries": []}, {"id": "fd89bc30-a4b2-48f6-9dfe-4c50ac72a389", "text": "Pedir crédito pessoal online passo a passo", "entries": []}, {"id": "301168ca-5868-4b61-9524-407143e4b9f0", "text": "quais são mais fiáveis simuladores de crédito pessoal", "entries": []}, {"id": "0a18485d-62ed-496b-8129-4b6b4ac65482", "text": "Como funciona o crédito pessoal para consolidar dívidas", "entries": []}, {"id": "0b32f350-2510-42ed-8f19-98104c1781fe", "text": "como encontrar a melhor oferta Crédito pessoal barato", "entries": []}, {"id": "0fd72ab0-34ff-4a18-9404-65c968ff3fc3", "text": "Melhores bancos para crédito pessoal em Portugal", "entries": []}, {"id": "1aaa6839-031c-4507-bee9-624420a3986f", "text": "Diferença entre TAN e TAEG no crédito pessoal", "entries": []}, {"id": "2142c126-1deb-44c7-b12a-c8796a02f466", "text": "prestações mensais crédito pessoal para 10.000€", "entries": []}, {"id": "221a85ac-3fc9-4a62-84e8-5e52fafa6a34", "text": "Quem pode pedir crédito pessoal em Portugal", "entries": []}, {"id": "2791fe7c-4efe-4623-893d-6512f9814811", "text": "diferenças crédito pessoal vs crédito automóvel", "entries": []}, {"id": "290658a4-84ef-448f-9d7a-aea500c161e2", "text": "qual é melhor crédito pessoal em banco vs financeira", "entries": []}, {"id": "2d28d497-fbc5-4d70-b0f3-a176f4c18977", "text": "o que escolher crédito pessoal vs linha de crédito", "entries": []}, {"id": "07fda806-b6b2-4bcf-acea-ef505be22d03", "text": "quanto pago por mês Crédito pessoal para 20.000€", "entries": []}, {"id": "3484fa07-adfb-42f9-a14a-c73d6f605241", "text": "Crédito pessoal vs cartão de crédito, qual compensa mais", "entries": []}, {"id": "3d7098ca-db1b-4be1-a654-56650f9ac077", "text": "Qual o prazo máximo de um crédito pessoal em Portugal", "entries": []}, {"id": "43c51b46-8beb-4770-b31c-bea6b4981cc6", "text": "O que é a TAEG num crédito pessoal", "entries": []}, {"id": "445e16af-2d02-41e6-8ffa-4cc167a3a18d", "text": "Quanto tempo demora a aprovação de um crédito pessoal", "entries": []}, {"id": "58ab8697-cc4b-402b-ba3e-b86d425c20e6", "text": "Posso amortizar um crédito pessoal antecipadamente?", "entries": []}, {"id": "6c5793bd-865a-4e45-a74f-4fa4bc6e6cde", "text": "Crédito pessoal para limpar dívidas urgentes", "entries": []}, {"id": "70210bb0-a61f-4171-ac89-53235400b35f", "text": "O que acontece se não pagar um crédito pessoal", "entries": []}, {"id": "7b5b98dc-0851-4db5-a8ff-1f98c5c1bfd2", "text": "O que é um crédito pessoal e como funciona em Portugal", "entries": []}, {"id": "7f93e3ed-597b-478d-86bc-edb47b2cbfa1", "text": "Consolidar créditos vs pedir novo crédito pessoal", "entries": []}]}};
+/* labs: official scores, tracked competitors, fan-out searches, data notes */
+const LABS={"activobank": {"static": true}};
 const ICONS={
   alert:'<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 2.5L1.5 13.5h13L8 2.5z"/><path d="M8 7v3"/><circle cx="8" cy="12" r=".5" fill="currentColor" stroke="none"/></svg>',
   list:'<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 4h12M2 8h12M2 12h7"/></svg>',
@@ -411,30 +511,76 @@ const ICONS={
   shield:'<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 1.5L1.5 4.5V9c0 3.5 3 5.5 6.5 6 3.5-.5 6.5-2.5 6.5-6V4.5L8 1.5z"/></svg>',
   target:'<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="3"/><path d="M8 5V2M8 14v-3M5 8H2M14 8h-3"/></svg>'
 };
-const ACTIONS={"activobank": [{"priority": "high", "effort": "High effort", "cat": "Visibility", "icon": "alert", "title": "Fix zero AI visibility: get ActivoBank into the Portuguese banking entity graph", "signals": ["0% visibility across 40 tracked prompts", "0 AI citations across 0 unique domains", "No competitor or citation data captured, indicating ActivoBank is invisible to current AI surfaces"], "favDomains": ["wikipedia.org", "wikidata.org", "bportugal.pt", "linkedin.com"], "why": "ActivoBank is currently mentioned in 0 of 40 tracked prompts and has 0 citations across the entire dataset. This is an entity recognition problem before it is a content problem. AI models do not have enough structured signals to associate ActivoBank with Portuguese retail banking, mobile banking, or related categories. The first lever is to seed the entity graph with authoritative records that LLMs ground on.", "steps": ["this week: audit and expand the ActivoBank Wikipedia article in Portuguese and English with sourced sections on history, products, parent group (Millennium BCP), and digital banking positioning", "Create or update the Wikidata item for ActivoBank with properties for headquarters, founding date, parent organization, industry codes, and official website", "Verify and complete the LinkedIn company page, Crunchbase profile, and Banco de Portugal public registry entry so name, domain, and category are consistent across sources LLMs scrape", "Publish a canonical About / Sobre NÃ³s page on activobank.pt with Organization and BankOrSavings schema, sameAs links to Wikipedia, Wikidata, LinkedIn, and Crunchbase, and a clear one-line entity description in Portuguese and English"], "outcome": "First citations from grounding sources within 45-90 days, baseline mention rate moving from 0% toward 10-15% on branded and category prompts.", "platDomains": ["wikipedia.org", "wikidata.org", "linkedin.com", "crunchbase.com", "bportugal.pt"]}, {"priority": "high", "effort": "Med effort", "cat": "Citation Strategy", "icon": "list", "title": "Get ActivoBank listed in the Portuguese best-bank and best-app listicles AI models cite", "signals": ["0 listicle inclusions detected in tracked data", "0 unique citing domains", "Portuguese banking comparison content is the dominant format LLMs reach for and ActivoBank is absent from it"], "favDomains": ["doutorfinancas.pt", "comparajÃ¡.pt", "idealista.pt", "saldopositivo.cgd.pt"], "why": "With 0 citations across 0 domains, ActivoBank is not in the source pool LLMs read when answering questions like melhor banco digital em Portugal or melhor app de banco. Portuguese personal-finance publishers and comparators dominate these answers, and inclusion in their roundups is the single fastest route from invisible to cited.", "steps": ["this week: build a target list of the top 20 Portuguese banking and personal-finance comparison articles ranking for melhor banco digital, conta Ã  ordem, and melhor app de banco", "Pitch updated data to Doutor FinanÃ§as, ComparaJÃ¡, Idealista, and Saldo Positivo with a one-page fact sheet covering fees, app rating, IBAN issuance speed, and unique features so editors have a reason to add ActivoBank to existing posts", "Offer authors an interview with a product lead or written commentary they can quote, since named-source quotes are heavily weighted by LLMs when picking who to cite", "Track inclusion weekly and re-pitch any roundup that updates its publication date without adding ActivoBank"], "outcome": "First listicle inclusions live within 30-45 days, AI citation lift visible 60-90 days after inclusion as crawlers refresh.", "platDomains": ["doutorfinancas.pt", "comparaja.pt", "idealista.pt", "saldopositivo.cgd.pt", "economias.pt"]}, {"priority": "high", "effort": "Med effort", "cat": "Content", "icon": "search", "title": "Publish entity-rich pillar content for the Portuguese digital-banking topics ActivoBank wants to own", "signals": ["0% mention rate across 40 prompts", "0 dominant content types in the dataset, meaning no ActivoBank-owned page is being pulled by LLMs", "No model breakdown data, indicating the gap is uniform across Perplexity, ChatGPT, Gemini, AIO, and AI Mode"], "favDomains": ["activobank.pt", "blog.activobank.pt"], "why": "ActivoBank has 0 citations from its own domain in tracked data. Even when the brand is part of an answer, LLMs have nothing on activobank.pt to cite. Creating clearly scoped pillar pages with structured data and named entity coverage gives AI surfaces a defensible primary source they can ground on for Portuguese banking topics.", "steps": ["today: identify the 8-10 highest-intent prompt themes from the 40 tracked (likely abrir conta, conta jovem, comissÃµes, app mÃ³vel, IBAN, MB Way, crÃ©dito pessoal) and assign each a pillar URL on activobank.pt", "Write each pillar with a clear definition paragraph in the first 80 words, an entity table (fees, limits, eligibility), an FAQ block, and outbound links to Banco de Portugal and Wikipedia for grounding", "Add FAQPage, Article, and BankOrSavings schema with sameAs links to the entity records seeded in the visibility action", "Cross-link pillars from the homepage and main product pages, and submit the new URLs in Search Console and IndexNow on the same day they go live"], "outcome": "First own-domain citations within 60-90 days, and a measurable share of mentions on category prompts as pillars accumulate authority.", "platDomains": ["activobank.pt", "google.com", "bing.com", "schema.org"]}, {"priority": "medium", "effort": "Med effort", "cat": "Citation Strategy", "icon": "chat", "title": "Earn ActivoBank mentions in Reddit and Portuguese forum threads LLMs over-cite", "signals": ["0 citations across 0 domains, no community signal for ActivoBank in tracked data", "Reddit and forum content is consistently weighted by ChatGPT, Perplexity, and Gemini for retail banking experience questions", "Branded and unbranded prompts both return 0 mentions"], "favDomains": ["reddit.com", "forum.zwame.pt"], "why": "Across 40 prompts ActivoBank receives 0 mentions, including on questions where peer experience normally surfaces forum citations. LLMs lean heavily on r/portugal, r/PersonalFinancePortugal, and ZWAME for Portuguese banking opinion. Without organic discussion in those threads, the brand cannot be retrieved when models pull community context.", "steps": ["this week: map the top 30 active Reddit and ZWAME threads about Portuguese digital banks and audit which ones already mention competitors but not ActivoBank", "Brief a small internal team to participate as identified bank employees following Reddit self-promotion rules, answering factual questions about fees, IBAN delivery, and app behaviour", "Encourage real customers via newsletter and app to share honest experiences in relevant threads, with no script and no incentive that violates platform rules", "Monitor monthly for new threads and respond to factual errors about ActivoBank within 48 hours so corrections are in the canonical thread version models scrape"], "outcome": "Forum mention surface visible in 30-60 days, citation lift from Reddit and ZWAME on AI surfaces 60-90 days later as crawlers refresh.", "platDomains": ["reddit.com", "forum.zwame.pt", "quora.com"]}, {"priority": "medium", "effort": "Med effort", "cat": "Content", "icon": "play", "title": "Build a YouTube presence so Gemini and AIO have ActivoBank video transcripts to cite", "signals": ["0 citations from any video source in tracked data", "Google AIO and Gemini increasingly surface YouTube transcripts for how-to banking queries", "ActivoBank has no video content cited across 40 prompts"], "favDomains": ["youtube.com"], "why": "Gemini and Google AIO pull YouTube transcripts directly when answering practical how-to questions like como abrir conta no ActivoBank or como ativar MB Way. With 0 video citations in the tracked data, ActivoBank is missing from a content surface that two of the five tracked models actively prefer for procedural answers.", "steps": ["this week: produce a list of the 15 most asked how-to questions about ActivoBank products (account opening, MB Way activation, app login, fees, card management)", "Record short, well-titled videos (3-5 minutes) for each, with full Portuguese captions uploaded as a transcript file rather than auto-generated only", "Use entity-rich descriptions, chapter markers, and links to the matching pillar page on activobank.pt so YouTube and Google can connect the video to the canonical source", "Cross-embed the videos on the matching pillar pages so the ActivoBank URL also benefits from the engagement signal"], "outcome": "Video citations on Gemini and AIO procedural answers within 2-4 weeks of upload, sustained presence as catalogue grows.", "platDomains": ["youtube.com", "google.com", "gemini.google.com"]}, {"priority": "medium", "effort": "Med effort", "cat": "Competitive", "icon": "target", "title": "Run a baseline competitive intelligence pass to learn why peers are cited and ActivoBank is not", "signals": ["0 competitor mentions captured in this dataset, blocking competitive analysis", "0 unique citing domains, so the source landscape is unknown", "0% visibility on 40 prompts means the gap is structural, not topical"], "favDomains": ["activobank.pt", "millenniumbcp.pt", "novobanco.pt", "bancobpi.pt"], "why": "Because the current dataset shows 0 competitors and 0 citations, the team is operating without a map. Before scaling content and PR effort, ActivoBank needs to know which Portuguese banks LLMs do mention, which sources cite them, and which prompts they own. This baseline turns a 0% starting point into a prioritized backlog.", "steps": ["today: re-run AI Peekaboo with explicit competitor seeds (Millennium BCP, Novobanco, BPI, CGD, Santander, N26, Revolut) so future runs capture competitor mention data the current run is missing", "Manually query the same 40 prompts on Perplexity, ChatGPT, Gemini, Google AIO, and Google AI Mode and log which brands and domains appear", "Categorize the captured citing domains into publishers, comparators, forums, official entities, and own-brand pages, and rank them by frequency", "Use that ranked list to update the listicle, Reddit, and pillar action plans with the specific domains that LLMs actually cite for Portuguese banking"], "outcome": "A live competitive baseline within 2 weeks that lets every other action target real cited sources rather than assumptions, and converts 0% visibility into a measurable trajectory.", "platDomains": ["aipeekaboo.com", "perplexity.ai", "chat.openai.com", "gemini.google.com", "google.com"]}]};
-let currentBrand='activobank',activeModel='all',promptFilter='all',intentFilter='all',actFilter='all',searchQuery='';
+let currentBrand='activobank',activeModel='all',promptFilter='all',intentFilter='all',topicFilter='all',searchQuery='';
 let sortCol='visibility',sortDir='desc';
 let currentTimeRange='all';
+let customStartDate=null,customEndDate=null;
+function toggleCustomPicker(btn){
+  var picker=document.getElementById('customDatePicker');
+  var isOpen=picker.style.display!=='none';
+  if(isOpen){closeCustomPicker();return;}
+  var rh=RAW_HISTORY[currentBrand];
+  if(rh&&rh.runDates&&rh.runDates.length){
+    var rd=rh.runDates;
+    if(!document.getElementById('customStart').value)document.getElementById('customStart').value=rd[0];
+    if(!document.getElementById('customEnd').value)document.getElementById('customEnd').value=rd[rd.length-1];
+  }
+  document.getElementById('customPickerError').style.display='none';
+  picker.style.display='block';
+  setTimeout(function(){document.addEventListener('click',_outsidePickerClick,true);},10);
+}
+function _outsidePickerClick(e){
+  var picker=document.getElementById('customDatePicker');
+  var btn=document.getElementById('customTfBtn');
+  if(!picker.contains(e.target)&&e.target!==btn){closeCustomPicker();}
+}
+function closeCustomPicker(){
+  document.getElementById('customDatePicker').style.display='none';
+  document.removeEventListener('click',_outsidePickerClick,true);
+}
+function applyCustomRange(){
+  var start=document.getElementById('customStart').value;
+  var end=document.getElementById('customEnd').value;
+  var errEl=document.getElementById('customPickerError');
+  if(!start||!end){errEl.textContent='Please select both a start and end date.';errEl.style.display='block';return;}
+  if(start>end){errEl.textContent='Start date must be before end date.';errEl.style.display='block';return;}
+  errEl.style.display='none';
+  customStartDate=start;customEndDate=end;
+  currentTimeRange='custom';
+  _compCitsCache={};
+  document.querySelectorAll('.tf-btn').forEach(function(x){x.classList.remove('active');});
+  document.getElementById('customTfBtn').classList.add('active');
+  closeCustomPicker();
+  _applyTimeRange();
+  renderAll();
+}
 let sentimentFilter='all';
 function setSentFilter(f,btn){sentimentFilter=f;document.querySelectorAll('#sentFilterBar .fb-btn').forEach(function(x){x.classList.remove('active');});btn.classList.add('active');renderSentiment();}
 
 /* ── Time range helpers ─────────────────────────────────────────────────── */
-function _daysBack(dateStr,days){var d=new Date(dateStr+'T00:00:00');d.setDate(d.getDate()-days);return d.toISOString().split('T')[0];}
+/* labs: UTC on both ends (upstream mixed local midnight with toISOString, so "Last 7 days" reached a day further back east of UTC) */
+function _daysBack(dateStr,days){var d=new Date(dateStr+'T00:00:00Z');d.setUTCDate(d.getUTCDate()-days);return d.toISOString().split('T')[0];}
 function _extractDomainJS(url){try{var parsed=new URL(url);var h=parsed.hostname.toLowerCase();return h.startsWith('www.')?h.slice(4):h;}catch(e){return url;}}
-function _normComp(name){var n=name.trim().toLowerCase();n=n.replace(/\.(ai|com|io|co|org|net|app)$/,'');n=n.replace(/\s+ai$/,'');n=n.replace(/ai$/,'');n=n.replace(/\s+(digital|agency|media|platform|labs?|technologies?|solutions?)$/,'');return n.replace(/[\s\-]/g,'');}
-function _dedupeComps(comps){var groups={};comps.forEach(function(c){var norm=_normComp(c.name);if(!groups[norm]){groups[norm]={canonical:c.name,canonicalMentions:c.mentions,mentions:0,avgScore:0,topSentiment:c.topSentiment,models:[],summaries:[]};}var g=groups[norm];g.mentions+=c.mentions;if(c.mentions>g.canonicalMentions){g.canonical=c.name;g.canonicalMentions=c.mentions;}(c.models||[]).forEach(function(m){if(g.models.indexOf(m)===-1)g.models.push(m);});});return Object.values(groups).map(function(g){return {name:g.canonical,mentions:g.mentions,avgScore:0,topSentiment:g.topSentiment,models:g.models,summaries:[]};}).sort(function(a,b){return b.mentions-a.mentions;});}
+/* same as normalize_comp_name() in build_labs.py: accents don't count ("Hôma" = "Homa"), and a
+   stub under 4 letters ("SEO Labs" -> "seo") keeps the name as written, so "SEO Labs",
+   "SEO.com" and "SEO" stay apart */
+function _noAccents(s){return String(s||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'');}
+function _normComp(name){var n=_noAccents(name).trim().toLowerCase();n=n.replace(/\.(ai|com|io|co|org|net|app)$/,'');n=n.replace(/\s+ai$/,'');n=n.replace(/ai$/,'');n=n.replace(/\s+(digital|agency|media|platform|labs?|technologies?|solutions?)$/,'');n=n.replace(/[\s\-]/g,'');return n.length>=4?n:_plainName(name);}
+function _plainName(n){return _noAccents(n).toLowerCase().replace(/[^\p{L}\p{N}]+/gu,'');}
+function _dedupeComps(comps){var groups={};comps.forEach(function(c){var norm=_normComp(c.name);if(!groups[norm]){groups[norm]={canonical:c.name,canonicalMentions:c.mentions,mentions:0,avgScore:0,topSentiment:c.topSentiment,models:[],modelMentions:{}};}var g=groups[norm];g.mentions+=c.mentions;if(c.mentions>g.canonicalMentions){g.canonical=c.name;g.canonicalMentions=c.mentions;}(c.models||[]).forEach(function(m){if(g.models.indexOf(m)===-1)g.models.push(m);});if(c.modelMentions){Object.keys(c.modelMentions).forEach(function(mk){g.modelMentions[mk]=(g.modelMentions[mk]||0)+c.modelMentions[mk];});}});return Object.values(groups).map(function(g){return {name:g.canonical,mentions:g.mentions,avgScore:0,topSentiment:g.topSentiment,models:g.models,modelMentions:g.modelMentions};}).sort(function(a,b){return b.mentions-a.mentions;});}
 
 function _computeFilteredData(brandKey){
   var rh=RAW_HISTORY[brandKey];
   if(!rh||!rh.runDates||!rh.runDates.length)return null;
   var runDates=rh.runDates;
   var maxDate=runDates[runDates.length-1];
-  var cutoffDate=null,lastRunOnly=false;
+  var cutoffDate=null,lastRunOnly=false,customEnd=null;
   if(currentTimeRange==='last-run'){lastRunOnly=true;}
   else if(currentTimeRange==='last-7'){cutoffDate=_daysBack(maxDate,7);}
   else if(currentTimeRange==='last-14'){cutoffDate=_daysBack(maxDate,14);}
   else if(currentTimeRange==='last-20'){cutoffDate=_daysBack(maxDate,20);}
-  function inRange(date){if(lastRunOnly)return date===maxDate;if(cutoffDate)return date>=cutoffDate;return true;}
+  else if(currentTimeRange==='custom'&&customStartDate&&customEndDate){cutoffDate=customStartDate;customEnd=customEndDate;}
+  function inRange(date){if(lastRunOnly)return date===maxDate;if(customEnd)return date>=cutoffDate&&date<=customEnd;if(cutoffDate)return date>=cutoffDate;return true;}
   var bk=BRAND_CFG[brandKey].key;
 
   /* --- prompts --- */
@@ -449,8 +595,7 @@ function _computeFilteredData(brandKey){
       if(e.hit){mentions++;if(e.sc)scores.push(e.sc);}
     });
     var avgScore=scores.length?Math.round(scores.reduce(function(a,b){return a+b;},0)/scores.length*100)/100:0;
-    var bestScore=scores.length?Math.max.apply(null,scores):0;
-    return {id:rp.id,text:rp.text,avgScore:avgScore,bestScore:bestScore,mentions:mentions,totalRuns:totalRuns,models:models};
+    return {id:rp.id,text:rp.text,avgScore:avgScore,mentions:mentions,totalRuns:totalRuns,models:models,intent:rp.intent||'',topic:rp.topic||''};
   });
 
   /* --- citations --- */
@@ -484,7 +629,7 @@ function _computeFilteredData(brandKey){
   var totalCit=Object.values(urlData).reduce(function(a,x){return a+x.count;},0);
   var origCit=D_ORIG.citations[bk];
   /* Use actual page/content type counts from filtered data; fall back to proportional scaling if pt/ct not in raw data */
-  var hasPtCt=rh.prompts.length>0&&rh.prompts[0].entries.length>0&&'pt' in (rh.prompts[0].entries[0].srcs||[{}])[0];
+  var hasPtCt=rh.prompts.length>0&&rh.prompts[0].entries.length>0&&'pt' in ((rh.prompts[0].entries[0].srcs||[])[0]||{});
   var domainTypesArr,contentTypesArr;
   if(hasPtCt||Object.keys(domainTypeCounts).length>0){
     domainTypesArr=Object.keys(domainTypeCounts).map(function(t){return {type:t,count:domainTypeCounts[t]};}).sort(function(a,b){return b.count-a.count;});
@@ -514,14 +659,15 @@ function _computeFilteredData(brandKey){
     rp.entries.filter(function(e){return inRange(e.date);}).forEach(function(e){
       (e.comps||[]).forEach(function(name){
         if(!name)return;
-        if(!compData[name])compData[name]={mentions:0,models:{}};
+        if(!compData[name])compData[name]={mentions:0,models:{},modelMentions:{}};
         compData[name].mentions++;compData[name].models[e.model]=true;
+        compData[name].modelMentions[e.model]=(compData[name].modelMentions[e.model]||0)+1;
       });
     });
   });
   var competitors=_dedupeComps(Object.keys(compData).map(function(name){
     var info=compData[name];
-    return {name:name,mentions:info.mentions,avgScore:0,topSentiment:'neutral',models:Object.keys(info.models),summaries:[]};
+    return {name:name,mentions:info.mentions,avgScore:0,topSentiment:'neutral',models:Object.keys(info.models),modelMentions:info.modelMentions};
   }));
 
   /* --- sentiment --- */
@@ -543,7 +689,9 @@ function _computeFilteredData(brandKey){
 
 function _applyTimeRange(){
   var bk=BRAND_CFG[currentBrand].key;
-  if(currentTimeRange==='all'){
+  /* a frozen one-off report (labs.static) was built by an older builder whose totals differ a little
+     from its own answers, so "All data" is recounted from the answers like every other range */
+  if(currentTimeRange==='all'&&!_labs().static){
     D.prompts[bk]=D_ORIG.prompts[bk];
     D.citations[bk]=D_ORIG.citations[bk];
     D.competitors[bk]=D_ORIG.competitors[bk];
@@ -567,6 +715,9 @@ function _applyTimeRange(){
     var maxDate=rd[rd.length-1];
     if(currentTimeRange==='last-run'){
       meta='Last run: '+maxDate+' &middot; 5 AI models';
+    } else if(currentTimeRange==='custom'&&customStartDate&&customEndDate){
+      var inRangeDates=rd.filter(function(d){return d>=customStartDate&&d<=customEndDate;});
+      meta=inRangeDates.length+' run'+(inRangeDates.length!==1?'s':'')+' &middot; '+customStartDate+' to '+customEndDate;
     } else if(currentTimeRange!=='all'){
       var days={'last-7':7,'last-14':14,'last-20':20}[currentTimeRange];
       var cutoff=_daysBack(maxDate,days);
@@ -581,13 +732,17 @@ function _applyTimeRange(){
 
 function setTimeRange(range,btn){
   currentTimeRange=range;
+  customStartDate=null;customEndDate=null;
+  _compCitsCache={};
   document.querySelectorAll('.tf-btn').forEach(function(x){x.classList.remove('active');});
   btn.classList.add('active');
+  closeCustomPicker();
   _applyTimeRange();
   renderAll();
 }
 
-function setBrand(b,btn){currentBrand=b;sortCol='visibility';sortDir='desc';['prompt','visibility','position','sentiment','competitors'].forEach(function(c){var arr=document.getElementById('sa-'+c);var th=document.getElementById('th-'+c);if(!arr||!th)return;if(c==='visibility'){th.classList.add('sorted');arr.classList.add('sorted');arr.innerHTML='&#8595;';}else{th.classList.remove('sorted');arr.classList.remove('sorted');arr.innerHTML='&#8597;';}});document.querySelectorAll('.bt-btn').forEach(x=>x.classList.remove('active'));btn.classList.add('active');_applyTimeRange();renderAll();}
+function setBrand(b,btn){currentBrand=b;sortCol='visibility';sortDir='desc';topicFilter='all';foType='all';foText='';foShowAll=false;foPick='';['prompt','visibility','position','sentiment','competitors'].forEach(function(c){var arr=document.getElementById('sa-'+c);var th=document.getElementById('th-'+c);if(!arr||!th)return;if(c==='visibility'){th.classList.add('sorted');arr.classList.add('sorted');arr.innerHTML='&#8595;';}else{th.classList.remove('sorted');arr.classList.remove('sorted');arr.innerHTML='&#8597;';}});document.querySelectorAll('.bt-btn').forEach(x=>x.classList.remove('active'));btn.classList.add('active');_compCitsCache={};_rebuildTopicMenu();_applyTimeRange();renderAll();}
+/* ── Filter dropdown helpers ─────────────────────────────────────────────── */
 var _fltDdOpen=null;
 function toggleFltDd(ddId,menuId,triggerId){
   var menu=document.getElementById(menuId);
@@ -638,10 +793,124 @@ function pickIntent(it,opt){
   var menu=document.getElementById('intentMenu');
   if(menu){menu.classList.remove('open');}
   _fltDdOpen=null;
-  applyPromptFilter();renderStats();
+  _compCitsCache={};
+  renderAll();
 }
+/* topic options are per-brand and open-vocabulary (from the prompt category field), so the
+   dropdown menu is rebuilt from whatever topics are actually present in the current brand's data */
+function _rebuildTopicMenu(){
+  var rh=RAW_HISTORY[currentBrand];
+  var topics=[],seen={};
+  if(rh&&rh.prompts){
+    rh.prompts.forEach(function(rp){var t=rp.topic;if(t&&!seen[t]){seen[t]=true;topics.push(t);}});
+    topics.sort();
+  }
+  if(topicFilter!=='all'&&topics.indexOf(topicFilter)===-1)topicFilter='all';
+  var menu=document.getElementById('topicMenu');
+  if(!menu)return;
+  var html='<div class="flt-opt'+(topicFilter==='all'?' selected':'')+'" onclick="pickTopic(\'all\',this)">All topics</div>';
+  html+=topics.map(function(t){
+    var esc1=t.replace(/'/g,"\\'").replace(/"/g,'&quot;');
+    return '<div class="flt-opt'+(topicFilter===t?' selected':'')+'" onclick="pickTopic(\''+esc1+'\',this)">'+esc(t)+'</div>';
+  }).join('');
+  menu.innerHTML=html;
+  var labelEl=document.getElementById('topicTriggerLabel');
+  if(labelEl)labelEl.textContent=topicFilter==='all'?'All topics':topicFilter;
+  var trigger=document.getElementById('topicTrigger');
+  if(trigger)trigger.classList.toggle('open',false);
+}
+function pickTopic(t,opt){
+  topicFilter=t;
+  document.querySelectorAll('#topicMenu .flt-opt').forEach(function(x){x.classList.remove('selected');});
+  if(opt)opt.classList.add('selected');
+  var labelEl=document.getElementById('topicTriggerLabel');
+  if(labelEl)labelEl.textContent=t==='all'?'All topics':t;
+  var trigger=document.getElementById('topicTrigger');
+  if(trigger){trigger.classList.remove('open');}
+  var menu=document.getElementById('topicMenu');
+  if(menu){menu.classList.remove('open');}
+  _fltDdOpen=null;
+  _compCitsCache={};
+  renderAll();
+}
+/* helper: does this prompt (intent + topic) pass the current intent/topic filters? (combined AND) */
+function _passesIntentTopic(intent,topic){
+  if(intentFilter!=='all'&&String(intent||'').toUpperCase()!==intentFilter)return false;
+  if(topicFilter!=='all'&&String(topic||'')!==topicFilter)return false;
+  return true;
+}
+/* helper: filter D.prompts[bk] by current intentFilter + topicFilter */
+function _filterPdByIntent(pd){
+  if(intentFilter==='all'&&topicFilter==='all')return pd;
+  return pd.filter(function(p){return _passesIntentTopic(p.intent,p.topic);});
+}
+/* helper: Set of prompt *texts* matching current intentFilter+topicFilter, or null if both 'all' */
+function _intentPromptTexts(bk){
+  if(intentFilter==='all'&&topicFilter==='all')return null;
+  var texts=new Set();
+  var rh=RAW_HISTORY[currentBrand];if(!rh)return texts;
+  (rh.prompts||[]).forEach(function(rp){if(_passesIntentTopic(rp.intent,rp.topic))texts.add(rp.text);});
+  return texts;
+}
+/* rebuild competitors from RAW_HISTORY filtered by current intentFilter+model */
+function _buildIntentFilteredComps(bk){
+  var rh=RAW_HISTORY[currentBrand];if(!rh)return[];
+  var compMap={},inR=_rangeFn();
+  (rh.prompts||[]).forEach(function(rp){
+    if(!_passesIntentTopic(rp.intent,rp.topic))return;
+    (rp.entries||[]).forEach(function(e){
+      if(!inR(e.date))return; /* labs: upstream ignored the date range here */
+      if(activeModel!=='all'&&e.model!==activeModel)return;
+      (e.comps||[]).forEach(function(c){
+        if(!c)return;
+        if(!compMap[c])compMap[c]={name:c,mentions:0,models:[],modelMentions:{},topSentiment:'neutral',avgScore:0};
+        compMap[c].mentions++;
+        if(e.model&&compMap[c].models.indexOf(e.model)===-1)compMap[c].models.push(e.model);
+        compMap[c].modelMentions[e.model]=(compMap[c].modelMentions[e.model]||0)+1;
+      });
+    });
+  });
+  return Object.values(compMap).sort(function(a,b){return b.mentions-a.mentions;});
+}
+/* rebuild citation aggregates (domains/page types/content types) from RAW_HISTORY filtered by current intentFilter+model */
+var _citMemo={key:null,val:null};
+function _buildIntentCitations(bk){
+  var _mk=[currentBrand,currentTimeRange,customStartDate,customEndDate,activeModel,intentFilter,topicFilter].join('|');
+  if(_citMemo.key===_mk)return _citMemo.val;
+  var _v=_buildIntentCitationsRaw(bk);_citMemo={key:_mk,val:_v};return _v;
+}
+function _buildIntentCitationsRaw(bk){
+  var rh=RAW_HISTORY[currentBrand];
+  var fallbackListicles=(D.citations[bk]||{}).topListicles||[];
+  if(!rh)return{total:0,uniqueDomains:0,domainTypes:[],contentTypes:[],topDomains:[],topListicles:fallbackListicles};
+  var domainCounts={},contentCounts={},typeCounts={},total=0,inR=_rangeFn();
+  (rh.prompts||[]).forEach(function(rp){
+    if(!_passesIntentTopic(rp.intent,rp.topic))return;
+    (rp.entries||[]).forEach(function(e){
+      if(!inR(e.date))return; /* labs: upstream ignored the date range here */
+      if(activeModel!=='all'&&e.model!==activeModel)return;
+      (e.srcs||[]).forEach(function(src){
+        if(!src||!src.u)return;
+        var dom=null; /* a citation whose URL can't be read still counts in the totals and types, just not under a domain */
+        try{dom=new URL(src.u).hostname.replace(/^www\./,'');}catch(err){}
+        if(dom)domainCounts[dom]=(domainCounts[dom]||0)+1;
+        if(src.pt)typeCounts[src.pt]=(typeCounts[src.pt]||0)+1;
+        if(src.ct)contentCounts[src.ct]=(contentCounts[src.ct]||0)+1;
+        total++;
+      });
+    });
+  });
+  var topDomains=Object.keys(domainCounts).map(function(d){return{domain:d,count:domainCounts[d]};}).sort(function(a,b){return b.count-a.count;});
+  var domainTypes=Object.keys(typeCounts).map(function(k){return{type:k,count:typeCounts[k]};}).sort(function(a,b){return b.count-a.count;});
+  var contentTypes=Object.keys(contentCounts).map(function(k){return{type:k,count:contentCounts[k]};}).sort(function(a,b){return b.count-a.count;});
+  return{total:total,uniqueDomains:topDomains.length,domainTypes:domainTypes,contentTypes:contentTypes,topDomains:topDomains,topListicles:fallbackListicles};
+}
+function _intentLabel(it){return it.charAt(0)+it.slice(1).toLowerCase();}
 function switchTab(t,btn){document.querySelectorAll('.stab').forEach(x=>x.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));document.getElementById('panel-'+t).classList.add('active');}
-function renderAll(){renderStats();renderOverview();renderPrompts();renderSentiment();renderCompetitors();renderCitations();renderActionsGrid();}
+/* labs: one failing block must not blank the rest of the page */
+function renderAll(){[renderLabsNotes,renderStats,renderOverview,renderPrompts,renderFanout,renderSentiment,renderCompetitors,renderCitations].forEach(function(f){try{f();}catch(e){if(window.console)console.error(f.name,e);}});}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
+function safeUrl(u){try{var p=new URL(u);return(p.protocol==='https:'||p.protocol==='http:')?u:'#';}catch(e){return '#';}}
 function fav(d,sz){return 'https://www.google.com/s2/favicons?domain='+d+'&sz='+(sz||32);}
 function favImg(d,cls,tip){return '<span class="fav-wrap" data-tip="'+(tip||d)+'"><img class="'+(cls||'act-fav')+'" src="'+fav(d)+'" onerror="this.style.display=\'none\'"></span>';}
 /* overview charts */
@@ -650,9 +919,13 @@ function _destroyCharts(){Object.values(_ovCharts).forEach(function(c){try{c.des
 function renderOverview(){
   _destroyCharts();
   var bk=BRAND_CFG[currentBrand].key;
-  var pd=D.prompts[bk];
+  var pd=_filterPdByIntent(D.prompts[bk]);
   var s=D.sentiment[bk];
-  var comps=_dedupeComps(D.competitors[bk]);
+  var comps=(intentFilter!=='all'||topicFilter!=='all')?_dedupeComps(_buildIntentFilteredComps(bk)):_dedupeComps(D.competitors[bk]);
+  /* labs: tracked competitors vs every other name the AIs mention (regulators, comparison sites, banks...) */
+  var _norms=_trackedNorms(),_split=_hasTracked();
+  var compsOther=_split?comps.filter(function(c){return !_isTracked(c.name,_norms);}):[];
+  if(_split)comps=comps.filter(function(c){return _isTracked(c.name,_norms);});
   var cit=D.citations[bk];
   var brandName=BRAND_CFG[currentBrand].name;
 
@@ -663,6 +936,7 @@ function renderOverview(){
     var allD=rh.runDates,maxD=allD[allD.length-1];
     if(currentTimeRange==='last-run'){inRangeDates=[maxD];}
     else if(currentTimeRange==='all'){inRangeDates=allD;}
+    else if(currentTimeRange==='custom'&&customStartDate&&customEndDate){inRangeDates=allD.filter(function(d){return d>=customStartDate&&d<=customEndDate;});}
     else{var ndays={'last-7':7,'last-14':14,'last-20':20}[currentTimeRange];var cutoffD=_daysBack(maxD,ndays);inRangeDates=allD.filter(function(d){return d>=cutoffD;});}
   }
   var isLastRun=(currentTimeRange==='last-run')||inRangeDates.length<=1;
@@ -672,50 +946,65 @@ function renderOverview(){
   inRangeDates.forEach(function(d){dayTotals[d]=0;dayBrandHits[d]=0;top5comps.forEach(function(c){dayCompHits[c.name][d]=0;});});
   if(rh){
     rh.prompts.forEach(function(rp){
+      if(!_passesIntentTopic(rp.intent,rp.topic))return;
       rp.entries.filter(function(e){return inRangeDates.indexOf(e.date)>-1&&(activeModel==='all'||e.model===activeModel);}).forEach(function(e){
         dayTotals[e.date]=(dayTotals[e.date]||0)+1;
         if(e.hit)dayBrandHits[e.date]=(dayBrandHits[e.date]||0)+1;
-        top5comps.forEach(function(c){if((e.comps||[]).indexOf(c.name)>-1)dayCompHits[c.name][e.date]=(dayCompHits[c.name][e.date]||0)+1;});
+        top5comps.forEach(function(c){if((e.comps||[]).some(function(n){return _normComp(n)===_normComp(c.name);}))dayCompHits[c.name][e.date]=(dayCompHits[c.name][e.date]||0)+1;});
       });
     });
   }
   var brandVis=inRangeDates.map(function(d){return dayTotals[d]>0?Math.round(dayBrandHits[d]/dayTotals[d]*100):null;});
   var compVisSeries=top5comps.map(function(c){return {name:c.name,data:inRangeDates.map(function(d){return dayTotals[d]>0?Math.round((dayCompHits[c.name][d]||0)/dayTotals[d]*100):null;})};});
+  /* labs: chart the official score per run (brand + every tracked competitor) when available;
+     the mention-rate series above stays as the fallback */
+  var chartLabels=inRangeDates.map(function(d){return d.slice(5);}),chartBrand=brandVis,chartComps=compVisSeries,chartMax=100,_visUnit='%';
+  var _ts=_official().timeseries,_officialAvail=!!(_ts&&_ts.brand&&(_ts.brand.series||[]).length);
+  /* the official score is one number per run for all models and prompts, so it can't follow the
+     model, intent and topic filters: with one on, chart the share of answers that name each brand instead */
+  var _filtersOn=activeModel!=='all'||intentFilter!=='all'||topicFilter!=='all';
+  var _officialChart=_officialAvail&&!_filtersOn;
+  if(_officialAvail&&_filtersOn){
+    var _vv=chartBrand.concat.apply(chartBrand,chartComps.map(function(c){return c.data;})).filter(function(v){return v!==null&&v!==undefined;});
+    chartMax=Math.min(100,Math.max(10,Math.ceil(Math.max.apply(null,_vv.concat([0]))*1.2/5)*5));
+  }
+  if(_officialChart){
+    var _inR=_rangeFn();
+    var _toMap=function(series){var m={};(series||[]).forEach(function(p){m[p.date]=p.score;});return m;};
+    var _tsComps=(_ts.competitors||[]).filter(function(c){return (c.series||[]).some(function(p){return p.score!==null;});});
+    var _bMap=_toMap(_ts.brand.series),_cMaps=_tsComps.map(function(c){return _toMap(c.series);});
+    var _has=function(v){return v!==null&&v!==undefined;};
+    var _dates=_ts.brand.series.map(function(p){return p.date;}).filter(function(d){return _inR(d)&&(_has(_bMap[d])||_cMaps.some(function(m){return _has(m[d]);}));});
+    chartLabels=_dates.map(function(d){return d.slice(5);});
+    chartBrand=_dates.map(function(d){return _has(_bMap[d])?_bMap[d]:null;});
+    chartComps=_tsComps.map(function(c,i){return {name:c.name,data:_dates.map(function(d){return _has(_cMaps[i][d])?_cMaps[i][d]:null;})};});
+    var _vals=chartBrand.concat.apply(chartBrand,chartComps.map(function(c){return c.data;})).filter(_has);
+    chartMax=Math.max(10,Math.ceil(Math.max.apply(null,_vals.concat([0]))*1.2/5)*5);
+    _visUnit='';
+    isLastRun=_dates.length<=1;
+  }
 
   /* ── Competitor mentions ────────────────────────────────────────────── */
   var compFiltered=activeModel==='all'?comps:comps.filter(function(c){return c.models&&c.models.indexOf(activeModel)>-1;});
   var top8=compFiltered.slice(0,8);
-  var modelCompCounts={};
-  if(activeModel!=='all'&&rh){
-    rh.prompts.forEach(function(rp){
-      rp.entries.filter(function(e){return inRangeDates.indexOf(e.date)>-1&&e.model===activeModel;}).forEach(function(e){
-        (e.comps||[]).forEach(function(c){modelCompCounts[c]=(modelCompCounts[c]||0)+1;});
-      });
-    });
-  }
   if(activeModel!=='all'){
-    top8=compFiltered.map(function(c){return Object.assign({},c,{modelMentions:modelCompCounts[c.name]||0});}).sort(function(a,b){return b.modelMentions-a.modelMentions;}).slice(0,8);
+    top8=compFiltered.map(function(c){var cnt=c.modelMentions&&c.modelMentions[activeModel]||0;return Object.assign({},c,{modelMentions:cnt});}).sort(function(a,b){return b.modelMentions-a.modelMentions;}).slice(0,8);
   }
 
   /* ── Sentiment ──────────────────────────────────────────────────────── */
-  var sMentions=activeModel==='all'?s.mentions:s.mentions.filter(function(m){return m.model===activeModel;});
+  /* labs: intent and topic apply here too (sentiment mentions carry the prompt text) */
+  var _sentTexts=_intentPromptTexts(bk);
+  var sMentions=s.mentions;
+  if(_sentTexts)sMentions=sMentions.filter(function(m){return _sentTexts.has(m.prompt);});
+  if(activeModel!=='all')sMentions=sMentions.filter(function(m){return m.model===activeModel;});
   var sentCounts={positive:0,neutral:0,negative:0,uncertain:0};
   sMentions.forEach(function(m){if(sentCounts.hasOwnProperty(m.sentiment))sentCounts[m.sentiment]++;});
 
   /* ── Model-filtered citations ───────────────────────────────────────── */
-  var activeCit=cit;
-  if(activeModel!=='all'&&D.modelCitations&&D.modelCitations[bk]&&D.modelCitations[bk][activeModel]){
-    var mc=D.modelCitations[bk][activeModel];
-    activeCit={
-      total:mc.total||cit.total,
-      uniqueUrls:cit.uniqueUrls,
-      uniqueDomains:mc.uniqueDomains||cit.uniqueDomains,
-      domainTypes:(mc.domainTypes&&mc.domainTypes.length)?mc.domainTypes:cit.domainTypes,
-      contentTypes:(mc.contentTypes&&mc.contentTypes.length)?mc.contentTypes:cit.contentTypes,
-      topDomains:(mc.topDomains&&mc.topDomains.length)?mc.topDomains:cit.topDomains,
-      topListicles:cit.topListicles,
-    };
-  }
+  /* labs: recounted from the raw answers so time range, model, intent and topic all apply, and
+     "All data" matches a range that covers every run (the build-time totals and the model
+     fallback this replaces ignored intent/topic, or fell back to every model's data) */
+  var activeCit=_buildIntentCitations(bk);
 
   /* ── Content & page types ───────────────────────────────────────────── */
   var ct=activeCit.contentTypes.slice(0,6);
@@ -725,11 +1014,14 @@ function renderOverview(){
   var dtLabels=dt.map(function(x){return x.type.replace(/_/g,' ').replace(/\b\w/g,function(c){return c.toUpperCase();});});
   var dtData=dt.map(function(x){return x.count;});
 
+  function _donutBody(id,n){return n>0?'<div class="cc-body" style="height:210px;position:relative"><canvas id="'+id+'"></canvas></div>':'<div class="cc-body" style="height:210px;display:flex;align-items:center;justify-content:center"><p style="color:var(--ink4);font-size:12px">No data for these filters.</p></div>';}
+
   /* ── Bar helper ─────────────────────────────────────────────────────── */
   function ovBars(items,maxVal,fillClass){
     return items.map(function(item){
       var pct=maxVal>0?Math.round(item.val/maxVal*100):0;
-      return '<div class="ov-bar-row"><div class="ov-bar-lbl"><img src="'+fav(item.icon)+'" onerror="this.style.opacity=\'0\'" alt=""><span>'+item.label+'</span></div><div class="ov-bar-track"><div class="ov-bar-fill '+fillClass+'" style="width:'+pct+'%"></div></div><div class="ov-bar-val">'+item.sub+'</div></div>';
+      /* labs: names come from AI answers, so they are escaped */
+      return '<div class="ov-bar-row"><div class="ov-bar-lbl"><img src="'+fav(encodeURIComponent(item.icon))+'" onerror="this.style.opacity=\'0\'" alt=""><span title="'+esc(item.label)+'">'+esc(item.label)+'</span></div><div class="ov-bar-track"><div class="ov-bar-fill '+fillClass+'" style="width:'+pct+'%"></div></div><div class="ov-bar-val">'+esc(item.sub)+'</div></div>';
     }).join('');
   }
 
@@ -740,41 +1032,55 @@ function renderOverview(){
   var covItemsFiltered=activeModel==='all'?covItems:covItems.filter(function(item){return item.label===(MODEL_META[activeModel]||{label:activeModel}).label;});
 
   /* ── Competitor bar items ───────────────────────────────────────────── */
-  var compMax=top8[0]?(activeModel!=='all'?(top8[0].modelMentions||top8[0].mentions):top8[0].mentions):1;
-  var compItems=top8.map(function(c){var cd=COMP_DOMAINS[c.name]||(c.name.toLowerCase().replace(/\s/g,'')+'.com');var mentionVal=activeModel!=='all'?(modelCompCounts[c.name]||0):c.mentions;return {icon:cd,label:c.name,val:mentionVal,sub:mentionVal+' mentions'};});
+  var compMax=top8[0]?(activeModel!=='all'?(top8[0].modelMentions||top8[0].mentions):top8[0].mentions):1;if(compMax===0)compMax=1;
+  var compItems=top8.map(function(c){var cd=COMP_DOMAINS[c.name]||(c.name.toLowerCase().replace(/\s/g,'')+'.com');var mentionVal=activeModel!=='all'?(c.modelMentions||0):c.mentions;return {icon:cd,label:c.name,val:mentionVal,sub:mentionVal+' mentions'};});
+  var brandMentionCount=inRangeDates.reduce(function(s,d){return s+(dayBrandHits[d]||0);},0);
+  /* labs: names the AIs mention that are not tracked competitors */
+  var otherFiltered=activeModel==='all'?compsOther:compsOther.filter(function(c){return c.models&&c.models.indexOf(activeModel)>-1;});
+  var other8=activeModel==='all'?otherFiltered.slice(0,8):otherFiltered.map(function(c){var cnt=c.modelMentions&&c.modelMentions[activeModel]||0;return Object.assign({},c,{modelMentions:cnt});}).sort(function(a,b){return b.modelMentions-a.modelMentions;}).slice(0,8);
+  var otherMax=other8[0]?(activeModel!=='all'?(other8[0].modelMentions||0):other8[0].mentions):1;if(!otherMax)otherMax=1;
+  var otherItems=other8.map(function(c){var v=activeModel!=='all'?(c.modelMentions||0):c.mentions;return {icon:_compDomain(c.name),label:c.name,val:v,sub:v+' mentions'};});
+  var _brandDomOv=BRAND_CFG[currentBrand].url||'';
+  if(brandMentionCount>compMax)compMax=brandMentionCount; /* one scale for the brand and the competitor bars */
+  var _brandPctOv=compMax>0?Math.round(brandMentionCount/compMax*100):0;
+  var _brandOvRow='<div class="ov-bar-row" style="background:rgba(79,70,229,.06);padding:6px 0;border-top:1.5px dashed rgba(79,70,229,.3);border-bottom:none"><div class="ov-bar-lbl" style="color:#4f46e5;font-weight:700"><img src="'+fav(_brandDomOv)+'" onerror="this.style.opacity=\'0\'" alt=""><span>You ('+brandName+')</span></div><div class="ov-bar-track"><div class="ov-bar-fill" style="width:'+_brandPctOv+'%;background:rgba(79,70,229,.85)"></div></div><div class="ov-bar-val" style="color:#4f46e5;font-weight:700">'+brandMentionCount+' mentions</div></div>';
 
   /* ── Top domain items ───────────────────────────────────────────────── */
   var topDom=activeCit.topDomains.slice(0,8),domMax=topDom[0]?topDom[0].count:1;
   var domItems=topDom.map(function(d){return {icon:d.domain,label:d.domain,val:d.count,sub:d.count+' citations'};});
 
   /* ── Render HTML ────────────────────────────────────────────────────── */
-  var visSubtitle=brandName+' vs top competitors &middot; '+(isLastRun?'last run snapshot':inRangeDates.length+' data points');
-  document.getElementById('ovContent').innerHTML=
-    '<div class="two-col" style="margin-bottom:14px">'+
-      '<div class="cc"><div class="cc-head"><div class="cc-title">Visibility Over Time</div><div class="cc-sub">'+visSubtitle+'</div></div><div class="cc-body" style="height:260px;position:relative"><canvas id="ov-vis"></canvas></div><div id="ov-vis-legend" style="display:flex;flex-wrap:wrap;gap:8px 14px;padding:8px 14px 4px;border-top:1px solid var(--border)"></div></div>'+
-      '<div class="cc"><div class="cc-head"><div class="cc-title">Competitor Mentions</div><div class="cc-sub">'+(activeModel!=='all'?(MODEL_META[activeModel]||{label:activeModel}).label+' &middot; ':'')+'top 8 by mention count</div></div><div class="cc-body"><div class="ov-bar-wrap">'+ovBars(compItems,compMax,'ov-green')+'</div></div></div>'+
-    '</div>'+
-    '<div class="two-col" style="margin-bottom:14px">'+
-      '<div class="cc"><div class="cc-head"><div class="cc-title">Sentiment Breakdown</div><div class="cc-sub">'+sMentions.length+' brand mention'+(sMentions.length!==1?'s':'')+' analysed</div></div><div class="cc-body" style="height:210px;position:relative"><canvas id="ov-sent"></canvas></div></div>'+
-      '<div class="cc"><div class="cc-head"><div class="cc-title">Model Coverage</div><div class="cc-sub">prompts triggering a brand mention per AI model</div></div><div class="cc-body"><div class="ov-bar-wrap">'+ovBars(covItemsFiltered,covMax,'ov-indigo')+'</div></div></div>'+
-    '</div>'+
-    '<div class="two-col" style="margin-bottom:14px">'+
-      '<div class="cc"><div class="cc-head"><div class="cc-title">Content Type Distribution</div><div class="cc-sub">how AI citation sources are classified</div></div><div class="cc-body" style="height:210px;position:relative"><canvas id="ov-ct"></canvas></div></div>'+
-      '<div class="cc"><div class="cc-head"><div class="cc-title">Page Type Distribution</div><div class="cc-sub">structure of pages AI models cite most</div></div><div class="cc-body" style="height:210px;position:relative"><canvas id="ov-dt"></canvas></div></div>'+
-    '</div>'+
-    '<div style="margin-bottom:14px">'+
-      '<div class="cc"><div class="cc-head"><div class="cc-title">Top Cited Domains</div><div class="cc-sub">leading citation sources</div></div><div class="cc-body"><div class="ov-bar-wrap">'+ovBars(domItems,domMax,'ov-violet')+'</div></div></div>'+
-    '</div>';
+  var _modelPrefix=activeModel!=='all'?(MODEL_META[activeModel]||{label:activeModel}).label+' &middot; ':'';
+  var visTitle=_officialChart?'Visibility score over time':(_officialAvail?'Mention rate over time':'Visibility Over Time');
+  var visSubtitle=_officialChart
+    ?esc(brandName)+' vs tracked competitors &middot; visibility score (0–100) per run, all models and prompts'
+    :(_officialAvail
+      ?esc(brandName)+' vs tracked competitors &middot; share of the filtered AI answers that name each brand, per run (the official score only exists for all models and prompts)'
+      :esc(brandName)+' vs top competitors &middot; '+(isLastRun?'last run snapshot':inRangeDates.length+' data points'));
+  var visCard='<div class="cc"><div class="cc-head"><div><div class="cc-title">'+visTitle+'</div><div class="cc-sub">'+visSubtitle+'</div></div></div><div class="cc-body" style="height:260px;position:relative"><canvas id="ov-vis"></canvas></div><div id="ov-vis-legend" style="display:flex;flex-wrap:wrap;gap:8px 14px;padding:8px 14px 4px;border-top:1px solid var(--border)"></div></div>';
+  var compCard='<div class="cc"><div class="cc-head"><div><div class="cc-title">'+(_split?'Tracked competitors':'Competitor Mentions')+'</div><div class="cc-sub">'+_modelPrefix+(_split?'mentions in AI answers':'top 8 by mention count')+'</div></div></div><div class="cc-body"><div class="ov-bar-wrap">'+(compItems.length?ovBars(compItems,compMax,'ov-green'):'<p style="color:var(--ink4);font-size:12px;padding:6px 0">No tracked competitor mentioned for this filter.</p>')+_brandOvRow+'</div></div></div>';
+  var alsoCard='<div class="cc"><div class="cc-head"><div><div class="cc-title">Also named by the AIs</div><div class="cc-sub">'+_modelPrefix+'not tracked: regulators, comparison sites, other brands</div></div></div><div class="cc-body"><div class="ov-bar-wrap">'+(otherItems.length?ovBars(otherItems,otherMax,'ov-violet'):'<p style="color:var(--ink4);font-size:12px;padding:6px 0">No other names for this filter.</p>')+'</div></div></div>';
+  var sentCard='<div class="cc"><div class="cc-head"><div><div class="cc-title">Sentiment Breakdown</div><div class="cc-sub">'+sMentions.length+' brand mention'+(sMentions.length!==1?'s':'')+' analysed</div></div></div>'+_donutBody('ov-sent',sMentions.length)+'</div>';
+  var covCard='<div class="cc"><div class="cc-head"><div><div class="cc-title">Model Coverage</div><div class="cc-sub">prompts where the latest answer of each AI model mentions the brand</div></div></div><div class="cc-body"><div class="ov-bar-wrap">'+ovBars(covItemsFiltered,covMax,'ov-indigo')+'</div></div></div>';
+  var ctCard='<div class="cc"><div class="cc-head"><div><div class="cc-title">Content Type Distribution</div><div class="cc-sub">how AI citation sources are classified</div></div></div>'+_donutBody('ov-ct',ctData.length)+'</div>';
+  var dtCard='<div class="cc"><div class="cc-head"><div><div class="cc-title">Page Type Distribution</div><div class="cc-sub">structure of pages AI models cite most</div></div></div>'+_donutBody('ov-dt',dtData.length)+'</div>';
+  var domCard='<div class="cc"><div class="cc-head"><div><div class="cc-title">Top Cited Domains</div><div class="cc-sub">leading citation sources</div></div></div><div class="cc-body"><div class="ov-bar-wrap">'+(domItems.length?ovBars(domItems,domMax,'ov-violet'):'<p style="color:var(--ink4);font-size:12px;padding:6px 0">No citations for these filters.</p>')+'</div></div></div>';
+  function _row(a,b){return '<div class="two-col" style="margin-bottom:14px">'+a+b+'</div>';}
+  document.getElementById('ovContent').innerHTML=_labsCardsHtml()+
+    _row(visCard,compCard)+
+    (_split?_row(alsoCard,covCard)+_row(sentCard,ctCard)+_row(dtCard,domCard)
+           :_row(sentCard,covCard)+_row(ctCard,dtCard)+'<div style="margin-bottom:14px">'+domCard+'</div>');
 
   var styleId='ov-bar-style';
   if(!document.getElementById(styleId)){var st=document.createElement('style');st.id=styleId;st.textContent='.ov-bar-fill.ov-indigo{background:rgba(79,70,229,.75)}.ov-bar-fill.ov-green{background:rgba(16,185,129,.75)}.ov-bar-fill.ov-violet{background:rgba(139,92,246,.75)}';document.head.appendChild(st);}
   var baseFont={family:'-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif',size:11};
+  var _donutTooltipCb={callbacks:{label:function(ctx){var sum=ctx.dataset.data.reduce(function(a,b){return a+b;},0);return ctx.label+': '+ctx.parsed+(sum>0?' ('+Math.round(ctx.parsed/sum*100)+'%)':'');}}};
 
   /* ── Visibility line chart ──────────────────────────────────────────── */
-  var visColors=['#4f46e5','#10b981','#f59e0b','#ef4444','#8b5cf6','#ec4899'];
-  var visDatasets=[{label:brandName,data:brandVis,borderColor:visColors[0],backgroundColor:visColors[0]+'20',borderWidth:2.5,pointRadius:isLastRun?7:3,pointHoverRadius:7,fill:false,tension:0,showLine:!isLastRun,spanGaps:true}];
-  compVisSeries.forEach(function(cv,ci){visDatasets.push({label:cv.name,data:cv.data,borderColor:visColors[ci+1],backgroundColor:visColors[ci+1]+'20',borderWidth:1.5,pointRadius:isLastRun?6:2,pointHoverRadius:5,fill:false,tension:0,showLine:!isLastRun,borderDash:[],spanGaps:true});});
-  _ovCharts.vis=new Chart(document.getElementById('ov-vis'),{type:'line',data:{labels:inRangeDates.map(function(d){return d.slice(5);}),datasets:visDatasets},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{enabled:false,external:function(context){
+  var visColors=['#4f46e5','#10b981','#f59e0b','#ef4444','#8b5cf6','#ec4899','#0ea5e9','#64748b'];
+  var visDatasets=[{label:brandName,data:chartBrand,borderColor:visColors[0],backgroundColor:visColors[0]+'20',borderWidth:2.5,pointRadius:isLastRun?7:3,pointHoverRadius:7,fill:false,tension:0,showLine:!isLastRun,spanGaps:true}];
+  chartComps.forEach(function(cv,ci){var col=visColors[(ci+1)%visColors.length];visDatasets.push({label:cv.name,data:cv.data,borderColor:col,backgroundColor:col+'20',borderWidth:1.5,pointRadius:isLastRun?6:2,pointHoverRadius:5,fill:false,tension:0,showLine:!isLastRun,borderDash:[],spanGaps:true});});
+  _ovCharts.vis=new Chart(document.getElementById('ov-vis'),{type:'line',data:{labels:chartLabels,datasets:visDatasets},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{enabled:false,external:function(context){
   var tt=context.tooltip;
   var el=document.getElementById('vis-tooltip');
   if(!el){el=document.createElement('div');el.id='vis-tooltip';el.style.cssText='position:absolute;background:#1e293b;color:#fff;border-radius:8px;padding:8px 12px;font-size:12px;pointer-events:none;z-index:100;box-shadow:0 4px 12px rgba(0,0,0,.2);transition:opacity .1s;min-width:140px;';document.body.appendChild(el);}
@@ -783,13 +1089,13 @@ function renderOverview(){
   var rows=(tt.dataPoints||[]).map(function(dp){
     var dsLabel=dp.dataset.label;
     var domain;
-    var bk=typeof currentBrand!=='undefined'?currentBrand:Object.keys(BRAND_CFG)[0];
-    var brandDomain=BRAND_CFG[bk]&&BRAND_CFG[bk].domain;
+    var bk=currentBrand;
+    var brandDomain=BRAND_CFG[bk]&&BRAND_CFG[bk].url;
     var brandName=BRAND_CFG[bk]&&BRAND_CFG[bk].name;
     if(dsLabel===brandName){domain=brandDomain;}
-    else{domain=typeof COMP_DOMAINS!=='undefined'&&COMP_DOMAINS[dsLabel]?(COMP_DOMAINS[dsLabel]):(dsLabel.toLowerCase().replace(/\s+(ai|digital|agency|media|labs?)$/,'').replace(/\s+/g,'')+'.com');}
+    else{domain=COMP_DOMAINS[dsLabel]?(COMP_DOMAINS[dsLabel]):(dsLabel.toLowerCase().replace(/\s+(ai|digital|agency|media|labs?)$/,'').replace(/\s+/g,'')+'.com');}
     var favUrl='https://www.google.com/s2/favicons?domain='+domain+'&sz=32';
-    var val=dp.parsed.y!==null?dp.parsed.y+'%':'N/A';
+    var val=dp.parsed.y!==null?dp.parsed.y+_visUnit:'N/A';
     return '<div style="display:flex;align-items:center;gap:6px;padding:2px 0"><img src="'+favUrl+'" style="width:14px;height:14px;border-radius:3px;border:1px solid rgba(255,255,255,.2)" onerror="this.style.display=\'none\'"><span style="flex:1;color:rgba(255,255,255,.85)">'+dsLabel+'</span><span style="font-weight:600;color:#fff">'+val+'</span></div>';
   }).join('');
   el.innerHTML=label+rows;
@@ -797,24 +1103,25 @@ function renderOverview(){
   el.style.opacity='1';
   el.style.left=(pos.left+window.scrollX+tt.caretX+12)+'px';
   el.style.top=(pos.top+window.scrollY+tt.caretY-el.offsetHeight/2)+'px';
-}}},scales:{x:{ticks:{font:baseFont,maxTicksLimit:12},grid:{display:false}},y:{min:0,max:100,ticks:{font:baseFont,callback:function(v){return v+'%';}},grid:{color:'rgba(0,0,0,.05)'}}}}});
+}}},scales:{x:{ticks:{font:baseFont,maxTicksLimit:12},grid:{display:false}},y:{min:0,max:chartMax,ticks:{font:baseFont,callback:function(v){return v+_visUnit;}},grid:{color:'rgba(0,0,0,.05)'}}}}});
   var visLegend=document.getElementById('ov-vis-legend');
-  if(visLegend){var brandDomain=BRAND_CFG[currentBrand].url||'aipeekaboo.com';var legendItems=[{label:brandName,domain:brandDomain,color:visColors[0]}];top5comps.forEach(function(c,ci){var cd=COMP_DOMAINS[c.name]||(c.name.toLowerCase().replace(/\s/g,'')+'.com');legendItems.push({label:c.name,domain:cd,color:visColors[ci+1]});});visLegend.innerHTML=legendItems.map(function(item){return '<div style="display:flex;align-items:center;gap:5px"><div style="width:20px;height:2px;background:'+item.color+';flex-shrink:0"></div><img src="'+fav(item.domain)+'" style="width:14px;height:14px;border-radius:3px;border:1px solid #e5e7eb;flex-shrink:0" onerror="this.style.display=\'none\'"><span style="font-size:11px;color:#374151;white-space:nowrap">'+item.label+'</span></div>';}).join('');}
+  if(visLegend){var brandDomain=BRAND_CFG[currentBrand].url||'';var legendItems=[{label:brandName,domain:brandDomain,color:visColors[0]}];chartComps.forEach(function(c,ci){legendItems.push({label:c.name,domain:_compDomain(c.name),color:visColors[(ci+1)%visColors.length]});});visLegend.innerHTML=legendItems.map(function(item){return '<div style="display:flex;align-items:center;gap:5px"><div style="width:20px;height:2px;background:'+item.color+';flex-shrink:0"></div><img src="'+fav(item.domain)+'" style="width:14px;height:14px;border-radius:3px;border:1px solid #e5e7eb;flex-shrink:0" onerror="this.style.display=\'none\'"><span style="font-size:11px;color:#374151;white-space:nowrap">'+item.label+'</span></div>';}).join('');}
 
   /* ── Sentiment donut ────────────────────────────────────────────────── */
-  _ovCharts.sent=new Chart(document.getElementById('ov-sent'),{type:'doughnut',data:{labels:['Positive','Neutral','Negative','Uncertain'],datasets:[{data:[sentCounts.positive,sentCounts.neutral,sentCounts.negative,sentCounts.uncertain],backgroundColor:['#22c55e','#94a3b8','#ef4444','#f59e0b'],borderWidth:0,hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:baseFont,boxWidth:12,padding:10}},tooltip:{callbacks:{label:function(ctx){var t=ctx.parsed;var sum=ctx.dataset.data.reduce(function(a,b){return a+b;},0);return ctx.label+': '+t+(sum>0?' ('+Math.round(t/sum*100)+'%)':'');}}}}}});
+  if(document.getElementById('ov-sent'))_ovCharts.sent=new Chart(document.getElementById('ov-sent'),{type:'doughnut',data:{labels:['Positive','Neutral','Negative','Uncertain'],datasets:[{data:[sentCounts.positive,sentCounts.neutral,sentCounts.negative,sentCounts.uncertain],backgroundColor:['#22c55e','#94a3b8','#ef4444','#f59e0b'],borderWidth:0,hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:baseFont,boxWidth:12,padding:10}},tooltip:_donutTooltipCb}}});
 
   /* ── Content type donut ─────────────────────────────────────────────── */
   var ctColors=['#6366f1','#8b5cf6','#ec4899','#f43f5e','#f97316','#eab308'];
-  _ovCharts.ct=new Chart(document.getElementById('ov-ct'),{type:'doughnut',data:{labels:ctLabels,datasets:[{data:ctData,backgroundColor:ctColors,borderWidth:0,hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:baseFont,boxWidth:12,padding:8}},tooltip:{callbacks:{label:function(ctx){var sum=ctx.dataset.data.reduce(function(a,b){return a+b;},0);return ctx.label+': '+ctx.parsed+(sum>0?' ('+Math.round(ctx.parsed/sum*100)+'%)':'');}}}}}});
+  if(document.getElementById('ov-ct'))_ovCharts.ct=new Chart(document.getElementById('ov-ct'),{type:'doughnut',data:{labels:ctLabels,datasets:[{data:ctData,backgroundColor:ctColors,borderWidth:0,hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:baseFont,boxWidth:12,padding:8}},tooltip:_donutTooltipCb}}});
 
   /* ── Page type donut ────────────────────────────────────────────────── */
   var dtColors=['#3b82f6','#06b6d4','#10b981','#84cc16','#f59e0b','#f97316'];
-  _ovCharts.dt=new Chart(document.getElementById('ov-dt'),{type:'doughnut',data:{labels:dtLabels,datasets:[{data:dtData,backgroundColor:dtColors,borderWidth:0,hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:baseFont,boxWidth:12,padding:8}},tooltip:{callbacks:{label:function(ctx){var sum=ctx.dataset.data.reduce(function(a,b){return a+b;},0);return ctx.label+': '+ctx.parsed+(sum>0?' ('+Math.round(ctx.parsed/sum*100)+'%)':'');}}}}}});
+  if(document.getElementById('ov-dt'))_ovCharts.dt=new Chart(document.getElementById('ov-dt'),{type:'doughnut',data:{labels:dtLabels,datasets:[{data:dtData,backgroundColor:dtColors,borderWidth:0,hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:baseFont,boxWidth:12,padding:8}},tooltip:_donutTooltipCb}}});
 }
 /* stats */
 function renderStats(){
-  var bk=BRAND_CFG[currentBrand].key,pd=(intentFilter!=='all'?D.prompts[bk].filter(function(p){return String(p.intent||'').toUpperCase()===intentFilter;}):D.prompts[bk]),totalRuns=0,mentioned=0;
+  var bk=BRAND_CFG[currentBrand].key,totalRuns=0,mentioned=0;
+  var pd=_filterPdByIntent(D.prompts[bk]);
   pd.forEach(function(p){
     if(activeModel==='all'){totalRuns+=p.totalRuns;mentioned+=p.mentions;}
     else{var mr=p.models[activeModel];if(mr){totalRuns++;if(mr.mentioned)mentioned++;}}
@@ -843,9 +1150,12 @@ function renderStats(){
     if(bsm)bestScoreModel=(MODEL_META[bsm]||{label:bsm}).label;
   }
   var c=D.citations[bk];
-  var citTotal=activeModel!=='all'&&D.modelCitations&&D.modelCitations[bk]&&D.modelCitations[bk][activeModel]?D.modelCitations[bk][activeModel].total:c.total;
+  var citTotal=_buildIntentCitations(bk).total;
   /* sentiment score */
-  var sentPos=0,sentTotal=0;pd.forEach(function(p){if(activeModel==='all'){Object.values(p.models).forEach(function(m){if(m&&m.mentioned&&m.sentiment){sentTotal++;if(m.sentiment==='positive')sentPos++;}});}else{var mr=p.models[activeModel];if(mr&&mr.mentioned&&mr.sentiment){sentTotal++;if(mr.sentiment==='positive')sentPos++;}}});
+  var s=D.sentiment[bk];
+  var sMentions=activeModel==='all'?s.mentions:s.mentions.filter(function(m){return m.model===activeModel;});
+  var sentPos=sMentions.filter(function(m){return m.sentiment==='positive';}).length;
+  var sentTotal=sMentions.length;
   var sentPct=sentTotal>0?(sentPos/sentTotal*100).toFixed(0):null;
   var sentCls=sentPct===null?'bad':parseInt(sentPct)>=60?'good':parseInt(sentPct)>=30?'warn':'bad';
   /* avg position */
@@ -862,7 +1172,7 @@ function renderStats(){
   var infoSvg='<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="7" cy="7" r="6"/><path d="M7 6v4" stroke-linecap="round"/><circle cx="7" cy="4.5" r=".5" fill="currentColor" stroke="none"/></svg>';
   var bestScoreTip='Highest AI visibility score (0-100) achieved'+(activeModel!=='all'?' for '+(MODEL_META[activeModel]||{label:activeModel}).label:' across all prompts and models')+'. Score reflects prominence and rank in the AI response';
   document.getElementById('statRow').innerHTML=
-    '<div class="stat-card"><div class="sc-label"><span class="info-tip" data-tip="Percentage of total AI model runs where the brand was mentioned (total mentions / total runs across all prompts and models)">'+infoSvg+'</span>AI Visibility</div><div class="sc-val '+visCls+'">'+visPct+'%</div><div class="sc-sub">'+mentioned+' of '+totalRuns+' model runs include a mention</div></div>'+
+    '<div class="stat-card"><div class="sc-label"><span class="info-tip" data-tip="Share of AI answers that mention the brand (mentions / runs). Not the visibility score, which also weighs how early the brand appears: see the visibility scores on the Overview.">'+infoSvg+'</span>Mention rate</div><div class="sc-val '+visCls+'">'+visPct+'%</div><div class="sc-sub">'+mentioned+' of '+totalRuns+' model runs include a mention</div></div>'+
     '<div class="stat-card"><div class="sc-label"><span class="info-tip" data-tip="Total number of individual AI model query executions across all prompts">'+infoSvg+'</span>Model Runs</div><div class="sc-val">'+totalRuns+'</div><div class="sc-sub">'+promptsMentioned+' of '+pd.length+' prompts trigger a mention</div></div>'+
     '<div class="stat-card"><div class="sc-label"><span class="info-tip" data-tip="'+bestScoreTip+'">'+infoSvg+'</span>Best Score</div><div class="sc-val '+(bestScore>0?'good':'bad')+'">'+(bestScore>0?bestScore:'None')+'</div><div class="sc-sub">'+(bestScore===100?'Rank 1 by '+(bestScoreModel||'AI'):bestScore>0?'highest ranking'+(bestScoreModel?' by '+bestScoreModel:''):'not ranked by any model')+'</div></div>'+
     '<div class="stat-card"><div class="sc-label"><span class="info-tip" data-tip="Total number of source URLs cited by AI models when answering prompts in this brand\'s topic area">'+infoSvg+'</span>Total Citations</div><div class="sc-val" style="color:var(--v)">'+citTotal.toLocaleString()+'</div><div class="sc-sub">'+c.uniqueDomains+' unique domains</div></div>'+
@@ -883,10 +1193,6 @@ function setSortCol(col){
   applyPromptFilter();
 }
 function sentWeight(s){return s==='positive'?3:s==='neutral'?2:s==='negative'?1:0;}
-function bestRankForPrompt(p){
-  var ranks=Object.values(p.models).filter(function(m){return m&&m.mentioned&&m.rank;}).map(function(m){return m.rank;});
-  return ranks.length?Math.min.apply(null,ranks):null;
-}
 function dominantSentiment(p){
   var sents=Object.values(p.models).filter(function(m){return m&&m.mentioned&&m.sentiment;}).map(function(m){return m.sentiment;});
   if(!sents.length)return null;
@@ -936,16 +1242,18 @@ function sortPrompts(arr){
 /* prompts */
 var _pd=[];
 var _promptComps={};
+var _promptCits={};
 function _buildPromptComps(bk){
   var rh=RAW_HISTORY[bk];if(!rh)return;
   var runDates=rh.runDates||[];
   var maxDate=runDates.length?runDates[runDates.length-1]:null;
-  var cutoffDate=null,lastRunOnly=false;
+  var cutoffDate=null,lastRunOnly=false,customEndPc=null;
   if(currentTimeRange==='last-run'){lastRunOnly=true;}
   else if(currentTimeRange==='last-7'&&maxDate){cutoffDate=_daysBack(maxDate,7);}
   else if(currentTimeRange==='last-14'&&maxDate){cutoffDate=_daysBack(maxDate,14);}
   else if(currentTimeRange==='last-20'&&maxDate){cutoffDate=_daysBack(maxDate,20);}
-  function pcInRange(date){if(!date)return true;if(lastRunOnly)return date===maxDate;if(cutoffDate)return date>=cutoffDate;return true;}
+  else if(currentTimeRange==='custom'&&customStartDate&&customEndDate){cutoffDate=customStartDate;customEndPc=customEndDate;}
+  function pcInRange(date){if(!date)return true;if(lastRunOnly)return date===maxDate;if(customEndPc)return date>=cutoffDate&&date<=customEndPc;if(cutoffDate)return date>=cutoffDate;return true;}
   var result={};
   (rh.prompts||[]).forEach(function(rp){
     var pid=rp.id;
@@ -964,9 +1272,113 @@ function _buildPromptComps(bk){
   });
   _promptComps=result;
 }
+function _buildPromptCitations(bk){
+  var rh=RAW_HISTORY[bk];if(!rh)return;
+  var runDates=rh.runDates||[];var maxDate=runDates.length?runDates[runDates.length-1]:null;
+  var cutoffDate=null,lastRunOnly=false,customEndPct=null;
+  if(currentTimeRange==='last-run'){lastRunOnly=true;}
+  else if(currentTimeRange==='last-7'&&maxDate){cutoffDate=_daysBack(maxDate,7);}
+  else if(currentTimeRange==='last-14'&&maxDate){cutoffDate=_daysBack(maxDate,14);}
+  else if(currentTimeRange==='last-20'&&maxDate){cutoffDate=_daysBack(maxDate,20);}
+  else if(currentTimeRange==='custom'&&customStartDate&&customEndDate){cutoffDate=customStartDate;customEndPct=customEndDate;}
+  function pctInRange(date){if(!date)return true;if(lastRunOnly)return date===maxDate;if(customEndPct)return date>=cutoffDate&&date<=customEndPct;if(cutoffDate)return date>=cutoffDate;return true;}
+  var result={};
+  (rh.prompts||[]).forEach(function(rp){
+    var pid=rp.id;var allCounts={};var modelCounts={};
+    (rp.entries||[]).filter(function(e){return pctInRange(e.date);}).forEach(function(e){
+      var mk=e.model;
+      (e.srcs||[]).forEach(function(src){
+        if(!src.u)return;
+        var domain=_extractDomainJS(src.u);if(!domain)return;
+        allCounts[domain]=(allCounts[domain]||0)+1;
+        if(!modelCounts[mk])modelCounts[mk]={};
+        modelCounts[mk][domain]=(modelCounts[mk][domain]||0)+1;
+      });
+    });
+    var toSorted=function(obj){return Object.keys(obj).map(function(d){return{domain:d,count:obj[d]};}).sort(function(a,b){return b.count-a.count;});};
+    result[pid]={all:toSorted(allCounts)};
+    Object.keys(modelCounts).forEach(function(mk){result[pid][mk]=toSorted(modelCounts[mk]);});
+  });
+  _promptCits=result;
+}
+var _expandedPrompts=new Set();
+function togglePromptExpand(pid,btn){
+  var row=document.getElementById('exp-'+pid);
+  if(!row)return;
+  var isOpen=row.style.display!=='none';
+  if(isOpen){row.style.display='none';btn.innerHTML='&#9654;';_expandedPrompts.delete(pid);}
+  else{document.getElementById('expContent-'+pid).innerHTML=buildPromptExpandContent(pid);row.style.display='';btn.innerHTML='&#9660;';_expandedPrompts.add(pid);}
+}
+/* labs: the expanded row shows the AI's searches first, then the cited URLs */
+function buildPromptExpandContent(pid){return _foPromptBlock(pid)+_buildPromptUrlTable(pid);}
+function _buildPromptUrlTable(pid){
+  var rh=RAW_HISTORY[currentBrand];if(!rh)return '';
+  var runDates=rh.runDates||[];var maxDate=runDates.length?runDates[runDates.length-1]:null;
+  var cutoffDate=null,lastRunOnly=false,customEndExp=null;
+  if(currentTimeRange==='last-run'){lastRunOnly=true;}
+  else if(currentTimeRange==='last-7'&&maxDate){cutoffDate=_daysBack(maxDate,7);}
+  else if(currentTimeRange==='last-14'&&maxDate){cutoffDate=_daysBack(maxDate,14);}
+  else if(currentTimeRange==='last-20'&&maxDate){cutoffDate=_daysBack(maxDate,20);}
+  else if(currentTimeRange==='custom'&&customStartDate&&customEndDate){cutoffDate=customStartDate;customEndExp=customEndDate;}
+  function expInRange(date){if(!date)return true;if(lastRunOnly)return date===maxDate;if(customEndExp)return date>=cutoffDate&&date<=customEndExp;if(cutoffDate)return date>=cutoffDate;return true;}
+  var prompt=(rh.prompts||[]).find(function(rp){return rp.id===pid;});
+  if(!prompt)return '';
+  var urlData={};
+  (prompt.entries||[]).filter(function(e){
+    return expInRange(e.date)&&(activeModel==='all'||e.model===activeModel);
+  }).forEach(function(e){
+    (e.srcs||[]).forEach(function(src){
+      if(!src.u)return;
+      if(!urlData[src.u])urlData[src.u]={url:src.u,title:src.t||'',count:0,models:{},comps:{}};
+      urlData[src.u].count++;
+      urlData[src.u].models[e.model]=(urlData[src.u].models[e.model]||0)+1;
+      (e.comps||[]).forEach(function(c){if(c)urlData[src.u].comps[c]=(urlData[src.u].comps[c]||0)+1;});
+    });
+  });
+  var urls=Object.values(urlData).sort(function(a,b){return b.count-a.count;}).slice(0,10);
+  if(!urls.length)return '<div style="padding:10px 0 14px;color:var(--ink4);font-size:12px">No citations in selected range.</div>';
+  var rows=urls.map(function(u){
+    var domain=_extractDomainJS(u.url);
+    var label=u.title&&u.title!==u.url?u.title:u.url;if(label.length>65)label=label.slice(0,65)+'…';
+    var modelBadges=Object.keys(u.models).map(function(mk){
+      var mm=MODEL_META[mk]||{domain:'google.com',label:mk};
+      return '<span class="fav-wrap" data-tip="'+esc(mm.label)+' · '+u.models[mk]+'x"><img style="width:13px;height:13px;border-radius:2px" src="'+fav(mm.domain)+'" onerror="this.style.display=\'none\'"></span>';
+    }).join('');
+    var compBadges=Object.keys(u.comps).sort(function(a,b){return u.comps[b]-u.comps[a];}).slice(0,4).map(function(c){
+      var cd=COMP_DOMAINS[c]||(c.toLowerCase().replace(/\s+/g,'')+'.com');
+      return '<span class="fav-wrap" data-tip="'+esc(c)+' · '+u.comps[c]+'x"><img style="width:13px;height:13px;border-radius:2px" src="'+fav(cd)+'" onerror="this.style.display=\'none\'"></span>';
+    }).join('');
+    return '<tr style="border-top:1px solid var(--border)">'+
+      '<td style="padding:6px 10px"><div style="display:flex;align-items:center;gap:6px;max-width:360px"><img src="'+fav(domain)+'" style="width:13px;height:13px;flex-shrink:0;border-radius:2px" onerror="this.style.display=\'none\'"><a href="'+safeUrl(u.url)+'" target="_blank" rel="noopener" style="font-size:12px;color:var(--v);text-decoration:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="'+u.url+'">'+label+'</a></div></td>'+
+      '<td style="padding:6px 10px;text-align:center;font-size:12px;font-weight:600;color:var(--ink);white-space:nowrap">'+u.count+'×</td>'+
+      '<td style="padding:6px 10px"><div style="display:flex;gap:3px;flex-wrap:wrap">'+modelBadges+'</div></td>'+
+      '<td style="padding:6px 10px"><div style="display:flex;gap:3px;flex-wrap:wrap">'+(compBadges||'<span style="font-size:11px;color:var(--ink4)">—</span>')+'</div></td>'+
+    '</tr>';
+  }).join('');
+  return '<div style="padding:2px 0 10px">'+
+    '<table style="width:100%;border-collapse:collapse">'+
+    '<thead><tr style="background:var(--surface)">'+
+    '<th style="padding:5px 10px;text-align:left;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink4)">URLs with the most citations</th>'+
+    '<th style="padding:5px 10px;text-align:center;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink4)">Cited</th>'+
+    '<th style="padding:5px 10px;text-align:left;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink4)">Models</th>'+
+    '<th style="padding:5px 10px;text-align:left;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink4)">Competitors Mentioned<span class="info-tip" data-tip="Competitors that appeared in the same AI response as this URL — co-occurrence, not a direct link." style="margin-left:4px"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="7" cy="7" r="6"/><path d="M7 6v4" stroke-linecap="round"/><circle cx="7" cy="4.5" r=".5" fill="currentColor" stroke="none"/></svg></span></th>'+
+    '</tr></thead><tbody>'+rows+'</tbody></table></div>';
+}
+function _intentBadge(it){if(!it)return '<span style="color:var(--ink4);font-size:11px">-</span>';var k=String(it).toUpperCase();var m={COMMERCIAL:['Commercial','#7c3aed'],TRANSACTIONAL:['Transactional','#16a34a'],INVESTIGATIONAL:['Investigational','#2563eb'],INFORMATIONAL:['Informational','#0891b2'],NAVIGATIONAL:['Navigational','#64748b'],BRANDED:['Branded','#d97706'],SENTIMENT:['Sentiment','#db2777']};var v=m[k]||[k.charAt(0)+k.slice(1).toLowerCase(),'#64748b'];return '<span style="display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;color:'+v[1]+';background:'+v[1]+'1a;white-space:nowrap">'+v[0]+'</span>';}
+function _topicBadge(t){if(!t)return '<span style="color:var(--ink4);font-size:11px">-</span>';return '<span style="display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;color:var(--ink3);background:var(--surface2);white-space:nowrap">'+esc(t)+'</span>';}
+/* labs: brand absent from every answer in range (and model), while a tracked competitor was named */
+function _isMissing(p){
+  var rh=RAW_HISTORY[currentBrand],inR=_rangeFn(),norms=_trackedNorms();
+  var rp=((rh&&rh.prompts)||[]).find(function(x){return x.id===p.id;});if(!rp)return false;
+  var es=rp.entries.filter(function(e){return inR(e.date)&&(activeModel==='all'||e.model===activeModel);});
+  if(!es.length||es.some(function(e){return e.hit;}))return false;
+  return es.some(function(e){return (e.comps||[]).some(function(c){return _isTracked(c,norms);});});
+}
 function renderPrompts(){
-  var bk=BRAND_CFG[currentBrand].key;_pd=D.prompts[bk];_buildPromptComps(currentBrand);
+  var bk=BRAND_CFG[currentBrand].key;_pd=D.prompts[bk];_buildPromptComps(currentBrand);_buildPromptCitations(currentBrand);
   document.getElementById('promptsSub').textContent=_pd.length+' prompts tracked · '+(activeModel==='all'?'all models':(MODEL_META[activeModel]||{label:activeModel}).label);
+  var missBtn=document.getElementById('promptMissBtn');
+  if(missBtn){missBtn.style.display=_hasTracked()?'':'none';missBtn.textContent='Missing, competitors named ('+_filterPdByIntent(_pd).filter(_isMissing).length+')';}
   searchQuery=document.getElementById('promptSearch').value;applyPromptFilter();
 }
 function onPromptSearch(q){searchQuery=q;applyPromptFilter();}
@@ -982,10 +1394,13 @@ function applyPromptFilter(){
     if(activeModel==='all')return !Object.values(p.models).some(function(m){return m&&m.mentioned;});
     return !(p.models[activeModel]&&p.models[activeModel].mentioned);
   });
+  if(promptFilter==='missing')data=data.filter(_isMissing);
   if(intentFilter!=='all')data=data.filter(function(p){return String(p.intent||'').toUpperCase()===intentFilter;});
+  if(topicFilter!=='all')data=data.filter(function(p){return String(p.topic||'')===topicFilter;});
   data=sortPrompts(data);
   var tbody=document.getElementById('promptsTbody');
-  if(!data.length){tbody.innerHTML='<tr><td colspan="6" style="text-align:center;padding:32px;color:var(--ink4)">No prompts match filter</td></tr>';return;}
+  if(!data.length){tbody.innerHTML='<tr><td colspan="11" style="text-align:center;padding:32px;color:var(--ink4)">No prompts match filter</td></tr>';return;}
+  var _foR=_foRows(),_foOn=_foModels().length>0;
   tbody.innerHTML=data.map(function(p){
     /* visibility */
     var visBadge,mentionedModels;
@@ -1050,20 +1465,59 @@ function applyPromptFilter(){
       pComps=aggC.slice(0,3).map(function(c){var cnt=activeModel==='all'?c.mentions:(c.modelMentions&&c.modelMentions[activeModel]||0);return{name:c.name,count:cnt};});
     }
     var compIcons=pComps.map(function(pc){
-      var cd=(typeof COMP_DOMAINS!=='undefined'&&COMP_DOMAINS[pc.name])||(pc.name.toLowerCase().replace(/\s+/g,'')+'.com');
-      var tip=pc.name+(pc.count?' · '+pc.count+' mention'+(pc.count!==1?'s':'')+(activeModel!=='all'?' in '+(MODEL_META[activeModel]||{label:activeModel}).label:''):'');
+      var cd=COMP_DOMAINS[pc.name]||(pc.name.toLowerCase().replace(/\s+/g,'')+'.com');
+      var tip=esc(pc.name)+(pc.count?' · '+pc.count+' mention'+(pc.count!==1?'s':'')+(activeModel!=='all'?' in '+(MODEL_META[activeModel]||{label:activeModel}).label:''):'');
       return '<div class="comp-iw"><img src="'+fav(cd)+'" onerror="this.style.display=\'none\'"><div class="comp-itip">'+tip+'</div></div>';
     }).join('');
     if(!compIcons)compIcons='<span style="color:var(--ink4);font-size:11px">-</span>';
-    return '<tr><td><div class="pt-text">'+p.text+'</div></td><td>'+visBadge+'</td><td>'+posBadge+'</td><td>'+sentBadge+'</td><td><div class="model-dots">'+dots+'</div></td><td><div class="comp-icons">'+compIcons+'</div></td></tr>';
+    /* top citations from _promptCits */
+    var pCitData=_promptCits[p.id];
+    var pCitKey=activeModel==='all'?'all':activeModel;
+    var pCitDomains=(pCitData&&(pCitData[pCitKey]||pCitData['all'])||[]).slice(0,5);
+    var citIcons=pCitDomains.map(function(pc){
+      var tip=pc.domain+(pc.count?' · '+pc.count+' citation'+(pc.count!==1?'s':'')+(activeModel!=='all'?' in '+(MODEL_META[activeModel]||{label:activeModel}).label:''):'');
+      return '<div class="comp-iw"><img src="'+fav(pc.domain)+'" onerror="this.style.display=\'none\'"><div class="comp-itip">'+tip+'</div></div>';
+    }).join('');
+    if(!citIcons)citIcons='<span style="color:var(--ink4);font-size:11px">-</span>';
+    var pid=p.id||'';
+    return '<tr>'+
+      '<td style="width:28px;text-align:center;padding:0">'+
+        '<button onclick="togglePromptExpand(\''+pid+'\',this)" style="background:none;border:none;cursor:pointer;font-size:10px;color:var(--ink3);padding:4px;line-height:1" title="Expand">&#9654;</button>'+
+      '</td>'+
+      '<td><div class="pt-text">'+esc(p.text)+'</div></td>'+
+      '<td>'+_intentBadge(p.intent)+'</td>'+
+      '<td>'+_topicBadge(p.topic)+'</td>'+
+      '<td>'+visBadge+'</td><td>'+posBadge+'</td><td>'+sentBadge+'</td>'+
+      '<td><div class="model-dots">'+dots+'</div></td>'+
+      '<td><div class="comp-icons">'+compIcons+'</div></td>'+
+      '<td><div class="comp-icons">'+citIcons+'</div></td>'+
+      '<td>'+(function(){var n=_foOn?_foCountFor(pid,_foR):0;return n?'<span class="fo-pill" title="'+n+' searches recorded in this range">'+n+'</span>':'<span style="color:var(--ink4);font-size:11px">-</span>';})()+'</td>'+
+    '</tr>'+
+    '<tr id="exp-'+pid+'" style="display:none">'+
+      '<td colspan="11" style="padding:0 12px 0 36px;background:var(--surface)">'+
+        '<div id="expContent-'+pid+'"></div>'+
+      '</td>'+
+    '</tr>';
   }).join('');
+  /* restore any rows that were open before the re-render */
+  _expandedPrompts.forEach(function(pid){
+    var row=document.getElementById('exp-'+pid);
+    if(!row)return;
+    document.getElementById('expContent-'+pid).innerHTML=buildPromptExpandContent(pid);
+    row.style.display='';
+    var btn=row.previousElementSibling&&row.previousElementSibling.querySelector('button');
+    if(btn)btn.innerHTML='&#9660;';
+  });
 }
 /* sentiment */
 function renderSentiment(){
   var bk=BRAND_CFG[currentBrand].key,s=D.sentiment[bk];
-  var mentions=activeModel==='all'?s.mentions:s.mentions.filter(function(m){return m.model===activeModel;});
+  var _sentIntentTexts=_intentPromptTexts(bk);
+  var mentions=s.mentions;
+  if(_sentIntentTexts)mentions=mentions.filter(function(m){return _sentIntentTexts.has(m.prompt);});
+  if(activeModel!=='all')mentions=mentions.filter(function(m){return m.model===activeModel;});
   var tileCounts;
-  if(activeModel==='all'){
+  if(activeModel==='all'&&intentFilter==='all'&&topicFilter==='all'){
     tileCounts={positive:s.positive||0,neutral:s.neutral||0,negative:s.negative||0,uncertain:s.uncertain||0};
   } else {
     tileCounts={positive:0,neutral:0,negative:0,uncertain:0};
@@ -1072,31 +1526,54 @@ function renderSentiment(){
   if(sentimentFilter!=='all')mentions=mentions.filter(function(m){return m.sentiment===sentimentFilter;});
   var tiles=[{cls:'spos',num:tileCounts.positive,lbl:'Positive'},{cls:'sneu',num:tileCounts.neutral,lbl:'Neutral'},{cls:'sneg',num:tileCounts.negative,lbl:'Negative'},{cls:'sunc',num:tileCounts.uncertain,lbl:'Uncertain'}].map(function(t){return '<div class="sent-tile '+t.cls+'"><div class="st-num">'+t.num+'</div><div class="st-lbl">'+t.lbl+'</div></div>';}).join('');
   var el=document.getElementById('sentContent');
-  if(s.total_mentions===0){el.innerHTML='<div class="sent-tiles">'+tiles+'</div><div class="cc"><div class="cc-body"><div class="no-data"><div class="no-data-icon">&#128202;</div><h3>No mentions detected</h3><p>'+BRAND_CFG[currentBrand].name+' was not mentioned in any of the 30 tracked prompts across 5 AI models. Start with the Citations tab to identify which sources AI models are already using to answer these prompts.</p></div></div></div>';return;}
+  if(s.total_mentions===0){el.innerHTML='<div class="sent-tiles">'+tiles+'</div><div class="cc"><div class="cc-body"><div class="no-data"><div class="no-data-icon">&#128202;</div><h3>No mentions detected</h3><p>'+esc(BRAND_CFG[currentBrand].name)+' was not mentioned in any tracked prompt in this range.</p></div></div></div>';return;}
   if(!mentions.length){var noDataMsg=sentimentFilter!=='all'?'No '+sentimentFilter+' mentions for this filter. Try a different sentiment or switch to All.':(activeModel==='all'?'No mentions detected for current filter.':'No mentions for '+(MODEL_META[activeModel]||{label:activeModel}).label+'. Switch to "All models" or try Sonar.');el.innerHTML='<div class="sent-tiles">'+tiles+'</div><div class="cc"><div class="cc-body"><div class="no-data"><div class="no-data-icon">&#128269;</div><h3>No matching mentions</h3><p>'+noDataMsg+'</p></div></div></div>';return;}
   var cards=mentions.map(function(mn){
     var mm=MODEL_META[mn.model]||{label:mn.model,domain:'google.com'};
-    var comps=(mn.competitors||[]).map(function(c){var cd=COMP_DOMAINS[c]||(c.toLowerCase().replace(/\s/g,'')+'.com');return '<span class="comp-tag" title="'+c+' was also recommended in this AI response"><img src="'+fav(cd,16)+'" style="width:12px;height:12px;border-radius:2px" onerror="this.style.display=\'none\'">'+c+'</span>';}).join('');
+    var comps=(mn.competitors||[]).map(function(c){var cd=COMP_DOMAINS[c]||(c.toLowerCase().replace(/\s/g,'')+'.com');return '<span class="comp-tag" title="'+esc(c)+' was also recommended in this AI response"><img src="'+fav(cd,16)+'" style="width:12px;height:12px;border-radius:2px" onerror="this.style.display=\'none\'">'+esc(c)+'</span>';}).join('');
     var compsSection=comps?'<div class="smc-comps-wrap"><div class="smc-comps-label">Other tools recommended in this response</div><div class="smc-comps">'+comps+'</div></div>':'';
-    return '<div class="sm-card"><div class="smc-head"><div class="smc-prompt">"'+mn.prompt+'"</div><div class="model-chip"><img src="'+fav(mm.domain,32)+'">'+mm.label+'</div></div><div class="smc-meta"><span>Rank: <b>#'+mn.rank+'</b></span><span>Score: <b>'+mn.score+'</b></span><span class="sent-chip chip-'+mn.sentiment+'">'+mn.sentiment.charAt(0).toUpperCase()+mn.sentiment.slice(1)+'</span></div><div class="smc-context">'+mn.context+'</div><div class="smc-reason">'+mn.reason+'</div>'+compsSection+'</div>';
+    return '<div class="sm-card"><div class="smc-head"><div class="smc-prompt">"'+esc(mn.prompt)+'"</div><div class="model-chip"><img src="'+fav(mm.domain,32)+'">'+mm.label+'</div></div><div class="smc-meta"><span>Rank: <b>#'+mn.rank+'</b></span><span>Score: <b>'+mn.score+'</b></span><span class="sent-chip chip-'+mn.sentiment+'">'+mn.sentiment.charAt(0).toUpperCase()+mn.sentiment.slice(1)+'</span></div><div class="smc-context">'+esc(mn.context)+'</div><div class="smc-reason">'+esc(mn.reason)+'</div>'+compsSection+'</div>';
   }).join('');
   el.innerHTML='<div class="sent-tiles">'+tiles+'</div><div class="cc"><div class="cc-head"><div><div class="cc-title">Confirmed Mentions</div><div class="cc-sub">'+mentions.length+' mention'+(mentions.length!==1?'s':'')+', verified against full AI responses</div></div></div><div class="cc-body">'+cards+'</div></div>';
 }
 /* competitors */
+var compScope='tracked';
+function setCompScope(s){compScope=s;renderCompetitors();}
 function renderCompetitors(){
-  var bk=BRAND_CFG[currentBrand].key,comps=_dedupeComps(D.competitors[bk].slice());
+  var bk=BRAND_CFG[currentBrand].key;
+  var comps=(intentFilter!=='all'||topicFilter!=='all')?_dedupeComps(_buildIntentFilteredComps(bk)):_dedupeComps(D.competitors[bk].slice());
   if(activeModel!=='all')comps=comps.filter(function(c){return c.models&&c.models.indexOf(activeModel)>-1;});
-  var max=comps[0]?comps[0].mentions:1;
-  document.getElementById('compList').innerHTML=comps.slice(0,15).map(function(c,i){
+  /* labs: official scoreboard on top; the mention list can show tracked, not tracked or all */
+  var board=document.getElementById('compBoard');if(board)board.innerHTML=_scoreboardHtml();
+  var seg=document.getElementById('compScopeSeg'),_cn=_trackedNorms(),_cs=_hasTracked();
+  if(seg){seg.style.display=_cs?'':'none';seg.innerHTML=[['tracked','Tracked'],['other','Not tracked'],['all','All']].map(function(o){return '<button class="'+(compScope===o[0]?'active':'')+'" onclick="setCompScope(\''+o[0]+'\')">'+o[1]+'</button>';}).join('');}
+  if(_cs&&compScope!=='all')comps=comps.filter(function(c){var t=_isTracked(c.name,_cn);return compScope==='tracked'?t:!t;});
+  function _dc(c){return activeModel==='all'?c.mentions:(c.modelMentions&&c.modelMentions[activeModel]||0);}
+  if(activeModel!=='all')comps=comps.slice().sort(function(a,b){return _dc(b)-_dc(a);});
+  var max=comps[0]?_dc(comps[0]):1;if(max===0)max=1;
+  var _cpd=_filterPdByIntent(D.prompts[bk]);
+  /* labs: count the brand like the competitors, answers in range (upstream counted prompts under a model filter) */
+  var _brandMentionsComp=_brandHitsInRange();
+  var _bMentionedPd=_cpd.filter(function(p){return activeModel==='all'?p.mentions>0:(p.models&&p.models[activeModel]&&p.models[activeModel].mentioned);});
+  var _brandAvgComp=_bMentionedPd.length?Math.round(_bMentionedPd.reduce(function(s,p){return s+(activeModel==='all'?(p.avgScore||0):((p.models[activeModel]&&p.models[activeModel].score)||0));},0)/_bMentionedPd.length):0;
+  var _brandPctComp=max>0?(_brandMentionsComp/max*100).toFixed(0):0;
+  var _brandDomComp=BRAND_CFG[currentBrand].url||'';
+  var _brandCompName=BRAND_CFG[currentBrand].name;
+  var _brandCompRow='<div class="comp-row" style="background:rgba(79,70,229,.06);border-bottom:1.5px dashed rgba(79,70,229,.25)"><div class="comp-rank" style="color:#4f46e5;font-size:9px;font-weight:800;letter-spacing:.05em;width:20px">YOU</div><img class="comp-fav" src="'+fav(_brandDomComp)+'" onerror="this.style.display=\'none\'"><div class="comp-name" style="color:#4f46e5;font-weight:700">'+esc(_brandCompName)+'</div><div class="comp-bar-wrap"><div class="comp-bar" style="width:'+_brandPctComp+'%;background:rgba(79,70,229,.85)"></div></div><div class="comp-count" style="color:#4f46e5;font-weight:600">'+_brandMentionsComp+' mentions</div><div class="sdot sdot-pos" title="positive"></div></div>';
+  document.getElementById('compList').innerHTML=_brandCompRow+comps.slice(0,15).map(function(c,i){
     var cd=COMP_DOMAINS[c.name]||(c.name.toLowerCase().replace(/\s/g,'')+'.com');
-    var pct=(c.mentions/max*100).toFixed(0);
+    var dispVal=_dc(c);
+    var pct=(dispVal/max*100).toFixed(0);
     var sdotCls=c.topSentiment==='positive'?'sdot-pos':c.topSentiment==='negative'?'sdot-neg':'sdot-neu';
-    return '<div class="comp-row"><div class="comp-rank">'+(i+1)+'</div><img class="comp-fav" src="'+fav(cd)+'" onerror="this.style.display=\'none\'"><div class="comp-name">'+c.name+'</div><div class="comp-bar-wrap"><div class="comp-bar" style="width:'+pct+'%"></div></div><div class="comp-count">'+c.mentions+' mentions</div><div class="comp-score">avg '+c.avgScore+'</div><div class="sdot '+sdotCls+'" title="'+c.topSentiment+'"></div></div>';
+    return '<div class="comp-row"><div class="comp-rank">'+(i+1)+'</div><img class="comp-fav" src="'+fav(cd)+'" onerror="this.style.display=\'none\'"><div class="comp-name">'+esc(c.name)+'</div><div class="comp-bar-wrap"><div class="comp-bar" style="width:'+pct+'%"></div></div><div class="comp-count">'+dispVal+' mentions</div><div class="sdot '+sdotCls+'" title="'+c.topSentiment+'"></div></div>';
   }).join('')||'<p style="color:var(--ink4);font-size:13px">No competitors for this filter.</p>';
-  document.getElementById('compSub').textContent=comps.length+' competitors detected'+(activeModel!=='all'?' for '+(MODEL_META[activeModel]||{label:activeModel}).label:'');
+  document.getElementById('compSub').textContent=comps.length+' '+(_cs?({tracked:'tracked competitors',other:'other names (not tracked)',all:'names'}[compScope]):'competitors detected')+(activeModel!=='all'?' for '+(MODEL_META[activeModel]||{label:activeModel}).label:'')+' · mentions in the selected range';
   var top3=comps.slice(0,3);
+  /* labs: upstream printed "average score 0" and "neutral" for every competitor (both are never
+     computed); show who leads and where each name is mentioned instead */
   document.getElementById('compInsight').innerHTML=top3.length?
-    '<div style="margin-bottom:14px"><div class="act-sect-label">Dominant competitors</div><p style="font-size:13px;color:var(--ink2);line-height:1.7;margin-top:6px"><b>'+top3[0].name+'</b> leads with '+top3[0].mentions+' AI mentions at an average score of '+top3[0].avgScore+'.'+(top3[1]?' '+top3[1].name+' ('+top3[1].mentions+' mentions) and '+(top3[2]?top3[2].name+' ('+top3[2].mentions+')':'')+'follow.':'')+'</p></div><div><div class="act-sect-label">By sentiment</div><div style="margin-top:8px;display:flex;flex-direction:column;gap:7px">'+comps.slice(0,7).map(function(c){var cd=COMP_DOMAINS[c.name]||(c.name.toLowerCase().replace(/\s/g,'')+'.com');var col=c.topSentiment==='positive'?'#16a34a':c.topSentiment==='negative'?'#dc2626':'#64748b';return '<div style="display:flex;align-items:center;gap:8px;font-size:12px"><img src="'+fav(cd)+'" style="width:14px;height:14px;border-radius:3px;border:1px solid var(--border)" onerror="this.style.display=\'none\'"><span style="flex:1;color:var(--ink)">'+c.name+'</span><span style="color:'+col+';font-weight:600;font-size:11px">'+c.topSentiment+'</span><span style="color:var(--ink4)">avg '+c.avgScore+'</span></div>';}).join('')+'</div></div>':
+    '<div style="margin-bottom:14px"><div class="act-sect-label">Most mentioned</div><p style="font-size:13px;color:var(--ink2);line-height:1.7;margin-top:6px"><b>'+esc(top3[0].name)+'</b> leads with '+_dc(top3[0])+' mentions'+(top3[1]?', then '+esc(top3[1].name)+' ('+_dc(top3[1])+')'+(top3[2]?' and '+esc(top3[2].name)+' ('+_dc(top3[2])+')':''):'')+'. '+esc(_brandCompName)+': '+_brandMentionsComp+'.</p></div>'+
+    '<div><div class="act-sect-label">Mentions per AI model</div><div style="margin-top:8px;display:flex;flex-direction:column;gap:7px">'+comps.slice(0,7).map(function(c){var models=MODEL_ORDER.filter(function(m){return c.modelMentions&&c.modelMentions[m];}).map(function(m){return '<span class="fav-wrap" data-tip="'+esc(_modelLabel(m))+'" style="display:inline-flex;align-items:center;gap:2px;margin-left:6px"><img src="'+_modelIcon(m)+'" style="width:12px;height:12px;border-radius:2px" onerror="this.style.display=\'none\'"><span style="font-size:11px;color:var(--ink3)">'+c.modelMentions[m]+'</span></span>';}).join('');return '<div style="display:flex;align-items:center;gap:8px;font-size:12px"><img src="'+fav(_compDomain(c.name))+'" style="width:14px;height:14px;border-radius:3px;border:1px solid var(--border)" onerror="this.style.display=\'none\'"><span style="flex:1;color:var(--ink)">'+esc(c.name)+'</span>'+models+'</div>';}).join('')+'</div></div>':
     '<p style="color:var(--ink4);font-size:13px">No data for this filter.</p>';
 }
 /* citations */
@@ -1114,14 +1591,14 @@ function buildUrlList(domain,bk){
   var rows=urls.map(function(u){
     var mchips=u.filteredModels.map(function(m){
       var mm=MODEL_META[m]||{domain:'google.com',label:m};
-      return '<span class="mdot-wrap" data-tip="'+mm.label+'"><img class="dom-url-td-mimg" src="'+fav(mm.domain)+'" onerror="this.style.display=\'none\'"></span>';
+      return '<span class="mdot-wrap" data-tip="'+esc(mm.label)+'"><img class="dom-url-td-mimg" src="'+fav(mm.domain)+'" onerror="this.style.display=\'none\'"></span>';
     }).join('');
     var pt=u.pageType?u.pageType.replace(/_/g,' ').replace(/\b\w/g,function(x){return x.toUpperCase();}):'<span style="color:var(--ink4)">—</span>';
     var ct=u.contentType?u.contentType.replace(/_/g,' ').replace(/\b\w/g,function(x){return x.toUpperCase();}):'<span style="color:var(--ink4)">—</span>';
     var ptBadge=u.pageType?'<span class="type-badge">'+pt+'</span>':pt;
     var ctBadge=u.contentType?'<span class="type-badge">'+ct+'</span>':ct;
     return '<tr>'+
-      '<td class="dom-url-td-title"><a href="'+u.url+'" target="_blank" rel="noopener" title="'+u.url+'">'+u.title.slice(0,68)+'</a></td>'+
+      '<td class="dom-url-td-title"><a href="'+safeUrl(u.url)+'" target="_blank" rel="noopener" title="'+u.url+'">'+u.title.slice(0,68)+'</a></td>'+
       '<td class="dom-url-td-cnt tc">'+u.displayCount+'×</td>'+
       '<td class="tc">'+ptBadge+'</td>'+
       '<td class="tc">'+ctBadge+'</td>'+
@@ -1148,12 +1625,12 @@ function buildCompUrlList(domain){
   var urls=_compCitsByDomain[domain]||[];
   if(!urls.length)return '<table class="dom-url-table"><tbody><tr><td colspan="5" style="color:var(--ink4);padding:14px;text-align:center">No URLs available.</td></tr></tbody></table>';
   var rows=urls.map(function(u){
-    var mchips=(u.models||[]).map(function(m){var mm=MODEL_META[m]||{domain:'google.com',label:m};return '<span class="mdot-wrap" data-tip="'+mm.label+'"><img class="dom-url-td-mimg" src="'+fav(mm.domain)+'" onerror="this.style.display=\'none\'"></span>';}).join('');
+    var mchips=(u.models||[]).map(function(m){var mm=MODEL_META[m]||{domain:'google.com',label:m};return '<span class="mdot-wrap" data-tip="'+esc(mm.label)+'"><img class="dom-url-td-mimg" src="'+fav(mm.domain)+'" onerror="this.style.display=\'none\'"></span>';}).join('');
     var pt=u.pageType?u.pageType.replace(/_/g,' ').replace(/\b\w/g,function(x){return x.toUpperCase();}):'<span style="color:var(--ink4)">—</span>';
     var ct=u.contentType?u.contentType.replace(/_/g,' ').replace(/\b\w/g,function(x){return x.toUpperCase();}):'<span style="color:var(--ink4)">—</span>';
     var ptBadge=u.pageType?'<span class="type-badge">'+pt+'</span>':pt;
     var ctBadge=u.contentType?'<span class="type-badge">'+ct+'</span>':ct;
-    return '<tr><td class="dom-url-td-title"><a href="'+u.url+'" target="_blank" rel="noopener" title="'+u.url+'">'+u.title.slice(0,68)+'</a></td><td class="dom-url-td-cnt tc">'+u.count+'×</td><td class="tc">'+ptBadge+'</td><td class="tc">'+ctBadge+'</td><td class="tc"><div class="dom-url-td-models">'+mchips+'</div></td></tr>';
+    return '<tr><td class="dom-url-td-title"><a href="'+safeUrl(u.url)+'" target="_blank" rel="noopener" title="'+u.url+'">'+u.title.slice(0,68)+'</a></td><td class="dom-url-td-cnt tc">'+u.count+'×</td><td class="tc">'+ptBadge+'</td><td class="tc">'+ctBadge+'</td><td class="tc"><div class="dom-url-td-models">'+mchips+'</div></td></tr>';
   }).join('');
   return '<table class="dom-url-table"><thead><tr><th>URL / Title</th><th class="tc">Cited</th><th class="tc">Page Type</th><th class="tc">Content Type</th><th class="tc">AI Models</th></tr></thead><tbody>'+rows+'</tbody></table>';
 }
@@ -1164,10 +1641,20 @@ function toggleCompDomRow(id,domain){
 }
 function _buildCompCits(bk){
   var rh=RAW_HISTORY[bk];if(!rh)return{};
+  // Date range filter matching current time range selection
+  var runDates=rh.runDates||[];var maxDateCc=runDates.length?runDates[runDates.length-1]:null;
+  var ccCutoff=null,ccEnd=null,ccLastRun=false;
+  if(currentTimeRange==='last-run'){ccLastRun=true;}
+  else if(currentTimeRange==='last-7'&&maxDateCc){ccCutoff=_daysBack(maxDateCc,7);}
+  else if(currentTimeRange==='last-14'&&maxDateCc){ccCutoff=_daysBack(maxDateCc,14);}
+  else if(currentTimeRange==='last-20'&&maxDateCc){ccCutoff=_daysBack(maxDateCc,20);}
+  else if(currentTimeRange==='custom'&&customStartDate&&customEndDate){ccCutoff=customStartDate;ccEnd=customEndDate;}
+  function ccInRange(date){if(!date)return true;if(ccLastRun)return date===maxDateCc;if(ccEnd)return date>=ccCutoff&&date<=ccEnd;if(ccCutoff)return date>=ccCutoff;return true;}
   // First pass: collect all citations per normalized comp key
   var normData={};
   (rh.prompts||[]).forEach(function(rp){
-    (rp.entries||[]).forEach(function(e){
+    if(!_passesIntentTopic(rp.intent,rp.topic))return;
+    (rp.entries||[]).filter(function(e){return ccInRange(e.date);}).forEach(function(e){
       if(!e.comps||!e.comps.length||!e.srcs||!e.srcs.length)return;
       e.comps.forEach(function(c){
         var norm=_normComp(c);
@@ -1198,30 +1685,58 @@ function _getCompCits(bk){if(!_compCitsCache[bk])_compCitsCache[bk]=_buildCompCi
 function toggleCitDd(){var m=document.getElementById('citCompMenu');if(m)m.classList.toggle('open');}
 document.addEventListener('click',function(e){var dd=document.getElementById('citCompDd');if(dd&&!dd.contains(e.target)){var m=document.getElementById('citCompMenu');if(m)m.classList.remove('open');}});
 function setCitComp(name,btn){activeCitComp=name;renderCitations();}
+function _buildBrandCits(bk){
+  var rh=RAW_HISTORY[bk];if(!rh)return[];
+  var runDates=rh.runDates||[];var maxDate=runDates.length?runDates[runDates.length-1]:null;
+  var cutoff=null,endDate=null,lastRunOnly=false;
+  if(currentTimeRange==='last-run'){lastRunOnly=true;}
+  else if(currentTimeRange==='last-7'&&maxDate){cutoff=_daysBack(maxDate,7);}
+  else if(currentTimeRange==='last-14'&&maxDate){cutoff=_daysBack(maxDate,14);}
+  else if(currentTimeRange==='last-20'&&maxDate){cutoff=_daysBack(maxDate,20);}
+  else if(currentTimeRange==='custom'&&customStartDate&&customEndDate){cutoff=customStartDate;endDate=customEndDate;}
+  function inRange(d){if(!d)return true;if(lastRunOnly)return d===maxDate;if(endDate)return d>=cutoff&&d<=endDate;if(cutoff)return d>=cutoff;return true;}
+  var urlMap={};
+  (rh.prompts||[]).forEach(function(rp){
+    if(!_passesIntentTopic(rp.intent,rp.topic))return;
+    (rp.entries||[]).forEach(function(e){
+      if(!e.hit||!e.srcs||!e.srcs.length)return;
+      if(!inRange(e.date))return;
+      if(activeModel!=='all'&&e.model!==activeModel)return;
+      e.srcs.forEach(function(s){
+        var key=s.u;
+        if(urlMap[key]){urlMap[key].count++;if(e.model&&urlMap[key].models.indexOf(e.model)===-1)urlMap[key].models.push(e.model);}
+        else urlMap[key]={url:s.u,title:s.t||s.u,domain:(s.u.match(/https?:\/\/([^\/]+)/)||[])[1]||'',count:1,models:e.model?[e.model]:[],pageType:s.pt,contentType:s.ct};
+      });
+    });
+  });
+  return Object.values(urlMap).sort(function(a,b){return b.count-a.count;});
+}
+function _barRows(items,total){return items.map(function(x){var pct=total>0?(x.count/total*100).toFixed(1):0;var lbl=x.type.replace(/_/g,' ').replace(/\b\w/g,function(c){return c.toUpperCase();});return '<div class="bar-row"><div class="bar-label">'+lbl+'</div><div class="bar-track"><div class="bar-fill" style="width:'+pct+'%"></div></div><div class="bar-val">'+x.count+'</div></div>';}).join('');}
 function renderCitations(){
   var bk=BRAND_CFG[currentBrand].key,c;
-  /* base citation data */
-  if(activeModel!=='all'&&D.modelCitations&&D.modelCitations[bk]&&D.modelCitations[bk][activeModel]){
-    c=Object.assign({},D.modelCitations[bk][activeModel]);
-    c.uniqueDomains=c.topDomains?c.topDomains.length:D.citations[bk].uniqueDomains;
-    c.topListicles=D.citations[bk].topListicles;
-  } else c=D.citations[bk];
-  /* competitor filter setup */
+  /* base citation data: recounted from the raw answers, same as the Overview */
+  c=_buildIntentCitations(bk);
+  /* competitor/brand filter setup */
   var compCits=_getCompCits(currentBrand);
-  var useCompFilter=activeCitComp!=='all'&&(compCits[activeCitComp]||compCits['__norm__'+_normComp(activeCitComp)]);
+  var _brandCitsArr=_buildBrandCits(currentBrand);
+  var useBrandFilter=activeCitComp==='__brand__';
+  var useCompFilter=!useBrandFilter&&activeCitComp!=='all'&&(compCits[activeCitComp]||compCits['__norm__'+_normComp(activeCitComp)]);
   var chevDdSvg='<svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" style="width:10px;height:10px;flex-shrink:0"><path d="M1 1l4 4 4-4"/></svg>';
   var allComps=_dedupeComps((D.competitors[bk]||[]).filter(function(cp){return!cp.isBrand;})).slice(0,15);
-  var activeCd=activeCitComp==='all'?null:(COMP_DOMAINS&&COMP_DOMAINS[activeCitComp])||(activeCitComp.toLowerCase().replace(/\s+/g,'')+'.com');
-  var triggerContent=(activeCd?'<img src="'+fav(activeCd)+'" onerror="this.style.display=\'none\'">':'')+'<span>'+(activeCitComp==='all'?'All Citations':activeCitComp)+'</span>'+chevDdSvg;
+  var _citBrandName=BRAND_CFG[currentBrand].name;
+  var _citBrandDom=BRAND_CFG[currentBrand].url||'';
+  var activeCd=activeCitComp==='all'?null:useBrandFilter?_citBrandDom:((COMP_DOMAINS&&COMP_DOMAINS[activeCitComp])||(activeCitComp.toLowerCase().replace(/\s+/g,'')+'.com'));
+  var triggerContent=(activeCd?'<img src="'+fav(activeCd)+'" onerror="this.style.display=\'none\'">':'')+'<span>'+(activeCitComp==='all'?'All Citations':useBrandFilter?'You ('+_citBrandName+')':activeCitComp)+'</span>'+chevDdSvg;
   var ddOpts='<div class="cit-comp-opt'+(activeCitComp==='all'?' active':'')+'" onclick="setCitComp(\'all\',this)">All Citations</div>';
+  ddOpts+='<div class="cit-comp-opt'+(useBrandFilter?' active':'')+'" style="border-bottom:1px solid var(--border);background:'+(useBrandFilter?'var(--surface2)':'rgba(79,70,229,.04)')+'" onclick="setCitComp(\'__brand__\',this)"><img src="'+fav(_citBrandDom)+'" onerror="this.style.display=\'none\'"><span style="color:#4f46e5;font-weight:'+(useBrandFilter?'700':'500')+'">You ('+_citBrandName+')</span></div>';
   ddOpts+=allComps.map(function(comp){
     var isActive=activeCitComp===comp.name;
     var cd=(COMP_DOMAINS&&COMP_DOMAINS[comp.name])||(comp.name.toLowerCase().replace(/\s+/g,'')+'.com');
     return '<div class="cit-comp-opt'+(isActive?' active':'')+'" onclick="setCitComp(\''+comp.name.replace(/'/g,"\\'").replace(/"/g,'&quot;')+'\',this)"><img src="'+fav(cd)+'" onerror="this.style.display=\'none\'">'+comp.name+'</div>';
   }).join('');
   var filterBar='<div class="cit-comp-bar"><span class="cit-comp-label">Filter by competitor</span><div class="cit-comp-dd" id="citCompDd"><button class="cit-comp-trigger" onclick="toggleCitDd()">'+triggerContent+'</button><div class="cit-comp-menu" id="citCompMenu">'+ddOpts+'</div></div></div>';
-  /* compute domain/content type bars, possibly filtered by competitor */
-  var compUrls=useCompFilter?(compCits[activeCitComp]||compCits['__norm__'+_normComp(activeCitComp)]):null;
+  /* compute domain/content type bars, possibly filtered by brand or competitor */
+  var compUrls=useCompFilter?(compCits[activeCitComp]||compCits['__norm__'+_normComp(activeCitComp)]):useBrandFilter?_brandCitsArr:null;
   var domainCounts={},contentCounts={},typeCounts={};
   if(useCompFilter&&compUrls){
     compUrls.forEach(function(cu){
@@ -1233,8 +1748,8 @@ function renderCitations(){
     var tct=Object.values(contentCounts).reduce(function(a,b){return a+b;},0)||1;
     var dtSorted=Object.keys(typeCounts).map(function(k){return{type:k,count:typeCounts[k]};}).sort(function(a,b){return b.count-a.count;});
     var ctSorted=Object.keys(contentCounts).map(function(k){return{type:k,count:contentCounts[k]};}).sort(function(a,b){return b.count-a.count;});
-    var dtBars=dtSorted.map(function(dt){var p=(dt.count/tdt*100).toFixed(1);var l=dt.type.replace(/_/g,' ').replace(/\b\w/g,function(ch){return ch.toUpperCase();});return '<div class="bar-row"><div class="bar-label">'+l+'</div><div class="bar-track"><div class="bar-fill" style="width:'+p+'%"></div></div><div class="bar-pct">'+p+'%</div><div class="bar-cnt">'+dt.count+'</div></div>';}).join('')||'<p style="color:var(--ink4);font-size:13px;padding:12px">No data for this filter.</p>';
-    var ctBars=ctSorted.slice(0,10).map(function(ct){var p=(ct.count/tct*100).toFixed(1);var l=ct.type.replace(/_/g,' ').replace(/\b\w/g,function(ch){return ch.toUpperCase();});return '<div class="bar-row"><div class="bar-label">'+l+'</div><div class="bar-track"><div class="bar-fill" style="width:'+p+'%"></div></div><div class="bar-pct">'+p+'%</div><div class="bar-cnt">'+ct.count+'</div></div>';}).join('')||'<p style="color:var(--ink4);font-size:13px;padding:12px">No data for this filter.</p>';
+    var dtBars=_barRows(dtSorted,tdt)||'<p style="color:var(--ink4);font-size:13px;padding:12px">No data for this filter.</p>';
+    var ctBars=_barRows(ctSorted.slice(0,10),tct)||'<p style="color:var(--ink4);font-size:13px;padding:12px">No data for this filter.</p>';
     var compTopDomains=Object.keys(domainCounts).map(function(d){return{domain:d,count:domainCounts[d]};}).sort(function(a,b){return b.count-a.count;}).slice(0,20);
     var totalComp=compUrls.reduce(function(s,cu){return s+cu.count;},0);
     /* build per-domain URL lookup for expandable rows */
@@ -1243,7 +1758,7 @@ function renderCitations(){
     Object.keys(_compCitsByDomain).forEach(function(d){_compCitsByDomain[d].sort(function(a,b){return b.count-a.count;});});
     var chevSvg2='<svg class="dom-chev" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l4 4 4-4"/></svg>';
     var domRows=compTopDomains.map(function(d,i){
-      var t=typeof DCAT!=='undefined'&&DCAT&&DCAT[d.domain]?DCAT[d.domain]:'AI/SaaS Blog';
+      var t=DCAT&&DCAT[d.domain]?DCAT[d.domain]:'AI/SaaS Blog';
       var panelId='cdp-'+currentBrand+'-'+i;
       var hasUrls=(_compCitsByDomain[d.domain]||[]).length>0;
       var domCell=hasUrls
@@ -1255,10 +1770,10 @@ function renderCitations(){
     document.getElementById('citContent').innerHTML=
       filterBar+
       '<div class="two-col">'+
-        '<div class="cc"><div class="cc-head"><div class="cc-title">Page Type</div><div class="cc-sub">'+totalComp.toLocaleString()+' citations with '+activeCitComp+'</div></div><div class="cc-body">'+dtBars+'</div></div>'+
-        '<div class="cc"><div class="cc-head"><div class="cc-title">Content Type</div><div class="cc-sub">when '+activeCitComp+' is mentioned</div></div><div class="cc-body">'+ctBars+'</div></div>'+
+        '<div class="cc"><div class="cc-head"><div class="cc-title">Page Type</div><div class="cc-sub">'+totalComp.toLocaleString()+' citations with '+(useBrandFilter?'You ('+_citBrandName+')':activeCitComp)+'</div></div><div class="cc-body">'+dtBars+'</div></div>'+
+        '<div class="cc"><div class="cc-head"><div class="cc-title">Content Type</div><div class="cc-sub">when '+(useBrandFilter?'You ('+_citBrandName+')':activeCitComp)+' is mentioned</div></div><div class="cc-body">'+ctBars+'</div></div>'+
       '</div>'+
-      '<div class="cc"><div class="cc-head"><div class="cc-title">Top Cited Domains</div><div class="cc-sub">co-occurring with '+activeCitComp+' mentions</div></div>'+
+      '<div class="cc"><div class="cc-head"><div class="cc-title">Top Cited Domains</div><div class="cc-sub">co-occurring with '+(useBrandFilter?'You ('+_citBrandName+')':activeCitComp)+' mentions</div></div>'+
         '<div class="cc-body np"><table class="dom-table"><thead><tr><th>#</th><th>Domain</th><th>Domain Type</th><th style="text-align:right">Citations</th></tr></thead><tbody>'+domRows+'</tbody></table></div>'+
       '</div>';
     return;
@@ -1266,11 +1781,11 @@ function renderCitations(){
   /* default (all citations) path */
   var tdt=c.domainTypes.reduce(function(a,x){return a+x.count;},0);
   var tct=c.contentTypes.reduce(function(a,x){return a+x.count;},0);
-  var dtBars=c.domainTypes.map(function(dt){var p=(dt.count/tdt*100).toFixed(1);var l=dt.type.replace(/_/g,' ').replace(/\b\w/g,function(ch){return ch.toUpperCase();});return '<div class="bar-row"><div class="bar-label">'+l+'</div><div class="bar-track"><div class="bar-fill" style="width:'+p+'%"></div></div><div class="bar-pct">'+p+'%</div><div class="bar-cnt">'+dt.count+'</div></div>';}).join('');
-  var ctBars=c.contentTypes.slice(0,10).map(function(ct){var p=(ct.count/tct*100).toFixed(1);var l=ct.type.replace(/_/g,' ').replace(/\b\w/g,function(ch){return ch.toUpperCase();});return '<div class="bar-row"><div class="bar-label">'+l+'</div><div class="bar-track"><div class="bar-fill" style="width:'+p+'%"></div></div><div class="bar-pct">'+p+'%</div><div class="bar-cnt">'+ct.count+'</div></div>';}).join('');
+  var dtBars=_barRows(c.domainTypes,tdt);
+  var ctBars=_barRows(c.contentTypes.slice(0,10),tct);
   var chevSvg='<svg class="dom-chev" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l4 4 4-4"/></svg>';
   var domRows=c.topDomains.slice(0,20).map(function(d,i){
-    var t=typeof DCAT!=='undefined'&&DCAT&&DCAT[d.domain]?DCAT[d.domain]:'AI/SaaS Blog';
+    var t=DCAT&&DCAT[d.domain]?DCAT[d.domain]:'AI/SaaS Blog';
     var panelId='dup-'+currentBrand+'-'+i;
     var hasUrls=DURL[bk]&&DURL[bk][d.domain]&&DURL[bk][d.domain].length>0;
     var domCell=hasUrls
@@ -1280,7 +1795,7 @@ function renderCitations(){
       '<tr class="dom-expand-row"><td colspan="4"><div class="dom-url-panel" id="'+panelId+'"></div></td></tr>';
   }).join('');
   var ltRows=(c.topListicles||[]).slice(0,8).map(function(l){
-    return '<tr><td><img class="dom-fav" src="'+fav(l.domain)+'" onerror="this.style.display=\'none\'"><b>'+l.domain+'</b></td><td style="font-size:12px;color:var(--ink3)">'+l.title.slice(0,62)+'</td><td style="text-align:right;font-weight:600;color:var(--v)">'+l.count+'x</td></tr>';
+    return '<tr><td><img class="dom-fav" src="'+fav(l.domain)+'" onerror="this.style.display=\'none\'"><b>'+l.domain+'</b></td><td style="font-size:12px;color:var(--ink3)">'+esc(l.title.slice(0,62))+'</td><td style="text-align:right;font-weight:600;color:var(--v)">'+l.count+'x</td></tr>';
   }).join('');
   document.getElementById('citContent').innerHTML=
     filterBar+
@@ -1288,44 +1803,359 @@ function renderCitations(){
       '<div class="cc"><div class="cc-head"><div class="cc-title">Page Type</div><div class="cc-sub">'+tdt.toLocaleString()+' total citations</div></div><div class="cc-body">'+dtBars+'</div></div>'+
       '<div class="cc"><div class="cc-head"><div class="cc-title">Content Type</div><div class="cc-sub">how AI sources are classified</div></div><div class="cc-body">'+ctBars+'</div></div>'+
     '</div>'+
-    '<div class="cc"><div class="cc-head"><div class="cc-title">Top 20 Cited Domains</div><div class="cc-sub">'+(c.uniqueDomains||'')+' unique domains'+(activeModel!=='all'?' for '+(MODEL_META[activeModel]||{label:activeModel}).label:'')+'</div></div>'+
+    '<div class="cc"><div class="cc-head"><div class="cc-title">Top 20 Cited Domains</div><div class="cc-sub">'+(c.uniqueDomains||'')+' unique domains'+(activeModel!=='all'?' for '+(MODEL_META[activeModel]||{label:activeModel}).label:'')+(intentFilter!=='all'?' &middot; '+_intentLabel(intentFilter)+' intent':'')+(topicFilter!=='all'?' &middot; '+esc(topicFilter)+' topic':'')+'</div></div>'+
       '<div class="cc-body np"><table class="dom-table"><thead><tr><th>#</th><th>Domain</th><th>Domain Type</th><th style="text-align:right">Citations</th></tr></thead><tbody>'+domRows+'</tbody></table></div>'+
     '</div>'+
     (ltRows?'<div class="cc"><div class="cc-head"><div class="cc-title">Top Listicle Articles</div><div class="cc-sub">highest-priority inclusion targets</div></div><div class="cc-body np"><table class="dom-table"><thead><tr><th>Domain</th><th>Article</th><th style="text-align:right">Cited</th></tr></thead><tbody>'+ltRows+'</tbody></table></div></div>':'');
 }
-/* actions */
-function setActFilter(f,btn){actFilter=f;document.querySelectorAll('.act-fb').forEach(x=>x.classList.remove('active'));btn.classList.add('active');renderActionsGrid();}
-var SN=['sn1','sn2','sn3','sn4','sn0'];
-var chevSVG='<svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l4 4 4-4"/></svg>';
-function renderActionsGrid(){
-  var actions=ACTIONS[currentBrand];
-  var filtered=actFilter==='all'?actions:actFilter==='high'?actions.filter(function(a){return a.priority==='high';}):actFilter==='medium'?actions.filter(function(a){return a.priority==='medium';}):actions.filter(function(a){return a.cat.toLowerCase().indexOf(actFilter.toLowerCase())>-1;});
-  document.getElementById('actGrid').innerHTML=filtered.map(function(a,idx){
-    var favHtml=(a.favDomains||[]).map(function(d){return favImg(d,'act-fav',d);}).join('');
-    var sigText=a.signals.join(' &middot; ');
-    var steps=a.steps.map(function(s,i){return '<li class="act-step"><span class="act-step-num '+SN[i%5]+'">'+(i+1)+'</span><span>'+s+'</span></li>';}).join('');
-    var platFavs=(a.platDomains||[]).map(function(d){return favImg(d,'act-platform-fav',d);}).join('');
-    var iconHtml=ICONS[a.icon]||a.icon;
-    return '<div class="act-card collapsed" id="actc-'+idx+'">'+
-      '<div class="act-card-head" onclick="toggleAct(\'actc-'+idx+'\')">'+
-        '<div class="act-icon">'+iconHtml+'</div>'+
-        '<div class="act-meta">'+
-          '<div class="act-head-row"><span class="act-effort-label">'+a.effort+'</span><span class="act-head-sep">&middot;</span><span class="act-cat-label">'+a.cat.toUpperCase()+'</span><span class="act-pri-dot pri-'+a.priority+'" title="'+a.priority+' priority"></span></div>'+
-          '<div class="act-title">'+a.title+'</div>'+
-          '<div class="act-sig-fav-row"><div class="act-signals">'+sigText+'</div>'+(favHtml?'<div class="act-favs">'+favHtml+'</div>':'')+' </div>'+
-        '</div>'+
-        '<div class="act-head-right"><button class="act-toggle">'+chevSVG+'</button></div>'+
-      '</div>'+
-      '<div class="act-body">'+
-        '<div class="act-sect"><div class="act-sect-label">Why it matters</div><p>'+a.why+'</p></div>'+
-        '<div class="act-sect"><div class="act-sect-label">Steps</div><ul class="act-steps-list">'+steps+'</ul></div>'+
-        '<div class="act-sect"><div class="act-sect-label">Expected outcome</div><div class="act-outcome">'+a.outcome+'</div></div>'+
-        (platFavs?'<div class="act-plat-row"><span class="act-plat-label">Relevant sources</span>'+platFavs+'</div>':'')+
-      '</div>'+
-    '</div>';
-  }).join('');
+/* ══ labs additions ═══════════════════════════════════════════════════════════
+   Everything below reads LABS (built by labs/tools/build_labs.py). Each block
+   degrades to "nothing shown" when its data is missing, never to an error. */
+function _labs(){return LABS[currentBrand]||{};}
+function _official(){return _labs().official||{};}
+/* date-range predicate for 'YYYY-MM-DD' strings, same rules as the rest of the page */
+function _rangeFn(){
+  var rh=RAW_HISTORY[currentBrand];var rd=(rh&&rh.runDates)||[];var maxD=rd.length?rd[rd.length-1]:null;
+  if(currentTimeRange==='last-run')return function(d){return d===maxD;};
+  if(currentTimeRange==='custom'&&customStartDate&&customEndDate)return function(d){return d>=customStartDate&&d<=customEndDate;};
+  var n={'last-7':7,'last-14':14,'last-20':20}[currentTimeRange];
+  if(n&&maxD){var cut=_daysBack(maxD,n);return function(d){return d>=cut;};}
+  return function(){return true;};
 }
-function toggleAct(id){var card=document.getElementById(id);var wasCollapsed=card.classList.contains('collapsed');document.querySelectorAll('.act-card').forEach(function(c){c.classList.add('collapsed');});if(wasCollapsed)card.classList.remove('collapsed');}
+function _fmtDate(d){if(!d)return '';var p=String(d).split('-');var m=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][parseInt(p[1],10)-1];if(p.length<3||!m)return esc(String(d));return parseInt(p[2],10)+' '+m+' '+parseInt(p[0],10);}
+function _fmtShort(d){return _fmtDate(d).replace(/ \d{4}$/,'');}
+function _modelList(keys){return (keys||[]).map(function(k){return esc(_modelLabel(k));}).join(' and ');}
+function _num(n){return (n===null||n===undefined)?'—':Number(n).toLocaleString('en-US');}
+/* same rule as same_name() in build_labs.py: equal once normalized, or equal identifying words
+   ("Cofidis Portugal" = "Cofidis", "Younited" = "Younited Credit"; "Santander" != "Santander Consumer Finance") */
+var NAME_GENERIC={};('portugal pt españa espana spain es online sa group grupo bank banco credit crédito credito finance financeira financial ltd inc plc de da do of the y e').split(' ').forEach(function(w){NAME_GENERIC[w]=1;});
+function _nameCore(n){return _noAccents(n).toLowerCase().split(/[^\p{L}\p{N}_]+/u).filter(function(w){return w&&!NAME_GENERIC[w];}).join(' ');}
+function _sameName(a,b){if(_normComp(a)===_normComp(b))return true;var ca=_nameCore(a);return !!ca&&ca===_nameCore(b);}
+function _trackedNorms(){return (_labs().tracked||[]).slice();}
+function _isTracked(name,tracked){return (tracked||_trackedNorms()).some(function(t){return _sameName(name,t);});}
+/* brand mentions in range, counted per answer like the competitors */
+function _brandHitsInRange(){var rh=RAW_HISTORY[currentBrand],inR=_rangeFn(),n=0;((rh&&rh.prompts)||[]).forEach(function(rp){if(!_passesIntentTopic(rp.intent,rp.topic))return;(rp.entries||[]).forEach(function(e){if(e.hit&&inR(e.date)&&(activeModel==='all'||e.model===activeModel))n++;});});return n;}
+function _hasTracked(){return (_labs().tracked||[]).length>0;}
+function _compDomain(name){return COMP_DOMAINS[name]||(name.toLowerCase().replace(/\s+/g,'')+'.com');}
+function _modelLabel(k){return (MODEL_META[k]||{label:k}).label;}
+function _modelIcon(k){return fav((MODEL_META[k]||{domain:'google.com'}).domain);}
+
+/* ── data notes ─────────────────────────────────────────────────────────── */
+function renderLabsNotes(){
+  var el=document.getElementById('labsNotes');if(!el)return;
+  var L=_labs(),n=L.notes||{},fo=L.fanout||{},items=[];
+  var inactive=n.inactive||n.archived||[];
+  if(inactive.length)items.push((inactive.length===1?'1 prompt that is no longer active is':inactive.length+' prompts that are no longer active are')+' left out of the report’s own numbers (the visibility scores still include '+(inactive.length===1?'it':'them')+'): '+inactive.map(function(a){return '“'+esc(a.text)+'”'+(a.status&&a.status!=='archived'?' ('+esc(a.status)+')':'');}).join(', ')+'.');
+  var byDate={};(n.partialRuns||[]).forEach(function(p){(byDate[p.date]=byDate[p.date]||[]).push(p);});
+  Object.keys(byDate).sort().forEach(function(d){
+    var parts=byDate[d].map(function(p){return p.count===0?'no '+esc(_modelLabel(p.model))+' answers':esc(_modelLabel(p.model))+' answered '+p.count+' prompt'+(p.count===1?'':'s')+' (usually '+p.typical+')';});
+    items.push('Run of '+_fmtDate(d)+': '+parts.join('; ')+'. That run is incomplete, so its counts are low.');
+  });
+  (n.capped||[]).length&&items.push(n.capped.length+' prompt'+(n.capped.length>1?'s have':' has')+' reached the 100-run history limit, so their oldest runs are missing.');
+  (n.failedPrompts||[]).length&&items.push(n.failedPrompts.length+' prompt'+(n.failedPrompts.length>1?'s':'')+' could not be loaded and show no runs.');
+  (n.failedEndpoints||[]).length&&items.push('No data was returned for: '+n.failedEndpoints.map(esc).join(', ')+'. Cards that need that data are hidden; the trend chart falls back to the report’s mention rates.');
+  if((fo.errors||[]).length)items.push('Fan-out searches could not be loaded for '+fo.errors.length+' of '+(fo.prompts||'?')+' prompts, so the Fan-out tab is incomplete.');
+  if((fo.truncated||[]).length)items.push('Fan-out searches were cut short for '+fo.truncated.length+' prompt'+(fo.truncated.length>1?'s':'')+'.');
+  if(fo.firstDate)items.push('Fan-out searches are recorded for '+_modelList(fo.models)+' only. The first were recorded on '+_fmtDate(fo.firstDate)+'; see the Fan-out tab for how complete each run is.');
+  if(!items.length){el.innerHTML='';return;}
+  var wasOpen=el.querySelector('details')&&el.querySelector('details').open;
+  el.innerHTML='<details class="labs-notes"'+(wasOpen?' open':'')+'><summary><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 2.5L1.5 13.5h13L8 2.5z"/><path d="M8 7v3"/><circle cx="8" cy="12" r=".5" fill="currentColor" stroke="none"/></svg>Data notes ('+items.length+')<span style="font-weight:400;color:#92400e">: read these before comparing numbers</span></summary><ul>'+items.map(function(i){return '<li>'+i+'</li>';}).join('')+'</ul></details>';
+}
+
+/* ── visibility scores (fixed 90-day window) ──────────────────────── */
+function _labsCardsHtml(){
+  var off=_official(),v=off.visibility,bm=off.byModel,cp=off.competitors;
+  if(!v&&!bm&&!cp)return '';
+  var info='<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="7" cy="7" r="6"/><path d="M7 6v4" stroke-linecap="round"/><circle cx="7" cy="4.5" r=".5" fill="currentColor" stroke="none"/></svg>';
+  function card(label,tip,val,sub){return '<div class="labs-card"><div class="sc-label"><span class="info-tip" data-tip="'+esc(tip)+'">'+info+'</span>'+label+'</div><div class="sc-val">'+val+'</div><div class="sc-sub">'+sub+'</div></div>';}
+  var cards=[];
+  if(v&&v.visibility)cards.push(card('Visibility score','Visibility score (0–100): each answer scores higher the earlier the brand appears in it, and answers without the brand score 0.',v.visibility.score+'<span style="font-size:14px;color:var(--ink4);font-weight:600">/100</span>','trend '+esc(v.visibility.trend||'n/a')+' · '+_num(v.visibility.runCount)+' answers'));
+  if(v&&v.marketShare)cards.push(card('Share of voice','The brand’s share of all brand mentions (the brand plus every competitor) in the AI answers.',v.marketShare.percentage+'%',_num(v.marketShare.brandMentions)+' of '+_num(v.marketShare.totalMentions)+' brand mentions'));
+  if(cp&&cp.summary&&cp.summary.brandRankAmongCompetitors){
+    /* the API breaks ties in its own order, so a brand that no AI named can come out "#2";
+       the position here is 1 + the competitors with a higher score, and ties are said */
+    var rankTip='Position among the tracked competitors, by visibility score in the latest run.',of=cp.summary.totalCompetitors+1;
+    var bs=cp.brand?cp.brand.score:null,others=(cp.competitors||[]).map(function(c){return c.score;});
+    var known=typeof bs==='number'&&others.length>0&&others.every(function(x){return typeof x==='number';});
+    if(bs===0)cards.push(card('Rank',rankTip,'Not named','no AI named it in the latest run · '+of+' brands tracked'));
+    else{
+      var tied=known?others.filter(function(x){return x===bs;}).length:0;
+      var pos=known?others.filter(function(x){return x>bs;}).length+1:cp.summary.brandRankAmongCompetitors;
+      cards.push(card('Rank',rankTip,'#'+pos+'<span style="font-size:14px;color:var(--ink4);font-weight:600"> of '+of+'</span>',(tied?'tied with '+tied+' · ':'')+'vs tracked competitors · latest run'));
+    }
+  }
+  if(bm&&bm.models&&bm.models.length){
+    var mx=Math.max.apply(null,bm.models.map(function(m){return m.visibilityScore||0;}).concat([1]));
+    var rows=bm.models.slice().sort(function(a,b){return (b.visibilityScore||0)-(a.visibilityScore||0);}).map(function(m){
+      var mm=MODEL_META[m.model]||{domain:'google.com'};
+      return '<div class="lm-row"><img src="'+fav(mm.domain)+'" onerror="this.style.visibility=\'hidden\'"><span class="lm-lbl">'+esc(m.label||_modelLabel(m.model))+'</span><div class="lm-track"><div class="lm-fill" style="width:'+Math.round((m.visibilityScore||0)/mx*100)+'%"></div></div><span class="lm-val">'+(m.visibilityScore===null?'—':m.visibilityScore)+'</span><span class="lm-meta">'+_num(m.runCount)+' runs'+(m.averagePosition?' · pos '+m.averagePosition:'')+'</span></div>';
+    }).join('');
+    cards.push('<div class="labs-card"><div class="sc-label"><span class="info-tip" data-tip="Visibility score per AI model, with the number of answers and the brand’s average position when it is mentioned.">'+info+'</span>Score per AI</div>'+rows+'</div>');
+  }
+  var w=(bm&&bm.range)||(cp&&cp.metricsWindow)||null;
+  var when=w?_fmtShort(w.from)+' to '+_fmtDate(w.to):'last 90 days';
+  var built=_labs().generatedAt?' · built '+_fmtDate(String(_labs().generatedAt).slice(0,10))+', '+esc(String(_labs().generatedAt).slice(11,16))+' UTC':'';
+  return '<div class="labs-sec-head"><span class="labs-sec-title">Visibility scores</span><span class="labs-sec-sub">'+when+' · all prompts and models · the filters above don’t change these'+built+'</span></div><div class="labs-row">'+cards.join('')+'</div>';
+}
+
+/* ── tracked competitor scoreboard (Competitors tab) ───────────────────── */
+function _scoreboardHtml(){
+  var off=_official(),cp=off.competitors;if(!cp||!cp.competitors||!cp.competitors.length)return '';
+  var brandName=BRAND_CFG[currentBrand].name,brandDom=BRAND_CFG[currentBrand].url;
+  var items=cp.competitors.map(function(c){var d=_extractDomainJS(c.url||'')||_compDomain(c.name);return {name:c.name,domain:d,vis:c.visibility,score:c.score,change:c.change,sent:c.sentimentPositive,pos:c.avgPosition,visits:c.monthlyVisits,you:false};});
+  items.push({name:brandName,domain:brandDom,vis:cp.brand?cp.brand.visibility:null,score:cp.brand?cp.brand.score:null,change:null,sent:null,pos:null,visits:off.traffic?off.traffic.monthlyVisits:null,you:true});
+  items.sort(function(a,b){return ((b.vis===null?-1:b.vis)-(a.vis===null?-1:a.vis))||((b.score||0)-(a.score||0));});
+  var rows=items.map(function(it,i){
+    var chg=it.change?'<span class="'+(/^-/.test(it.change)?'chg-down':/^\+/.test(it.change)&&it.change!=='+0%'?'chg-up':'')+'">'+esc(it.change)+'</span>':'—';
+    return '<tr'+(it.you?' class="sb-you"':'')+'><td style="color:var(--ink4);width:24px">'+(i+1)+'</td><td><span class="sb-name"><img src="'+fav(it.domain)+'" onerror="this.style.visibility=\'hidden\'">'+esc(it.name)+(it.you?'<span class="tag tag-you">You</span>':'')+'</span></td>'+
+      '<td>'+(it.vis===null||it.vis===undefined?'—':it.vis)+'</td><td>'+(it.score===null||it.score===undefined?'—':it.score)+'</td><td>'+chg+'</td><td>'+(it.sent===null||it.sent===undefined?'—':it.sent+'%')+'</td><td>'+(it.pos?'#'+it.pos:'—')+'</td><td>'+(it.visits?_num(it.visits):'—')+'</td></tr>';
+  }).join('');
+  var w=cp.metricsWindow?_fmtShort(cp.metricsWindow.from)+' to '+_fmtDate(cp.metricsWindow.to):'last 90 days';
+  return '<div class="cc"><div class="cc-head"><div><div class="cc-title">Tracked competitors</div><div class="cc-sub">Visibility, sentiment and position: '+w+' · score and change: latest run · the filters above don’t change this table</div></div></div>'+
+    '<div class="cc-body np sb-wrap"><table class="sb-table"><thead><tr><th>#</th><th>Brand</th><th>Visibility</th><th>Score</th><th>Change</th><th>Positive sentiment</th><th>Avg position</th><th>Monthly visits</th></tr></thead><tbody>'+rows+'</tbody></table></div></div>';
+}
+
+/* ── fan-out searches ───────────────────────────────────────────────────── */
+var FO_TYPES={site:'Site search',local:'Local',discovery:'Discovery',comparison:'Comparison',brand:'Brand lookup',pricing:'Pricing',reviews:'Reviews',careers:'Careers',howto:'How-to',research:'Research',regulation:'Regulation',news:'News',other:'Other'};
+var FO_STOP={};('de da do das dos em no na nos nas o a os as e ou para por com sem um uma que qual quais como aos ao à às pelo pela pelos pelas num numa sobre entre the of in for and or to on with vs y el la los las en del con al un una les des du et pour sur avec le').split(' ').forEach(function(w){FO_STOP[w]=1;});
+var foType='all',foText='',foShowAll=false,foPick='',_foSets={};
+function _foTypeLabel(t){return t?(FO_TYPES[t]||t):'Not yet categorised';}
+function _foModels(){return (_labs().fanout||{}).models||[];}
+function _foPromptMap(){var m={};((RAW_HISTORY[currentBrand]||{}).prompts||[]).forEach(function(rp){m[rp.id]=rp;});return m;}
+/* searches passing the date, model, intent and topic filters */
+function _foRows(){
+  var fo=_labs().fanout||{},pm=_foPromptMap(),inR=_rangeFn();
+  return (fo.queries||[]).filter(function(q){
+    var rp=pm[q.p];if(!rp||!_passesIntentTopic(rp.intent,rp.topic))return false;
+    if(activeModel!=='all'&&q.m!==activeModel)return false;
+    return inR(q.d);
+  });
+}
+function _foSiteDomains(q){var out=[],re=/site:([^\s"'()]+)/gi,x;while((x=re.exec(q))){out.push(x[1].toLowerCase().replace(/^https?:\/\//,'').replace(/^www\./,'').replace(/\/.*$/,''));}return out;}
+function _foQueryHtml(q){return esc(q).replace(/site:([^\s"'()&]+)/gi,'<span class="fo-site">site:$1</span>');}
+function _nameRe(names){
+  var parts=(Array.isArray(names)?names:[names]).map(function(n){return String(n||'').trim();}).filter(function(s){return s.length>=3;})
+    .sort(function(a,b){return b.length-a.length;}).map(function(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&').replace(/\s+/g,'\\s+');});
+  if(!parts.length)return null;
+  try{return new RegExp('(^|[^\\p{L}\\p{N}])(?:'+parts.join('|')+')(?=$|[^\\p{L}\\p{N}])','giu');}catch(err){return new RegExp('(^|\\W)(?:'+parts.join('|')+')(?=$|\\W)','gi');}
+}
+/* brand groups found in searches: the brand (its own names come from the builder, see
+   brand_self_names), each tracked competitor (all its spellings), other names */
+function _foBrandGroups(){
+  var bk=BRAND_CFG[currentBrand].key,brandName=BRAND_CFG[currentBrand].name,norms=_trackedNorms(),al=_labs().aliases||{};
+  var own=[brandName,brandName.replace(/\s*\([^)]*\)\s*$/,'')].concat(al[brandName]||[]).filter(function(n,i,a){return n&&a.indexOf(n)===i;});
+  var groups=[{name:brandName,kind:'you',spellings:own}],byNorm={};
+  own.forEach(function(n){byNorm[_normComp(n)]=groups[0];});
+  (_labs().tracked||[]).forEach(function(n){var k=_normComp(n);if(byNorm[k])return;var g={name:n,kind:'tracked',spellings:[n].concat(al[n]||[])};groups.push(g);byNorm[k]=g;(al[n]||[]).forEach(function(a){byNorm[_normComp(a)]=g;});});
+  _dedupeComps(D_ORIG.competitors[bk]||[]).slice(0,80).forEach(function(c){
+    /* another spelling of a name already listed ("hôma" for "Homa"): searches may use it too */
+    var k=_normComp(c.name);if(byNorm[k]){if(byNorm[k].spellings.indexOf(c.name)===-1)byNorm[k].spellings.push(c.name);return;}
+    if(_isTracked(c.name,norms)){var tg=groups.find(function(g){return g.kind==='tracked'&&_sameName(c.name,g.name);});if(tg){tg.spellings.push(c.name);byNorm[k]=tg;return;}}
+    var g={name:c.name,kind:'other',spellings:[c.name]};groups.push(g);byNorm[k]=g;
+  });
+  return groups;
+}
+/* one pattern per spelling: the brand's and the tracked competitors' first, then the other
+   names, longest first within each. The AIs write brands with a capital ("Hoka", "ANOgov",
+   "DEGIRO") and words in lowercase, so other brands' names, and short names like "ERA", count
+   only when written with a capital or exactly as the brand writes them: "Casa" the store,
+   not the word "casa"; "Licitaciones" the company, not "licitaciones" */
+function _foMatcher(groups){
+  var items=[];
+  groups.forEach(function(g,gi){(g.spellings||[]).forEach(function(s){
+    s=String(s||'').trim();var re=_nameRe([s]);if(re)items.push({gi:gi,s:s,len:s.length,other:g.kind==='other'?1:0,strict:g.kind!=='you'||s.length<=4,re:re});
+  });});
+  return items.sort(function(a,b){return (a.other-b.other)||(b.len-a.len);});
+}
+/* brand names in one search: each stretch of text goes to the first name in that order that
+   covers it, so "Zara Home" is not also "Zara", and an untracked "WiZink Extra" or "Santander
+   Totta" doesn't take searches from the brand or from tracked Santander. Returns the groups
+   found and the text without them. */
+function _foMatch(q,items){
+  var taken=[],hits={};
+  items.forEach(function(it){
+    it.re.lastIndex=0;var m;
+    while((m=it.re.exec(q))){
+      var st=m.index+m[1].length,en=m.index+m[0].length,t=q.slice(st,en);
+      if(it.strict&&t!==it.s&&t===t.toLowerCase())continue;
+      if(!taken.some(function(x){return st<x[1]&&en>x[0];})){taken.push([st,en]);hits[it.gi]=1;}
+    }
+  });
+  var rest=q;taken.sort(function(a,b){return b[0]-a[0];}).forEach(function(t){rest=rest.slice(0,t[0])+' '+rest.slice(t[1]);});
+  return {hits:hits,rest:rest};
+}
+function _foNoSite(q){return String(q||'').replace(/site:\S+/gi,' ');}
+function _foBrands(rows){
+  var groups=_foBrandGroups(),items=_foMatcher(groups),found=groups.map(function(){return [];});
+  rows.forEach(function(r){var h=_foMatch(_foNoSite(r.q),items).hits;Object.keys(h).forEach(function(gi){found[gi].push(r);});});
+  var all=groups.map(function(g,gi){return {name:g.name,kind:g.kind,rows:found[gi],count:found[gi].length};})
+    .filter(function(c){return c.count>0;}).sort(function(a,b){return b.count-a.count;});
+  /* an untracked name in more than 30% of the searches ("SEO" for an SEO agency) is the
+     category, not a brand: listed apart, like the context words of the themes */
+  var common=rows.length>=20?all.filter(function(c){return c.kind==='other'&&c.count/rows.length>0.3;}):[];
+  var out=all.filter(function(c){return common.indexOf(c)===-1;});
+  out.common=common;
+  return out;
+}
+/* words of a search, without site: operators, brand names, stop words or years */
+function _foTokens(q,items){
+  var t=_foMatch(_foNoSite(q),items||[]).rest.toLowerCase();
+  return t.replace(/["“”'’()\[\],.;:!?|/]/g,' ').split(/\s+/).filter(function(w){return w&&w.length>2&&!FO_STOP[w]&&!/^(19|20)\d\d$/.test(w)&&!/^\d+$/.test(w);});
+}
+/* recurring themes = keywords found in 3+ searches. Words present in more than 30% of the
+   searches (the category and the market, e.g. "crédito", "portugal") are context, not themes.
+   Plurals fold into the singular; each theme shows the phrase it most often appears in. */
+function _foThemes(rows){
+  var items=_foMatcher(_foBrandGroups()),toks=rows.map(function(r){return _foTokens(r.q,items);}),n=rows.length,wdf={};
+  toks.forEach(function(ts){var seen={};ts.forEach(function(w){if(!seen[w]){seen[w]=1;wdf[w]=(wdf[w]||0)+1;}});});
+  var root=function(w){if(/es$/.test(w)&&wdf[w.slice(0,-2)])return w.slice(0,-2);if(/s$/.test(w)&&wdf[w.slice(0,-1)])return w.slice(0,-1);return w;};
+  var th={};
+  toks.forEach(function(ts,i){var seen={};ts.forEach(function(w){
+    var k=root(w),t=th[k]||(th[k]={key:k,rows:[],forms:{}});
+    t.forms[w]=(t.forms[w]||0)+1;
+    if(!seen[k]){seen[k]=1;t.rows.push(rows[i]);}
+  });});
+  var all=Object.keys(th).map(function(k){var t=th[k];t.label=Object.keys(t.forms).sort(function(a,b){return t.forms[b]-t.forms[a];})[0];return t;});
+  /* a word (with its plurals) in more than 30% of the searches is context, not a theme */
+  var common=n>=20?all.filter(function(t){return t.rows.length/n>0.3;}).sort(function(a,b){return b.rows.length-a.rows.length;}):[];
+  var themes=all.filter(function(t){return common.indexOf(t)===-1&&t.rows.length>=3;}).map(function(t){
+    /* example = the search written most often among this theme's searches, as written */
+    var freq={},orig={};t.rows.forEach(function(r){var k=r.q.toLowerCase();freq[k]=(freq[k]||0)+1;if(!orig[k])orig[k]=r.q;});
+    var best=Object.keys(freq).sort(function(a,b){return (freq[b]-freq[a])||(a.length-b.length);})[0];
+    t.example=orig[best]||'';t.exampleCount=freq[best]||0;return t;
+  });
+  themes.sort(function(a,b){return b.rows.length-a.rows.length;});
+  return {themes:themes,common:common.map(function(t){return {word:t.label,count:t.rows.length};})};
+}
+function _foKindTag(kind){return kind==='you'?'<span class="tag tag-you">You</span>':kind==='tracked'?'<span class="tag tag-tracked">Tracked</span>':kind==='competitor'?'<span class="tag tag-tracked">Competitor</span>':kind==='third'?'<span class="tag tag-other">Third party</span>':'<span class="tag tag-other">Not tracked</span>';}
+/* the name part of a domain, like domain_stem() in build_labs.py: "www.elcorteingles.pt" -> "elcorteingles",
+   "foo.com.pt" -> "foo", "app.n26.com" -> "n26" */
+var SECOND_LEVEL={com:1,co:1,org:1,net:1,gov:1,edu:1,ac:1,nom:1,gob:1,mil:1};
+function _domainStem(d){var l=String(d||'').toLowerCase().replace(/^https?:\/\//,'').split('/')[0].split('.').filter(function(x){return x&&x!=='www';});var s=l.length<2?(l[0]||''):(l.length>=3&&SECOND_LEVEL[l[l.length-2]]?l[l.length-3]:l[l.length-2]);return _plainName(s);}
+function _foDomainKind(d){
+  var own=(BRAND_CFG[currentBrand].url||'').toLowerCase();
+  /* the brand's own site, in any country (elcorteingles.es for elcorteingles.pt) */
+  if(own&&(d===own||d.slice(-own.length-1)==='.'+own||_domainStem(d)===_domainStem(own)))return 'you';
+  var cp=(_official().competitors||{}).competitors||[];
+  for(var i=0;i<cp.length;i++){var cd=_extractDomainJS(cp[i].url||'');if(cd&&(d===cd||d.slice(-cd.length-1)==='.'+cd))return 'competitor';}
+  return 'other';
+}
+function setFoType(t){foType=(foType===t?'all':t);foShowAll=false;renderFanout();}
+/* a pick is one theme, site or brand from the cards: the list then shows exactly the searches it counted */
+function setFoPick(key){foPick=(foPick===key?'':key);foType='all';foText='';foShowAll=false;renderFanout();if(foPick){var a=document.getElementById('foAll');if(a)a.scrollIntoView({behavior:'smooth',block:'start'});}}
+function onFoSearch(v){foText=v;foShowAll=false;_renderFoTable();}
+function foMore(){foShowAll=true;_renderFoTable();}
+function _foPickLabel(key){var i=key.indexOf(':'),kind=key.slice(0,i),v=key.slice(i+1);return (kind==='theme'?'theme':kind==='site'?'site':'brand')+' “'+v+'”';}
+function _foFiltered(){
+  var rows=_foRows();
+  if(foPick){var set=_foSets[foPick];rows=set?rows.filter(function(r){return set.has(r);}):[];}
+  if(foType!=='all')rows=rows.filter(function(r){return (r.t||'')===(foType==='__none__'?'':foType);});
+  if(foText){var t=foText.toLowerCase();rows=rows.filter(function(r){return r.q.toLowerCase().indexOf(t)>-1;});}
+  return rows;
+}
+function _renderFoTable(){
+  var box=document.getElementById('foTableBox');if(!box)return;
+  var rows=_foFiltered(),pm=_foPromptMap();
+  rows=rows.slice().sort(function(a,b){return (b.d||'').localeCompare(a.d||'')||((pm[a.p]||{}).text||'').localeCompare((pm[b.p]||{}).text||'')||(a.r||'').localeCompare(b.r||'')||a.s-b.s;});
+  var shown=foShowAll?rows:rows.slice(0,100);
+  var brandName=BRAND_CFG[currentBrand].name;
+  var body=shown.map(function(r){
+    var rp=pm[r.p]||{text:''};
+    var hit=r.h===true?'<span class="fo-hit" title="'+esc(brandName)+' is in this answer">✓</span>':r.h===false?'<span class="fo-miss" title="'+esc(brandName)+' is not in this answer">✗</span>':'<span class="fo-miss">—</span>';
+    return '<tr><td class="fo-q">'+_foQueryHtml(r.q)+'</td><td><span class="fo-cat">'+esc(_foTypeLabel(r.t))+'</span></td><td style="white-space:nowrap"><img src="'+_modelIcon(r.m)+'" style="width:13px;height:13px;border-radius:2px;vertical-align:-2px;margin-right:4px" onerror="this.style.display=\'none\'">'+esc(_modelLabel(r.m))+'</td><td style="color:var(--ink3);max-width:300px" title="'+esc(rp.text)+'">'+esc(rp.text.length>70?rp.text.slice(0,70)+'…':rp.text)+'</td><td style="white-space:nowrap;color:var(--ink3)">'+_fmtShort(r.d)+'</td><td style="text-align:center">'+hit+'</td></tr>';
+  }).join('');
+  var sub=document.getElementById('foTableSub');
+  if(sub)sub.innerHTML=rows.length+' search'+(rows.length!==1?'es':'')+(foPick?' · '+esc(_foPickLabel(foPick))+' <button class="fb-btn" style="padding:0 8px;margin-left:4px" onclick="setFoPick(\'\')">clear ✕</button>':'')+(foType!=='all'?' · '+esc(_foTypeLabel(foType==='__none__'?null:foType)):'')+(foText?' · containing “'+esc(foText)+'”':'');
+  box.innerHTML=rows.length?'<table class="fo-tbl"><thead><tr><th>Search</th><th>Category</th><th>Model</th><th>Prompt</th><th>Run</th><th title="Is '+esc(brandName)+' in the answer that ran this search?">'+esc(brandName)+' in answer</th></tr></thead><tbody>'+body+'</tbody></table>'+(rows.length>shown.length?'<div class="fo-more"><button onclick="foMore()">Show all '+rows.length+'</button></div>':''):'<div class="fo-empty" style="padding:18px">No searches match these filters.</div>';
+}
+/* answers behind a set of searches: how many mention the brand (each answer counted once) */
+function _foHits(rows){var runs={},hits=0,known=0;rows.forEach(function(r){if(runs[r.r])return;runs[r.r]=1;if(r.h===true||r.h===false){known++;if(r.h)hits++;}});return known?hits+' of '+known:'—';}
+function _foModelIcons(rows){var m={};rows.forEach(function(r){m[r.m]=1;});return Object.keys(m).map(function(k){return '<img src="'+_modelIcon(k)+'" title="'+esc(_modelLabel(k))+'" style="width:13px;height:13px;border-radius:2px;margin-right:3px" onerror="this.style.display=\'none\'">';}).join('');}
+function _foPickAttrs(key){var on=foPick===key;return ' class="fo-clickable'+(on?' fo-active':'')+'" data-k="'+esc(key)+'" onclick="setFoPick(this.dataset.k)" title="'+(on?'Click to clear':'Click to list these searches')+'"';}
+function renderFanout(){
+  var el=document.getElementById('fanoutContent');if(!el)return;
+  var L=_labs(),fo=L.fanout||{},fm=_foModels(),brandName=BRAND_CFG[currentBrand].name;
+  var all=fo.queries||[],fmList=_modelList(fm);
+  if(!all.length){el.innerHTML='<div class="cc"><div class="cc-body"><div class="no-data"><div class="no-data-icon">&#128269;</div><h3>No fan-out searches to show</h3><p>'+((fo.errors||[]).length?'The searches could not be loaded for '+fo.errors.length+' of '+(fo.prompts||'?')+' prompts during this build, so there may be some.':'The web searches '+(fmList||'ChatGPT and Gemini')+' run while answering are recorded. None were recorded for this brand in the last 90 days.')+'</p></div></div></div>';return;}
+  if(activeModel!=='all'&&fm.indexOf(activeModel)===-1){el.innerHTML='<div class="cc"><div class="cc-body"><div class="no-data"><div class="no-data-icon">&#128269;</div><h3>Not recorded for '+esc(_modelLabel(activeModel))+'</h3><p>Fan-out searches are recorded for '+fmList+' only. Pick one of them, or All models, in the model filter.</p></div></div></div>';return;}
+  var rows=_foRows(),inR=_rangeFn(),filtersOn=currentTimeRange!=='all'||activeModel!=='all'||intentFilter!=='all'||topicFilter!=='all';
+  /* per run, under the same filters as the rest of the tab: answers with recorded searches vs
+     all answers from the fan-out models */
+  var den={},runsWith={};
+  ((RAW_HISTORY[currentBrand]||{}).prompts||[]).forEach(function(rp){
+    if(!_passesIntentTopic(rp.intent,rp.topic))return;
+    (rp.entries||[]).forEach(function(e){if(fm.indexOf(e.model)>-1&&(activeModel==='all'||e.model===activeModel)&&inR(e.date))den[e.date]=(den[e.date]||0)+1;});
+  });
+  rows.forEach(function(q){if(q.r)runsWith[q.r]=q.d;});
+  var num={};Object.keys(runsWith).forEach(function(r){var d=runsWith[r];num[d]=(num[d]||0)+1;});
+  var runRows=Object.keys(num).sort().reverse().map(function(d){var a=num[d],b=den[d]||0;return '<tr><td>'+_fmtDate(d)+'</td><td class="n">'+a+'</td><td class="n">'+b+'</td><td class="n">'+(b?Math.round(a/b*100)+'%':'—')+'</td></tr>';}).join('');
+  /* first run from which every run has most answers recorded (whole history, no filters) */
+  var gNum={},gDen={},gRuns={};
+  all.forEach(function(q){if(q.r)gRuns[q.r]=q.d;});Object.keys(gRuns).forEach(function(r){gNum[gRuns[r]]=(gNum[gRuns[r]]||0)+1;});
+  ((RAW_HISTORY[currentBrand]||{}).prompts||[]).forEach(function(rp){(rp.entries||[]).forEach(function(e){if(fm.indexOf(e.model)>-1)gDen[e.date]=(gDen[e.date]||0)+1;});});
+  var fullFrom=null;Object.keys(gDen).sort().reverse().some(function(d){if(gDen[d]&&(gNum[d]||0)/gDen[d]>=0.5){fullFrom=d;return false;}return true;});
+  var cov=fo.coverage||{},answers=Object.keys(runsWith).length;
+  var byModel={};rows.forEach(function(q){byModel[q.m]=(byModel[q.m]||0)+1;});
+  var modelLine=fm.filter(function(m){return activeModel==='all'||m===activeModel;}).map(function(m){return esc(_modelLabel(m))+' '+(byModel[m]||0);}).join(' · ');
+  var win=fo.window&&fo.window.from?_fmtDate(String(fo.window.from).slice(0,10))+' to '+_fmtDate(String(fo.window.to).slice(0,10)):'the last 90 days';
+  var covHtml='<div class="cc"><div class="cc-head"><div><div class="cc-title">What the AIs searched for</div><div class="cc-sub">Before answering, '+fmList+' search the web. Those searches are recorded for every tracked prompt.</div></div></div><div class="cc-body"><div class="fo-cov">'+
+    '<div><div class="fo-num">'+_num(rows.length)+'</div><div class="sc-sub" style="margin-top:6px">searches from '+_num(answers)+' answers'+(filtersOn?' in the selected filters':'')+' · '+modelLine+'</div>'+
+    '<div class="sc-sub" style="margin-top:10px;line-height:1.6">Recording, '+win+', all prompts: of the '+_num(cov.total)+' '+fmList+' answers, '+_num(cov.captured)+' have their searches on record, '+_num(cov.not_reported)+' didn’t report their searches'+(cov.none?', '+_num(cov.none)+' answered without searching':'')+' and '+_num(cov.not_recorded)+' have none on record. Recording started on '+_fmtDate(fo.firstDate)+(fullFrom?' and covers most answers from the '+_fmtDate(fullFrom)+' run':'')+'.'+(fo.typesPending?' '+fo.typesPending+' searches are not categorised yet.':'')+'</div></div>'+
+    '<div><table class="fo-runs"><thead><tr><th>Run</th><th style="text-align:right">Answers with searches</th><th style="text-align:right">'+fm.filter(function(m){return activeModel==='all'||m===activeModel;}).map(function(m){return esc(_modelLabel(m));}).join(' + ')+' answers</th><th style="text-align:right">Share</th></tr></thead><tbody>'+(runRows||'<tr><td colspan="4" style="color:var(--ink4)">No recorded searches in the selected filters.</td></tr>')+'</tbody></table></div>'+
+    '</div></div></div>';
+  _foSets={};
+  if(!rows.length){foPick='';el.innerHTML=covHtml+'<div class="cc"><div class="cc-body"><div class="no-data"><h3>No searches in this range</h3><p>Recording started on '+_fmtDate(fo.firstDate)+'. Widen the date range or clear the intent and topic filters.</p></div></div></div>';return;}
+  /* themes */
+  var th=_foThemes(rows),themes=th.themes.slice(0,15);
+  th.themes.forEach(function(t){_foSets['theme:'+t.label]=new Set(t.rows);});
+  var themeRows=themes.map(function(t){
+    var prompts={};t.rows.forEach(function(r){prompts[r.p]=1;});
+    return '<tr'+_foPickAttrs('theme:'+t.label)+'><td class="fo-q"><b>'+esc(t.label)+'</b>'+(t.example&&t.example.toLowerCase()!==t.label?'<div style="font-size:11.5px;color:var(--ink4)">e.g. “'+esc(t.example)+'”'+(t.exampleCount>1?' ×'+t.exampleCount:'')+'</div>':'')+'</td><td style="text-align:right">'+t.rows.length+'</td><td style="text-align:right">'+Object.keys(prompts).length+'</td><td style="white-space:nowrap">'+_foModelIcons(t.rows)+'</td><td style="text-align:right;white-space:nowrap">'+_foHits(t.rows)+'</td></tr>';
+  }).join('');
+  var themeHtml='<div class="cc"><div class="cc-head"><div><div class="cc-title">Recurring themes</div><div class="cc-sub">words in 3 or more searches, brand names left out · click one to list its searches</div></div></div>'+
+    (th.common.length?'<div style="padding:8px 18px;border-bottom:1px solid var(--border);font-size:12px;color:var(--ink3)">In most searches, so not listed: '+th.common.map(function(c){return '<b>'+esc(c.word)+'</b> ('+c.count+')';}).join(', ')+'</div>':'')+
+    '<div class="cc-body np">'+(themeRows?'<table class="fo-tbl"><thead><tr><th>Theme</th><th style="text-align:right">Searches</th><th style="text-align:right">Prompts</th><th>Models</th><th style="text-align:right" title="Answers that ran these searches, and how many of them mention '+esc(brandName)+'">'+esc(brandName)+' in answer</th></tr></thead><tbody>'+themeRows+'</tbody></table>':'<div class="fo-empty" style="padding:14px 18px">No word repeats in 3 searches yet. This fills in as more runs are recorded.</div>')+'</div></div>';
+  /* sites searched directly */
+  var siteMap={};rows.forEach(function(r){_foSiteDomains(r.q).filter(function(d,i,a){return a.indexOf(d)===i;}).forEach(function(d){(siteMap[d]=siteMap[d]||[]).push(r);});});
+  var sites=Object.keys(siteMap).map(function(d){_foSets['site:'+d]=new Set(siteMap[d]);return {d:d,rows:siteMap[d]};}).sort(function(a,b){return b.rows.length-a.rows.length;});
+  var siteHtml='<div class="cc"><div class="cc-head"><div><div class="cc-title">Sites searched directly</div><div class="cc-sub">“site:” searches: the AI looked inside one website · click one to list its searches</div></div></div><div class="cc-body">'+
+    (sites.length?sites.slice(0,12).map(function(s){var kind=_foDomainKind(s.d);return '<div'+_foPickAttrs('site:'+s.d).replace('class="','class="comp-row ')+' style="padding-left:4px"><img class="comp-fav" src="'+fav(s.d)+'" onerror="this.style.visibility=\'hidden\'"><div class="comp-name">'+esc(s.d)+_foKindTag(kind==='other'?'third':kind)+'</div><div class="comp-count">'+s.rows.length+' search'+(s.rows.length!==1?'es':'')+'</div></div>';}).join(''):'<div class="fo-empty">No site: searches in this range.</div>')+'</div></div>';
+  /* brands named in searches */
+  var brands=_foBrands(rows),bMax=brands.length?brands[0].count:1;
+  brands.forEach(function(b){_foSets['brand:'+b.name]=new Set(b.rows);});
+  var brandHtml='<div class="cc"><div class="cc-head"><div><div class="cc-title">Brands named in searches</div><div class="cc-sub">searches that contain a brand’s name · click one to list them</div></div></div>'+
+    (brands.common.length?'<div style="padding:8px 18px;border-bottom:1px solid var(--border);font-size:12px;color:var(--ink3)">In most searches, so not listed: '+brands.common.map(function(c){return '<b>'+esc(c.name)+'</b> ('+c.count+')';}).join(', ')+'</div>':'')+
+    '<div class="cc-body">'+
+    (brands.length?brands.slice(0,12).map(function(b){var dom=b.kind==='you'?(BRAND_CFG[currentBrand].url||''):_compDomain(b.name);return '<div'+_foPickAttrs('brand:'+b.name).replace('class="','class="comp-row ')+' style="padding-left:4px"><img class="comp-fav" src="'+fav(dom)+'" onerror="this.style.visibility=\'hidden\'"><div class="comp-name">'+esc(b.name)+_foKindTag(b.kind)+'</div><div class="comp-bar-wrap"><div class="comp-bar" style="width:'+Math.round(b.count/bMax*100)+'%;'+(b.kind==='you'?'background:rgba(79,70,229,.85)':'')+'"></div></div><div class="comp-count">'+b.count+' search'+(b.count!==1?'es':'')+'</div></div>';}).join(''):'<div class="fo-empty">No brand names in these searches.</div>')+'</div></div>';
+  if(foPick&&!_foSets[foPick])foPick='';
+  /* categories */
+  var cats={};rows.forEach(function(r){var k=r.t||'__none__';cats[k]=(cats[k]||0)+1;});
+  var catList=Object.keys(cats).map(function(k){return {k:k,n:cats[k]};}).sort(function(a,b){return (a.k==='__none__')-(b.k==='__none__')||b.n-a.n;});
+  var catMax=Math.max.apply(null,catList.map(function(c){return c.n;}));
+  var catHtml=catList.map(function(c){var on=foType===c.k;return '<div class="bar-row fo-clickable'+(on?' fo-active':'')+'" data-k="'+esc(c.k)+'" onclick="setFoType(this.dataset.k)" style="'+(on?'background:var(--v-bg);':'')+'border-radius:6px;padding:4px 6px"><div class="bar-label">'+esc(_foTypeLabel(c.k==='__none__'?null:c.k))+'</div><div class="bar-track"><div class="bar-fill" style="width:'+Math.round(c.n/catMax*100)+'%"></div></div><div class="bar-cnt">'+c.n+'</div></div>';}).join('');
+  var catChips='<button class="fb-btn'+(foType==='all'?' active':'')+'" onclick="setFoType(\'all\')">All categories</button>'+catList.map(function(c){return '<button class="fb-btn'+(foType===c.k?' active':'')+'" data-k="'+esc(c.k)+'" onclick="setFoType(this.dataset.k)">'+esc(_foTypeLabel(c.k==='__none__'?null:c.k))+' '+c.n+'</button>';}).join('');
+  var tableHtml='<div class="cc" id="foAll"><div class="cc-head"><div><div class="cc-title">All searches</div><div class="cc-sub" id="foTableSub"></div></div><input class="search-inp" id="foSearch" placeholder="Search the searches..." value="'+esc(foText)+'" oninput="onFoSearch(this.value)"></div><div class="filter-bar">'+catChips+'</div><div class="cc-body np" id="foTableBox"></div></div>';
+  el.innerHTML=covHtml+'<div class="two-col" style="margin-bottom:0;align-items:start"><div>'+themeHtml+'</div><div>'+brandHtml+siteHtml+'</div></div>'+
+    '<div class="cc"><div class="cc-head"><div><div class="cc-title">Searches by category</div><div class="cc-sub">categories assigned automatically · click one to filter the list below</div></div></div><div class="cc-body">'+catHtml+'</div></div>'+tableHtml;
+  _renderFoTable();
+}
+/* searches behind one prompt, grouped by answer (Prompts tab, expanded row) */
+function _foPromptBlock(pid){
+  var fm=_foModels();if(!fm.length)return '';
+  var rows=_foRows().filter(function(r){return r.p===pid;});
+  var brandName=BRAND_CFG[currentBrand].name,fo=_labs().fanout||{};
+  if(!rows.length)return '<div class="fo-block"><div class="fo-block-title">Searches the AIs ran</div><div class="fo-empty">None recorded for this prompt in this range'+(fo.firstDate?' (recording started '+_fmtDate(fo.firstDate)+', '+_modelList(fm)+' only)':'')+'.</div></div>';
+  var runs={},order=[];
+  rows.forEach(function(r){if(!runs[r.r]){runs[r.r]={d:r.d,m:r.m,h:r.h,rows:[]};order.push(r.r);}runs[r.r].rows.push(r);});
+  order.sort(function(a,b){return (runs[b].d||'').localeCompare(runs[a].d||'')||(runs[a].m||'').localeCompare(runs[b].m||'');});
+  return '<div class="fo-block"><div class="fo-block-title">Searches the AIs ran ('+rows.length+')</div>'+order.map(function(id){
+    var run=runs[id];run.rows.sort(function(a,b){return a.s-b.s;});
+    var hit=run.h===true?'<span class="fo-hit">'+esc(brandName)+' in answer</span>':run.h===false?'<span class="fo-miss">'+esc(brandName)+' not in answer</span>':'';
+    return '<div class="fo-run"><div class="fo-run-meta"><img src="'+_modelIcon(run.m)+'" onerror="this.style.display=\'none\'"><span><b>'+esc(_modelLabel(run.m))+'</b> · '+_fmtShort(run.d)+'<br>'+hit+'</span></div><ol>'+run.rows.map(function(r){return '<li>'+_foQueryHtml(r.q)+' <span class="fo-cat">'+esc(_foTypeLabel(r.t))+'</span></li>';}).join('')+'</ol></div>';
+  }).join('')+'</div>';
+}
+function _foCountFor(pid,rows){return rows.filter(function(r){return r.p===pid;}).length;}
+_rebuildTopicMenu();
 _applyTimeRange();
 renderAll();
 </script>
