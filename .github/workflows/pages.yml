@@ -5,7 +5,7 @@ on:
     branches: [main]
   workflow_dispatch:
   workflow_run:
-    workflows: ["Build PeekaBoo Report"]
+    workflows: ["Build visibility report"]
     types: [completed]
     branches: [main]
 
