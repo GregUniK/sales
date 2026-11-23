@@ -18,11 +18,16 @@ concurrency:
   group: pages
   cancel-in-progress: true
 
+# Upload and deploy run as two jobs. deploy-pages lists the run's artifacts
+# exactly once, with no retry. In a single job that lookup ran about half a
+# second after the upload finished, and on 23 Nov 2026 the list was still empty
+# in 5 runs ("No artifacts named github-pages were found"). The deploy job
+# starts on a fresh runner well after the upload, and retries once after 30 s.
+# Splitting also makes "Re-run failed jobs" safe: it re-runs only the deploy
+# job against the one artifact, instead of uploading a second one ("Multiple
+# artifacts named github-pages ... count is 2").
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -32,10 +37,27 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
         with:
+          # The action already leaves out .git and .github.
           path: '.'
           # v4+ drops dotfiles by default — .nojekyll must ship or Pages
           # re-enables Jekyll processing on the published site.
           include-hidden-files: true
+
+  deploy:
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url || steps.retry.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
+        continue-on-error: true
+        uses: actions/deploy-pages@v5
+      - name: Wait before retrying
+        if: steps.deployment.outcome == 'failure'
+        run: sleep 30
+      - name: Deploy to GitHub Pages (retry)
+        id: retry
+        if: steps.deployment.outcome == 'failure'
         uses: actions/deploy-pages@v5
